@@ -5,7 +5,7 @@ import 'package:flame/components.dart';
 import '../pile.dart';
 import '../suit.dart';
 import '../tarabish_game.dart';
-import 'card.dart';
+import '../entity/card/card.dart';
 
 class FoundationPile extends PositionComponent implements Pile {
   FoundationPile(int intSuit, this.checkWin, {super.position})

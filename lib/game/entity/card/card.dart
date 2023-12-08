@@ -4,24 +4,25 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
+import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flutter/animation.dart';
+import 'package:vg_tarabish_flame/game/components/foundation_pile.dart';
+import 'package:vg_tarabish_flame/game/components/tableau_pile.dart';
+import 'package:vg_tarabish_flame/game/pile.dart';
+import 'package:vg_tarabish_flame/game/rank.dart';
+import 'package:vg_tarabish_flame/game/suit.dart';
+import 'package:vg_tarabish_flame/game/tarabish_game.dart';
+import 'package:vg_tarabish_flame/game/tarabish_world.dart';
 
-import '../pile.dart';
-import '../rank.dart';
-import '../suit.dart';
-import '../tarabish_game.dart';
-import '../tarabish_world.dart';
-import 'foundation_pile.dart';
-import 'stock_pile.dart';
-import 'tableau_pile.dart';
-
-class Card extends PositionComponent
-    with DragCallbacks, TapCallbacks, HasWorldReference<TarabishWorld> {
-  Card(int intRank, int intSuit)
+class Card extends PositionedEntity with HasWorldReference<TarabishWorld> {
+  Card(int intRank, int intSuit,
+      {required Behavior tappingBehavior,
+      required Behavior cardDraggingBehavior})
       : rank = Rank.fromInt(intRank),
         suit = Suit.fromInt(intSuit),
         super(
           size: TarabishGame.cardSize,
+          behaviors: [tappingBehavior, cardDraggingBehavior],
         );
 
   final Rank rank;
@@ -32,6 +33,26 @@ class Card extends PositionComponent
   bool _isFaceUpView = false;
   bool _isDragging = false;
   Vector2 _whereCardStarted = Vector2(0, 0);
+
+  bool get faceUp => this._faceUp;
+
+  set faceUp(bool value) => this._faceUp = value;
+
+  bool get isAnimatedFlip => this._isAnimatedFlip;
+
+  set isAnimatedFlip(bool value) => this._isAnimatedFlip = value;
+
+  bool get isFaceUpView => this._isFaceUpView;
+
+  set isFaceUpView(bool value) => this._isFaceUpView = value;
+
+  bool get dragging => this._isDragging;
+
+  set dragging(bool value) => this._isDragging = value;
+
+  Vector2 get whereCardStarted => this._whereCardStarted;
+
+  set whereCardStarted(Vector2 value) => this._whereCardStarted = value;
 
   final List<Card> attachedCards = [];
 
@@ -241,115 +262,115 @@ class Card extends PositionComponent
 
   //#region Card-Dragging
 
-  @override
-  void onDragStart(DragStartEvent event) {
-    super.onDragStart(event);
-    if (pile?.canMoveCard(this, MoveMethod.drag) ?? false) {
-      _isDragging = true;
-      priority = 100;
-      // Copy each co-ord, else _whereCardStarted changes as the position does.
-      _whereCardStarted = Vector2(position.x, position.y);
-      if (pile is TableauPile) {
-        attachedCards.clear();
-        final extraCards = (pile! as TableauPile).cardsOnTop(this);
-        for (final card in extraCards) {
-          card.priority = attachedCards.length + 101;
-          attachedCards.add(card);
-        }
-      }
-    }
-  }
+  // @override
+  // void onDragStart(DragStartEvent event) {
+  //   super.onDragStart(event);
+  //   if (pile?.canMoveCard(this, MoveMethod.drag) ?? false) {
+  //     _isDragging = true;
+  //     priority = 100;
+  //     // Copy each co-ord, else _whereCardStarted changes as the position does.
+  //     _whereCardStarted = Vector2(position.x, position.y);
+  //     if (pile is TableauPile) {
+  //       attachedCards.clear();
+  //       final extraCards = (pile! as TableauPile).cardsOnTop(this);
+  //       for (final card in extraCards) {
+  //         card.priority = attachedCards.length + 101;
+  //         attachedCards.add(card);
+  //       }
+  //     }
+  //   }
+  // }
 
-  @override
-  void onDragUpdate(DragUpdateEvent event) {
-    if (!_isDragging) {
-      return;
-    }
-    final delta = event.localDelta;
-    position.add(delta);
-    attachedCards.forEach((card) => card.position.add(delta));
-  }
+  // @override
+  // void onDragUpdate(DragUpdateEvent event) {
+  //   if (!_isDragging) {
+  //     return;
+  //   }
+  //   final delta = event.localDelta;
+  //   position.add(delta);
+  //   attachedCards.forEach((card) => card.position.add(delta));
+  // }
 
-  @override
-  void onDragEnd(DragEndEvent event) {
-    super.onDragEnd(event);
-    if (!_isDragging) {
-      return;
-    }
-    _isDragging = false;
-    // Find out what is under the center-point of this card when it is dropped.
-    final dropPiles = parent!
-        .componentsAtPoint(position + size / 2)
-        .whereType<Pile>()
-        .toList();
-    if (dropPiles.isNotEmpty) {
-      if (dropPiles.first.canAcceptCard(this)) {
-        // Found a Pile.
-        // Move card(s) gracefully into position on the receiving pile.
-        pile!.removeCard(this, MoveMethod.drag);
-        if (dropPiles.first is TableauPile) {
-          // Get TableauPile to handle positions, priorities and moves of cards.
-          (dropPiles.first as TableauPile).dropCards(this, attachedCards);
-          attachedCards.clear();
-        } else {
-          // Drop a single card onto a FoundationPile.
-          final dropPosition = (dropPiles.first as FoundationPile).position;
-          doMove(
-            dropPosition,
-            onComplete: () {
-              dropPiles.first.acquireCard(this);
-            },
-          );
-        }
-        return;
-      }
-    }
+  // @override
+  // void onDragEnd(DragEndEvent event) {
+  //   super.onDragEnd(event);
+  //   if (!_isDragging) {
+  //     return;
+  //   }
+  //   _isDragging = false;
+  //   // Find out what is under the center-point of this card when it is dropped.
+  //   final dropPiles = parent!
+  //       .componentsAtPoint(position + size / 2)
+  //       .whereType<Pile>()
+  //       .toList();
+  //   if (dropPiles.isNotEmpty) {
+  //     if (dropPiles.first.canAcceptCard(this)) {
+  //       // Found a Pile.
+  //       // Move card(s) gracefully into position on the receiving pile.
+  //       pile!.removeCard(this, MoveMethod.drag);
+  //       if (dropPiles.first is TableauPile) {
+  //         // Get TableauPile to handle positions, priorities and moves of cards.
+  //         (dropPiles.first as TableauPile).dropCards(this, attachedCards);
+  //         attachedCards.clear();
+  //       } else {
+  //         // Drop a single card onto a FoundationPile.
+  //         final dropPosition = (dropPiles.first as FoundationPile).position;
+  //         doMove(
+  //           dropPosition,
+  //           onComplete: () {
+  //             dropPiles.first.acquireCard(this);
+  //           },
+  //         );
+  //       }
+  //       return;
+  //     }
+  //   }
 
-    // Invalid drop (middle of nowhere, invalid pile or invalid card for pile).
-    doMove(
-      _whereCardStarted,
-      onComplete: () {
-        pile!.returnCard(this);
-      },
-    );
-    if (attachedCards.isNotEmpty) {
-      attachedCards.forEach((card) {
-        final offset = card.position - position;
-        card.doMove(
-          _whereCardStarted + offset,
-          onComplete: () {
-            pile!.returnCard(card);
-          },
-        );
-      });
-      attachedCards.clear();
-    }
-  }
+  //   // Invalid drop (middle of nowhere, invalid pile or invalid card for pile).
+  //   doMove(
+  //     _whereCardStarted,
+  //     onComplete: () {
+  //       pile!.returnCard(this);
+  //     },
+  //   );
+  //   if (attachedCards.isNotEmpty) {
+  //     attachedCards.forEach((card) {
+  //       final offset = card.position - position;
+  //       card.doMove(
+  //         _whereCardStarted + offset,
+  //         onComplete: () {
+  //           pile!.returnCard(card);
+  //         },
+  //       );
+  //     });
+  //     attachedCards.clear();
+  //   }
+  // }
 
   //#endregion
 
   //#region Card-Tapping
 
-  // Tap a face-up card to make it auto-move and go out (if acceptable), but
-  // if it is face-down and on the Stock Pile, pass the event to that pile.
+  // // Tap a face-up card to make it auto-move and go out (if acceptable), but
+  // // if it is face-down and on the Stock Pile, pass the event to that pile.
 
-  @override
-  void onTapUp(TapUpEvent event) {
-    if (pile?.canMoveCard(this, MoveMethod.tap) ?? false) {
-      final suitIndex = suit.value;
-      if (world.foundations[suitIndex].canAcceptCard(this)) {
-        pile!.removeCard(this, MoveMethod.tap);
-        doMove(
-          world.foundations[suitIndex].position,
-          onComplete: () {
-            world.foundations[suitIndex].acquireCard(this);
-          },
-        );
-      }
-    } else if (pile is StockPile) {
-      world.stock.onTapUp(event);
-    }
-  }
+  // @override
+  // void onTapUp(TapUpEvent event) {
+  //   if (pile?.canMoveCard(this, MoveMethod.tap) ?? false) {
+  //     final suitIndex = suit.value;
+  //     if (world.foundations[suitIndex].canAcceptCard(this)) {
+  //       pile!.removeCard(this, MoveMethod.tap);
+  //       doMove(
+  //         world.foundations[suitIndex].position,
+  //         onComplete: () {
+  //           world.foundations[suitIndex].acquireCard(this);
+  //         },
+  //       );
+  //     }
+  //   } else if (pile is StockPile) {
+  //     world.stock.onTapUp(event);
+  //   }
+  // }
 
   //#endRegion
 

@@ -2,15 +2,17 @@ import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
+import 'package:vg_tarabish_flame/game/components/flat_button.dart';
+import 'package:vg_tarabish_flame/game/components/foundation_pile.dart';
+import 'package:vg_tarabish_flame/game/components/stock_pile.dart';
+import 'package:vg_tarabish_flame/game/components/tableau_pile.dart';
+import 'package:vg_tarabish_flame/game/components/waste_pile.dart';
+import 'package:vg_tarabish_flame/game/entity/card/behaviors/behaviors.dart';
+import 'package:vg_tarabish_flame/game/entity/card/behaviors/dragging_behavior.dart';
+// import 'package:vg_tarabish_flame/game/entity/card/behaviors/tapping_behavior.dart';
 
-import 'components/card.dart';
-import 'components/flat_button.dart';
-import 'components/foundation_pile.dart';
-import 'components/stock_pile.dart';
-import 'components/tableau_pile.dart';
-import 'components/waste_pile.dart';
-
-import 'tarabish_game.dart';
+import 'package:vg_tarabish_flame/game/entity/card/card.dart';
+import 'package:vg_tarabish_flame/game/tarabish_game.dart';
 
 class TarabishWorld extends World with HasGameReference<TarabishGame> {
   final cardGap = TarabishGame.cardGap;
@@ -53,7 +55,12 @@ class TarabishWorld extends World with HasGameReference<TarabishGame> {
     }
     for (var rank = 1; rank <= 13; rank++) {
       for (var suit = 0; suit < 4; suit++) {
-        final card = Card(rank, suit);
+        final card = Card(
+          rank,
+          suit,
+          tappingBehavior: CardTappingBehavior(),
+          cardDraggingBehavior: CardDraggingBehavior(),
+        );
         card.position = stock.position;
         cards.add(card);
       }
@@ -61,9 +68,9 @@ class TarabishWorld extends World with HasGameReference<TarabishGame> {
 
     add(stock);
     add(waste);
-    addAll(foundations);
-    addAll(tableauPiles);
-    addAll(cards);
+    await addAll(foundations);
+    await addAll(tableauPiles);
+    await addAll(cards);
 
     playAreaSize =
         Vector2(7 * cardSpaceWidth + cardGap, 4 * cardSpaceHeight + topGap);

@@ -1,4 +1,4 @@
-import 'components/card.dart';
+import 'entity/card/card.dart';
 
 enum MoveMethod { drag, tap }
 

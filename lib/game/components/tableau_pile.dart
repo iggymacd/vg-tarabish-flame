@@ -4,7 +4,7 @@ import 'package:flame/components.dart';
 
 import '../pile.dart';
 import '../tarabish_game.dart';
-import 'card.dart';
+import '../entity/card/card.dart';
 
 class TableauPile extends PositionComponent implements Pile {
   TableauPile({super.position}) : super(size: TarabishGame.cardSize);

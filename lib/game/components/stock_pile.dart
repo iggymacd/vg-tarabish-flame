@@ -5,7 +5,7 @@ import 'package:flame/events.dart';
 
 import '../pile.dart';
 import '../tarabish_game.dart';
-import 'card.dart';
+import '../entity/card/card.dart';
 import 'waste_pile.dart';
 
 class StockPile extends PositionComponent

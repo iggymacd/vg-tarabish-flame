@@ -2,7 +2,7 @@ import 'package:flame/components.dart';
 
 import '../pile.dart';
 import '../tarabish_game.dart';
-import 'card.dart';
+import '../entity/card/card.dart';
 
 class WastePile extends PositionComponent
     with HasGameReference<TarabishGame>
