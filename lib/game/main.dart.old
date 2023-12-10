@@ -4,6 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'tarabish_game.dart';
 
 void main() {
-  final game = TarabishGame();
+  final game = TavernGame();
   runApp(GameWidget(game: game));
 }

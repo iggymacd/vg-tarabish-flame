@@ -6,11 +6,12 @@ import 'package:vg_tarabish_flame/game/components/stock_pile.dart';
 import 'package:vg_tarabish_flame/game/entity/card/card.dart';
 import 'package:vg_tarabish_flame/game/pile.dart';
 import 'package:vg_tarabish_flame/game/tarabish_game.dart';
+import 'package:vg_tarabish_flame/game/tarabish_world.dart';
 // import 'package:vg_sample_flame/game/game.dart';
 // import 'package:vg_sample_flame/gen/assets.gen.dart';
 
 class CardTappingBehavior extends Behavior<Card>
-    with TapCallbacks, HasGameRef<TarabishGame> {
+    with TapCallbacks, HasGameRef<TavernGames>, HasWorldReference<TavernWorld> {
   @override
   bool containsLocalPoint(Vector2 point) {
     return parent.containsLocalPoint(point);
@@ -33,17 +34,17 @@ class CardTappingBehavior extends Behavior<Card>
   void onTapUp(TapUpEvent event) {
     if (parent.pile?.canMoveCard(parent, MoveMethod.tap) ?? false) {
       final suitIndex = parent.suit.value;
-      if (parent.world.foundations[suitIndex].canAcceptCard(parent)) {
+      if (world.foundations[suitIndex].canAcceptCard(parent)) {
         parent.pile!.removeCard(parent, MoveMethod.tap);
         parent.doMove(
-          parent.world.foundations[suitIndex].position,
+          world.foundations[suitIndex].position,
           onComplete: () {
-            parent.world.foundations[suitIndex].acquireCard(parent);
+            world.foundations[suitIndex].acquireCard(parent);
           },
         );
       }
     } else if (parent.pile is StockPile) {
-      parent.world.stock.onTapUp(event);
+      world.stock.onTapUp(event);
     }
   }
 }

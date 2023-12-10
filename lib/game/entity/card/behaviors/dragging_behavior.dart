@@ -11,8 +11,10 @@ class CardDraggingBehavior extends Behavior<Card> with DragCallbacks {
   void onDragStart(DragStartEvent event) {
     super.onDragStart(event);
     if (parent.pile?.canMoveCard(parent, MoveMethod.drag) ?? false) {
+      print("setting dragging to true");
       parent.dragging = true;
-      priority = 100;
+      parent.priority = 100;
+      print("dragging is ${parent.dragging}");
       // Copy each co-ord, else _whereCardStarted changes as the position does.
       parent.whereCardStarted = Vector2(parent.position.x, parent.position.y);
       if (parent.pile is TableauPile) {
@@ -28,6 +30,7 @@ class CardDraggingBehavior extends Behavior<Card> with DragCallbacks {
 
   @override
   void onDragUpdate(DragUpdateEvent event) {
+    print("onDragUpdate dragging is ${parent.dragging}");
     if (!parent.dragging) {
       return;
     }
@@ -38,18 +41,24 @@ class CardDraggingBehavior extends Behavior<Card> with DragCallbacks {
 
   @override
   void onDragEnd(DragEndEvent event) {
+    print("onDragEnd dragging is ${parent.dragging}");
     super.onDragEnd(event);
+    print("2nd onDragEnd dragging is ${parent.dragging}");
     if (!parent.dragging) {
       return;
     }
     parent.dragging = false;
     // Find out what is under the center-point of this card when it is dropped.
-    final dropPiles = parent
+    // print(
+    //     "parent position is ${parent.componentsAtPoint(parent.position + parent.size / 2)}");
+    final dropPiles = parent.parent!
         .componentsAtPoint(parent.position + parent.size / 2)
         .whereType<Pile>()
         .toList();
     if (dropPiles.isNotEmpty) {
+      print("dropPiles.isNotEmpty is ${dropPiles.isNotEmpty}");
       if (dropPiles.first.canAcceptCard(parent)) {
+        print("canAcceptCard is ${dropPiles.first.canAcceptCard(parent)}");
         // Found a Pile.
         // Move card(s) gracefully into position on the receiving pile.
         parent.pile!.removeCard(parent, MoveMethod.drag);
@@ -71,7 +80,7 @@ class CardDraggingBehavior extends Behavior<Card> with DragCallbacks {
         return;
       }
     }
-
+    print("invalid drop");
     // Invalid drop (middle of nowhere, invalid pile or invalid card for pile).
     parent.doMove(
       parent.whereCardStarted,

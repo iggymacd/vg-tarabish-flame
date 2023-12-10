@@ -10,7 +10,7 @@ import '../entity/card/card.dart';
 class FoundationPile extends PositionComponent implements Pile {
   FoundationPile(int intSuit, this.checkWin, {super.position})
       : suit = Suit.fromInt(intSuit),
-        super(size: TarabishGame.cardSize);
+        super(size: TavernGames.cardSize);
 
   final VoidCallback checkWin;
 
@@ -71,12 +71,12 @@ class FoundationPile extends PositionComponent implements Pile {
 
   @override
   void render(Canvas canvas) {
-    canvas.drawRRect(TarabishGame.cardRRect, _borderPaint);
+    canvas.drawRRect(TavernGames.cardRRect, _borderPaint);
     suit.sprite.render(
       canvas,
       position: size / 2,
       anchor: Anchor.center,
-      size: Vector2.all(TarabishGame.cardWidth * 0.6),
+      size: Vector2.all(TavernGames.cardWidth * 0.6),
       overridePaint: _suitPaint,
     );
   }

@@ -7,12 +7,12 @@ import '../tarabish_game.dart';
 import '../entity/card/card.dart';
 
 class TableauPile extends PositionComponent implements Pile {
-  TableauPile({super.position}) : super(size: TarabishGame.cardSize);
+  TableauPile({super.position}) : super(size: TavernGames.cardSize);
 
   /// Which cards are currently placed onto this pile.
   final List<Card> _cards = [];
-  final Vector2 _fanOffset1 = Vector2(0, TarabishGame.cardHeight * 0.05);
-  final Vector2 _fanOffset2 = Vector2(0, TarabishGame.cardHeight * 0.20);
+  final Vector2 _fanOffset1 = Vector2(0, TavernGames.cardHeight * 0.05);
+  final Vector2 _fanOffset2 = Vector2(0, TavernGames.cardHeight * 0.20);
 
   //#region Pile API
 
@@ -111,7 +111,7 @@ class TableauPile extends PositionComponent implements Pile {
   }
 
   void calculateHitArea() {
-    height = TarabishGame.cardHeight * 1.5 +
+    height = TavernGames.cardHeight * 1.5 +
         (_cards.length < 2 ? 0.0 : _cards.last.y - _cards.first.y);
   }
 
@@ -130,7 +130,7 @@ class TableauPile extends PositionComponent implements Pile {
 
   @override
   void render(Canvas canvas) {
-    canvas.drawRRect(TarabishGame.cardRRect, _borderPaint);
+    canvas.drawRRect(TavernGames.cardRRect, _borderPaint);
   }
 
   //#endregion

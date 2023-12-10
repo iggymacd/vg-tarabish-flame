@@ -9,9 +9,9 @@ import '../entity/card/card.dart';
 import 'waste_pile.dart';
 
 class StockPile extends PositionComponent
-    with TapCallbacks, HasGameReference<TarabishGame>
+    with TapCallbacks, HasGameReference<TavernGames>
     implements Pile {
-  StockPile({super.position}) : super(size: TarabishGame.cardSize);
+  StockPile({super.position}) : super(size: TavernGames.cardSize);
 
   /// Which cards are currently placed onto this pile. The first card in the
   /// list is at the bottom, the last card is on top.
@@ -80,10 +80,10 @@ class StockPile extends PositionComponent
 
   @override
   void render(Canvas canvas) {
-    canvas.drawRRect(TarabishGame.cardRRect, _borderPaint);
+    canvas.drawRRect(TavernGames.cardRRect, _borderPaint);
     canvas.drawCircle(
       Offset(width / 2, height / 2),
-      TarabishGame.cardWidth * 0.3,
+      TavernGames.cardWidth * 0.3,
       _circlePaint,
     );
   }

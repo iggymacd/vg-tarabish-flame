@@ -3,25 +3,24 @@ import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
-import 'package:flame/events.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flutter/animation.dart';
-import 'package:vg_tarabish_flame/game/components/foundation_pile.dart';
-import 'package:vg_tarabish_flame/game/components/tableau_pile.dart';
 import 'package:vg_tarabish_flame/game/pile.dart';
 import 'package:vg_tarabish_flame/game/rank.dart';
 import 'package:vg_tarabish_flame/game/suit.dart';
 import 'package:vg_tarabish_flame/game/tarabish_game.dart';
-import 'package:vg_tarabish_flame/game/tarabish_world.dart';
 
-class Card extends PositionedEntity with HasWorldReference<TarabishWorld> {
-  Card(int intRank, int intSuit,
-      {required Behavior tappingBehavior,
-      required Behavior cardDraggingBehavior})
-      : rank = Rank.fromInt(intRank),
+class Card extends PositionedEntity {
+  //} with HasWorldReference<TarabishWorld> {
+  Card(
+    int intRank,
+    int intSuit, {
+    required Behavior tappingBehavior,
+    required Behavior cardDraggingBehavior,
+  })  : rank = Rank.fromInt(intRank),
         suit = Suit.fromInt(intSuit),
         super(
-          size: TarabishGame.cardSize,
+          size: TavernGames.cardSize,
           behaviors: [tappingBehavior, cardDraggingBehavior],
         );
 
@@ -34,25 +33,25 @@ class Card extends PositionedEntity with HasWorldReference<TarabishWorld> {
   bool _isDragging = false;
   Vector2 _whereCardStarted = Vector2(0, 0);
 
-  bool get faceUp => this._faceUp;
+  bool get faceUp => _faceUp;
 
-  set faceUp(bool value) => this._faceUp = value;
+  set faceUp(bool value) => _faceUp = value;
 
-  bool get isAnimatedFlip => this._isAnimatedFlip;
+  bool get isAnimatedFlip => _isAnimatedFlip;
 
-  set isAnimatedFlip(bool value) => this._isAnimatedFlip = value;
+  set isAnimatedFlip(bool value) => _isAnimatedFlip = value;
 
-  bool get isFaceUpView => this._isFaceUpView;
+  bool get isFaceUpView => _isFaceUpView;
 
-  set isFaceUpView(bool value) => this._isFaceUpView = value;
+  set isFaceUpView(bool value) => _isFaceUpView = value;
 
-  bool get dragging => this._isDragging;
+  bool get dragging => _isDragging;
 
-  set dragging(bool value) => this._isDragging = value;
+  set dragging(bool value) => _isDragging = value;
 
-  Vector2 get whereCardStarted => this._whereCardStarted;
+  Vector2 get whereCardStarted => _whereCardStarted;
 
-  set whereCardStarted(Vector2 value) => this._whereCardStarted = value;
+  set whereCardStarted(Vector2 value) => _whereCardStarted = value;
 
   final List<Card> attachedCards = [];
 
@@ -94,8 +93,8 @@ class Card extends PositionedEntity with HasWorldReference<TarabishWorld> {
     ..style = PaintingStyle.stroke
     ..strokeWidth = 35;
   static final RRect cardRRect = RRect.fromRectAndRadius(
-    TarabishGame.cardSize.toRect(),
-    const Radius.circular(TarabishGame.cardRadius),
+    TavernGames.cardSize.toRect(),
+    const Radius.circular(TavernGames.cardRadius),
   );
   static final RRect backRRectInner = cardRRect.deflate(40);
   static final Sprite flameSprite = tarabishSprite(1367, 6, 357, 501);
@@ -299,6 +298,7 @@ class Card extends PositionedEntity with HasWorldReference<TarabishWorld> {
   //   }
   //   _isDragging = false;
   //   // Find out what is under the center-point of this card when it is dropped.
+  //   print("parent position is ${componentsAtPoint(position + size / 2)}");
   //   final dropPiles = parent!
   //       .componentsAtPoint(position + size / 2)
   //       .whereType<Pile>()

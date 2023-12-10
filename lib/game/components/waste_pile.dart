@@ -5,12 +5,12 @@ import '../tarabish_game.dart';
 import '../entity/card/card.dart';
 
 class WastePile extends PositionComponent
-    with HasGameReference<TarabishGame>
+    with HasGameReference<TavernGames>
     implements Pile {
-  WastePile({super.position}) : super(size: TarabishGame.cardSize);
+  WastePile({super.position}) : super(size: TavernGames.cardSize);
 
   final List<Card> _cards = [];
-  final Vector2 _fanOffset = Vector2(TarabishGame.cardWidth * 0.2, 0);
+  final Vector2 _fanOffset = Vector2(TavernGames.cardWidth * 0.2, 0);
 
   //#region Pile API
 

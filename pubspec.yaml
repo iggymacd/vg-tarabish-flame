@@ -7,8 +7,11 @@ environment:
   sdk: ">=3.1.0 <4.0.0"
 
 dependencies:
+  audioplayers: ^5.2.1
   bloc: ^8.1.2
+  equatable: ^2.0.5
   flame: ^1.11.0
+  flame_audio: ^2.1.5
   flame_behaviors: ^1.0.0
   flutter:
     sdk: flutter
@@ -16,8 +19,10 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   freezed_annotation: ^2.4.1
+  google_fonts: ^6.1.0
   intl: ^0.18.0
   json_annotation: ^4.8.1
+  rxdart: ^0.27.7
 
 dev_dependencies:
   bloc_test: ^9.1.4

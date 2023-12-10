@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
+import 'package:vg_tarabish_flame/bloc/tavern_bloc.dart';
 import 'package:vg_tarabish_flame/game/components/flat_button.dart';
 import 'package:vg_tarabish_flame/game/components/foundation_pile.dart';
 import 'package:vg_tarabish_flame/game/components/stock_pile.dart';
@@ -14,11 +15,12 @@ import 'package:vg_tarabish_flame/game/entity/card/behaviors/dragging_behavior.d
 import 'package:vg_tarabish_flame/game/entity/card/card.dart';
 import 'package:vg_tarabish_flame/game/tarabish_game.dart';
 
-class TarabishWorld extends World with HasGameReference<TarabishGame> {
-  final cardGap = TarabishGame.cardGap;
-  final topGap = TarabishGame.topGap;
-  final cardSpaceWidth = TarabishGame.cardSpaceWidth;
-  final cardSpaceHeight = TarabishGame.cardSpaceHeight;
+class TavernWorld extends World with HasGameReference<TavernGames> {
+  late final TavernBloc tavernBloc; // = game.tavernBloc;
+  final cardGap = TavernGames.cardGap;
+  final topGap = TavernGames.topGap;
+  final cardSpaceWidth = TavernGames.cardSpaceWidth;
+  final cardSpaceHeight = TavernGames.cardSpaceHeight;
 
   final stock = StockPile(position: Vector2(0.0, 0.0));
   final waste = WastePile(position: Vector2(0.0, 0.0));
@@ -29,6 +31,7 @@ class TarabishWorld extends World with HasGameReference<TarabishGame> {
 
   @override
   Future<void> onLoad() async {
+    tavernBloc = game.tavernBloc;
     await Flame.images.load('tarabish-sprites.png');
 
     stock.position = Vector2(cardGap, topGap);
@@ -86,13 +89,13 @@ class TarabishWorld extends World with HasGameReference<TarabishGame> {
     camera.viewfinder.position = Vector2(gameMidX, 0);
     camera.viewfinder.anchor = Anchor.topCenter;
 
-    deal();
+    // deal();
   }
 
   void addButton(String label, double buttonX, Action action) {
     final button = FlatButton(
       label,
-      size: Vector2(TarabishGame.cardWidth, 0.6 * topGap),
+      size: Vector2(TavernGames.cardWidth, 0.6 * topGap),
       position: Vector2(buttonX, topGap / 2),
       onReleased: () {
         if (action == Action.haveFun) {
@@ -101,7 +104,7 @@ class TarabishWorld extends World with HasGameReference<TarabishGame> {
         } else {
           // Restart with a new deal or the same deal as before.
           game.action = action;
-          game.world = TarabishWorld();
+          game.world = TavernWorld();
         }
       },
     );
@@ -113,7 +116,7 @@ class TarabishWorld extends World with HasGameReference<TarabishGame> {
 
     if (game.action != Action.sameDeal) {
       // New deal: change the Random Number Generator's seed.
-      game.seed = Random().nextInt(TarabishGame.maxInt);
+      game.seed = Random().nextInt(TavernGames.maxInt);
       if (game.action == Action.changeDraw) {
         game.tarabishDraw = (game.tarabishDraw == 3) ? 1 : 3;
       }
@@ -181,14 +184,14 @@ class TarabishWorld extends World with HasGameReference<TarabishGame> {
 
     final cameraZoom = game.camera.viewfinder.zoom;
     final zoomedScreen = game.size / cameraZoom;
-    final screenCenter = (playAreaSize - TarabishGame.cardSize) / 2;
+    final screenCenter = (playAreaSize - TavernGames.cardSize) / 2;
     final topLeft = Vector2(
-      (playAreaSize.x - zoomedScreen.x) / 2 - TarabishGame.cardWidth,
-      -TarabishGame.cardHeight,
+      (playAreaSize.x - zoomedScreen.x) / 2 - TavernGames.cardWidth,
+      -TavernGames.cardHeight,
     );
     final nCards = cards.length;
-    final offscreenHeight = zoomedScreen.y + TarabishGame.cardSize.y;
-    final offscreenWidth = zoomedScreen.x + TarabishGame.cardSize.x;
+    final offscreenHeight = zoomedScreen.y + TavernGames.cardSize.y;
+    final offscreenWidth = zoomedScreen.x + TavernGames.cardSize.x;
     final spacing = 2.0 * (offscreenHeight + offscreenWidth) / nCards;
 
     // Starting points, directions and lengths of offscreen rect's sides.
@@ -239,7 +242,7 @@ class TarabishWorld extends World with HasGameReference<TarabishGame> {
             } else {
               // Restart with a new deal after winning or pressing "Have fun".
               game.action = Action.newDeal;
-              game.world = TarabishWorld();
+              game.world = TavernWorld();
             }
           }
         },
