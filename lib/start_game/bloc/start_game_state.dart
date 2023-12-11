@@ -49,6 +49,8 @@ part of 'start_game_bloc.dart';
 sealed class StartGameState with _$StartGameState {
   const factory StartGameState.gameTypeDialogDisplayed() =
       GameTypeDialogDisplayed;
+  const factory StartGameState.gameTypeDialogCancelled() =
+      GameTypeDialogCancelled;
   const factory StartGameState.gameTypeChosen({
     required String gameType,
   }) = GameTypeChosen;

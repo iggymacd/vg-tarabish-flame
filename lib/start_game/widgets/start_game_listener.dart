@@ -39,6 +39,8 @@ class StartGameListener extends StatelessWidget {
           // TODONE: Handle this case.
           case GameTypeDialogDisplayed():
             _onChooseGameType(context);
+          case GameTypeDialogCancelled():
+          // TODO: Handle this case.
         }
       },
       child: _child,

@@ -19,18 +19,21 @@ mixin _$StartGameEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() displayGameTypeDialog,
+    required TResult Function() cancelDisplayGameTypeDialog,
     required TResult Function(String gameType) chooseGameType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? displayGameTypeDialog,
+    TResult? Function()? cancelDisplayGameTypeDialog,
     TResult? Function(String gameType)? chooseGameType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? displayGameTypeDialog,
+    TResult Function()? cancelDisplayGameTypeDialog,
     TResult Function(String gameType)? chooseGameType,
     required TResult orElse(),
   }) =>
@@ -39,18 +42,24 @@ mixin _$StartGameEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_DisplayGameTypeDialog value)
         displayGameTypeDialog,
+    required TResult Function(_CancelDisplayGameTypeDialog value)
+        cancelDisplayGameTypeDialog,
     required TResult Function(_ChooseGameType value) chooseGameType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DisplayGameTypeDialog value)? displayGameTypeDialog,
+    TResult? Function(_CancelDisplayGameTypeDialog value)?
+        cancelDisplayGameTypeDialog,
     TResult? Function(_ChooseGameType value)? chooseGameType,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_DisplayGameTypeDialog value)? displayGameTypeDialog,
+    TResult Function(_CancelDisplayGameTypeDialog value)?
+        cancelDisplayGameTypeDialog,
     TResult Function(_ChooseGameType value)? chooseGameType,
     required TResult orElse(),
   }) =>
@@ -116,6 +125,7 @@ class _$DisplayGameTypeDialogImpl implements _DisplayGameTypeDialog {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() displayGameTypeDialog,
+    required TResult Function() cancelDisplayGameTypeDialog,
     required TResult Function(String gameType) chooseGameType,
   }) {
     return displayGameTypeDialog();
@@ -125,6 +135,7 @@ class _$DisplayGameTypeDialogImpl implements _DisplayGameTypeDialog {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? displayGameTypeDialog,
+    TResult? Function()? cancelDisplayGameTypeDialog,
     TResult? Function(String gameType)? chooseGameType,
   }) {
     return displayGameTypeDialog?.call();
@@ -134,6 +145,7 @@ class _$DisplayGameTypeDialogImpl implements _DisplayGameTypeDialog {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? displayGameTypeDialog,
+    TResult Function()? cancelDisplayGameTypeDialog,
     TResult Function(String gameType)? chooseGameType,
     required TResult orElse(),
   }) {
@@ -148,6 +160,8 @@ class _$DisplayGameTypeDialogImpl implements _DisplayGameTypeDialog {
   TResult map<TResult extends Object?>({
     required TResult Function(_DisplayGameTypeDialog value)
         displayGameTypeDialog,
+    required TResult Function(_CancelDisplayGameTypeDialog value)
+        cancelDisplayGameTypeDialog,
     required TResult Function(_ChooseGameType value) chooseGameType,
   }) {
     return displayGameTypeDialog(this);
@@ -157,6 +171,8 @@ class _$DisplayGameTypeDialogImpl implements _DisplayGameTypeDialog {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DisplayGameTypeDialog value)? displayGameTypeDialog,
+    TResult? Function(_CancelDisplayGameTypeDialog value)?
+        cancelDisplayGameTypeDialog,
     TResult? Function(_ChooseGameType value)? chooseGameType,
   }) {
     return displayGameTypeDialog?.call(this);
@@ -166,6 +182,8 @@ class _$DisplayGameTypeDialogImpl implements _DisplayGameTypeDialog {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_DisplayGameTypeDialog value)? displayGameTypeDialog,
+    TResult Function(_CancelDisplayGameTypeDialog value)?
+        cancelDisplayGameTypeDialog,
     TResult Function(_ChooseGameType value)? chooseGameType,
     required TResult orElse(),
   }) {
@@ -178,6 +196,124 @@ class _$DisplayGameTypeDialogImpl implements _DisplayGameTypeDialog {
 
 abstract class _DisplayGameTypeDialog implements StartGameEvent {
   const factory _DisplayGameTypeDialog() = _$DisplayGameTypeDialogImpl;
+}
+
+/// @nodoc
+abstract class _$$CancelDisplayGameTypeDialogImplCopyWith<$Res> {
+  factory _$$CancelDisplayGameTypeDialogImplCopyWith(
+          _$CancelDisplayGameTypeDialogImpl value,
+          $Res Function(_$CancelDisplayGameTypeDialogImpl) then) =
+      __$$CancelDisplayGameTypeDialogImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CancelDisplayGameTypeDialogImplCopyWithImpl<$Res>
+    extends _$StartGameEventCopyWithImpl<$Res,
+        _$CancelDisplayGameTypeDialogImpl>
+    implements _$$CancelDisplayGameTypeDialogImplCopyWith<$Res> {
+  __$$CancelDisplayGameTypeDialogImplCopyWithImpl(
+      _$CancelDisplayGameTypeDialogImpl _value,
+      $Res Function(_$CancelDisplayGameTypeDialogImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$CancelDisplayGameTypeDialogImpl
+    implements _CancelDisplayGameTypeDialog {
+  const _$CancelDisplayGameTypeDialogImpl();
+
+  @override
+  String toString() {
+    return 'StartGameEvent.cancelDisplayGameTypeDialog()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CancelDisplayGameTypeDialogImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() displayGameTypeDialog,
+    required TResult Function() cancelDisplayGameTypeDialog,
+    required TResult Function(String gameType) chooseGameType,
+  }) {
+    return cancelDisplayGameTypeDialog();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? displayGameTypeDialog,
+    TResult? Function()? cancelDisplayGameTypeDialog,
+    TResult? Function(String gameType)? chooseGameType,
+  }) {
+    return cancelDisplayGameTypeDialog?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? displayGameTypeDialog,
+    TResult Function()? cancelDisplayGameTypeDialog,
+    TResult Function(String gameType)? chooseGameType,
+    required TResult orElse(),
+  }) {
+    if (cancelDisplayGameTypeDialog != null) {
+      return cancelDisplayGameTypeDialog();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_DisplayGameTypeDialog value)
+        displayGameTypeDialog,
+    required TResult Function(_CancelDisplayGameTypeDialog value)
+        cancelDisplayGameTypeDialog,
+    required TResult Function(_ChooseGameType value) chooseGameType,
+  }) {
+    return cancelDisplayGameTypeDialog(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_DisplayGameTypeDialog value)? displayGameTypeDialog,
+    TResult? Function(_CancelDisplayGameTypeDialog value)?
+        cancelDisplayGameTypeDialog,
+    TResult? Function(_ChooseGameType value)? chooseGameType,
+  }) {
+    return cancelDisplayGameTypeDialog?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_DisplayGameTypeDialog value)? displayGameTypeDialog,
+    TResult Function(_CancelDisplayGameTypeDialog value)?
+        cancelDisplayGameTypeDialog,
+    TResult Function(_ChooseGameType value)? chooseGameType,
+    required TResult orElse(),
+  }) {
+    if (cancelDisplayGameTypeDialog != null) {
+      return cancelDisplayGameTypeDialog(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CancelDisplayGameTypeDialog implements StartGameEvent {
+  const factory _CancelDisplayGameTypeDialog() =
+      _$CancelDisplayGameTypeDialogImpl;
 }
 
 /// @nodoc
@@ -247,6 +383,7 @@ class _$ChooseGameTypeImpl implements _ChooseGameType {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() displayGameTypeDialog,
+    required TResult Function() cancelDisplayGameTypeDialog,
     required TResult Function(String gameType) chooseGameType,
   }) {
     return chooseGameType(gameType);
@@ -256,6 +393,7 @@ class _$ChooseGameTypeImpl implements _ChooseGameType {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? displayGameTypeDialog,
+    TResult? Function()? cancelDisplayGameTypeDialog,
     TResult? Function(String gameType)? chooseGameType,
   }) {
     return chooseGameType?.call(gameType);
@@ -265,6 +403,7 @@ class _$ChooseGameTypeImpl implements _ChooseGameType {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? displayGameTypeDialog,
+    TResult Function()? cancelDisplayGameTypeDialog,
     TResult Function(String gameType)? chooseGameType,
     required TResult orElse(),
   }) {
@@ -279,6 +418,8 @@ class _$ChooseGameTypeImpl implements _ChooseGameType {
   TResult map<TResult extends Object?>({
     required TResult Function(_DisplayGameTypeDialog value)
         displayGameTypeDialog,
+    required TResult Function(_CancelDisplayGameTypeDialog value)
+        cancelDisplayGameTypeDialog,
     required TResult Function(_ChooseGameType value) chooseGameType,
   }) {
     return chooseGameType(this);
@@ -288,6 +429,8 @@ class _$ChooseGameTypeImpl implements _ChooseGameType {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_DisplayGameTypeDialog value)? displayGameTypeDialog,
+    TResult? Function(_CancelDisplayGameTypeDialog value)?
+        cancelDisplayGameTypeDialog,
     TResult? Function(_ChooseGameType value)? chooseGameType,
   }) {
     return chooseGameType?.call(this);
@@ -297,6 +440,8 @@ class _$ChooseGameTypeImpl implements _ChooseGameType {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_DisplayGameTypeDialog value)? displayGameTypeDialog,
+    TResult Function(_CancelDisplayGameTypeDialog value)?
+        cancelDisplayGameTypeDialog,
     TResult Function(_ChooseGameType value)? chooseGameType,
     required TResult orElse(),
   }) {
@@ -322,6 +467,7 @@ mixin _$StartGameState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() gameTypeDialogDisplayed,
+    required TResult Function() gameTypeDialogCancelled,
     required TResult Function(String gameType) gameTypeChosen,
     required TResult Function() initial,
   }) =>
@@ -329,6 +475,7 @@ mixin _$StartGameState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? gameTypeDialogDisplayed,
+    TResult? Function()? gameTypeDialogCancelled,
     TResult? Function(String gameType)? gameTypeChosen,
     TResult? Function()? initial,
   }) =>
@@ -336,6 +483,7 @@ mixin _$StartGameState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? gameTypeDialogDisplayed,
+    TResult Function()? gameTypeDialogCancelled,
     TResult Function(String gameType)? gameTypeChosen,
     TResult Function()? initial,
     required TResult orElse(),
@@ -345,6 +493,8 @@ mixin _$StartGameState {
   TResult map<TResult extends Object?>({
     required TResult Function(GameTypeDialogDisplayed value)
         gameTypeDialogDisplayed,
+    required TResult Function(GameTypeDialogCancelled value)
+        gameTypeDialogCancelled,
     required TResult Function(GameTypeChosen value) gameTypeChosen,
     required TResult Function(Initial value) initial,
   }) =>
@@ -352,6 +502,7 @@ mixin _$StartGameState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GameTypeDialogDisplayed value)? gameTypeDialogDisplayed,
+    TResult? Function(GameTypeDialogCancelled value)? gameTypeDialogCancelled,
     TResult? Function(GameTypeChosen value)? gameTypeChosen,
     TResult? Function(Initial value)? initial,
   }) =>
@@ -359,6 +510,7 @@ mixin _$StartGameState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GameTypeDialogDisplayed value)? gameTypeDialogDisplayed,
+    TResult Function(GameTypeDialogCancelled value)? gameTypeDialogCancelled,
     TResult Function(GameTypeChosen value)? gameTypeChosen,
     TResult Function(Initial value)? initial,
     required TResult orElse(),
@@ -426,6 +578,7 @@ class _$GameTypeDialogDisplayedImpl implements GameTypeDialogDisplayed {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() gameTypeDialogDisplayed,
+    required TResult Function() gameTypeDialogCancelled,
     required TResult Function(String gameType) gameTypeChosen,
     required TResult Function() initial,
   }) {
@@ -436,6 +589,7 @@ class _$GameTypeDialogDisplayedImpl implements GameTypeDialogDisplayed {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? gameTypeDialogDisplayed,
+    TResult? Function()? gameTypeDialogCancelled,
     TResult? Function(String gameType)? gameTypeChosen,
     TResult? Function()? initial,
   }) {
@@ -446,6 +600,7 @@ class _$GameTypeDialogDisplayedImpl implements GameTypeDialogDisplayed {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? gameTypeDialogDisplayed,
+    TResult Function()? gameTypeDialogCancelled,
     TResult Function(String gameType)? gameTypeChosen,
     TResult Function()? initial,
     required TResult orElse(),
@@ -461,6 +616,8 @@ class _$GameTypeDialogDisplayedImpl implements GameTypeDialogDisplayed {
   TResult map<TResult extends Object?>({
     required TResult Function(GameTypeDialogDisplayed value)
         gameTypeDialogDisplayed,
+    required TResult Function(GameTypeDialogCancelled value)
+        gameTypeDialogCancelled,
     required TResult Function(GameTypeChosen value) gameTypeChosen,
     required TResult Function(Initial value) initial,
   }) {
@@ -471,6 +628,7 @@ class _$GameTypeDialogDisplayedImpl implements GameTypeDialogDisplayed {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GameTypeDialogDisplayed value)? gameTypeDialogDisplayed,
+    TResult? Function(GameTypeDialogCancelled value)? gameTypeDialogCancelled,
     TResult? Function(GameTypeChosen value)? gameTypeChosen,
     TResult? Function(Initial value)? initial,
   }) {
@@ -481,6 +639,7 @@ class _$GameTypeDialogDisplayedImpl implements GameTypeDialogDisplayed {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GameTypeDialogDisplayed value)? gameTypeDialogDisplayed,
+    TResult Function(GameTypeDialogCancelled value)? gameTypeDialogCancelled,
     TResult Function(GameTypeChosen value)? gameTypeChosen,
     TResult Function(Initial value)? initial,
     required TResult orElse(),
@@ -494,6 +653,125 @@ class _$GameTypeDialogDisplayedImpl implements GameTypeDialogDisplayed {
 
 abstract class GameTypeDialogDisplayed implements StartGameState {
   const factory GameTypeDialogDisplayed() = _$GameTypeDialogDisplayedImpl;
+}
+
+/// @nodoc
+abstract class _$$GameTypeDialogCancelledImplCopyWith<$Res> {
+  factory _$$GameTypeDialogCancelledImplCopyWith(
+          _$GameTypeDialogCancelledImpl value,
+          $Res Function(_$GameTypeDialogCancelledImpl) then) =
+      __$$GameTypeDialogCancelledImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GameTypeDialogCancelledImplCopyWithImpl<$Res>
+    extends _$StartGameStateCopyWithImpl<$Res, _$GameTypeDialogCancelledImpl>
+    implements _$$GameTypeDialogCancelledImplCopyWith<$Res> {
+  __$$GameTypeDialogCancelledImplCopyWithImpl(
+      _$GameTypeDialogCancelledImpl _value,
+      $Res Function(_$GameTypeDialogCancelledImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$GameTypeDialogCancelledImpl implements GameTypeDialogCancelled {
+  const _$GameTypeDialogCancelledImpl();
+
+  @override
+  String toString() {
+    return 'StartGameState.gameTypeDialogCancelled()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GameTypeDialogCancelledImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() gameTypeDialogDisplayed,
+    required TResult Function() gameTypeDialogCancelled,
+    required TResult Function(String gameType) gameTypeChosen,
+    required TResult Function() initial,
+  }) {
+    return gameTypeDialogCancelled();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? gameTypeDialogDisplayed,
+    TResult? Function()? gameTypeDialogCancelled,
+    TResult? Function(String gameType)? gameTypeChosen,
+    TResult? Function()? initial,
+  }) {
+    return gameTypeDialogCancelled?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? gameTypeDialogDisplayed,
+    TResult Function()? gameTypeDialogCancelled,
+    TResult Function(String gameType)? gameTypeChosen,
+    TResult Function()? initial,
+    required TResult orElse(),
+  }) {
+    if (gameTypeDialogCancelled != null) {
+      return gameTypeDialogCancelled();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GameTypeDialogDisplayed value)
+        gameTypeDialogDisplayed,
+    required TResult Function(GameTypeDialogCancelled value)
+        gameTypeDialogCancelled,
+    required TResult Function(GameTypeChosen value) gameTypeChosen,
+    required TResult Function(Initial value) initial,
+  }) {
+    return gameTypeDialogCancelled(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GameTypeDialogDisplayed value)? gameTypeDialogDisplayed,
+    TResult? Function(GameTypeDialogCancelled value)? gameTypeDialogCancelled,
+    TResult? Function(GameTypeChosen value)? gameTypeChosen,
+    TResult? Function(Initial value)? initial,
+  }) {
+    return gameTypeDialogCancelled?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GameTypeDialogDisplayed value)? gameTypeDialogDisplayed,
+    TResult Function(GameTypeDialogCancelled value)? gameTypeDialogCancelled,
+    TResult Function(GameTypeChosen value)? gameTypeChosen,
+    TResult Function(Initial value)? initial,
+    required TResult orElse(),
+  }) {
+    if (gameTypeDialogCancelled != null) {
+      return gameTypeDialogCancelled(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GameTypeDialogCancelled implements StartGameState {
+  const factory GameTypeDialogCancelled() = _$GameTypeDialogCancelledImpl;
 }
 
 /// @nodoc
@@ -563,6 +841,7 @@ class _$GameTypeChosenImpl implements GameTypeChosen {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() gameTypeDialogDisplayed,
+    required TResult Function() gameTypeDialogCancelled,
     required TResult Function(String gameType) gameTypeChosen,
     required TResult Function() initial,
   }) {
@@ -573,6 +852,7 @@ class _$GameTypeChosenImpl implements GameTypeChosen {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? gameTypeDialogDisplayed,
+    TResult? Function()? gameTypeDialogCancelled,
     TResult? Function(String gameType)? gameTypeChosen,
     TResult? Function()? initial,
   }) {
@@ -583,6 +863,7 @@ class _$GameTypeChosenImpl implements GameTypeChosen {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? gameTypeDialogDisplayed,
+    TResult Function()? gameTypeDialogCancelled,
     TResult Function(String gameType)? gameTypeChosen,
     TResult Function()? initial,
     required TResult orElse(),
@@ -598,6 +879,8 @@ class _$GameTypeChosenImpl implements GameTypeChosen {
   TResult map<TResult extends Object?>({
     required TResult Function(GameTypeDialogDisplayed value)
         gameTypeDialogDisplayed,
+    required TResult Function(GameTypeDialogCancelled value)
+        gameTypeDialogCancelled,
     required TResult Function(GameTypeChosen value) gameTypeChosen,
     required TResult Function(Initial value) initial,
   }) {
@@ -608,6 +891,7 @@ class _$GameTypeChosenImpl implements GameTypeChosen {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GameTypeDialogDisplayed value)? gameTypeDialogDisplayed,
+    TResult? Function(GameTypeDialogCancelled value)? gameTypeDialogCancelled,
     TResult? Function(GameTypeChosen value)? gameTypeChosen,
     TResult? Function(Initial value)? initial,
   }) {
@@ -618,6 +902,7 @@ class _$GameTypeChosenImpl implements GameTypeChosen {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GameTypeDialogDisplayed value)? gameTypeDialogDisplayed,
+    TResult Function(GameTypeDialogCancelled value)? gameTypeDialogCancelled,
     TResult Function(GameTypeChosen value)? gameTypeChosen,
     TResult Function(Initial value)? initial,
     required TResult orElse(),
@@ -678,6 +963,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() gameTypeDialogDisplayed,
+    required TResult Function() gameTypeDialogCancelled,
     required TResult Function(String gameType) gameTypeChosen,
     required TResult Function() initial,
   }) {
@@ -688,6 +974,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? gameTypeDialogDisplayed,
+    TResult? Function()? gameTypeDialogCancelled,
     TResult? Function(String gameType)? gameTypeChosen,
     TResult? Function()? initial,
   }) {
@@ -698,6 +985,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? gameTypeDialogDisplayed,
+    TResult Function()? gameTypeDialogCancelled,
     TResult Function(String gameType)? gameTypeChosen,
     TResult Function()? initial,
     required TResult orElse(),
@@ -713,6 +1001,8 @@ class _$InitialImpl implements Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(GameTypeDialogDisplayed value)
         gameTypeDialogDisplayed,
+    required TResult Function(GameTypeDialogCancelled value)
+        gameTypeDialogCancelled,
     required TResult Function(GameTypeChosen value) gameTypeChosen,
     required TResult Function(Initial value) initial,
   }) {
@@ -723,6 +1013,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GameTypeDialogDisplayed value)? gameTypeDialogDisplayed,
+    TResult? Function(GameTypeDialogCancelled value)? gameTypeDialogCancelled,
     TResult? Function(GameTypeChosen value)? gameTypeChosen,
     TResult? Function(Initial value)? initial,
   }) {
@@ -733,6 +1024,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GameTypeDialogDisplayed value)? gameTypeDialogDisplayed,
+    TResult Function(GameTypeDialogCancelled value)? gameTypeDialogCancelled,
     TResult Function(GameTypeChosen value)? gameTypeChosen,
     TResult Function(Initial value)? initial,
     required TResult orElse(),

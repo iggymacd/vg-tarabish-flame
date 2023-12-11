@@ -3,6 +3,8 @@ part of 'start_game_bloc.dart';
 @freezed
 sealed class StartGameEvent with _$StartGameEvent {
   const factory StartGameEvent.displayGameTypeDialog() = _DisplayGameTypeDialog;
+  const factory StartGameEvent.cancelDisplayGameTypeDialog() =
+      _CancelDisplayGameTypeDialog;
   const factory StartGameEvent.chooseGameType({
     required String gameType,
   }) = _ChooseGameType;

@@ -36,25 +36,43 @@ class TavernWorld extends World with HasGameReference<TavernGames> {
   Future<void> onLoad() async {
     tavernBloc = game.tavernBloc;
     startGameBloc = game.startGameBloc;
+    if ((game.action == Action.none || game.action == Action.newGame)) {
+      ///  send an event to show dialog for user to choose game
+      /// wait for a state indicating that the game type was chosen
 
-    ///  send an event to show dialog for user to choose game
-    /// wait for a state indicating that the game type was chosen
-    startGameBloc.add(const StartGameEvent.displayGameTypeDialog());
-    await startGameBloc.stream.firstWhere((state) {
-      print('runtime type is ${state.runtimeType}');
-      return switch (state) {
-        GameTypeChosen() => true,
-        GameTypeDialogDisplayed() => false,
-        Initial() => false,
+      startGameBloc.add(const StartGameEvent.displayGameTypeDialog());
+      final chosenState = await startGameBloc.stream.firstWhere((state) {
+        print('runtime type is ${state.runtimeType}');
+        return switch (state) {
+          GameTypeChosen() => true,
+          GameTypeDialogDisplayed() => false,
+          Initial() => false,
+          // TODO: Handle this case.
+          GameTypeDialogCancelled() => false,
+        };
+      }).timeout(
+        const Duration(seconds: 5), // Set a reasonable timeout duration
+        onTimeout: () {
+          // Handle the case where the user cancels or times out
+          // You can throw an exception or return a default value
+          startGameBloc.add(const StartGameEvent.cancelDisplayGameTypeDialog());
+          return Future.value(const GameTypeChosen(gameType: 'Solitaire'));
+        },
+      );
+
+      gameType = switch (chosenState) {
+        final GameTypeChosen currentState => currentState.gameType,
+        GameTypeDialogDisplayed() ||
+        Initial() ||
+        GameTypeDialogCancelled() =>
+          'Solitaire',
+        // Initial() => 'Solitaire',
+        // TODO: Handle this case.
+        // GameTypeDialogCancelled() => null,
       };
-      // return true;
-    }); //state.status != AuthStatus.loading,
-
-    gameType = switch (startGameBloc.state) {
-      final GameTypeChosen currentState => currentState.gameType,
-      GameTypeDialogDisplayed() || Initial() => 'Solitaire',
-      // Initial() => 'Solitaire',
-    };
+    } else {
+      gameType = 'Solitaire';
+    }
     print('playing game of $gameType');
     // StartGameState.gameTypeChosen(gameType: gameType) =>
     await Flame.images.load('tarabish-sprites.png');

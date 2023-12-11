@@ -20,6 +20,9 @@ class StartGameBloc extends Bloc<StartGameEvent, StartGameState> {
           _onDisplayGameTypeDialog(currentEvent, emit);
         case _ChooseGameType currentEvent:
           _onChooseGameType(currentEvent, emit);
+        case _CancelDisplayGameTypeDialog currentEvent:
+          print('cancelled game type dialog');
+          emit(const StartGameState.gameTypeDialogCancelled());
         // default:
       }
     });
