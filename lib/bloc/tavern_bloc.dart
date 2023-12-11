@@ -43,6 +43,12 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
         case _TavernMembersUpdated():
           _handleTavernMembersUpdated(event, emit);
         case _Started():
+          print('TavenEvent _Started called');
+        // TODO: Handle this case.
+        case _ShowGameTypes():
+          _handleShowGameTypes(event, emit);
+        // case _ChooseGameType():
+        //   _handleChooseGameType(event, emit);
         // TODO: Handle this case.
       }
     });
@@ -88,4 +94,15 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
         emit(currentState.copyWith(tavernMembers: event.tavernMembers));
     }
   }
+
+  void _handleShowGameTypes(_ShowGameTypes event, Emitter<TavernState> emit) {
+    print('TavenEvent _handleShowGameTypes called');
+  }
+
+  // void _handleChooseGameType(_ChooseGameType event, Emitter<TavernState> emit) {
+  //   // ignore: lines_longer_than_80_chars
+  //   print(
+  //     'TavenEvent _handleChooseGameType called with chosen game ${event.gameType}',
+  //   );
+  // }
 }

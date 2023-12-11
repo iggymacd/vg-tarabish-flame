@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vg_tarabish_flame/bloc/tavern_bloc.dart';
-import 'package:vg_tarabish_flame/game/tarabish_game.dart';
+import 'package:vg_tarabish_flame/game/tavern_game.dart';
 import 'package:vg_tarabish_flame/l10n/l10n.dart';
+import 'package:vg_tarabish_flame/start_game/bloc/start_game_bloc.dart';
+import 'package:vg_tarabish_flame/start_game/widgets/start_game_listener.dart';
 import 'package:vg_tarabish_flame/tavern_repository/tavern_repository.dart';
 
 class App extends StatelessWidget {
@@ -16,7 +18,8 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => TavernBloc(TavernRepository()))
+        BlocProvider(create: (_) => TavernBloc(TavernRepository())),
+        BlocProvider(create: (_) => StartGameBloc()),
         // BlocProvider(
         //   create: (_) => PreloadCubit(
         //     Images(prefix: ''),
@@ -48,7 +51,9 @@ class AppView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final game = TavernGames(tavernBloc: context.read<TavernBloc>());
+    final game = TavernGames(
+        tavernBloc: context.read<TavernBloc>(),
+        startGameBloc: context.read<StartGameBloc>());
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -68,7 +73,7 @@ class AppView extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       // home: const LoadingPage(),
-      home: GameWidget(game: game),
+      home: StartGameListener(child: GameWidget(game: game)),
     );
   }
 }

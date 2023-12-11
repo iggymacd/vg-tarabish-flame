@@ -3,6 +3,10 @@ part of 'tavern_bloc.dart';
 @freezed
 sealed class TavernEvent with _$TavernEvent {
   const factory TavernEvent.started() = _Started;
+  const factory TavernEvent.showGameTypes() = _ShowGameTypes;
+  // const factory TavernEvent.chooseGameType({
+  //   required String gameType,
+  // }) = _ChooseGameType;
   const factory TavernEvent.tavernGamesUpdated({
     required List<TavernGame> tavernGames,
   }) = _TavernGamesUpdated;

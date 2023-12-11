@@ -4,7 +4,7 @@ import 'package:flame/components.dart';
 
 import '../pile.dart';
 import '../suit.dart';
-import '../tarabish_game.dart';
+import '../tavern_game.dart';
 import '../entity/card/card.dart';
 
 class FoundationPile extends PositionComponent implements Pile {

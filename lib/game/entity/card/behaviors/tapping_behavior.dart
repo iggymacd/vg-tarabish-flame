@@ -5,8 +5,8 @@ import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:vg_tarabish_flame/game/components/stock_pile.dart';
 import 'package:vg_tarabish_flame/game/entity/card/card.dart';
 import 'package:vg_tarabish_flame/game/pile.dart';
-import 'package:vg_tarabish_flame/game/tarabish_game.dart';
-import 'package:vg_tarabish_flame/game/tarabish_world.dart';
+import 'package:vg_tarabish_flame/game/tavern_game.dart';
+import 'package:vg_tarabish_flame/game/tavern_world.dart';
 // import 'package:vg_sample_flame/game/game.dart';
 // import 'package:vg_sample_flame/gen/assets.gen.dart';
 

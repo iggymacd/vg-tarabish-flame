@@ -5,12 +5,18 @@ import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame/palette.dart';
 import 'package:vg_tarabish_flame/bloc/tavern_bloc.dart';
+import 'package:vg_tarabish_flame/start_game/start_game.dart';
 
-import 'tarabish_world.dart';
+import 'tavern_world.dart';
 
-enum Action { newDeal, sameDeal, changeDraw, haveFun }
+enum Action { newDeal, sameDeal, changeDraw, haveFun, newGame, none }
 
 class TavernGames extends FlameGame<TavernWorld> {
+  // = (2 to the power 32) - 1
+
+  // This TarabishGame constructor also initiates the first TarabishWorld.
+  TavernGames({required this.startGameBloc, required this.tavernBloc})
+      : super(world: TavernWorld());
   static const double cardGap = 175.0;
   static const double topGap = 500.0;
   static const double cardWidth = 1000.0;
@@ -25,18 +31,16 @@ class TavernGames extends FlameGame<TavernWorld> {
   );
 
   // Constant used when creating Random seed.
-  static const int maxInt = 0xFFFFFFFE; // = (2 to the power 32) - 1
-
-  // This TarabishGame constructor also initiates the first TarabishWorld.
-  TavernGames({required this.tavernBloc}) : super(world: TavernWorld());
+  static const int maxInt = 0xFFFFFFFE;
   final TavernBloc tavernBloc;
+  final StartGameBloc startGameBloc;
   // These three values persist between games and are starting conditions
   // for the next game to be played in TarabishWorld. The actual seed is
   // computed in TarabishWorld but is held here in case the player chooses
   // to replay a game by selecting Action.sameDeal.
   int tarabishDraw = 1;
   int seed = 1;
-  Action action = Action.newDeal;
+  Action action = Action.none;
 }
 
 Sprite tarabishSprite(double x, double y, double width, double height) {

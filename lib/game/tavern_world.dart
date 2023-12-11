@@ -13,10 +13,13 @@ import 'package:vg_tarabish_flame/game/entity/card/behaviors/dragging_behavior.d
 // import 'package:vg_tarabish_flame/game/entity/card/behaviors/tapping_behavior.dart';
 
 import 'package:vg_tarabish_flame/game/entity/card/card.dart';
-import 'package:vg_tarabish_flame/game/tarabish_game.dart';
+import 'package:vg_tarabish_flame/game/tavern_game.dart';
+import 'package:vg_tarabish_flame/start_game/start_game.dart';
 
 class TavernWorld extends World with HasGameReference<TavernGames> {
   late final TavernBloc tavernBloc; // = game.tavernBloc;
+  late final StartGameBloc startGameBloc;
+  late final String gameType;
   final cardGap = TavernGames.cardGap;
   final topGap = TavernGames.topGap;
   final cardSpaceWidth = TavernGames.cardSpaceWidth;
@@ -32,6 +35,28 @@ class TavernWorld extends World with HasGameReference<TavernGames> {
   @override
   Future<void> onLoad() async {
     tavernBloc = game.tavernBloc;
+    startGameBloc = game.startGameBloc;
+
+    ///  send an event to show dialog for user to choose game
+    /// wait for a state indicating that the game type was chosen
+    startGameBloc.add(const StartGameEvent.displayGameTypeDialog());
+    await startGameBloc.stream.firstWhere((state) {
+      print('runtime type is ${state.runtimeType}');
+      return switch (state) {
+        GameTypeChosen() => true,
+        GameTypeDialogDisplayed() => false,
+        Initial() => false,
+      };
+      // return true;
+    }); //state.status != AuthStatus.loading,
+
+    gameType = switch (startGameBloc.state) {
+      final GameTypeChosen currentState => currentState.gameType,
+      GameTypeDialogDisplayed() || Initial() => 'Solitaire',
+      // Initial() => 'Solitaire',
+    };
+    print('playing game of $gameType');
+    // StartGameState.gameTypeChosen(gameType: gameType) =>
     await Flame.images.load('tarabish-sprites.png');
 
     stock.position = Vector2(cardGap, topGap);
@@ -83,6 +108,7 @@ class TavernWorld extends World with HasGameReference<TavernGames> {
     addButton('Same deal', gameMidX + cardSpaceWidth, Action.sameDeal);
     addButton('Draw 1 or 3', gameMidX + 2 * cardSpaceWidth, Action.changeDraw);
     addButton('Have fun', gameMidX + 3 * cardSpaceWidth, Action.haveFun);
+    addButton('New Game', gameMidX + 4 * cardSpaceWidth, Action.newGame);
 
     final camera = game.camera;
     camera.viewfinder.visibleGameSize = playAreaSize;
@@ -90,6 +116,9 @@ class TavernWorld extends World with HasGameReference<TavernGames> {
     camera.viewfinder.anchor = Anchor.topCenter;
 
     // deal();
+    if (!(game.action == Action.none || game.action == Action.newGame)) {
+      deal();
+    }
   }
 
   void addButton(String label, double buttonX, Action action) {
@@ -102,6 +131,10 @@ class TavernWorld extends World with HasGameReference<TavernGames> {
           // Shortcut to the "win" sequence, for Tutorial purposes only.
           letsCelebrate();
         } else {
+          if (action == Action.newGame) {
+            print('starting new game');
+            startGameBloc.add(const StartGameEvent.displayGameTypeDialog());
+          }
           // Restart with a new deal or the same deal as before.
           game.action = action;
           game.world = TavernWorld();
@@ -241,7 +274,7 @@ class TavernWorld extends World with HasGameReference<TavernGames> {
               letsCelebrate(phase: 2);
             } else {
               // Restart with a new deal after winning or pressing "Have fun".
-              game.action = Action.newDeal;
+              game.action = Action.none;
               game.world = TavernWorld();
             }
           }

@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 
 import '../pile.dart';
-import '../tarabish_game.dart';
+import '../tavern_game.dart';
 import '../entity/card/card.dart';
 
 class TableauPile extends PositionComponent implements Pile {

@@ -8,7 +8,7 @@ import 'package:flutter/animation.dart';
 import 'package:vg_tarabish_flame/game/pile.dart';
 import 'package:vg_tarabish_flame/game/rank.dart';
 import 'package:vg_tarabish_flame/game/suit.dart';
-import 'package:vg_tarabish_flame/game/tarabish_game.dart';
+import 'package:vg_tarabish_flame/game/tavern_game.dart';
 
 class Card extends PositionedEntity {
   //} with HasWorldReference<TarabishWorld> {

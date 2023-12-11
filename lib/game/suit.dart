@@ -1,6 +1,6 @@
 import 'package:flame/sprite.dart';
 import 'package:flutter/foundation.dart';
-import 'tarabish_game.dart';
+import 'tavern_game.dart';
 
 @immutable
 class Suit {
