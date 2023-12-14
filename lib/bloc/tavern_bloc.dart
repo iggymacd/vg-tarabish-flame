@@ -45,11 +45,15 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
           _handleTavernMembersUpdated(event, emit);
         case _NewGame():
           print('TavernEvent _NewGame called');
+          _handleNewGame(event, emit);
         // TODO: Handle this case.
         case _ShowGameTypes():
           _handleShowGameTypes(event, emit);
         // case _ChooseGameType():
         //   _handleChooseGameType(event, emit);
+        // TODO: Handle this case.
+        case _SwitchGame():
+          _handleSwitchGame(event, emit);
         // TODO: Handle this case.
       }
     });

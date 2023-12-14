@@ -220,7 +220,7 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
         default:
       }
     });
-    parent.tavernBloc.add(TavernEvent.newGame());
+    parent.tavernBloc.add(const TavernEvent.newGame());
     // assert(parent.cards.length == 36,
     //     'There are ${parent.cards.length} cards: should be 36');
 
