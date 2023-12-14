@@ -19,6 +19,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:vg_tarabish_flame/game/entity/game/card_game.dart';
 import 'package:vg_tarabish_flame/tavern_repository/tavern_repository.dart';
 
 part 'tavern_event.dart';
@@ -42,8 +43,8 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
           _handleTavernGamesUpdated(event, emit);
         case _TavernMembersUpdated():
           _handleTavernMembersUpdated(event, emit);
-        case _Started():
-          print('TavenEvent _Started called');
+        case _NewGame():
+          print('TavernEvent _NewGame called');
         // TODO: Handle this case.
         case _ShowGameTypes():
           _handleShowGameTypes(event, emit);
@@ -59,6 +60,13 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
       _tavernGamesStreamSubscription;
   late final StreamSubscription<List<TavernMember>>
       _tavernMembersStreamSubscription;
+
+// Map to store game streams based on their IDs
+  final Map<String, Stream<CardGame>> _gameStreams =
+      <String, Stream<CardGame>>{};
+
+  // ID of the currently viewed game
+  String? _currentGameId;
 
   @override
   Future<void> close() {
@@ -99,6 +107,54 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
     print('TavenEvent _handleShowGameTypes called');
   }
 
+  void _handleNewGame(_NewGame event, Emitter<TavernState> emit) {
+    print('TavenEvent _handleNewGame called');
+    final String gameId = event.gameId; // Extract gameId from the event
+
+    // Create a new game stream if it doesn't exist
+    if (!_gameStreams.containsKey(gameId)) {
+      final Stream<CardGame> newGameStream =
+          tavernRepository.newOrExistingGameInProgress(id: gameId);
+      _gameStreams[gameId] = newGameStream;
+    }
+
+    // Switch to the newly created game
+    _currentGameId = gameId;
+    _gameStreams[gameId]!.listen((CardGame game) {
+      // Do something with the updated game state
+      // You may emit a new state to the UI if needed
+      print('Received updated game state for game $gameId: $game');
+    });
+  }
+
+  void _handleSwitchGame(_SwitchGame event, Emitter<TavernState> emit) {
+    print('TavenEvent _handleSwitchGame called');
+    final String gameId = event.gameId; // Extract gameId from the event
+
+    // Check if the game stream exists
+    if (_gameStreams.containsKey(gameId)) {
+      // Switch to the selected game
+      _currentGameId = gameId;
+      _gameStreams[gameId]!.listen((CardGame game) {
+        // Do something with the updated game state
+        // You may emit a new state to the UI if needed
+        print('Received updated game state for game $gameId: $game');
+      });
+    } else {
+      print('Game stream for $gameId does not exist.');
+      // Optionally, you can create a new game stream for the selected game
+      // Uncomment the next line if you want to create a new stream:
+      // _gameStreams[gameId] = tavernRepository.newOrExistingGameInProgress(id: gameId);
+
+      // Switch to the selected game (whether it's a new stream or not)
+      _currentGameId = gameId;
+      _gameStreams[gameId]!.listen((CardGame game) {
+        // Do something with the updated game state
+        // You may emit a new state to the UI if needed
+        print('Received updated game state for game $gameId: $game');
+      });
+    }
+  }
   // void _handleChooseGameType(_ChooseGameType event, Emitter<TavernState> emit) {
   //   // ignore: lines_longer_than_80_chars
   //   print(

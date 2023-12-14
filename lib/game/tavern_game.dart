@@ -3,11 +3,9 @@ import 'dart:ui';
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
-import 'package:flame/palette.dart';
 import 'package:vg_tarabish_flame/bloc/tavern_bloc.dart';
+import 'package:vg_tarabish_flame/game/tavern_world.dart';
 import 'package:vg_tarabish_flame/start_game/start_game.dart';
-
-import 'tavern_world.dart';
 
 enum Action { newDeal, sameDeal, changeDraw, haveFun, newGame, none }
 

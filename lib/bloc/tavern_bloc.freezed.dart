@@ -18,7 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TavernEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() newGame,
+    required TResult Function(String gameId) switchGame,
     required TResult Function() showGameTypes,
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
@@ -27,7 +28,8 @@ mixin _$TavernEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? newGame,
+    TResult? Function(String gameId)? switchGame,
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
@@ -35,7 +37,8 @@ mixin _$TavernEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? newGame,
+    TResult Function(String gameId)? switchGame,
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
@@ -44,7 +47,8 @@ mixin _$TavernEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_NewGame value) newGame,
+    required TResult Function(_SwitchGame value) switchGame,
     required TResult Function(_ShowGameTypes value) showGameTypes,
     required TResult Function(_TavernGamesUpdated value) tavernGamesUpdated,
     required TResult Function(_TavernMembersUpdated value) tavernMembersUpdated,
@@ -52,7 +56,8 @@ mixin _$TavernEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_NewGame value)? newGame,
+    TResult? Function(_SwitchGame value)? switchGame,
     TResult? Function(_ShowGameTypes value)? showGameTypes,
     TResult? Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult? Function(_TavernMembersUpdated value)? tavernMembersUpdated,
@@ -60,7 +65,8 @@ mixin _$TavernEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_NewGame value)? newGame,
+    TResult Function(_SwitchGame value)? switchGame,
     TResult Function(_ShowGameTypes value)? showGameTypes,
     TResult Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult Function(_TavernMembersUpdated value)? tavernMembersUpdated,
@@ -88,35 +94,35 @@ class _$TavernEventCopyWithImpl<$Res, $Val extends TavernEvent>
 }
 
 /// @nodoc
-abstract class _$$StartedImplCopyWith<$Res> {
-  factory _$$StartedImplCopyWith(
-          _$StartedImpl value, $Res Function(_$StartedImpl) then) =
-      __$$StartedImplCopyWithImpl<$Res>;
+abstract class _$$NewGameImplCopyWith<$Res> {
+  factory _$$NewGameImplCopyWith(
+          _$NewGameImpl value, $Res Function(_$NewGameImpl) then) =
+      __$$NewGameImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$StartedImplCopyWithImpl<$Res>
-    extends _$TavernEventCopyWithImpl<$Res, _$StartedImpl>
-    implements _$$StartedImplCopyWith<$Res> {
-  __$$StartedImplCopyWithImpl(
-      _$StartedImpl _value, $Res Function(_$StartedImpl) _then)
+class __$$NewGameImplCopyWithImpl<$Res>
+    extends _$TavernEventCopyWithImpl<$Res, _$NewGameImpl>
+    implements _$$NewGameImplCopyWith<$Res> {
+  __$$NewGameImplCopyWithImpl(
+      _$NewGameImpl _value, $Res Function(_$NewGameImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$StartedImpl implements _Started {
-  const _$StartedImpl();
+class _$NewGameImpl implements _NewGame {
+  const _$NewGameImpl();
 
   @override
   String toString() {
-    return 'TavernEvent.started()';
+    return 'TavernEvent.newGame()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$StartedImpl);
+        (other.runtimeType == runtimeType && other is _$NewGameImpl);
   }
 
   @override
@@ -125,37 +131,40 @@ class _$StartedImpl implements _Started {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() newGame,
+    required TResult Function(String gameId) switchGame,
     required TResult Function() showGameTypes,
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
         tavernMembersUpdated,
   }) {
-    return started();
+    return newGame();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? newGame,
+    TResult? Function(String gameId)? switchGame,
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
   }) {
-    return started?.call();
+    return newGame?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? newGame,
+    TResult Function(String gameId)? switchGame,
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
     required TResult orElse(),
   }) {
-    if (started != null) {
-      return started();
+    if (newGame != null) {
+      return newGame();
     }
     return orElse();
   }
@@ -163,43 +172,198 @@ class _$StartedImpl implements _Started {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_NewGame value) newGame,
+    required TResult Function(_SwitchGame value) switchGame,
     required TResult Function(_ShowGameTypes value) showGameTypes,
     required TResult Function(_TavernGamesUpdated value) tavernGamesUpdated,
     required TResult Function(_TavernMembersUpdated value) tavernMembersUpdated,
   }) {
-    return started(this);
+    return newGame(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_NewGame value)? newGame,
+    TResult? Function(_SwitchGame value)? switchGame,
     TResult? Function(_ShowGameTypes value)? showGameTypes,
     TResult? Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult? Function(_TavernMembersUpdated value)? tavernMembersUpdated,
   }) {
-    return started?.call(this);
+    return newGame?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_NewGame value)? newGame,
+    TResult Function(_SwitchGame value)? switchGame,
     TResult Function(_ShowGameTypes value)? showGameTypes,
     TResult Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult Function(_TavernMembersUpdated value)? tavernMembersUpdated,
     required TResult orElse(),
   }) {
-    if (started != null) {
-      return started(this);
+    if (newGame != null) {
+      return newGame(this);
     }
     return orElse();
   }
 }
 
-abstract class _Started implements TavernEvent {
-  const factory _Started() = _$StartedImpl;
+abstract class _NewGame implements TavernEvent {
+  const factory _NewGame() = _$NewGameImpl;
+}
+
+/// @nodoc
+abstract class _$$SwitchGameImplCopyWith<$Res> {
+  factory _$$SwitchGameImplCopyWith(
+          _$SwitchGameImpl value, $Res Function(_$SwitchGameImpl) then) =
+      __$$SwitchGameImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String gameId});
+}
+
+/// @nodoc
+class __$$SwitchGameImplCopyWithImpl<$Res>
+    extends _$TavernEventCopyWithImpl<$Res, _$SwitchGameImpl>
+    implements _$$SwitchGameImplCopyWith<$Res> {
+  __$$SwitchGameImplCopyWithImpl(
+      _$SwitchGameImpl _value, $Res Function(_$SwitchGameImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? gameId = null,
+  }) {
+    return _then(_$SwitchGameImpl(
+      gameId: null == gameId
+          ? _value.gameId
+          : gameId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SwitchGameImpl implements _SwitchGame {
+  const _$SwitchGameImpl({required this.gameId});
+
+  @override
+  final String gameId;
+
+  @override
+  String toString() {
+    return 'TavernEvent.switchGame(gameId: $gameId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SwitchGameImpl &&
+            (identical(other.gameId, gameId) || other.gameId == gameId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, gameId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SwitchGameImplCopyWith<_$SwitchGameImpl> get copyWith =>
+      __$$SwitchGameImplCopyWithImpl<_$SwitchGameImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() newGame,
+    required TResult Function(String gameId) switchGame,
+    required TResult Function() showGameTypes,
+    required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
+    required TResult Function(List<TavernMember> tavernMembers)
+        tavernMembersUpdated,
+  }) {
+    return switchGame(gameId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? newGame,
+    TResult? Function(String gameId)? switchGame,
+    TResult? Function()? showGameTypes,
+    TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
+    TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
+  }) {
+    return switchGame?.call(gameId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? newGame,
+    TResult Function(String gameId)? switchGame,
+    TResult Function()? showGameTypes,
+    TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
+    TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
+    required TResult orElse(),
+  }) {
+    if (switchGame != null) {
+      return switchGame(gameId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_NewGame value) newGame,
+    required TResult Function(_SwitchGame value) switchGame,
+    required TResult Function(_ShowGameTypes value) showGameTypes,
+    required TResult Function(_TavernGamesUpdated value) tavernGamesUpdated,
+    required TResult Function(_TavernMembersUpdated value) tavernMembersUpdated,
+  }) {
+    return switchGame(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_NewGame value)? newGame,
+    TResult? Function(_SwitchGame value)? switchGame,
+    TResult? Function(_ShowGameTypes value)? showGameTypes,
+    TResult? Function(_TavernGamesUpdated value)? tavernGamesUpdated,
+    TResult? Function(_TavernMembersUpdated value)? tavernMembersUpdated,
+  }) {
+    return switchGame?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_NewGame value)? newGame,
+    TResult Function(_SwitchGame value)? switchGame,
+    TResult Function(_ShowGameTypes value)? showGameTypes,
+    TResult Function(_TavernGamesUpdated value)? tavernGamesUpdated,
+    TResult Function(_TavernMembersUpdated value)? tavernMembersUpdated,
+    required TResult orElse(),
+  }) {
+    if (switchGame != null) {
+      return switchGame(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SwitchGame implements TavernEvent {
+  const factory _SwitchGame({required final String gameId}) = _$SwitchGameImpl;
+
+  String get gameId;
+  @JsonKey(ignore: true)
+  _$$SwitchGameImplCopyWith<_$SwitchGameImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -240,7 +404,8 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() newGame,
+    required TResult Function(String gameId) switchGame,
     required TResult Function() showGameTypes,
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
@@ -252,7 +417,8 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? newGame,
+    TResult? Function(String gameId)? switchGame,
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
@@ -263,7 +429,8 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? newGame,
+    TResult Function(String gameId)? switchGame,
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
@@ -278,7 +445,8 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_NewGame value) newGame,
+    required TResult Function(_SwitchGame value) switchGame,
     required TResult Function(_ShowGameTypes value) showGameTypes,
     required TResult Function(_TavernGamesUpdated value) tavernGamesUpdated,
     required TResult Function(_TavernMembersUpdated value) tavernMembersUpdated,
@@ -289,7 +457,8 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_NewGame value)? newGame,
+    TResult? Function(_SwitchGame value)? switchGame,
     TResult? Function(_ShowGameTypes value)? showGameTypes,
     TResult? Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult? Function(_TavernMembersUpdated value)? tavernMembersUpdated,
@@ -300,7 +469,8 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_NewGame value)? newGame,
+    TResult Function(_SwitchGame value)? switchGame,
     TResult Function(_ShowGameTypes value)? showGameTypes,
     TResult Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult Function(_TavernMembersUpdated value)? tavernMembersUpdated,
@@ -390,7 +560,8 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() newGame,
+    required TResult Function(String gameId) switchGame,
     required TResult Function() showGameTypes,
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
@@ -402,7 +573,8 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? newGame,
+    TResult? Function(String gameId)? switchGame,
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
@@ -413,7 +585,8 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? newGame,
+    TResult Function(String gameId)? switchGame,
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
@@ -428,7 +601,8 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_NewGame value) newGame,
+    required TResult Function(_SwitchGame value) switchGame,
     required TResult Function(_ShowGameTypes value) showGameTypes,
     required TResult Function(_TavernGamesUpdated value) tavernGamesUpdated,
     required TResult Function(_TavernMembersUpdated value) tavernMembersUpdated,
@@ -439,7 +613,8 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_NewGame value)? newGame,
+    TResult? Function(_SwitchGame value)? switchGame,
     TResult? Function(_ShowGameTypes value)? showGameTypes,
     TResult? Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult? Function(_TavernMembersUpdated value)? tavernMembersUpdated,
@@ -450,7 +625,8 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_NewGame value)? newGame,
+    TResult Function(_SwitchGame value)? switchGame,
     TResult Function(_ShowGameTypes value)? showGameTypes,
     TResult Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult Function(_TavernMembersUpdated value)? tavernMembersUpdated,
@@ -548,7 +724,8 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() started,
+    required TResult Function() newGame,
+    required TResult Function(String gameId) switchGame,
     required TResult Function() showGameTypes,
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
@@ -560,7 +737,8 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? started,
+    TResult? Function()? newGame,
+    TResult? Function(String gameId)? switchGame,
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
@@ -571,7 +749,8 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? started,
+    TResult Function()? newGame,
+    TResult Function(String gameId)? switchGame,
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
@@ -586,7 +765,8 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_Started value) started,
+    required TResult Function(_NewGame value) newGame,
+    required TResult Function(_SwitchGame value) switchGame,
     required TResult Function(_ShowGameTypes value) showGameTypes,
     required TResult Function(_TavernGamesUpdated value) tavernGamesUpdated,
     required TResult Function(_TavernMembersUpdated value) tavernMembersUpdated,
@@ -597,7 +777,8 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Started value)? started,
+    TResult? Function(_NewGame value)? newGame,
+    TResult? Function(_SwitchGame value)? switchGame,
     TResult? Function(_ShowGameTypes value)? showGameTypes,
     TResult? Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult? Function(_TavernMembersUpdated value)? tavernMembersUpdated,
@@ -608,7 +789,8 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Started value)? started,
+    TResult Function(_NewGame value)? newGame,
+    TResult Function(_SwitchGame value)? switchGame,
     TResult Function(_ShowGameTypes value)? showGameTypes,
     TResult Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult Function(_TavernMembersUpdated value)? tavernMembersUpdated,

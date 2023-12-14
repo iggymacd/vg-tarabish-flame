@@ -54,6 +54,18 @@ class StartGameListener extends StatelessWidget {
       child: const ChooseGameTypeDialog(),
       barrierDismissible: false,
     );
+
+    // Set a duration for the timeout
+    const Duration timeoutDuration = Duration(seconds: 10);
+
+    // Schedule the removal of the dialog after the specified duration
+    Future.delayed(timeoutDuration, () {
+      // Check if the dialog is still open before trying to pop it
+      if (Navigator.of(context).canPop()) {
+        Navigator.of(context).pop();
+        // You can also handle the timeout action here
+      }
+    });
   }
 
   // void _onHowToPlay(BuildContext context) {

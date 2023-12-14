@@ -63,6 +63,8 @@ class _ChooseGameTypeDialogState extends State<ChooseGameTypeDialog> {
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
+              context.read<StartGameBloc>().add(
+                  const StartGameEvent.chooseGameType(gameType: 'Solitaire'));
             },
             child: Text("Cancel"),
           )
