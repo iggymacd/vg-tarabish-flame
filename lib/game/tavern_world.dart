@@ -14,7 +14,6 @@ import 'package:vg_tarabish_flame/game/components/waste_pile.dart';
 // import 'package:vg_tarabish_flame/game/entity/card/behaviors/tapping_behavior.dart';
 
 import 'package:vg_tarabish_flame/game/entity/card/card.dart';
-import 'package:vg_tarabish_flame/game/entity/game/card_game.dart';
 import 'package:vg_tarabish_flame/game/tavern_game.dart';
 import 'package:vg_tarabish_flame/start_game/start_game.dart';
 
@@ -23,7 +22,7 @@ class TavernWorld extends World
   late final TavernBloc tavernBloc; // = game.tavernBloc;
   late final StartGameBloc startGameBloc;
   late final String gameType;
-  late final CardGame currentCardGame;
+  late int currentCardGameAction;
   final cardGap = TavernGames.cardGap;
   final topGap = TavernGames.topGap;
   final cardSpaceWidth = TavernGames.cardSpaceWidth;
@@ -86,7 +85,7 @@ class TavernWorld extends World
         add(SolitaireSetupBehavior());
       case 'Tarabish':
         // await setupTarabishGame();
-        await add(TarabishSetupBehavior());
+        // await add(TarabishSetupBehavior());
         add(TarabishGamePlayBehavior());
       default:
         // await setupSolitaireGame();

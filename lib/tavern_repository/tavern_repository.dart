@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:rxdart/subjects.dart';
 import 'package:uuid/uuid.dart';
 import 'package:vg_tarabish_flame/game/entity/game/card_game.dart';
+import 'package:vg_tarabish_flame/game/entity/game/view/card_game_action.dart';
 
 /// {@template tavern_repository}
 /// Repository to manage tavern.
@@ -73,12 +74,21 @@ class TavernRepository {
     late String uniqueId;
     if (id == '') {
       uniqueId = Uuid().v4();
+      print('new game id is $uniqueId');
     } else {
       uniqueId = id;
     }
     return _currentGamesInProgressMap.putIfAbsent(
       uniqueId,
-      () => BehaviorSubject<CardGame>.seeded(const CardGame.tarabish())..stream,
+      () => BehaviorSubject<CardGame>.seeded(
+          CardGame.tarabish(gameId: uniqueId, actions: <CardGameAction>[
+        Shuffle(),
+        Draw(3, 0),
+        Draw(3, 1),
+        Draw(3, 2),
+        Draw(3, 3),
+      ]))
+        ..stream,
     );
   }
 }

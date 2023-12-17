@@ -4,6 +4,7 @@ part of 'tavern_bloc.dart';
 sealed class TavernEvent with _$TavernEvent {
   const factory TavernEvent.newGame({
     @Default('') String gameId,
+    @Default('Solitaire') String gameType,
   }) = _NewGame;
   const factory TavernEvent.switchGame({
     required String gameId,

@@ -55,6 +55,7 @@ class SolitaireSetupBehavior extends Behavior<TavernWorld> {
       }
     }
 
+    // print("cards ${cards.}");
     add(parent.stock);
     add(parent.waste);
     await addAll(parent.foundations);

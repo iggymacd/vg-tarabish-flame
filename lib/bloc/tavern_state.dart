@@ -2,10 +2,13 @@ part of 'tavern_bloc.dart';
 
 @freezed
 sealed class TavernState with _$TavernState {
-  const factory TavernState.initial() = _Initial;
+  const factory TavernState.initial() = TavernStateInitial;
+  const factory TavernState.currentGameStateUpdated({
+    required CardGame cardGame,
+  }) = CurrentGameStateUpdated;
   const factory TavernState.tavernGamesOrMembersUpdated({
     @Default(<TavernMember>[]) List<TavernMember> tavernMembers,
     @Default(<TavernGame>[]) List<TavernGame> tavernGames,
-  }) = _TavernGamesOrMembersUpdated;
+  }) = TavernGamesOrMembersUpdated;
   // const factory TavernState.initial() = _Initial;
 }

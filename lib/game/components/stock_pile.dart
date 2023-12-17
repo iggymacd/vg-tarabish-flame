@@ -16,7 +16,7 @@ class StockPile extends PositionComponent
   /// Which cards are currently placed onto this pile. The first card in the
   /// list is at the bottom, the last card is on top.
   final List<Card> _cards = [];
-
+  Card get topCard => _cards.last;
   //#region Pile API
 
   @override

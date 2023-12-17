@@ -1,5 +1,6 @@
 // import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:vg_tarabish_flame/game/entity/game/view/card_game_action.dart';
 // import 'package:vg_tarabish_flame/tavern_repository/tavern_repository.dart';
 
 // part 'tavern_event.dart';
@@ -8,7 +9,25 @@ part 'card_game.freezed.dart';
 
 @freezed
 class CardGame with _$CardGame {
-  const factory CardGame.tarabish() = _TarabishGame;
+  // var currentStep;
+  const CardGame._();
+  const factory CardGame.tarabish({
+    required String gameId,
+    required List<CardGameAction> actions,
+    // required List<CardGamemand> actions,
+    // @Default(0) int currentAction,
+    // @Default(0) int lastAction,
+    // required int seed,
+    // required int tarabishDraw,
+    // required int action,
+  }) = _TarabishGame;
+
+  int get lastActionIndex => actions.length - 1;
+
+  CardGameAction? get lastAction => actions.lastOrNull;
+
+  // CardGameAction? get currentAction => actions.elementAtOrNull(currentAction);
+
   // CardGame()
   //     : super();
   // deal() {

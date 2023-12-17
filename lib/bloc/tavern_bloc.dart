@@ -27,7 +27,7 @@ part 'tavern_state.dart';
 part 'tavern_bloc.freezed.dart';
 
 class TavernBloc extends Bloc<TavernEvent, TavernState> {
-  TavernBloc(this.tavernRepository) : super(const _Initial()) {
+  TavernBloc(this.tavernRepository) : super(const TavernStateInitial()) {
     _tavernGamesStreamSubscription =
         tavernRepository.tavernGamesStream.listen((tavernGames) {
       add(TavernEvent.tavernGamesUpdated(tavernGames: tavernGames));
@@ -84,13 +84,15 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
     Emitter<TavernState> emit,
   ) {
     print('tavern games are ${event.tavernGames}');
-    switch (state) {
-      case _Initial():
-        emit(TavernState.tavernGamesOrMembersUpdated(
-            tavernGames: event.tavernGames));
-      case final _TavernGamesOrMembersUpdated currentState:
-        emit(currentState.copyWith(tavernGames: event.tavernGames));
-    }
+    emit(TavernState.tavernGamesOrMembersUpdated(
+        tavernGames: event.tavernGames));
+    // switch (state) {
+    //   case _Initial():
+    //     emit(TavernState.tavernGamesOrMembersUpdated(
+    //         tavernGames: event.tavernGames));
+    //   case final _TavernGamesOrMembersUpdated currentState:
+    //     emit(currentState.copyWith(tavernGames: event.tavernGames));
+    // }
   }
 
   void _handleTavernMembersUpdated(
@@ -98,13 +100,15 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
     Emitter<TavernState> emit,
   ) {
     print('tavern members are ${event.tavernMembers}');
-    switch (state) {
-      case _Initial():
-        emit(TavernState.tavernGamesOrMembersUpdated(
-            tavernMembers: event.tavernMembers));
-      case final _TavernGamesOrMembersUpdated currentState:
-        emit(currentState.copyWith(tavernMembers: event.tavernMembers));
-    }
+    emit(TavernState.tavernGamesOrMembersUpdated(
+        tavernMembers: event.tavernMembers));
+    // switch (state) {
+    //   case _Initial():
+    //     emit(TavernState.tavernGamesOrMembersUpdated(
+    //         tavernMembers: event.tavernMembers));
+    //   case final _TavernGamesOrMembersUpdated currentState:
+    //     emit(currentState.copyWith(tavernMembers: event.tavernMembers));
+    // }
   }
 
   void _handleShowGameTypes(_ShowGameTypes event, Emitter<TavernState> emit) {
@@ -128,6 +132,7 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
       // Do something with the updated game state
       // You may emit a new state to the UI if needed
       print('Received updated game state for game $gameId: $game');
+      emit(CurrentGameStateUpdated(cardGame: game));
     });
   }
 
