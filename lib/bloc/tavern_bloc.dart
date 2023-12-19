@@ -121,8 +121,9 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
 
     // Create a new game stream if it doesn't exist
     if (!_gameStreams.containsKey(gameId)) {
-      final Stream<CardGame> newGameStream =
-          tavernRepository.newOrExistingGameInProgress(id: gameId);
+      final isDemo = event.demo;
+      final Stream<CardGame> newGameStream = tavernRepository
+          .newOrExistingGameInProgress(id: gameId, demo: isDemo);
       _gameStreams[gameId] = newGameStream;
     }
 

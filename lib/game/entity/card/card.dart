@@ -17,10 +17,8 @@ import 'package:vg_tarabish_flame/game/tavern_world.dart';
 
 class Card extends PositionComponent
     with HasWorldReference<TavernWorld>, DragCallbacks {
-  Card(
-    int intRank,
-    int intSuit,
-  )   : rank = Rank.fromInt(intRank),
+  Card(int intRank, int intSuit, {this.pilePosition})
+      : rank = Rank.fromInt(intRank),
         suit = Suit.fromInt(intSuit),
         super(
           size: TavernGames.cardSize,
@@ -29,6 +27,7 @@ class Card extends PositionComponent
 
   final Rank rank;
   final Suit suit;
+  int? pilePosition;
   Pile? pile;
   bool _faceUp = false;
   bool _isAnimatedFlip = false;

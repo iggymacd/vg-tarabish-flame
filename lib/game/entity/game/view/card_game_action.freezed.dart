@@ -18,61 +18,79 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CardGameAction {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() play,
-    required TResult Function(int count, int? from) draw,
-    required TResult Function() discard,
-    required TResult Function() pass,
+    required TResult Function() startGame,
+    required TResult Function() drawCard,
+    required TResult Function(String cardId) playCard,
+    required TResult Function() endTurn,
+    required TResult Function() showHand,
+    required TResult Function() showTable,
+    required TResult Function() showScoreboard,
     required TResult Function() shuffle,
-    required TResult Function() deal,
+    required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? play,
-    TResult? Function(int count, int? from)? draw,
-    TResult? Function()? discard,
-    TResult? Function()? pass,
+    TResult? Function()? startGame,
+    TResult? Function()? drawCard,
+    TResult? Function(String cardId)? playCard,
+    TResult? Function()? endTurn,
+    TResult? Function()? showHand,
+    TResult? Function()? showTable,
+    TResult? Function()? showScoreboard,
     TResult? Function()? shuffle,
-    TResult? Function()? deal,
+    TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? play,
-    TResult Function(int count, int? from)? draw,
-    TResult Function()? discard,
-    TResult Function()? pass,
+    TResult Function()? startGame,
+    TResult Function()? drawCard,
+    TResult Function(String cardId)? playCard,
+    TResult Function()? endTurn,
+    TResult Function()? showHand,
+    TResult Function()? showTable,
+    TResult Function()? showScoreboard,
     TResult Function()? shuffle,
-    TResult Function()? deal,
+    TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Play value) play,
-    required TResult Function(Draw value) draw,
-    required TResult Function(Discard value) discard,
-    required TResult Function(Pass value) pass,
+    required TResult Function(StartGame value) startGame,
+    required TResult Function(DrawCard value) drawCard,
+    required TResult Function(PlayCard value) playCard,
+    required TResult Function(EndTurn value) endTurn,
+    required TResult Function(ShowHand value) showHand,
+    required TResult Function(ShowTable value) showTable,
+    required TResult Function(ShowScoreboard value) showScoreboard,
     required TResult Function(Shuffle value) shuffle,
     required TResult Function(Deal value) deal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Play value)? play,
-    TResult? Function(Draw value)? draw,
-    TResult? Function(Discard value)? discard,
-    TResult? Function(Pass value)? pass,
+    TResult? Function(StartGame value)? startGame,
+    TResult? Function(DrawCard value)? drawCard,
+    TResult? Function(PlayCard value)? playCard,
+    TResult? Function(EndTurn value)? endTurn,
+    TResult? Function(ShowHand value)? showHand,
+    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(ShowScoreboard value)? showScoreboard,
     TResult? Function(Shuffle value)? shuffle,
     TResult? Function(Deal value)? deal,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Play value)? play,
-    TResult Function(Draw value)? draw,
-    TResult Function(Discard value)? discard,
-    TResult Function(Pass value)? pass,
+    TResult Function(StartGame value)? startGame,
+    TResult Function(DrawCard value)? drawCard,
+    TResult Function(PlayCard value)? playCard,
+    TResult Function(EndTurn value)? endTurn,
+    TResult Function(ShowHand value)? showHand,
+    TResult Function(ShowTable value)? showTable,
+    TResult Function(ShowScoreboard value)? showScoreboard,
     TResult Function(Shuffle value)? shuffle,
     TResult Function(Deal value)? deal,
     required TResult orElse(),
@@ -99,34 +117,35 @@ class _$CardGameActionCopyWithImpl<$Res, $Val extends CardGameAction>
 }
 
 /// @nodoc
-abstract class _$$PlayImplCopyWith<$Res> {
-  factory _$$PlayImplCopyWith(
-          _$PlayImpl value, $Res Function(_$PlayImpl) then) =
-      __$$PlayImplCopyWithImpl<$Res>;
+abstract class _$$StartGameImplCopyWith<$Res> {
+  factory _$$StartGameImplCopyWith(
+          _$StartGameImpl value, $Res Function(_$StartGameImpl) then) =
+      __$$StartGameImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$PlayImplCopyWithImpl<$Res>
-    extends _$CardGameActionCopyWithImpl<$Res, _$PlayImpl>
-    implements _$$PlayImplCopyWith<$Res> {
-  __$$PlayImplCopyWithImpl(_$PlayImpl _value, $Res Function(_$PlayImpl) _then)
+class __$$StartGameImplCopyWithImpl<$Res>
+    extends _$CardGameActionCopyWithImpl<$Res, _$StartGameImpl>
+    implements _$$StartGameImplCopyWith<$Res> {
+  __$$StartGameImplCopyWithImpl(
+      _$StartGameImpl _value, $Res Function(_$StartGameImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$PlayImpl implements Play {
-  const _$PlayImpl();
+class _$StartGameImpl implements StartGame {
+  const _$StartGameImpl();
 
   @override
   String toString() {
-    return 'CardGameAction.play()';
+    return 'CardGameAction.startGame()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$PlayImpl);
+        (other.runtimeType == runtimeType && other is _$StartGameImpl);
   }
 
   @override
@@ -135,42 +154,51 @@ class _$PlayImpl implements Play {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() play,
-    required TResult Function(int count, int? from) draw,
-    required TResult Function() discard,
-    required TResult Function() pass,
+    required TResult Function() startGame,
+    required TResult Function() drawCard,
+    required TResult Function(String cardId) playCard,
+    required TResult Function() endTurn,
+    required TResult Function() showHand,
+    required TResult Function() showTable,
+    required TResult Function() showScoreboard,
     required TResult Function() shuffle,
-    required TResult Function() deal,
+    required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
   }) {
-    return play();
+    return startGame();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? play,
-    TResult? Function(int count, int? from)? draw,
-    TResult? Function()? discard,
-    TResult? Function()? pass,
+    TResult? Function()? startGame,
+    TResult? Function()? drawCard,
+    TResult? Function(String cardId)? playCard,
+    TResult? Function()? endTurn,
+    TResult? Function()? showHand,
+    TResult? Function()? showTable,
+    TResult? Function()? showScoreboard,
     TResult? Function()? shuffle,
-    TResult? Function()? deal,
+    TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
   }) {
-    return play?.call();
+    return startGame?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? play,
-    TResult Function(int count, int? from)? draw,
-    TResult Function()? discard,
-    TResult Function()? pass,
+    TResult Function()? startGame,
+    TResult Function()? drawCard,
+    TResult Function(String cardId)? playCard,
+    TResult Function()? endTurn,
+    TResult Function()? showHand,
+    TResult Function()? showTable,
+    TResult Function()? showScoreboard,
     TResult Function()? shuffle,
-    TResult Function()? deal,
+    TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
     required TResult orElse(),
   }) {
-    if (play != null) {
-      return play();
+    if (startGame != null) {
+      return startGame();
     }
     return orElse();
   }
@@ -178,158 +206,313 @@ class _$PlayImpl implements Play {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Play value) play,
-    required TResult Function(Draw value) draw,
-    required TResult Function(Discard value) discard,
-    required TResult Function(Pass value) pass,
+    required TResult Function(StartGame value) startGame,
+    required TResult Function(DrawCard value) drawCard,
+    required TResult Function(PlayCard value) playCard,
+    required TResult Function(EndTurn value) endTurn,
+    required TResult Function(ShowHand value) showHand,
+    required TResult Function(ShowTable value) showTable,
+    required TResult Function(ShowScoreboard value) showScoreboard,
     required TResult Function(Shuffle value) shuffle,
     required TResult Function(Deal value) deal,
   }) {
-    return play(this);
+    return startGame(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Play value)? play,
-    TResult? Function(Draw value)? draw,
-    TResult? Function(Discard value)? discard,
-    TResult? Function(Pass value)? pass,
+    TResult? Function(StartGame value)? startGame,
+    TResult? Function(DrawCard value)? drawCard,
+    TResult? Function(PlayCard value)? playCard,
+    TResult? Function(EndTurn value)? endTurn,
+    TResult? Function(ShowHand value)? showHand,
+    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(ShowScoreboard value)? showScoreboard,
     TResult? Function(Shuffle value)? shuffle,
     TResult? Function(Deal value)? deal,
   }) {
-    return play?.call(this);
+    return startGame?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Play value)? play,
-    TResult Function(Draw value)? draw,
-    TResult Function(Discard value)? discard,
-    TResult Function(Pass value)? pass,
+    TResult Function(StartGame value)? startGame,
+    TResult Function(DrawCard value)? drawCard,
+    TResult Function(PlayCard value)? playCard,
+    TResult Function(EndTurn value)? endTurn,
+    TResult Function(ShowHand value)? showHand,
+    TResult Function(ShowTable value)? showTable,
+    TResult Function(ShowScoreboard value)? showScoreboard,
     TResult Function(Shuffle value)? shuffle,
     TResult Function(Deal value)? deal,
     required TResult orElse(),
   }) {
-    if (play != null) {
-      return play(this);
+    if (startGame != null) {
+      return startGame(this);
     }
     return orElse();
   }
 }
 
-abstract class Play implements CardGameAction {
-  const factory Play() = _$PlayImpl;
+abstract class StartGame implements CardGameAction {
+  const factory StartGame() = _$StartGameImpl;
 }
 
 /// @nodoc
-abstract class _$$DrawImplCopyWith<$Res> {
-  factory _$$DrawImplCopyWith(
-          _$DrawImpl value, $Res Function(_$DrawImpl) then) =
-      __$$DrawImplCopyWithImpl<$Res>;
+abstract class _$$DrawCardImplCopyWith<$Res> {
+  factory _$$DrawCardImplCopyWith(
+          _$DrawCardImpl value, $Res Function(_$DrawCardImpl) then) =
+      __$$DrawCardImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DrawCardImplCopyWithImpl<$Res>
+    extends _$CardGameActionCopyWithImpl<$Res, _$DrawCardImpl>
+    implements _$$DrawCardImplCopyWith<$Res> {
+  __$$DrawCardImplCopyWithImpl(
+      _$DrawCardImpl _value, $Res Function(_$DrawCardImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$DrawCardImpl implements DrawCard {
+  const _$DrawCardImpl();
+
+  @override
+  String toString() {
+    return 'CardGameAction.drawCard()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$DrawCardImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() startGame,
+    required TResult Function() drawCard,
+    required TResult Function(String cardId) playCard,
+    required TResult Function() endTurn,
+    required TResult Function() showHand,
+    required TResult Function() showTable,
+    required TResult Function() showScoreboard,
+    required TResult Function() shuffle,
+    required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
+  }) {
+    return drawCard();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? startGame,
+    TResult? Function()? drawCard,
+    TResult? Function(String cardId)? playCard,
+    TResult? Function()? endTurn,
+    TResult? Function()? showHand,
+    TResult? Function()? showTable,
+    TResult? Function()? showScoreboard,
+    TResult? Function()? shuffle,
+    TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
+  }) {
+    return drawCard?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? startGame,
+    TResult Function()? drawCard,
+    TResult Function(String cardId)? playCard,
+    TResult Function()? endTurn,
+    TResult Function()? showHand,
+    TResult Function()? showTable,
+    TResult Function()? showScoreboard,
+    TResult Function()? shuffle,
+    TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
+    required TResult orElse(),
+  }) {
+    if (drawCard != null) {
+      return drawCard();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(StartGame value) startGame,
+    required TResult Function(DrawCard value) drawCard,
+    required TResult Function(PlayCard value) playCard,
+    required TResult Function(EndTurn value) endTurn,
+    required TResult Function(ShowHand value) showHand,
+    required TResult Function(ShowTable value) showTable,
+    required TResult Function(ShowScoreboard value) showScoreboard,
+    required TResult Function(Shuffle value) shuffle,
+    required TResult Function(Deal value) deal,
+  }) {
+    return drawCard(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(StartGame value)? startGame,
+    TResult? Function(DrawCard value)? drawCard,
+    TResult? Function(PlayCard value)? playCard,
+    TResult? Function(EndTurn value)? endTurn,
+    TResult? Function(ShowHand value)? showHand,
+    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(ShowScoreboard value)? showScoreboard,
+    TResult? Function(Shuffle value)? shuffle,
+    TResult? Function(Deal value)? deal,
+  }) {
+    return drawCard?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StartGame value)? startGame,
+    TResult Function(DrawCard value)? drawCard,
+    TResult Function(PlayCard value)? playCard,
+    TResult Function(EndTurn value)? endTurn,
+    TResult Function(ShowHand value)? showHand,
+    TResult Function(ShowTable value)? showTable,
+    TResult Function(ShowScoreboard value)? showScoreboard,
+    TResult Function(Shuffle value)? shuffle,
+    TResult Function(Deal value)? deal,
+    required TResult orElse(),
+  }) {
+    if (drawCard != null) {
+      return drawCard(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DrawCard implements CardGameAction {
+  const factory DrawCard() = _$DrawCardImpl;
+}
+
+/// @nodoc
+abstract class _$$PlayCardImplCopyWith<$Res> {
+  factory _$$PlayCardImplCopyWith(
+          _$PlayCardImpl value, $Res Function(_$PlayCardImpl) then) =
+      __$$PlayCardImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int count, int? from});
+  $Res call({String cardId});
 }
 
 /// @nodoc
-class __$$DrawImplCopyWithImpl<$Res>
-    extends _$CardGameActionCopyWithImpl<$Res, _$DrawImpl>
-    implements _$$DrawImplCopyWith<$Res> {
-  __$$DrawImplCopyWithImpl(_$DrawImpl _value, $Res Function(_$DrawImpl) _then)
+class __$$PlayCardImplCopyWithImpl<$Res>
+    extends _$CardGameActionCopyWithImpl<$Res, _$PlayCardImpl>
+    implements _$$PlayCardImplCopyWith<$Res> {
+  __$$PlayCardImplCopyWithImpl(
+      _$PlayCardImpl _value, $Res Function(_$PlayCardImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? count = null,
-    Object? from = freezed,
+    Object? cardId = null,
   }) {
-    return _then(_$DrawImpl(
-      null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int,
-      freezed == from
-          ? _value.from
-          : from // ignore: cast_nullable_to_non_nullable
-              as int?,
+    return _then(_$PlayCardImpl(
+      null == cardId
+          ? _value.cardId
+          : cardId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _$DrawImpl implements Draw {
-  const _$DrawImpl(this.count, this.from);
+class _$PlayCardImpl implements PlayCard {
+  const _$PlayCardImpl(this.cardId);
 
   @override
-  final int count;
-  @override
-  final int? from;
+  final String cardId;
 
   @override
   String toString() {
-    return 'CardGameAction.draw(count: $count, from: $from)';
+    return 'CardGameAction.playCard(cardId: $cardId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DrawImpl &&
-            (identical(other.count, count) || other.count == count) &&
-            (identical(other.from, from) || other.from == from));
+            other is _$PlayCardImpl &&
+            (identical(other.cardId, cardId) || other.cardId == cardId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, count, from);
+  int get hashCode => Object.hash(runtimeType, cardId);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$DrawImplCopyWith<_$DrawImpl> get copyWith =>
-      __$$DrawImplCopyWithImpl<_$DrawImpl>(this, _$identity);
+  _$$PlayCardImplCopyWith<_$PlayCardImpl> get copyWith =>
+      __$$PlayCardImplCopyWithImpl<_$PlayCardImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() play,
-    required TResult Function(int count, int? from) draw,
-    required TResult Function() discard,
-    required TResult Function() pass,
+    required TResult Function() startGame,
+    required TResult Function() drawCard,
+    required TResult Function(String cardId) playCard,
+    required TResult Function() endTurn,
+    required TResult Function() showHand,
+    required TResult Function() showTable,
+    required TResult Function() showScoreboard,
     required TResult Function() shuffle,
-    required TResult Function() deal,
+    required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
   }) {
-    return draw(count, from);
+    return playCard(cardId);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? play,
-    TResult? Function(int count, int? from)? draw,
-    TResult? Function()? discard,
-    TResult? Function()? pass,
+    TResult? Function()? startGame,
+    TResult? Function()? drawCard,
+    TResult? Function(String cardId)? playCard,
+    TResult? Function()? endTurn,
+    TResult? Function()? showHand,
+    TResult? Function()? showTable,
+    TResult? Function()? showScoreboard,
     TResult? Function()? shuffle,
-    TResult? Function()? deal,
+    TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
   }) {
-    return draw?.call(count, from);
+    return playCard?.call(cardId);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? play,
-    TResult Function(int count, int? from)? draw,
-    TResult Function()? discard,
-    TResult Function()? pass,
+    TResult Function()? startGame,
+    TResult Function()? drawCard,
+    TResult Function(String cardId)? playCard,
+    TResult Function()? endTurn,
+    TResult Function()? showHand,
+    TResult Function()? showTable,
+    TResult Function()? showScoreboard,
     TResult Function()? shuffle,
-    TResult Function()? deal,
+    TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
     required TResult orElse(),
   }) {
-    if (draw != null) {
-      return draw(count, from);
+    if (playCard != null) {
+      return playCard(cardId);
     }
     return orElse();
   }
@@ -337,87 +520,95 @@ class _$DrawImpl implements Draw {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Play value) play,
-    required TResult Function(Draw value) draw,
-    required TResult Function(Discard value) discard,
-    required TResult Function(Pass value) pass,
+    required TResult Function(StartGame value) startGame,
+    required TResult Function(DrawCard value) drawCard,
+    required TResult Function(PlayCard value) playCard,
+    required TResult Function(EndTurn value) endTurn,
+    required TResult Function(ShowHand value) showHand,
+    required TResult Function(ShowTable value) showTable,
+    required TResult Function(ShowScoreboard value) showScoreboard,
     required TResult Function(Shuffle value) shuffle,
     required TResult Function(Deal value) deal,
   }) {
-    return draw(this);
+    return playCard(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Play value)? play,
-    TResult? Function(Draw value)? draw,
-    TResult? Function(Discard value)? discard,
-    TResult? Function(Pass value)? pass,
+    TResult? Function(StartGame value)? startGame,
+    TResult? Function(DrawCard value)? drawCard,
+    TResult? Function(PlayCard value)? playCard,
+    TResult? Function(EndTurn value)? endTurn,
+    TResult? Function(ShowHand value)? showHand,
+    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(ShowScoreboard value)? showScoreboard,
     TResult? Function(Shuffle value)? shuffle,
     TResult? Function(Deal value)? deal,
   }) {
-    return draw?.call(this);
+    return playCard?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Play value)? play,
-    TResult Function(Draw value)? draw,
-    TResult Function(Discard value)? discard,
-    TResult Function(Pass value)? pass,
+    TResult Function(StartGame value)? startGame,
+    TResult Function(DrawCard value)? drawCard,
+    TResult Function(PlayCard value)? playCard,
+    TResult Function(EndTurn value)? endTurn,
+    TResult Function(ShowHand value)? showHand,
+    TResult Function(ShowTable value)? showTable,
+    TResult Function(ShowScoreboard value)? showScoreboard,
     TResult Function(Shuffle value)? shuffle,
     TResult Function(Deal value)? deal,
     required TResult orElse(),
   }) {
-    if (draw != null) {
-      return draw(this);
+    if (playCard != null) {
+      return playCard(this);
     }
     return orElse();
   }
 }
 
-abstract class Draw implements CardGameAction {
-  const factory Draw(final int count, final int? from) = _$DrawImpl;
+abstract class PlayCard implements CardGameAction {
+  const factory PlayCard(final String cardId) = _$PlayCardImpl;
 
-  int get count;
-  int? get from;
+  String get cardId;
   @JsonKey(ignore: true)
-  _$$DrawImplCopyWith<_$DrawImpl> get copyWith =>
+  _$$PlayCardImplCopyWith<_$PlayCardImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$DiscardImplCopyWith<$Res> {
-  factory _$$DiscardImplCopyWith(
-          _$DiscardImpl value, $Res Function(_$DiscardImpl) then) =
-      __$$DiscardImplCopyWithImpl<$Res>;
+abstract class _$$EndTurnImplCopyWith<$Res> {
+  factory _$$EndTurnImplCopyWith(
+          _$EndTurnImpl value, $Res Function(_$EndTurnImpl) then) =
+      __$$EndTurnImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$DiscardImplCopyWithImpl<$Res>
-    extends _$CardGameActionCopyWithImpl<$Res, _$DiscardImpl>
-    implements _$$DiscardImplCopyWith<$Res> {
-  __$$DiscardImplCopyWithImpl(
-      _$DiscardImpl _value, $Res Function(_$DiscardImpl) _then)
+class __$$EndTurnImplCopyWithImpl<$Res>
+    extends _$CardGameActionCopyWithImpl<$Res, _$EndTurnImpl>
+    implements _$$EndTurnImplCopyWith<$Res> {
+  __$$EndTurnImplCopyWithImpl(
+      _$EndTurnImpl _value, $Res Function(_$EndTurnImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$DiscardImpl implements Discard {
-  const _$DiscardImpl();
+class _$EndTurnImpl implements EndTurn {
+  const _$EndTurnImpl();
 
   @override
   String toString() {
-    return 'CardGameAction.discard()';
+    return 'CardGameAction.endTurn()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DiscardImpl);
+        (other.runtimeType == runtimeType && other is _$EndTurnImpl);
   }
 
   @override
@@ -426,42 +617,51 @@ class _$DiscardImpl implements Discard {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() play,
-    required TResult Function(int count, int? from) draw,
-    required TResult Function() discard,
-    required TResult Function() pass,
+    required TResult Function() startGame,
+    required TResult Function() drawCard,
+    required TResult Function(String cardId) playCard,
+    required TResult Function() endTurn,
+    required TResult Function() showHand,
+    required TResult Function() showTable,
+    required TResult Function() showScoreboard,
     required TResult Function() shuffle,
-    required TResult Function() deal,
+    required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
   }) {
-    return discard();
+    return endTurn();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? play,
-    TResult? Function(int count, int? from)? draw,
-    TResult? Function()? discard,
-    TResult? Function()? pass,
+    TResult? Function()? startGame,
+    TResult? Function()? drawCard,
+    TResult? Function(String cardId)? playCard,
+    TResult? Function()? endTurn,
+    TResult? Function()? showHand,
+    TResult? Function()? showTable,
+    TResult? Function()? showScoreboard,
     TResult? Function()? shuffle,
-    TResult? Function()? deal,
+    TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
   }) {
-    return discard?.call();
+    return endTurn?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? play,
-    TResult Function(int count, int? from)? draw,
-    TResult Function()? discard,
-    TResult Function()? pass,
+    TResult Function()? startGame,
+    TResult Function()? drawCard,
+    TResult Function(String cardId)? playCard,
+    TResult Function()? endTurn,
+    TResult Function()? showHand,
+    TResult Function()? showTable,
+    TResult Function()? showScoreboard,
     TResult Function()? shuffle,
-    TResult Function()? deal,
+    TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
     required TResult orElse(),
   }) {
-    if (discard != null) {
-      return discard();
+    if (endTurn != null) {
+      return endTurn();
     }
     return orElse();
   }
@@ -469,80 +669,90 @@ class _$DiscardImpl implements Discard {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Play value) play,
-    required TResult Function(Draw value) draw,
-    required TResult Function(Discard value) discard,
-    required TResult Function(Pass value) pass,
+    required TResult Function(StartGame value) startGame,
+    required TResult Function(DrawCard value) drawCard,
+    required TResult Function(PlayCard value) playCard,
+    required TResult Function(EndTurn value) endTurn,
+    required TResult Function(ShowHand value) showHand,
+    required TResult Function(ShowTable value) showTable,
+    required TResult Function(ShowScoreboard value) showScoreboard,
     required TResult Function(Shuffle value) shuffle,
     required TResult Function(Deal value) deal,
   }) {
-    return discard(this);
+    return endTurn(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Play value)? play,
-    TResult? Function(Draw value)? draw,
-    TResult? Function(Discard value)? discard,
-    TResult? Function(Pass value)? pass,
+    TResult? Function(StartGame value)? startGame,
+    TResult? Function(DrawCard value)? drawCard,
+    TResult? Function(PlayCard value)? playCard,
+    TResult? Function(EndTurn value)? endTurn,
+    TResult? Function(ShowHand value)? showHand,
+    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(ShowScoreboard value)? showScoreboard,
     TResult? Function(Shuffle value)? shuffle,
     TResult? Function(Deal value)? deal,
   }) {
-    return discard?.call(this);
+    return endTurn?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Play value)? play,
-    TResult Function(Draw value)? draw,
-    TResult Function(Discard value)? discard,
-    TResult Function(Pass value)? pass,
+    TResult Function(StartGame value)? startGame,
+    TResult Function(DrawCard value)? drawCard,
+    TResult Function(PlayCard value)? playCard,
+    TResult Function(EndTurn value)? endTurn,
+    TResult Function(ShowHand value)? showHand,
+    TResult Function(ShowTable value)? showTable,
+    TResult Function(ShowScoreboard value)? showScoreboard,
     TResult Function(Shuffle value)? shuffle,
     TResult Function(Deal value)? deal,
     required TResult orElse(),
   }) {
-    if (discard != null) {
-      return discard(this);
+    if (endTurn != null) {
+      return endTurn(this);
     }
     return orElse();
   }
 }
 
-abstract class Discard implements CardGameAction {
-  const factory Discard() = _$DiscardImpl;
+abstract class EndTurn implements CardGameAction {
+  const factory EndTurn() = _$EndTurnImpl;
 }
 
 /// @nodoc
-abstract class _$$PassImplCopyWith<$Res> {
-  factory _$$PassImplCopyWith(
-          _$PassImpl value, $Res Function(_$PassImpl) then) =
-      __$$PassImplCopyWithImpl<$Res>;
+abstract class _$$ShowHandImplCopyWith<$Res> {
+  factory _$$ShowHandImplCopyWith(
+          _$ShowHandImpl value, $Res Function(_$ShowHandImpl) then) =
+      __$$ShowHandImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$PassImplCopyWithImpl<$Res>
-    extends _$CardGameActionCopyWithImpl<$Res, _$PassImpl>
-    implements _$$PassImplCopyWith<$Res> {
-  __$$PassImplCopyWithImpl(_$PassImpl _value, $Res Function(_$PassImpl) _then)
+class __$$ShowHandImplCopyWithImpl<$Res>
+    extends _$CardGameActionCopyWithImpl<$Res, _$ShowHandImpl>
+    implements _$$ShowHandImplCopyWith<$Res> {
+  __$$ShowHandImplCopyWithImpl(
+      _$ShowHandImpl _value, $Res Function(_$ShowHandImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$PassImpl implements Pass {
-  const _$PassImpl();
+class _$ShowHandImpl implements ShowHand {
+  const _$ShowHandImpl();
 
   @override
   String toString() {
-    return 'CardGameAction.pass()';
+    return 'CardGameAction.showHand()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$PassImpl);
+        (other.runtimeType == runtimeType && other is _$ShowHandImpl);
   }
 
   @override
@@ -551,42 +761,51 @@ class _$PassImpl implements Pass {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() play,
-    required TResult Function(int count, int? from) draw,
-    required TResult Function() discard,
-    required TResult Function() pass,
+    required TResult Function() startGame,
+    required TResult Function() drawCard,
+    required TResult Function(String cardId) playCard,
+    required TResult Function() endTurn,
+    required TResult Function() showHand,
+    required TResult Function() showTable,
+    required TResult Function() showScoreboard,
     required TResult Function() shuffle,
-    required TResult Function() deal,
+    required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
   }) {
-    return pass();
+    return showHand();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? play,
-    TResult? Function(int count, int? from)? draw,
-    TResult? Function()? discard,
-    TResult? Function()? pass,
+    TResult? Function()? startGame,
+    TResult? Function()? drawCard,
+    TResult? Function(String cardId)? playCard,
+    TResult? Function()? endTurn,
+    TResult? Function()? showHand,
+    TResult? Function()? showTable,
+    TResult? Function()? showScoreboard,
     TResult? Function()? shuffle,
-    TResult? Function()? deal,
+    TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
   }) {
-    return pass?.call();
+    return showHand?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? play,
-    TResult Function(int count, int? from)? draw,
-    TResult Function()? discard,
-    TResult Function()? pass,
+    TResult Function()? startGame,
+    TResult Function()? drawCard,
+    TResult Function(String cardId)? playCard,
+    TResult Function()? endTurn,
+    TResult Function()? showHand,
+    TResult Function()? showTable,
+    TResult Function()? showScoreboard,
     TResult Function()? shuffle,
-    TResult Function()? deal,
+    TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
     required TResult orElse(),
   }) {
-    if (pass != null) {
-      return pass();
+    if (showHand != null) {
+      return showHand();
     }
     return orElse();
   }
@@ -594,49 +813,346 @@ class _$PassImpl implements Pass {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Play value) play,
-    required TResult Function(Draw value) draw,
-    required TResult Function(Discard value) discard,
-    required TResult Function(Pass value) pass,
+    required TResult Function(StartGame value) startGame,
+    required TResult Function(DrawCard value) drawCard,
+    required TResult Function(PlayCard value) playCard,
+    required TResult Function(EndTurn value) endTurn,
+    required TResult Function(ShowHand value) showHand,
+    required TResult Function(ShowTable value) showTable,
+    required TResult Function(ShowScoreboard value) showScoreboard,
     required TResult Function(Shuffle value) shuffle,
     required TResult Function(Deal value) deal,
   }) {
-    return pass(this);
+    return showHand(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Play value)? play,
-    TResult? Function(Draw value)? draw,
-    TResult? Function(Discard value)? discard,
-    TResult? Function(Pass value)? pass,
+    TResult? Function(StartGame value)? startGame,
+    TResult? Function(DrawCard value)? drawCard,
+    TResult? Function(PlayCard value)? playCard,
+    TResult? Function(EndTurn value)? endTurn,
+    TResult? Function(ShowHand value)? showHand,
+    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(ShowScoreboard value)? showScoreboard,
     TResult? Function(Shuffle value)? shuffle,
     TResult? Function(Deal value)? deal,
   }) {
-    return pass?.call(this);
+    return showHand?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Play value)? play,
-    TResult Function(Draw value)? draw,
-    TResult Function(Discard value)? discard,
-    TResult Function(Pass value)? pass,
+    TResult Function(StartGame value)? startGame,
+    TResult Function(DrawCard value)? drawCard,
+    TResult Function(PlayCard value)? playCard,
+    TResult Function(EndTurn value)? endTurn,
+    TResult Function(ShowHand value)? showHand,
+    TResult Function(ShowTable value)? showTable,
+    TResult Function(ShowScoreboard value)? showScoreboard,
     TResult Function(Shuffle value)? shuffle,
     TResult Function(Deal value)? deal,
     required TResult orElse(),
   }) {
-    if (pass != null) {
-      return pass(this);
+    if (showHand != null) {
+      return showHand(this);
     }
     return orElse();
   }
 }
 
-abstract class Pass implements CardGameAction {
-  const factory Pass() = _$PassImpl;
+abstract class ShowHand implements CardGameAction {
+  const factory ShowHand() = _$ShowHandImpl;
+}
+
+/// @nodoc
+abstract class _$$ShowTableImplCopyWith<$Res> {
+  factory _$$ShowTableImplCopyWith(
+          _$ShowTableImpl value, $Res Function(_$ShowTableImpl) then) =
+      __$$ShowTableImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ShowTableImplCopyWithImpl<$Res>
+    extends _$CardGameActionCopyWithImpl<$Res, _$ShowTableImpl>
+    implements _$$ShowTableImplCopyWith<$Res> {
+  __$$ShowTableImplCopyWithImpl(
+      _$ShowTableImpl _value, $Res Function(_$ShowTableImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ShowTableImpl implements ShowTable {
+  const _$ShowTableImpl();
+
+  @override
+  String toString() {
+    return 'CardGameAction.showTable()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ShowTableImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() startGame,
+    required TResult Function() drawCard,
+    required TResult Function(String cardId) playCard,
+    required TResult Function() endTurn,
+    required TResult Function() showHand,
+    required TResult Function() showTable,
+    required TResult Function() showScoreboard,
+    required TResult Function() shuffle,
+    required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
+  }) {
+    return showTable();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? startGame,
+    TResult? Function()? drawCard,
+    TResult? Function(String cardId)? playCard,
+    TResult? Function()? endTurn,
+    TResult? Function()? showHand,
+    TResult? Function()? showTable,
+    TResult? Function()? showScoreboard,
+    TResult? Function()? shuffle,
+    TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
+  }) {
+    return showTable?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? startGame,
+    TResult Function()? drawCard,
+    TResult Function(String cardId)? playCard,
+    TResult Function()? endTurn,
+    TResult Function()? showHand,
+    TResult Function()? showTable,
+    TResult Function()? showScoreboard,
+    TResult Function()? shuffle,
+    TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
+    required TResult orElse(),
+  }) {
+    if (showTable != null) {
+      return showTable();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(StartGame value) startGame,
+    required TResult Function(DrawCard value) drawCard,
+    required TResult Function(PlayCard value) playCard,
+    required TResult Function(EndTurn value) endTurn,
+    required TResult Function(ShowHand value) showHand,
+    required TResult Function(ShowTable value) showTable,
+    required TResult Function(ShowScoreboard value) showScoreboard,
+    required TResult Function(Shuffle value) shuffle,
+    required TResult Function(Deal value) deal,
+  }) {
+    return showTable(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(StartGame value)? startGame,
+    TResult? Function(DrawCard value)? drawCard,
+    TResult? Function(PlayCard value)? playCard,
+    TResult? Function(EndTurn value)? endTurn,
+    TResult? Function(ShowHand value)? showHand,
+    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(ShowScoreboard value)? showScoreboard,
+    TResult? Function(Shuffle value)? shuffle,
+    TResult? Function(Deal value)? deal,
+  }) {
+    return showTable?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StartGame value)? startGame,
+    TResult Function(DrawCard value)? drawCard,
+    TResult Function(PlayCard value)? playCard,
+    TResult Function(EndTurn value)? endTurn,
+    TResult Function(ShowHand value)? showHand,
+    TResult Function(ShowTable value)? showTable,
+    TResult Function(ShowScoreboard value)? showScoreboard,
+    TResult Function(Shuffle value)? shuffle,
+    TResult Function(Deal value)? deal,
+    required TResult orElse(),
+  }) {
+    if (showTable != null) {
+      return showTable(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ShowTable implements CardGameAction {
+  const factory ShowTable() = _$ShowTableImpl;
+}
+
+/// @nodoc
+abstract class _$$ShowScoreboardImplCopyWith<$Res> {
+  factory _$$ShowScoreboardImplCopyWith(_$ShowScoreboardImpl value,
+          $Res Function(_$ShowScoreboardImpl) then) =
+      __$$ShowScoreboardImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ShowScoreboardImplCopyWithImpl<$Res>
+    extends _$CardGameActionCopyWithImpl<$Res, _$ShowScoreboardImpl>
+    implements _$$ShowScoreboardImplCopyWith<$Res> {
+  __$$ShowScoreboardImplCopyWithImpl(
+      _$ShowScoreboardImpl _value, $Res Function(_$ShowScoreboardImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ShowScoreboardImpl implements ShowScoreboard {
+  const _$ShowScoreboardImpl();
+
+  @override
+  String toString() {
+    return 'CardGameAction.showScoreboard()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ShowScoreboardImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() startGame,
+    required TResult Function() drawCard,
+    required TResult Function(String cardId) playCard,
+    required TResult Function() endTurn,
+    required TResult Function() showHand,
+    required TResult Function() showTable,
+    required TResult Function() showScoreboard,
+    required TResult Function() shuffle,
+    required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
+  }) {
+    return showScoreboard();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? startGame,
+    TResult? Function()? drawCard,
+    TResult? Function(String cardId)? playCard,
+    TResult? Function()? endTurn,
+    TResult? Function()? showHand,
+    TResult? Function()? showTable,
+    TResult? Function()? showScoreboard,
+    TResult? Function()? shuffle,
+    TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
+  }) {
+    return showScoreboard?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? startGame,
+    TResult Function()? drawCard,
+    TResult Function(String cardId)? playCard,
+    TResult Function()? endTurn,
+    TResult Function()? showHand,
+    TResult Function()? showTable,
+    TResult Function()? showScoreboard,
+    TResult Function()? shuffle,
+    TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
+    required TResult orElse(),
+  }) {
+    if (showScoreboard != null) {
+      return showScoreboard();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(StartGame value) startGame,
+    required TResult Function(DrawCard value) drawCard,
+    required TResult Function(PlayCard value) playCard,
+    required TResult Function(EndTurn value) endTurn,
+    required TResult Function(ShowHand value) showHand,
+    required TResult Function(ShowTable value) showTable,
+    required TResult Function(ShowScoreboard value) showScoreboard,
+    required TResult Function(Shuffle value) shuffle,
+    required TResult Function(Deal value) deal,
+  }) {
+    return showScoreboard(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(StartGame value)? startGame,
+    TResult? Function(DrawCard value)? drawCard,
+    TResult? Function(PlayCard value)? playCard,
+    TResult? Function(EndTurn value)? endTurn,
+    TResult? Function(ShowHand value)? showHand,
+    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(ShowScoreboard value)? showScoreboard,
+    TResult? Function(Shuffle value)? shuffle,
+    TResult? Function(Deal value)? deal,
+  }) {
+    return showScoreboard?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StartGame value)? startGame,
+    TResult Function(DrawCard value)? drawCard,
+    TResult Function(PlayCard value)? playCard,
+    TResult Function(EndTurn value)? endTurn,
+    TResult Function(ShowHand value)? showHand,
+    TResult Function(ShowTable value)? showTable,
+    TResult Function(ShowScoreboard value)? showScoreboard,
+    TResult Function(Shuffle value)? shuffle,
+    TResult Function(Deal value)? deal,
+    required TResult orElse(),
+  }) {
+    if (showScoreboard != null) {
+      return showScoreboard(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ShowScoreboard implements CardGameAction {
+  const factory ShowScoreboard() = _$ShowScoreboardImpl;
 }
 
 /// @nodoc
@@ -677,12 +1193,15 @@ class _$ShuffleImpl implements Shuffle {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() play,
-    required TResult Function(int count, int? from) draw,
-    required TResult Function() discard,
-    required TResult Function() pass,
+    required TResult Function() startGame,
+    required TResult Function() drawCard,
+    required TResult Function(String cardId) playCard,
+    required TResult Function() endTurn,
+    required TResult Function() showHand,
+    required TResult Function() showTable,
+    required TResult Function() showScoreboard,
     required TResult Function() shuffle,
-    required TResult Function() deal,
+    required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
   }) {
     return shuffle();
   }
@@ -690,12 +1209,15 @@ class _$ShuffleImpl implements Shuffle {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? play,
-    TResult? Function(int count, int? from)? draw,
-    TResult? Function()? discard,
-    TResult? Function()? pass,
+    TResult? Function()? startGame,
+    TResult? Function()? drawCard,
+    TResult? Function(String cardId)? playCard,
+    TResult? Function()? endTurn,
+    TResult? Function()? showHand,
+    TResult? Function()? showTable,
+    TResult? Function()? showScoreboard,
     TResult? Function()? shuffle,
-    TResult? Function()? deal,
+    TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
   }) {
     return shuffle?.call();
   }
@@ -703,12 +1225,15 @@ class _$ShuffleImpl implements Shuffle {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? play,
-    TResult Function(int count, int? from)? draw,
-    TResult Function()? discard,
-    TResult Function()? pass,
+    TResult Function()? startGame,
+    TResult Function()? drawCard,
+    TResult Function(String cardId)? playCard,
+    TResult Function()? endTurn,
+    TResult Function()? showHand,
+    TResult Function()? showTable,
+    TResult Function()? showScoreboard,
     TResult Function()? shuffle,
-    TResult Function()? deal,
+    TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
     required TResult orElse(),
   }) {
     if (shuffle != null) {
@@ -720,10 +1245,13 @@ class _$ShuffleImpl implements Shuffle {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Play value) play,
-    required TResult Function(Draw value) draw,
-    required TResult Function(Discard value) discard,
-    required TResult Function(Pass value) pass,
+    required TResult Function(StartGame value) startGame,
+    required TResult Function(DrawCard value) drawCard,
+    required TResult Function(PlayCard value) playCard,
+    required TResult Function(EndTurn value) endTurn,
+    required TResult Function(ShowHand value) showHand,
+    required TResult Function(ShowTable value) showTable,
+    required TResult Function(ShowScoreboard value) showScoreboard,
     required TResult Function(Shuffle value) shuffle,
     required TResult Function(Deal value) deal,
   }) {
@@ -733,10 +1261,13 @@ class _$ShuffleImpl implements Shuffle {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Play value)? play,
-    TResult? Function(Draw value)? draw,
-    TResult? Function(Discard value)? discard,
-    TResult? Function(Pass value)? pass,
+    TResult? Function(StartGame value)? startGame,
+    TResult? Function(DrawCard value)? drawCard,
+    TResult? Function(PlayCard value)? playCard,
+    TResult? Function(EndTurn value)? endTurn,
+    TResult? Function(ShowHand value)? showHand,
+    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(ShowScoreboard value)? showScoreboard,
     TResult? Function(Shuffle value)? shuffle,
     TResult? Function(Deal value)? deal,
   }) {
@@ -746,10 +1277,13 @@ class _$ShuffleImpl implements Shuffle {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Play value)? play,
-    TResult Function(Draw value)? draw,
-    TResult Function(Discard value)? discard,
-    TResult Function(Pass value)? pass,
+    TResult Function(StartGame value)? startGame,
+    TResult Function(DrawCard value)? drawCard,
+    TResult Function(PlayCard value)? playCard,
+    TResult Function(EndTurn value)? endTurn,
+    TResult Function(ShowHand value)? showHand,
+    TResult Function(ShowTable value)? showTable,
+    TResult Function(ShowScoreboard value)? showScoreboard,
     TResult Function(Shuffle value)? shuffle,
     TResult Function(Deal value)? deal,
     required TResult orElse(),
@@ -770,6 +1304,8 @@ abstract class _$$DealImplCopyWith<$Res> {
   factory _$$DealImplCopyWith(
           _$DealImpl value, $Res Function(_$DealImpl) then) =
       __$$DealImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<int> cardIds, int playerId, bool flip});
 }
 
 /// @nodoc
@@ -778,66 +1314,128 @@ class __$$DealImplCopyWithImpl<$Res>
     implements _$$DealImplCopyWith<$Res> {
   __$$DealImplCopyWithImpl(_$DealImpl _value, $Res Function(_$DealImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cardIds = null,
+    Object? playerId = null,
+    Object? flip = null,
+  }) {
+    return _then(_$DealImpl(
+      cardIds: null == cardIds
+          ? _value._cardIds
+          : cardIds // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      playerId: null == playerId
+          ? _value.playerId
+          : playerId // ignore: cast_nullable_to_non_nullable
+              as int,
+      flip: null == flip
+          ? _value.flip
+          : flip // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$DealImpl implements Deal {
-  const _$DealImpl();
+  const _$DealImpl(
+      {required final List<int> cardIds,
+      required this.playerId,
+      this.flip = false})
+      : _cardIds = cardIds;
+
+  final List<int> _cardIds;
+  @override
+  List<int> get cardIds {
+    if (_cardIds is EqualUnmodifiableListView) return _cardIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_cardIds);
+  }
+
+  @override
+  final int playerId;
+  @override
+  @JsonKey()
+  final bool flip;
 
   @override
   String toString() {
-    return 'CardGameAction.deal()';
+    return 'CardGameAction.deal(cardIds: $cardIds, playerId: $playerId, flip: $flip)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DealImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$DealImpl &&
+            const DeepCollectionEquality().equals(other._cardIds, _cardIds) &&
+            (identical(other.playerId, playerId) ||
+                other.playerId == playerId) &&
+            (identical(other.flip, flip) || other.flip == flip));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_cardIds), playerId, flip);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DealImplCopyWith<_$DealImpl> get copyWith =>
+      __$$DealImplCopyWithImpl<_$DealImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() play,
-    required TResult Function(int count, int? from) draw,
-    required TResult Function() discard,
-    required TResult Function() pass,
+    required TResult Function() startGame,
+    required TResult Function() drawCard,
+    required TResult Function(String cardId) playCard,
+    required TResult Function() endTurn,
+    required TResult Function() showHand,
+    required TResult Function() showTable,
+    required TResult Function() showScoreboard,
     required TResult Function() shuffle,
-    required TResult Function() deal,
+    required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
   }) {
-    return deal();
+    return deal(cardIds, playerId, flip);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? play,
-    TResult? Function(int count, int? from)? draw,
-    TResult? Function()? discard,
-    TResult? Function()? pass,
+    TResult? Function()? startGame,
+    TResult? Function()? drawCard,
+    TResult? Function(String cardId)? playCard,
+    TResult? Function()? endTurn,
+    TResult? Function()? showHand,
+    TResult? Function()? showTable,
+    TResult? Function()? showScoreboard,
     TResult? Function()? shuffle,
-    TResult? Function()? deal,
+    TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
   }) {
-    return deal?.call();
+    return deal?.call(cardIds, playerId, flip);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? play,
-    TResult Function(int count, int? from)? draw,
-    TResult Function()? discard,
-    TResult Function()? pass,
+    TResult Function()? startGame,
+    TResult Function()? drawCard,
+    TResult Function(String cardId)? playCard,
+    TResult Function()? endTurn,
+    TResult Function()? showHand,
+    TResult Function()? showTable,
+    TResult Function()? showScoreboard,
     TResult Function()? shuffle,
-    TResult Function()? deal,
+    TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
     required TResult orElse(),
   }) {
     if (deal != null) {
-      return deal();
+      return deal(cardIds, playerId, flip);
     }
     return orElse();
   }
@@ -845,10 +1443,13 @@ class _$DealImpl implements Deal {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(Play value) play,
-    required TResult Function(Draw value) draw,
-    required TResult Function(Discard value) discard,
-    required TResult Function(Pass value) pass,
+    required TResult Function(StartGame value) startGame,
+    required TResult Function(DrawCard value) drawCard,
+    required TResult Function(PlayCard value) playCard,
+    required TResult Function(EndTurn value) endTurn,
+    required TResult Function(ShowHand value) showHand,
+    required TResult Function(ShowTable value) showTable,
+    required TResult Function(ShowScoreboard value) showScoreboard,
     required TResult Function(Shuffle value) shuffle,
     required TResult Function(Deal value) deal,
   }) {
@@ -858,10 +1459,13 @@ class _$DealImpl implements Deal {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Play value)? play,
-    TResult? Function(Draw value)? draw,
-    TResult? Function(Discard value)? discard,
-    TResult? Function(Pass value)? pass,
+    TResult? Function(StartGame value)? startGame,
+    TResult? Function(DrawCard value)? drawCard,
+    TResult? Function(PlayCard value)? playCard,
+    TResult? Function(EndTurn value)? endTurn,
+    TResult? Function(ShowHand value)? showHand,
+    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(ShowScoreboard value)? showScoreboard,
     TResult? Function(Shuffle value)? shuffle,
     TResult? Function(Deal value)? deal,
   }) {
@@ -871,10 +1475,13 @@ class _$DealImpl implements Deal {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(Play value)? play,
-    TResult Function(Draw value)? draw,
-    TResult Function(Discard value)? discard,
-    TResult Function(Pass value)? pass,
+    TResult Function(StartGame value)? startGame,
+    TResult Function(DrawCard value)? drawCard,
+    TResult Function(PlayCard value)? playCard,
+    TResult Function(EndTurn value)? endTurn,
+    TResult Function(ShowHand value)? showHand,
+    TResult Function(ShowTable value)? showTable,
+    TResult Function(ShowScoreboard value)? showScoreboard,
     TResult Function(Shuffle value)? shuffle,
     TResult Function(Deal value)? deal,
     required TResult orElse(),
@@ -887,5 +1494,15 @@ class _$DealImpl implements Deal {
 }
 
 abstract class Deal implements CardGameAction {
-  const factory Deal() = _$DealImpl;
+  const factory Deal(
+      {required final List<int> cardIds,
+      required final int playerId,
+      final bool flip}) = _$DealImpl;
+
+  List<int> get cardIds;
+  int get playerId;
+  bool get flip;
+  @JsonKey(ignore: true)
+  _$$DealImplCopyWith<_$DealImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

@@ -5,6 +5,7 @@ sealed class TavernEvent with _$TavernEvent {
   const factory TavernEvent.newGame({
     @Default('') String gameId,
     @Default('Solitaire') String gameType,
+    @Default(false) bool demo,
   }) = _NewGame;
   const factory TavernEvent.switchGame({
     required String gameId,

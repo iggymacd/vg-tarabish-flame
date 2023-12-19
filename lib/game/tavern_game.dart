@@ -7,7 +7,7 @@ import 'package:vg_tarabish_flame/bloc/tavern_bloc.dart';
 import 'package:vg_tarabish_flame/game/tavern_world.dart';
 import 'package:vg_tarabish_flame/start_game/start_game.dart';
 
-enum Action { newDeal, sameDeal, changeDraw, haveFun, newGame, none }
+enum Action { newDeal, sameDeal, demo, changeDraw, haveFun, newGame, none }
 
 class TavernGames extends FlameGame<TavernWorld> {
   // = (2 to the power 32) - 1

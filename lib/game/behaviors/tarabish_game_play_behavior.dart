@@ -41,11 +41,17 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
         ),
       );
     }
-    for (var rank = 1; rank <= 13; rank++) {
-      if (rank > 1 && rank < 6) {
-        continue;
-      }
-      for (var suit = 0; suit < 4; suit++) {
+
+    // for (var rank = 1; rank <= 13; rank++) {
+    for (var suit = 0; suit < 4; suit++) {
+      // if (rank > 1 && rank < 6) {
+      //   continue;
+      // }
+      // for (var suit = 0; suit < 4; suit++) {
+      for (var rank = 1; rank <= 13; rank++) {
+        if (rank > 1 && rank < 6) {
+          continue;
+        }
         final card = Card(
           rank,
           suit,
@@ -69,8 +75,7 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
 
     addButton('New deal', gameMidX, Action.newDeal);
     addButton('Same deal', gameMidX + parent.cardSpaceWidth, Action.sameDeal);
-    addButton(
-        'Draw 1 or 3', gameMidX + 2 * parent.cardSpaceWidth, Action.changeDraw);
+    addButton('Demo', gameMidX + 2 * parent.cardSpaceWidth, Action.demo);
     addButton('Have fun', gameMidX + 3 * parent.cardSpaceWidth, Action.haveFun);
     addButton('New Game', gameMidX + 4 * parent.cardSpaceWidth, Action.newGame);
 
@@ -153,7 +158,10 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
           print('no match');
       }
     });
-    parent.tavernBloc.add(const TavernEvent.newGame(gameType: 'Tarabish'));
+    final isDemo = parent.game.action == Action.demo;
+
+    parent.tavernBloc
+        .add(TavernEvent.newGame(gameType: 'Tarabish', demo: isDemo));
   }
 
   @override
@@ -168,42 +176,45 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
         _handleShuffle(shuffleAction);
       case final Deal dealAction:
         _handleDeal(dealAction);
-      case Draw drawAction:
-        _handleDraw(drawAction);
-      case Discard discardAction:
-        _handleDiscard(discardAction);
-      case Play playAction:
-        _handlePlay(playAction);
+      // case  Draw drawAction:
+      //   _handleDraw(drawAction);
+      // case Discard discardAction:
+      //   _handleDiscard(discardAction);
+      // case Play playAction:
+      //   _handlePlay(playAction);
       default:
+        print("default");
     }
   }
 
+  // void _handleDeal(Deal dealAction) {
+  //   print('deal');
+  // }
+
   void _handleDeal(Deal dealAction) {
-    print('deal');
-  }
-
-  void _handleDraw(Draw drawAction) {
     // print('draw for ${}');
-    final playerPosition = drawAction.from;
-    var targetB = parent.playerPiles[playerPosition!];
+    final playerPosition = dealAction.playerId;
+    final cardsToDeal = dealAction.cardIds;
+    final flipCards = dealAction.flip;
+    // final counter = dealAction.counter;
+    // var targetB = parent.playerPiles[playerPosition!];
     // var cardToDeal;
-    print('draw for $playerPosition');
-    // var nMovingCards = 0;
-    // final cardToDraw = parent.cards.last;
-
-    for (var x = 0; x < 3; x++) {
-      final target = targetB;
-      // parent.playerPiles[playerPosition!];
-      Card cardToDeal = parent.cards[x + (counter * x)];
+    int counter = 0;
+    print('deal for $playerPosition of $cardsToDeal');
+    for (final cardId in cardsToDeal) {
+      Card cardToDeal = parent.cards[cardId];
+      if (flipCards) {
+        cardToDeal.flip();
+      }
       cardToDeal.doMove(
-        target.position,
-        speed: 15.0,
-        start: 0, //nMovingCards * 0.15,
-        startPriority: 100, // + nMovingCards,
+        parent.playerPiles[playerPosition].position,
+        speed: 10.0,
+        start: counter * 0.15, //nMovingCards * 0.15,
+        startPriority: 100 + counter++, // + nMovingCards,
         onComplete: () {
-          target.acquireCard(cardToDeal);
+          parent.playerPiles[playerPosition].acquireCard(cardToDeal);
           // nMovingCards--;
-          // if (nMovingCards == 0) {
+          // if (playerPosition == 0) {
           //   var delayFactor = 0;
           //   for (final playerPile in parent.playerPiles) {
           //     delayFactor++;
@@ -212,21 +223,49 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
           // }
         },
       );
-      // nMovingCards++;
     }
+    // var nMovingCards = 0;
+    // final cardToDraw = parent.cards.last;
+
+    //   for (var x = 0; x < 3; x++) {
+    //     final target = targetB;
+    //     // parent.playerPiles[playerPosition!];
+    //     Card cardToDeal = parent.cards[x + (counter * x)];
+    // cardToDeal.doMove(
+    //   target.position,
+    //   speed: 15.0,
+    //   start: 0, //nMovingCards * 0.15,
+    //   startPriority: 100, // + nMovingCards,
+    //   onComplete: () {
+    //     target.acquireCard(cardToDeal);
+    //     // nMovingCards--;
+    //     // if (nMovingCards == 0) {
+    //     //   var delayFactor = 0;
+    //     //   for (final playerPile in parent.playerPiles) {
+    //     //     delayFactor++;
+    //     //     playerPile.flipTopCard(start: delayFactor * 0.15);
+    //     //   }
+    //     // }
+    //   },
+    // );
+    //     // nMovingCards++;
+    //   }
   }
 
-  void _handleDiscard(Discard discardAction) {
-    print('discardAction');
-  }
+  // void _handleDiscard(Discard discardAction) {
+  //   print('discardAction');
+  // }
 
-  void _handlePlay(Play playAction) {
-    print('play');
-  }
+  // void _handlePlay(Play playAction) {
+  //   print('play');
+  // }
 
   void _handleShuffle(Shuffle shuffleAction) {
     print('shuffle');
     // TODO: implement shuffle
+    final cards = parent.cards;
+    // var nMovingCards = 0;
+    // var cardToDeal =
   }
 
   // void dealCard(
