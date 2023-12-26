@@ -6,6 +6,8 @@ import 'package:rxdart/subjects.dart';
 import 'package:uuid/uuid.dart';
 import 'package:vg_tarabish_flame/game/entity/game/card_game.dart';
 import 'package:vg_tarabish_flame/game/entity/game/view/card_game_action.dart';
+import 'package:vg_tarabish_flame/game/suit.dart';
+import 'package:vg_tarabish_flame/game/tavern_game.dart';
 
 /// {@template tavern_repository}
 /// Repository to manage tavern.
@@ -40,9 +42,9 @@ class TavernRepository {
   Stream<List<TavernMember>> get tavernMembersStream =>
       _tavernMembersController.stream;
 
-  /// Stream of [CardGame] state changes
-  Stream<CardGame> cardGameStream(String id) =>
-      newOrExistingGameInProgress(id: id);
+  // /// Stream of [CardGame] state changes
+  // Stream<CardGame> cardGameStream(String id) =>
+  //     newOrExistingGameInProgress(id: id);
 
   /// Acquires list of [TavernGame]s.
   Future<List<TavernGame>> fetchTavernGames() async {
@@ -72,22 +74,39 @@ class TavernRepository {
     _tavernMembersController.close();
   }
 
-  Stream<CardGame> newOrExistingGameInProgress({
+/**
+ * Stream of [CardGame] state changes - if gameId is not found in 
+ * _currentGamesInProgressMap, then throw an error
+ */
+  Stream<CardGame> listenCardGame({required String gameId}) {
+    if (_currentGamesInProgressMap.containsKey(gameId)) {
+      return _currentGamesInProgressMap[gameId]!.stream;
+    } else {
+      throw Exception('Game not found');
+    }
+  }
+
+  // Stream<CardGame> newOrExistingGameInProgress({
+  String newOrExistingGameInProgress({
     String id = '',
     bool demo = false,
   }) {
     print("demo mode is $demo");
     if (demo) {
-      return BehaviorSubject<CardGame>.seeded(CardGame.tarabish(
-          gameId: '88888888-4444-4444-4444-121212121212',
-          actions: <CardGameAction>[
-            Shuffle(),
-            const Deal(cardIds: [1, 2, 3], playerId: 1),
-            const Deal(cardIds: [4, 5, 6], playerId: 2),
-            const Deal(cardIds: [7, 8, 9], playerId: 3),
-            const Deal(cardIds: [28, 11, 22], playerId: 0, flip: true),
-          ]))
-        ..stream;
+      _currentGamesInProgressMap.putIfAbsent(
+        'demo',
+        () => generateDemo(gameType: 'tarabish'),
+      );
+      return 'demo';
+      // return BehaviorSubject<CardGame>.seeded(
+      //     const CardGame.tarabish(gameId: 'demo', actions: <CardGameAction>[
+      //   Shuffle(),
+      //   Deal(cardIds: [1, 2, 3], playerId: 1),
+      //   Deal(cardIds: [4, 5, 6], playerId: 2),
+      //   Deal(cardIds: [7, 8, 9], playerId: 3),
+      //   Deal(cardIds: [28, 11, 22], playerId: 0, flip: true),
+      // ]))
+      //   ..stream;
     }
     late String uniqueId;
     if (id == '') {
@@ -96,34 +115,134 @@ class TavernRepository {
     } else {
       uniqueId = id;
     }
-    return _currentGamesInProgressMap.putIfAbsent(
+    _currentGamesInProgressMap.putIfAbsent(
       uniqueId,
       () => BehaviorSubject<CardGame>.seeded(
-        CardGame.tarabish(gameId: uniqueId, actions: <CardGameAction>[
-          // Shuffle(),
-          // const Deal(cardIds: [1, 2, 3], playerId: 1),
-          // const Deal(cardIds: [4, 5, 6], playerId: 2),
-          // const Deal(cardIds: [7, 8, 9], playerId: 3),
-          // const Deal(cardIds: [28, 11, 22], playerId: 0, flip: true),
-        ]),
-      )..stream,
+        CardGame.tarabish(
+          gameId: uniqueId,
+          actions: <CardGameAction>[
+            // Shuffle(),
+            // const Deal(cardIds: [1, 2, 3], playerId: 1),
+            // const Deal(cardIds: [4, 5, 6], playerId: 2),
+            // const Deal(cardIds: [7, 8, 9], playerId: 3),
+            // const Deal(cardIds: [28, 11, 22], playerId: 0, flip: true),
+          ],
+        ),
+      ),
+    );
+    return uniqueId;
+  }
+
+  BehaviorSubject<CardGame> generateDemo({String gameType = 'solitaire'}) {
+    /// use a switch to determine the type of game
+    switch (gameType) {
+      case 'solitaire':
+        return generateDemoSolitaire();
+      case 'tarabish':
+        return generateDemoTarabish();
+      default:
+        return generateDemoSolitaire();
+    }
+  }
+
+  BehaviorSubject<CardGame> generateDemoTarabish() {
+    // tarabish game has 36 cards, so 9 cards per player
+    // create list of 36 integers and shuffle with a constant seed to ensure
+    // the same sequence is generated each time
+    List<int> integers = createConsecutiveIntegers(36);
+    print('    original integers: $integers');
+    integers.shuffle(Random(1));
+    print('    shuffled integers: $integers');
+    final reversed = integers.reversed.toList();
+
+    return BehaviorSubject<CardGame>.seeded(
+      CardGame.tarabish(
+        gameId: 'demo',
+        actions: <CardGameAction>[
+          Shuffle(),
+          Deal(cardIds: getNext(reversed, 3, 0), playerId: 1),
+          Deal(cardIds: getNext(reversed, 3, 1), playerId: 2),
+          Deal(cardIds: getNext(reversed, 3, 2), playerId: 3),
+          Deal(cardIds: getNext(reversed, 3, 3), playerId: 0, flip: true),
+          BidHand(playerId: 0, bid: Suit.SPADES),
+          Deal(cardIds: getNext(reversed, 3, 4), playerId: 1),
+          Deal(cardIds: getNext(reversed, 3, 5), playerId: 2),
+          Deal(cardIds: getNext(reversed, 3, 6), playerId: 3),
+          Deal(cardIds: getNext(reversed, 3, 7), playerId: 0, flip: true),
+          Deal(cardIds: getNext(reversed, 3, 8), playerId: 1),
+          Deal(cardIds: getNext(reversed, 3, 9), playerId: 2),
+          Deal(cardIds: getNext(reversed, 3, 10), playerId: 3),
+          Deal(cardIds: getNext(reversed, 3, 11), playerId: 0, flip: true),
+        ],
+      ),
     );
   }
 
-  List<int> createConsecutiveIntegers(int count, [int? seed]) {
+  BehaviorSubject<CardGame> generateDemoSolitaire() {
+    return BehaviorSubject<CardGame>.seeded(
+      const CardGame.tarabish(
+        gameId: 'demo',
+        actions: <CardGameAction>[
+          Shuffle(),
+          Deal(cardIds: [1, 2, 3], playerId: 1),
+          Deal(cardIds: [4, 5, 6], playerId: 2),
+          Deal(cardIds: [7, 8, 9], playerId: 3),
+          BidHand(playerId: 0, bid: Suit.SPADES),
+          // const Discard(playerId: 0, cardIds: [1, 2, 3]),
+          Deal(cardIds: [10, 11, 12], playerId: 0, flip: true),
+          Deal(cardIds: [13, 14, 15], playerId: 1),
+          Deal(cardIds: [16, 17, 18], playerId: 2),
+          Deal(cardIds: [19, 20, 21], playerId: 3),
+          Deal(cardIds: [22, 23, 24], playerId: 0, flip: true),
+          Deal(cardIds: [25, 26, 27], playerId: 1),
+          Deal(cardIds: [28, 29, 30], playerId: 2),
+          Deal(cardIds: [31, 32, 33], playerId: 3),
+          Deal(cardIds: [34, 35, 36], playerId: 0, flip: true),
+        ],
+      ),
+    );
+  }
+
+  List<int> createConsecutiveIntegers(
+    int count, {
+    int? seed,
+    bool? shuffle = false,
+  }) {
     List<int> integers = [];
-    for (int i = 0; i < count; i++) {
+    for (int i = 1; i <= count; i++) {
       integers.add(i);
     }
-    if (seed != null) {
-      Random random = Random(seed);
-      // random.shuffle(integers);
-      integers.shuffle(random);
-    } else {
-      Random random = Random();
-      integers.shuffle(random);
+    if (shuffle!) {
+      if (seed != null) {
+        final random = Random(seed);
+        // random.shuffle(integers);
+        integers.shuffle(random);
+      } else {
+        final random = Random();
+        integers.shuffle(random);
+      }
     }
     return integers;
+  }
+
+  // getNext(Iterable<int> reversed, int i, int j) {
+  List<int> getNext(List<int> inputList, int count, int multiple) {
+    if (multiple < 0) {
+      throw ArgumentError("Multiple should be a non-negative integer.");
+    }
+
+    final startIndex = multiple * count;
+    final endIndex = startIndex + count;
+
+    if (startIndex >= endIndex) {
+      throw ArgumentError("Invalid multiple value or list length.");
+    }
+
+    // List<int> reversedSublist =
+    //     inputList.sublist(startIndex, endIndex).reversed.toList();
+
+    return inputList.sublist(startIndex, endIndex);
+// }
   }
 }
 

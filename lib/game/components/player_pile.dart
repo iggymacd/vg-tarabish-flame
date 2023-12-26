@@ -7,14 +7,21 @@ import '../tavern_game.dart';
 import '../entity/card/card.dart';
 
 class PlayerPile extends PositionComponent implements Pile {
-  PlayerPile({super.position}) : super(size: TavernGames.cardSize);
+  PlayerPile({required this.message, super.position})
+      : super(size: TavernGames.cardSize) {
+    // message.position.setFrom(Vector2(position.x + 10, position.y + 10));
+    add(message);
+  }
 
   /// Which cards are currently placed onto this pile.
   final List<Card> _cards = [];
   final Vector2 _fanOffset1 = Vector2(0, TavernGames.cardHeight * 0.05);
   final Vector2 _fanOffset2 = Vector2(0, TavernGames.cardHeight * 0.20);
-  final Vector2 _fanOffset1h = Vector2(TavernGames.cardWidth * 0.05, 0);
-  final Vector2 _fanOffset2h = Vector2(TavernGames.cardWidth * 0.20, 0);
+  final Vector2 _fanOffset1h =
+      Vector2(TavernGames.cardWidth * TavernGames.cardSpacingFaceDown, 0);
+  final Vector2 _fanOffset2h =
+      Vector2(TavernGames.cardWidth * TavernGames.cardSpacingFaceUp, 0);
+  final TextComponent message;
 
   //#region Pile API
 
@@ -97,10 +104,15 @@ class PlayerPile extends PositionComponent implements Pile {
   }
 
   void layOutCards() {
+    final cardSpacingAdjustment =
+        (TavernGames.cardSpacingFaceUp - TavernGames.cardSpacingFaceDown) /
+            2 *
+            _cards.length;
     if (_cards.isEmpty) {
       calculateHitArea(); // Shrink hit-area when all cards have been removed.
       return;
     }
+    position = Vector2(position.x - cardSpacingAdjustment, y);
     _cards[0].position.setFrom(position);
     _cards[0].priority = 0;
     for (var i = 1; i < _cards.length; i++) {

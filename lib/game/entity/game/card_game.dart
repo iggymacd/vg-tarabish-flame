@@ -14,6 +14,8 @@ class CardGame with _$CardGame {
   const factory CardGame.tarabish({
     required String gameId,
     required List<CardGameAction> actions,
+    // @Default(false) bool isDemo,
+
     // required List<CardGamemand> actions,
     // @Default(0) int currentAction,
     // @Default(0) int lastAction,

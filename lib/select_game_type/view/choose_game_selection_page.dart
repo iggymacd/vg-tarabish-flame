@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vg_tarabish_flame/bloc/tavern_bloc.dart';
 import 'package:vg_tarabish_flame/start_game/bloc/start_game_bloc.dart';
 
 class ChooseGameTypeDialog extends StatefulWidget {
@@ -37,8 +36,8 @@ class _ChooseGameTypeDialogState extends State<ChooseGameTypeDialog> {
                 child: ElevatedButton(
                   onPressed: () async {
                     Navigator.of(context).pop();
-                    context.read<StartGameBloc>().add(
-                        const StartGameEvent.chooseGameType(
+                    context.read<GameDialogBloc>().add(
+                        const GameDialogEvent.chooseGameType(
                             gameType: 'Solitaire'));
                   },
                   child: Text("Solitaire"),
@@ -50,8 +49,8 @@ class _ChooseGameTypeDialogState extends State<ChooseGameTypeDialog> {
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.of(context).pop();
-                    context.read<StartGameBloc>().add(
-                        const StartGameEvent.chooseGameType(
+                    context.read<GameDialogBloc>().add(
+                        const GameDialogEvent.chooseGameType(
                             gameType: 'Tarabish'));
                   },
                   child: const Text("Tarabish"),
@@ -63,8 +62,8 @@ class _ChooseGameTypeDialogState extends State<ChooseGameTypeDialog> {
           ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
-              context.read<StartGameBloc>().add(
-                  const StartGameEvent.chooseGameType(gameType: 'Solitaire'));
+              context.read<GameDialogBloc>().add(
+                  const GameDialogEvent.chooseGameType(gameType: 'Solitaire'));
             },
             child: Text("Cancel"),
           )

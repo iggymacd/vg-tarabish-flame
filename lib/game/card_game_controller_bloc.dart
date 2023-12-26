@@ -38,7 +38,9 @@ class CardGameControllerBloc extends Bloc<CardGameAction, CardGameState> {
   }
 
   Stream<CardGameState> _drawCard(
-      DrawCard event, Emitter<CardGameState> emit) async* {
+    DrawCard event,
+    Emitter<CardGameState> emit,
+  ) async* {
     try {
       emit(CardGameState.loading()); // CardGameState.loading();
       // final state = await _cardGameRepository.drawCard();

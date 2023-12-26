@@ -62,9 +62,9 @@ class SolitaireSetupBehavior extends Behavior<TavernWorld> {
     await addAll(parent.tableauPiles);
     await addAll(parent.cards);
 
-    parent.playAreaSize = Vector2(7 * parent.cardSpaceWidth + parent.cardGap,
+    parent.tableAreaSize = Vector2(7 * parent.cardSpaceWidth + parent.cardGap,
         4 * parent.cardSpaceHeight + parent.topGap);
-    final gameMidX = parent.playAreaSize.x / 2;
+    final gameMidX = parent.tableAreaSize.x / 2;
 
     addButton('New deal', gameMidX, Action.newDeal);
     addButton('Same deal', gameMidX + parent.cardSpaceWidth, Action.sameDeal);
@@ -74,7 +74,7 @@ class SolitaireSetupBehavior extends Behavior<TavernWorld> {
     addButton('New Game', gameMidX + 4 * parent.cardSpaceWidth, Action.newGame);
 
     final camera = parent.game.camera;
-    camera.viewfinder.visibleGameSize = parent.playAreaSize;
+    camera.viewfinder.visibleGameSize = parent.tableAreaSize;
     camera.viewfinder.position = Vector2(gameMidX, 0);
     camera.viewfinder.anchor = Anchor.topCenter;
 
@@ -98,7 +98,7 @@ class SolitaireSetupBehavior extends Behavior<TavernWorld> {
           if (action == Action.newGame) {
             print('starting new game');
             parent.startGameBloc
-                .add(const StartGameEvent.displayGameTypeDialog());
+                .add(const GameDialogEvent.displayGameTypeDialog());
           }
           // Restart with a new deal or the same deal as before.
           parent.game.action = action;
@@ -132,9 +132,9 @@ class SolitaireSetupBehavior extends Behavior<TavernWorld> {
 
     final cameraZoom = parent.game.camera.viewfinder.zoom;
     final zoomedScreen = parent.game.size / cameraZoom;
-    final screenCenter = (parent.playAreaSize - TavernGames.cardSize) / 2;
+    final screenCenter = (parent.tableAreaSize - TavernGames.cardSize) / 2;
     final topLeft = Vector2(
-      (parent.playAreaSize.x - zoomedScreen.x) / 2 - TavernGames.cardWidth,
+      (parent.tableAreaSize.x - zoomedScreen.x) / 2 - TavernGames.cardWidth,
       -TavernGames.cardHeight,
     );
     final nCards = parent.cards.length;

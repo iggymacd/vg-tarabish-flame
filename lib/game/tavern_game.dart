@@ -13,11 +13,13 @@ class TavernGames extends FlameGame<TavernWorld> {
   // = (2 to the power 32) - 1
 
   // This TarabishGame constructor also initiates the first TarabishWorld.
-  TavernGames({required this.startGameBloc, required this.tavernBloc})
+  TavernGames({required this.gameDialogBloc, required this.tavernBloc})
       : super(world: TavernWorld());
   static const double cardGap = 175.0;
   static const double topGap = 500.0;
   static const double cardWidth = 1000.0;
+  static const double cardSpacingFaceUp = 0.20;
+  static const double cardSpacingFaceDown = 0.05;
   static const double cardHeight = 1400.0;
   static const double cardRadius = 100.0;
   static const double cardSpaceWidth = cardWidth + cardGap;
@@ -31,7 +33,7 @@ class TavernGames extends FlameGame<TavernWorld> {
   // Constant used when creating Random seed.
   static const int maxInt = 0xFFFFFFFE;
   final TavernBloc tavernBloc;
-  final StartGameBloc startGameBloc;
+  final GameDialogBloc gameDialogBloc;
   // These three values persist between games and are starting conditions
   // for the next game to be played in TarabishWorld. The actual seed is
   // computed in TarabishWorld but is held here in case the player chooses

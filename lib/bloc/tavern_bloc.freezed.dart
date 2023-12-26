@@ -1079,6 +1079,8 @@ abstract class _$$CurrentGameStateUpdatedImplCopyWith<$Res> {
       __$$CurrentGameStateUpdatedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({CardGame cardGame});
+
+  $CardGameCopyWith<$Res> get cardGame;
 }
 
 /// @nodoc
@@ -1093,14 +1095,22 @@ class __$$CurrentGameStateUpdatedImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cardGame = freezed,
+    Object? cardGame = null,
   }) {
     return _then(_$CurrentGameStateUpdatedImpl(
-      cardGame: freezed == cardGame
+      cardGame: null == cardGame
           ? _value.cardGame
           : cardGame // ignore: cast_nullable_to_non_nullable
               as CardGame,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CardGameCopyWith<$Res> get cardGame {
+    return $CardGameCopyWith<$Res>(_value.cardGame, (value) {
+      return _then(_value.copyWith(cardGame: value));
+    });
   }
 }
 
@@ -1122,12 +1132,12 @@ class _$CurrentGameStateUpdatedImpl implements CurrentGameStateUpdated {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CurrentGameStateUpdatedImpl &&
-            const DeepCollectionEquality().equals(other.cardGame, cardGame));
+            (identical(other.cardGame, cardGame) ||
+                other.cardGame == cardGame));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(cardGame));
+  int get hashCode => Object.hash(runtimeType, cardGame);
 
   @JsonKey(ignore: true)
   @override

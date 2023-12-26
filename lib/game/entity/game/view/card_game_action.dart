@@ -10,6 +10,10 @@ sealed class CardGameAction with _$CardGameAction {
   const factory CardGameAction.playCard(String cardId) = PlayCard;
   const factory CardGameAction.endTurn() = EndTurn;
   const factory CardGameAction.showHand() = ShowHand;
+  const factory CardGameAction.bidHand({
+    required int bid,
+    required int playerId,
+  }) = BidHand;
   const factory CardGameAction.showTable() = ShowTable;
   const factory CardGameAction.showScoreboard() = ShowScoreboard;
   const factory CardGameAction.shuffle() = Shuffle;

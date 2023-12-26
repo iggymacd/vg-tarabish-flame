@@ -116,16 +116,19 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
   }
 
   void _handleNewGame(_NewGame event, Emitter<TavernState> emit) {
-    print('TavenEvent _handleNewGame called');
-    final String gameId = event.gameId; // Extract gameId from the event
+    print('TavernEvent _handleNewGame called with demo == ${event.demo}');
+    // final String gameId = event.gameId; // Extract gameId from the event
 
     // Create a new game stream if it doesn't exist
-    if (!_gameStreams.containsKey(gameId)) {
-      final isDemo = event.demo;
-      final Stream<CardGame> newGameStream = tavernRepository
-          .newOrExistingGameInProgress(id: gameId, demo: isDemo);
-      _gameStreams[gameId] = newGameStream;
-    }
+    // if (!_gameStreams.containsKey(gameId)) {
+    final isDemo = event.demo;
+    final String gameId =
+        tavernRepository.newOrExistingGameInProgress(demo: isDemo);
+    // final Stream<CardGame> newGameStream =
+    //     tavernRepository.listenCardGame(gameId: gameId);
+
+    _gameStreams[gameId] = tavernRepository.listenCardGame(gameId: gameId);
+    // }
 
     // Switch to the newly created game
     _currentGameId = gameId;

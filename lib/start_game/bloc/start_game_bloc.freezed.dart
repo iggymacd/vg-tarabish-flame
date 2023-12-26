@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$StartGameEvent {
+mixin _$GameDialogEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() displayGameTypeDialog,
@@ -67,16 +67,16 @@ mixin _$StartGameEvent {
 }
 
 /// @nodoc
-abstract class $StartGameEventCopyWith<$Res> {
-  factory $StartGameEventCopyWith(
-          StartGameEvent value, $Res Function(StartGameEvent) then) =
-      _$StartGameEventCopyWithImpl<$Res, StartGameEvent>;
+abstract class $GameDialogEventCopyWith<$Res> {
+  factory $GameDialogEventCopyWith(
+          GameDialogEvent value, $Res Function(GameDialogEvent) then) =
+      _$GameDialogEventCopyWithImpl<$Res, GameDialogEvent>;
 }
 
 /// @nodoc
-class _$StartGameEventCopyWithImpl<$Res, $Val extends StartGameEvent>
-    implements $StartGameEventCopyWith<$Res> {
-  _$StartGameEventCopyWithImpl(this._value, this._then);
+class _$GameDialogEventCopyWithImpl<$Res, $Val extends GameDialogEvent>
+    implements $GameDialogEventCopyWith<$Res> {
+  _$GameDialogEventCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -94,7 +94,7 @@ abstract class _$$DisplayGameTypeDialogImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$DisplayGameTypeDialogImplCopyWithImpl<$Res>
-    extends _$StartGameEventCopyWithImpl<$Res, _$DisplayGameTypeDialogImpl>
+    extends _$GameDialogEventCopyWithImpl<$Res, _$DisplayGameTypeDialogImpl>
     implements _$$DisplayGameTypeDialogImplCopyWith<$Res> {
   __$$DisplayGameTypeDialogImplCopyWithImpl(_$DisplayGameTypeDialogImpl _value,
       $Res Function(_$DisplayGameTypeDialogImpl) _then)
@@ -108,7 +108,7 @@ class _$DisplayGameTypeDialogImpl implements _DisplayGameTypeDialog {
 
   @override
   String toString() {
-    return 'StartGameEvent.displayGameTypeDialog()';
+    return 'GameDialogEvent.displayGameTypeDialog()';
   }
 
   @override
@@ -194,7 +194,7 @@ class _$DisplayGameTypeDialogImpl implements _DisplayGameTypeDialog {
   }
 }
 
-abstract class _DisplayGameTypeDialog implements StartGameEvent {
+abstract class _DisplayGameTypeDialog implements GameDialogEvent {
   const factory _DisplayGameTypeDialog() = _$DisplayGameTypeDialogImpl;
 }
 
@@ -208,7 +208,7 @@ abstract class _$$CancelDisplayGameTypeDialogImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$CancelDisplayGameTypeDialogImplCopyWithImpl<$Res>
-    extends _$StartGameEventCopyWithImpl<$Res,
+    extends _$GameDialogEventCopyWithImpl<$Res,
         _$CancelDisplayGameTypeDialogImpl>
     implements _$$CancelDisplayGameTypeDialogImplCopyWith<$Res> {
   __$$CancelDisplayGameTypeDialogImplCopyWithImpl(
@@ -225,7 +225,7 @@ class _$CancelDisplayGameTypeDialogImpl
 
   @override
   String toString() {
-    return 'StartGameEvent.cancelDisplayGameTypeDialog()';
+    return 'GameDialogEvent.cancelDisplayGameTypeDialog()';
   }
 
   @override
@@ -311,7 +311,7 @@ class _$CancelDisplayGameTypeDialogImpl
   }
 }
 
-abstract class _CancelDisplayGameTypeDialog implements StartGameEvent {
+abstract class _CancelDisplayGameTypeDialog implements GameDialogEvent {
   const factory _CancelDisplayGameTypeDialog() =
       _$CancelDisplayGameTypeDialogImpl;
 }
@@ -327,7 +327,7 @@ abstract class _$$ChooseGameTypeImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ChooseGameTypeImplCopyWithImpl<$Res>
-    extends _$StartGameEventCopyWithImpl<$Res, _$ChooseGameTypeImpl>
+    extends _$GameDialogEventCopyWithImpl<$Res, _$ChooseGameTypeImpl>
     implements _$$ChooseGameTypeImplCopyWith<$Res> {
   __$$ChooseGameTypeImplCopyWithImpl(
       _$ChooseGameTypeImpl _value, $Res Function(_$ChooseGameTypeImpl) _then)
@@ -357,7 +357,7 @@ class _$ChooseGameTypeImpl implements _ChooseGameType {
 
   @override
   String toString() {
-    return 'StartGameEvent.chooseGameType(gameType: $gameType)';
+    return 'GameDialogEvent.chooseGameType(gameType: $gameType)';
   }
 
   @override
@@ -452,7 +452,7 @@ class _$ChooseGameTypeImpl implements _ChooseGameType {
   }
 }
 
-abstract class _ChooseGameType implements StartGameEvent {
+abstract class _ChooseGameType implements GameDialogEvent {
   const factory _ChooseGameType({required final String gameType}) =
       _$ChooseGameTypeImpl;
 

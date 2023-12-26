@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
+import 'package:flame/text.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:vg_tarabish_flame/bloc/tavern_bloc.dart';
 import 'package:vg_tarabish_flame/game/components/flat_button.dart';
@@ -9,6 +12,7 @@ import 'package:vg_tarabish_flame/game/entity/game/view/card_game_action.dart';
 import 'package:vg_tarabish_flame/game/tavern_game.dart';
 import 'package:vg_tarabish_flame/game/tavern_world.dart';
 import 'package:vg_tarabish_flame/start_game/bloc/start_game_bloc.dart';
+import 'package:flutter/material.dart' as material;
 
 class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
   // final List<PlayerPile> playerPiles = [];
@@ -22,7 +26,7 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
     parent.stock.position = Vector2(parent.cardGap, parent.topGap);
     // parent.waste.position =
     //     Vector2(parent.cardSpaceWidth + parent.cardGap, parent.topGap);
-    parent.playAreaSize = Vector2(4 * parent.cardSpaceHeight + parent.topGap,
+    parent.tableAreaSize = Vector2(4 * parent.cardSpaceHeight + parent.topGap,
         4 * parent.cardSpaceHeight + parent.topGap);
     // for (var i = 0; i < 4; i++) {
     //   parent.foundations.add(
@@ -37,8 +41,20 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
     for (var i = 0; i < 4; i++) {
       parent.playerPiles.add(
         PlayerPile(
-          position: getPlayerPosition(i),
-        ),
+            position: getPlayerPosition(i),
+            message: TextComponent(
+              text: getMessage(i),
+              size: Vector2.all(TavernGames.cardWidth), //.bind(context),
+              textRenderer: TextPaint(
+                style: TextStyle(
+                  color: material.Colors.white,
+                  fontSize: 200,
+                ),
+              ),
+              // anchor: Anchor.center,
+              priority: 1,
+              position: getMessagePosition(i),
+            )),
       );
     }
 
@@ -62,7 +78,7 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
         parent.cards.add(card);
       }
     }
-    parent.cards.indexed.forEach((element) => print('element is $element'));
+    // parent.cards.indexed.forEach((element) => print('element is $element'));
     add(parent.stock);
     // add(parent.waste);
     // await addAll(parent.foundations);
@@ -71,7 +87,7 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
 
     // Vector2(7 * parent.cardSpaceWidth + parent.cardGap,
     //     4 * parent.cardSpaceHeight + parent.topGap);
-    final gameMidX = parent.playAreaSize.x / 2;
+    final gameMidX = parent.tableAreaSize.x / 2;
 
     addButton('New deal', gameMidX, Action.newDeal);
     addButton('Same deal', gameMidX + parent.cardSpaceWidth, Action.sameDeal);
@@ -80,7 +96,7 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
     addButton('New Game', gameMidX + 4 * parent.cardSpaceWidth, Action.newGame);
 
     final camera = parent.game.camera;
-    camera.viewfinder.visibleGameSize = parent.playAreaSize;
+    camera.viewfinder.visibleGameSize = parent.tableAreaSize;
     camera.viewfinder.position = Vector2(gameMidX, 0);
     camera.viewfinder.anchor = Anchor.topCenter;
 
@@ -92,6 +108,37 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
     play();
   }
 
+  String getMessage(int i) {
+    switch (i) {
+      case 0:
+        return 'South';
+      case 1:
+        return 'West';
+      case 2:
+        return 'North';
+      case 3:
+        return 'East';
+      default:
+        return 'Unknown';
+    }
+  }
+
+  Vector2 getMessagePosition(int i) {
+    // return Vector2.all(-16);
+    switch (i) {
+      case 0:
+        return Vector2(0, -(parent.cardGap * 2));
+      case 1:
+        return Vector2(0, -(parent.cardGap * 2));
+      case 2:
+        return Vector2(0, parent.cardSpaceHeight);
+      case 3:
+        return Vector2(0, -(parent.cardGap * 2));
+      default:
+        return Vector2(0, -(parent.cardGap * 2));
+    }
+  }
+
   @override
   void update(double dt) {
     // TODO: implement update
@@ -100,7 +147,7 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
 
   ///
   void play() {
-    parent.tavernBloc.stream.listen((state) {
+    parent.tavernBloc.stream.listen((state) async {
       print('I am listening for TavernStates got $state');
       switch (state) {
         case TavernState.initial:
@@ -110,7 +157,8 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
         case CurrentGameStateUpdated():
 
           ///
-          print("CardGame state is updated - handle state change");
+          print(
+              "CardGame state is updated - handle state change - card game is ${state.cardGame}");
           final cardGameState = state.cardGame;
           // parent.currentCardGameView =
           //     CardGameView(cardGameState, commands: List.empty());
@@ -122,18 +170,31 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
           // currentCommandIndex, and create a new command for each and execute
           //  until we get to the end. Then we can consider our CardGameView as
           //  synchronized with the cardGame state.
+          // print('parent is $parent :: cardGameState is $cardGameState');
+          // print(
+          //     'parent.currentCardGameAction is ${parent.currentCardGameAction} :: cardGameState.lastActionIndex is ${cardGameState.lastActionIndex}');
           if (parent.currentCardGameAction ==
               cardGameState.lastActionIndex - 1) {
+            print('in if condition');
             execute(cardGameState.lastAction);
             // Create a new command and execute it.
             // final command = CardGameCommand();
             // command.execute(parent);
           } else if (parent.currentCardGameAction <
               cardGameState.lastActionIndex - 1) {
-            cardGameState.actions
-                .getRange(parent.currentCardGameAction + 1,
-                    cardGameState.actions.length)
-                .forEach(execute);
+            print('in else if condition');
+            await Future.forEach(
+                cardGameState.actions.getRange(
+                  parent.currentCardGameAction + 1,
+                  cardGameState.actions.length,
+                ),
+                execute);
+            // cardGameState.actions
+            //     .getRange(
+            //       parent.currentCardGameAction + 1,
+            //       cardGameState.actions.length,
+            //     )
+            //     .forEach(execute);
             // Find the appropriate action from cardGame that matches the currentCommandIndex.
             // final action = cardGame.actions[cardGameView.currentCommand];
 
@@ -170,12 +231,12 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
     super.onRemove();
   }
 
-  void execute(CardGameAction? lastAction) {
+  Future<void> execute(CardGameAction? lastAction) async {
     switch (lastAction) {
       case Shuffle shuffleAction:
         _handleShuffle(shuffleAction);
       case final Deal dealAction:
-        _handleDeal(dealAction);
+        await _handleDeal(dealAction);
       // case  Draw drawAction:
       //   _handleDraw(drawAction);
       // case Discard discardAction:
@@ -191,7 +252,7 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
   //   print('deal');
   // }
 
-  void _handleDeal(Deal dealAction) {
+  Future<void> _handleDeal(Deal dealAction) async {
     // print('draw for ${}');
     final playerPosition = dealAction.playerId;
     final cardsToDeal = dealAction.cardIds;
@@ -201,55 +262,33 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
     // var cardToDeal;
     int counter = 0;
     print('deal for $playerPosition of $cardsToDeal');
+
     for (final cardId in cardsToDeal) {
-      Card cardToDeal = parent.cards[cardId];
+      Card cardToDeal = parent.cards[cardId - 1];
       if (flipCards) {
         cardToDeal.flip();
       }
-      cardToDeal.doMove(
-        parent.playerPiles[playerPosition].position,
-        speed: 10.0,
-        start: counter * 0.15, //nMovingCards * 0.15,
-        startPriority: 100 + counter++, // + nMovingCards,
-        onComplete: () {
-          parent.playerPiles[playerPosition].acquireCard(cardToDeal);
-          // nMovingCards--;
-          // if (playerPosition == 0) {
-          //   var delayFactor = 0;
-          //   for (final playerPile in parent.playerPiles) {
-          //     delayFactor++;
-          //     playerPile.flipTopCard(start: delayFactor * 0.15);
-          //   }
-          // }
-        },
-      );
+      await doMove(cardToDeal, playerPosition, counter);
     }
-    // var nMovingCards = 0;
-    // final cardToDraw = parent.cards.last;
+  }
 
-    //   for (var x = 0; x < 3; x++) {
-    //     final target = targetB;
-    //     // parent.playerPiles[playerPosition!];
-    //     Card cardToDeal = parent.cards[x + (counter * x)];
-    // cardToDeal.doMove(
-    //   target.position,
-    //   speed: 15.0,
-    //   start: 0, //nMovingCards * 0.15,
-    //   startPriority: 100, // + nMovingCards,
-    //   onComplete: () {
-    //     target.acquireCard(cardToDeal);
-    //     // nMovingCards--;
-    //     // if (nMovingCards == 0) {
-    //     //   var delayFactor = 0;
-    //     //   for (final playerPile in parent.playerPiles) {
-    //     //     delayFactor++;
-    //     //     playerPile.flipTopCard(start: delayFactor * 0.15);
-    //     //   }
-    //     // }
-    //   },
-    // );
-    //     // nMovingCards++;
-    //   }
+  Future<void> doMove(Card cardToDeal, int playerPosition, int counter) async {
+    // final c = Completer();
+    Completer<void> completer = Completer<void>();
+    cardToDeal.doMove(
+      parent.playerPiles[playerPosition].position,
+      speed: 10,
+      start: counter * 0.55, //nMovingCards * 0.15,
+      startPriority: 100 + counter++, // + nMovingCards,
+      onComplete: () {
+        parent.playerPiles[playerPosition].acquireCard(cardToDeal);
+        completer.complete();
+        // return c.future;
+        // nMovingCards--;
+        // if (nMovingCards == 0)
+      },
+    );
+    await completer.future;
   }
 
   // void _handleDiscard(Discard discardAction) {
@@ -303,11 +342,11 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
           if (action == Action.newGame) {
             print('starting new game');
             parent.startGameBloc
-                .add(const StartGameEvent.displayGameTypeDialog());
+                .add(const GameDialogEvent.displayGameTypeDialog());
           }
           // Restart with a new deal or the same deal as before.
           parent.game.action = action;
-          parent.game.world = TavernWorld();
+          parent.game.world = TavernWorld()..gameType = parent.gameType;
         }
       },
     );
@@ -337,9 +376,9 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
 
     final cameraZoom = parent.game.camera.viewfinder.zoom;
     final zoomedScreen = parent.game.size / cameraZoom;
-    final screenCenter = (parent.playAreaSize - TavernGames.cardSize) / 2;
+    final screenCenter = (parent.tableAreaSize - TavernGames.cardSize) / 2;
     final topLeft = Vector2(
-      (parent.playAreaSize.x - zoomedScreen.x) / 2 - TavernGames.cardWidth,
+      (parent.tableAreaSize.x - zoomedScreen.x) / 2 - TavernGames.cardWidth,
       -TavernGames.cardHeight,
     );
     final nCards = parent.cards.length;
@@ -417,74 +456,23 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
     }
   }
 
-  // void deal() {
-  //   assert(parent.cards.length == 36,
-  //       'There are ${parent.cards.length} cards: should be 52');
-
-  //   if (parent.game.action != Action.sameDeal) {
-  //     // New deal: change the Random Number Generator's seed.
-  //     parent.game.seed = Random().nextInt(TavernGames.maxInt);
-  //     if (parent.game.action == Action.changeDraw) {
-  //       parent.game.tarabishDraw = (parent.game.tarabishDraw == 3) ? 1 : 3;
-  //     }
-  //   }
-  //   // For the "Same deal" option, re-use the previous seed, else use a new one.
-  //   parent.cards.shuffle(Random(parent.game.seed));
-
-  //   // Each card dealt must be seen to come from the top of the deck!
-  //   var dealPriority = 1;
-  //   for (final card in parent.cards) {
-  //     card.priority = dealPriority++;
-  //   }
-
-  //   // Change priority as cards take off: so later cards fly above earlier ones.
-  //   var cardToDeal = parent.cards.length - 1;
-  //   var nMovingCards = 0;
-  //   for (var i = 0; i < 4; i++) {
-  //     for (var j = i; j < 4; j++) {
-  //       final card = parent.cards[cardToDeal--];
-  //       card.doMove(
-  //         playerPiles[j].position,
-  //         speed: 15.0,
-  //         start: nMovingCards * 0.15,
-  //         startPriority: 100 + nMovingCards,
-  //         onComplete: () {
-  //           playerPiles[j].acquireCard(card);
-  //           nMovingCards--;
-  //           if (nMovingCards == 0) {
-  //             var delayFactor = 0;
-  //             for (final tableauPile in playerPiles) {
-  //               delayFactor++;
-  //               tableauPile.flipTopCard(start: delayFactor * 0.15);
-  //             }
-  //           }
-  //         },
-  //       );
-  //       nMovingCards++;
-  //     }
-  //   }
-  //   for (var n = 0; n <= cardToDeal; n++) {
-  //     parent.stock.acquireCard(parent.cards[n]);
-  //   }
-  // }
-
   Vector2 getPlayerPosition(int i) {
     switch (i) {
       case 0:
-        return Vector2(parent.playAreaSize.x / 2 - parent.cardSpaceWidth / 2,
-            parent.playAreaSize.y - parent.cardSpaceHeight);
+        return Vector2(parent.tableAreaSize.x / 2 - parent.cardSpaceWidth / 2,
+            parent.tableAreaSize.y - parent.cardSpaceHeight);
       case 1:
         return Vector2(parent.cardGap,
-            parent.playAreaSize.y / 2 - parent.cardSpaceHeight / 2);
+            parent.tableAreaSize.y / 2 - parent.cardSpaceHeight / 2);
       case 2:
-        return Vector2(parent.playAreaSize.x / 2 - parent.cardSpaceWidth / 2,
+        return Vector2(parent.tableAreaSize.x / 2 - parent.cardSpaceWidth / 2,
             parent.topGap);
       case 3:
-        return Vector2(parent.playAreaSize.x - parent.cardSpaceWidth,
-            parent.playAreaSize.y / 2 - parent.cardSpaceHeight / 2);
+        return Vector2(parent.tableAreaSize.x - parent.cardSpaceWidth,
+            parent.tableAreaSize.y / 2 - parent.cardSpaceHeight / 2);
       default:
-        return Vector2(parent.playAreaSize.x / 2 - parent.cardSpaceWidth / 2,
-            parent.playAreaSize.y - parent.cardSpaceHeight);
+        return Vector2(parent.tableAreaSize.x / 2 - parent.cardSpaceWidth / 2,
+            parent.tableAreaSize.y - parent.cardSpaceHeight);
     }
   }
 }

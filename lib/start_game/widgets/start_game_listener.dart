@@ -27,7 +27,7 @@ class StartGameListener extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<StartGameBloc, StartGameState>(
+    return BlocListener<GameDialogBloc, StartGameState>(
       listener: (context, state) {
         print('state changed...');
         switch (state) {
@@ -51,21 +51,22 @@ class StartGameListener extends StatelessWidget {
     print('calling _onChooseGameType');
     _showGameTypeDialog(
       context: context,
+      // child: LandingPage(),
       child: const ChooseGameTypeDialog(),
       barrierDismissible: false,
     );
 
     // Set a duration for the timeout
-    const Duration timeoutDuration = Duration(seconds: 10);
+    // const Duration timeoutDuration = Duration(seconds: 10);
 
     // Schedule the removal of the dialog after the specified duration
-    Future.delayed(timeoutDuration, () {
-      // Check if the dialog is still open before trying to pop it
-      if (Navigator.of(context).canPop()) {
-        Navigator.of(context).pop();
-        // You can also handle the timeout action here
-      }
-    });
+    // Future.delayed(timeoutDuration, () {
+    //   // Check if the dialog is still open before trying to pop it
+    //   if (Navigator.of(context).canPop()) {
+    //     Navigator.of(context).pop();
+    //     // You can also handle the timeout action here
+    //   }
+    // });
   }
 
   // void _onHowToPlay(BuildContext context) {
@@ -85,6 +86,8 @@ class StartGameListener extends StatelessWidget {
     bool barrierDismissible = true,
   }) {
     final gameWidgetWidth = MediaQuery.of(context).size.height * 9 / 16;
+    // final gameWidgetWidth = MediaQuery.of(context).size.width;
+    // final gameWidgetHeight = MediaQuery.of(context).size.height; //  * 9 / 16;
 
     showDialog<void>(
       context: context,
@@ -94,6 +97,8 @@ class StartGameListener extends StatelessWidget {
         return Center(
           child: SizedBox(
             height: gameWidgetWidth * 0.87,
+            // height: gameWidgetHeight,
+            // width: gameWidgetWidth,,
             width: gameWidgetWidth,
             child: child,
           ),

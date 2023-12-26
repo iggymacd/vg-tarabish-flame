@@ -9,9 +9,9 @@ part 'start_game_bloc.freezed.dart';
 /// {@template start_game_bloc}
 /// Bloc that manages the app flow before the game starts.
 /// {@endtemplate}
-class StartGameBloc extends Bloc<StartGameEvent, StartGameState> {
+class GameDialogBloc extends Bloc<GameDialogEvent, StartGameState> {
   /// {@macro start_game_bloc}
-  StartGameBloc() : super(const StartGameState.initial()) {
+  GameDialogBloc() : super(const StartGameState.initial()) {
     // on<PlayTapped>(_onPlayTapped);
     // on<ReplayTapped>(_onReplayTapped);
     on((event, emit) {
