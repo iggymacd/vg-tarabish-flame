@@ -19,6 +19,7 @@ mixin _$CardGameAction {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startGame,
+    required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
     required TResult Function(String cardId) playCard,
     required TResult Function() endTurn,
@@ -33,6 +34,7 @@ mixin _$CardGameAction {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startGame,
+    TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
     TResult? Function(String cardId)? playCard,
     TResult? Function()? endTurn,
@@ -47,6 +49,7 @@ mixin _$CardGameAction {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startGame,
+    TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
     TResult Function(String cardId)? playCard,
     TResult Function()? endTurn,
@@ -62,6 +65,7 @@ mixin _$CardGameAction {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartGame value) startGame,
+    required TResult Function(SetDealer value) setDealer,
     required TResult Function(DrawCard value) drawCard,
     required TResult Function(PlayCard value) playCard,
     required TResult Function(EndTurn value) endTurn,
@@ -76,6 +80,7 @@ mixin _$CardGameAction {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartGame value)? startGame,
+    TResult? Function(SetDealer value)? setDealer,
     TResult? Function(DrawCard value)? drawCard,
     TResult? Function(PlayCard value)? playCard,
     TResult? Function(EndTurn value)? endTurn,
@@ -90,6 +95,7 @@ mixin _$CardGameAction {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartGame value)? startGame,
+    TResult Function(SetDealer value)? setDealer,
     TResult Function(DrawCard value)? drawCard,
     TResult Function(PlayCard value)? playCard,
     TResult Function(EndTurn value)? endTurn,
@@ -161,6 +167,7 @@ class _$StartGameImpl implements StartGame {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startGame,
+    required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
     required TResult Function(String cardId) playCard,
     required TResult Function() endTurn,
@@ -178,6 +185,7 @@ class _$StartGameImpl implements StartGame {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startGame,
+    TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
     TResult? Function(String cardId)? playCard,
     TResult? Function()? endTurn,
@@ -195,6 +203,7 @@ class _$StartGameImpl implements StartGame {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startGame,
+    TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
     TResult Function(String cardId)? playCard,
     TResult Function()? endTurn,
@@ -216,6 +225,7 @@ class _$StartGameImpl implements StartGame {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartGame value) startGame,
+    required TResult Function(SetDealer value) setDealer,
     required TResult Function(DrawCard value) drawCard,
     required TResult Function(PlayCard value) playCard,
     required TResult Function(EndTurn value) endTurn,
@@ -233,6 +243,7 @@ class _$StartGameImpl implements StartGame {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartGame value)? startGame,
+    TResult? Function(SetDealer value)? setDealer,
     TResult? Function(DrawCard value)? drawCard,
     TResult? Function(PlayCard value)? playCard,
     TResult? Function(EndTurn value)? endTurn,
@@ -250,6 +261,7 @@ class _$StartGameImpl implements StartGame {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartGame value)? startGame,
+    TResult Function(SetDealer value)? setDealer,
     TResult Function(DrawCard value)? drawCard,
     TResult Function(PlayCard value)? playCard,
     TResult Function(EndTurn value)? endTurn,
@@ -270,6 +282,194 @@ class _$StartGameImpl implements StartGame {
 
 abstract class StartGame implements CardGameAction {
   const factory StartGame() = _$StartGameImpl;
+}
+
+/// @nodoc
+abstract class _$$SetDealerImplCopyWith<$Res> {
+  factory _$$SetDealerImplCopyWith(
+          _$SetDealerImpl value, $Res Function(_$SetDealerImpl) then) =
+      __$$SetDealerImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int playerId});
+}
+
+/// @nodoc
+class __$$SetDealerImplCopyWithImpl<$Res>
+    extends _$CardGameActionCopyWithImpl<$Res, _$SetDealerImpl>
+    implements _$$SetDealerImplCopyWith<$Res> {
+  __$$SetDealerImplCopyWithImpl(
+      _$SetDealerImpl _value, $Res Function(_$SetDealerImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? playerId = null,
+  }) {
+    return _then(_$SetDealerImpl(
+      playerId: null == playerId
+          ? _value.playerId
+          : playerId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetDealerImpl implements SetDealer {
+  const _$SetDealerImpl({required this.playerId});
+
+  @override
+  final int playerId;
+
+  @override
+  String toString() {
+    return 'CardGameAction.setDealer(playerId: $playerId)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetDealerImpl &&
+            (identical(other.playerId, playerId) ||
+                other.playerId == playerId));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, playerId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetDealerImplCopyWith<_$SetDealerImpl> get copyWith =>
+      __$$SetDealerImplCopyWithImpl<_$SetDealerImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() startGame,
+    required TResult Function(int playerId) setDealer,
+    required TResult Function() drawCard,
+    required TResult Function(String cardId) playCard,
+    required TResult Function() endTurn,
+    required TResult Function() showHand,
+    required TResult Function(int bid, int playerId) bidHand,
+    required TResult Function() showTable,
+    required TResult Function() showScoreboard,
+    required TResult Function() shuffle,
+    required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
+  }) {
+    return setDealer(playerId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? startGame,
+    TResult? Function(int playerId)? setDealer,
+    TResult? Function()? drawCard,
+    TResult? Function(String cardId)? playCard,
+    TResult? Function()? endTurn,
+    TResult? Function()? showHand,
+    TResult? Function(int bid, int playerId)? bidHand,
+    TResult? Function()? showTable,
+    TResult? Function()? showScoreboard,
+    TResult? Function()? shuffle,
+    TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
+  }) {
+    return setDealer?.call(playerId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? startGame,
+    TResult Function(int playerId)? setDealer,
+    TResult Function()? drawCard,
+    TResult Function(String cardId)? playCard,
+    TResult Function()? endTurn,
+    TResult Function()? showHand,
+    TResult Function(int bid, int playerId)? bidHand,
+    TResult Function()? showTable,
+    TResult Function()? showScoreboard,
+    TResult Function()? shuffle,
+    TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
+    required TResult orElse(),
+  }) {
+    if (setDealer != null) {
+      return setDealer(playerId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(StartGame value) startGame,
+    required TResult Function(SetDealer value) setDealer,
+    required TResult Function(DrawCard value) drawCard,
+    required TResult Function(PlayCard value) playCard,
+    required TResult Function(EndTurn value) endTurn,
+    required TResult Function(ShowHand value) showHand,
+    required TResult Function(BidHand value) bidHand,
+    required TResult Function(ShowTable value) showTable,
+    required TResult Function(ShowScoreboard value) showScoreboard,
+    required TResult Function(Shuffle value) shuffle,
+    required TResult Function(Deal value) deal,
+  }) {
+    return setDealer(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(StartGame value)? startGame,
+    TResult? Function(SetDealer value)? setDealer,
+    TResult? Function(DrawCard value)? drawCard,
+    TResult? Function(PlayCard value)? playCard,
+    TResult? Function(EndTurn value)? endTurn,
+    TResult? Function(ShowHand value)? showHand,
+    TResult? Function(BidHand value)? bidHand,
+    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(ShowScoreboard value)? showScoreboard,
+    TResult? Function(Shuffle value)? shuffle,
+    TResult? Function(Deal value)? deal,
+  }) {
+    return setDealer?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(StartGame value)? startGame,
+    TResult Function(SetDealer value)? setDealer,
+    TResult Function(DrawCard value)? drawCard,
+    TResult Function(PlayCard value)? playCard,
+    TResult Function(EndTurn value)? endTurn,
+    TResult Function(ShowHand value)? showHand,
+    TResult Function(BidHand value)? bidHand,
+    TResult Function(ShowTable value)? showTable,
+    TResult Function(ShowScoreboard value)? showScoreboard,
+    TResult Function(Shuffle value)? shuffle,
+    TResult Function(Deal value)? deal,
+    required TResult orElse(),
+  }) {
+    if (setDealer != null) {
+      return setDealer(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SetDealer implements CardGameAction {
+  const factory SetDealer({required final int playerId}) = _$SetDealerImpl;
+
+  int get playerId;
+  @JsonKey(ignore: true)
+  _$$SetDealerImplCopyWith<_$SetDealerImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -311,6 +511,7 @@ class _$DrawCardImpl implements DrawCard {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startGame,
+    required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
     required TResult Function(String cardId) playCard,
     required TResult Function() endTurn,
@@ -328,6 +529,7 @@ class _$DrawCardImpl implements DrawCard {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startGame,
+    TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
     TResult? Function(String cardId)? playCard,
     TResult? Function()? endTurn,
@@ -345,6 +547,7 @@ class _$DrawCardImpl implements DrawCard {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startGame,
+    TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
     TResult Function(String cardId)? playCard,
     TResult Function()? endTurn,
@@ -366,6 +569,7 @@ class _$DrawCardImpl implements DrawCard {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartGame value) startGame,
+    required TResult Function(SetDealer value) setDealer,
     required TResult Function(DrawCard value) drawCard,
     required TResult Function(PlayCard value) playCard,
     required TResult Function(EndTurn value) endTurn,
@@ -383,6 +587,7 @@ class _$DrawCardImpl implements DrawCard {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartGame value)? startGame,
+    TResult? Function(SetDealer value)? setDealer,
     TResult? Function(DrawCard value)? drawCard,
     TResult? Function(PlayCard value)? playCard,
     TResult? Function(EndTurn value)? endTurn,
@@ -400,6 +605,7 @@ class _$DrawCardImpl implements DrawCard {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartGame value)? startGame,
+    TResult Function(SetDealer value)? setDealer,
     TResult Function(DrawCard value)? drawCard,
     TResult Function(PlayCard value)? playCard,
     TResult Function(EndTurn value)? endTurn,
@@ -487,6 +693,7 @@ class _$PlayCardImpl implements PlayCard {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startGame,
+    required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
     required TResult Function(String cardId) playCard,
     required TResult Function() endTurn,
@@ -504,6 +711,7 @@ class _$PlayCardImpl implements PlayCard {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startGame,
+    TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
     TResult? Function(String cardId)? playCard,
     TResult? Function()? endTurn,
@@ -521,6 +729,7 @@ class _$PlayCardImpl implements PlayCard {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startGame,
+    TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
     TResult Function(String cardId)? playCard,
     TResult Function()? endTurn,
@@ -542,6 +751,7 @@ class _$PlayCardImpl implements PlayCard {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartGame value) startGame,
+    required TResult Function(SetDealer value) setDealer,
     required TResult Function(DrawCard value) drawCard,
     required TResult Function(PlayCard value) playCard,
     required TResult Function(EndTurn value) endTurn,
@@ -559,6 +769,7 @@ class _$PlayCardImpl implements PlayCard {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartGame value)? startGame,
+    TResult? Function(SetDealer value)? setDealer,
     TResult? Function(DrawCard value)? drawCard,
     TResult? Function(PlayCard value)? playCard,
     TResult? Function(EndTurn value)? endTurn,
@@ -576,6 +787,7 @@ class _$PlayCardImpl implements PlayCard {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartGame value)? startGame,
+    TResult Function(SetDealer value)? setDealer,
     TResult Function(DrawCard value)? drawCard,
     TResult Function(PlayCard value)? playCard,
     TResult Function(EndTurn value)? endTurn,
@@ -642,6 +854,7 @@ class _$EndTurnImpl implements EndTurn {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startGame,
+    required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
     required TResult Function(String cardId) playCard,
     required TResult Function() endTurn,
@@ -659,6 +872,7 @@ class _$EndTurnImpl implements EndTurn {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startGame,
+    TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
     TResult? Function(String cardId)? playCard,
     TResult? Function()? endTurn,
@@ -676,6 +890,7 @@ class _$EndTurnImpl implements EndTurn {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startGame,
+    TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
     TResult Function(String cardId)? playCard,
     TResult Function()? endTurn,
@@ -697,6 +912,7 @@ class _$EndTurnImpl implements EndTurn {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartGame value) startGame,
+    required TResult Function(SetDealer value) setDealer,
     required TResult Function(DrawCard value) drawCard,
     required TResult Function(PlayCard value) playCard,
     required TResult Function(EndTurn value) endTurn,
@@ -714,6 +930,7 @@ class _$EndTurnImpl implements EndTurn {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartGame value)? startGame,
+    TResult? Function(SetDealer value)? setDealer,
     TResult? Function(DrawCard value)? drawCard,
     TResult? Function(PlayCard value)? playCard,
     TResult? Function(EndTurn value)? endTurn,
@@ -731,6 +948,7 @@ class _$EndTurnImpl implements EndTurn {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartGame value)? startGame,
+    TResult Function(SetDealer value)? setDealer,
     TResult Function(DrawCard value)? drawCard,
     TResult Function(PlayCard value)? playCard,
     TResult Function(EndTurn value)? endTurn,
@@ -792,6 +1010,7 @@ class _$ShowHandImpl implements ShowHand {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startGame,
+    required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
     required TResult Function(String cardId) playCard,
     required TResult Function() endTurn,
@@ -809,6 +1028,7 @@ class _$ShowHandImpl implements ShowHand {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startGame,
+    TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
     TResult? Function(String cardId)? playCard,
     TResult? Function()? endTurn,
@@ -826,6 +1046,7 @@ class _$ShowHandImpl implements ShowHand {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startGame,
+    TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
     TResult Function(String cardId)? playCard,
     TResult Function()? endTurn,
@@ -847,6 +1068,7 @@ class _$ShowHandImpl implements ShowHand {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartGame value) startGame,
+    required TResult Function(SetDealer value) setDealer,
     required TResult Function(DrawCard value) drawCard,
     required TResult Function(PlayCard value) playCard,
     required TResult Function(EndTurn value) endTurn,
@@ -864,6 +1086,7 @@ class _$ShowHandImpl implements ShowHand {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartGame value)? startGame,
+    TResult? Function(SetDealer value)? setDealer,
     TResult? Function(DrawCard value)? drawCard,
     TResult? Function(PlayCard value)? playCard,
     TResult? Function(EndTurn value)? endTurn,
@@ -881,6 +1104,7 @@ class _$ShowHandImpl implements ShowHand {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartGame value)? startGame,
+    TResult Function(SetDealer value)? setDealer,
     TResult Function(DrawCard value)? drawCard,
     TResult Function(PlayCard value)? playCard,
     TResult Function(EndTurn value)? endTurn,
@@ -977,6 +1201,7 @@ class _$BidHandImpl implements BidHand {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startGame,
+    required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
     required TResult Function(String cardId) playCard,
     required TResult Function() endTurn,
@@ -994,6 +1219,7 @@ class _$BidHandImpl implements BidHand {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startGame,
+    TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
     TResult? Function(String cardId)? playCard,
     TResult? Function()? endTurn,
@@ -1011,6 +1237,7 @@ class _$BidHandImpl implements BidHand {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startGame,
+    TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
     TResult Function(String cardId)? playCard,
     TResult Function()? endTurn,
@@ -1032,6 +1259,7 @@ class _$BidHandImpl implements BidHand {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartGame value) startGame,
+    required TResult Function(SetDealer value) setDealer,
     required TResult Function(DrawCard value) drawCard,
     required TResult Function(PlayCard value) playCard,
     required TResult Function(EndTurn value) endTurn,
@@ -1049,6 +1277,7 @@ class _$BidHandImpl implements BidHand {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartGame value)? startGame,
+    TResult? Function(SetDealer value)? setDealer,
     TResult? Function(DrawCard value)? drawCard,
     TResult? Function(PlayCard value)? playCard,
     TResult? Function(EndTurn value)? endTurn,
@@ -1066,6 +1295,7 @@ class _$BidHandImpl implements BidHand {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartGame value)? startGame,
+    TResult Function(SetDealer value)? setDealer,
     TResult Function(DrawCard value)? drawCard,
     TResult Function(PlayCard value)? playCard,
     TResult Function(EndTurn value)? endTurn,
@@ -1134,6 +1364,7 @@ class _$ShowTableImpl implements ShowTable {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startGame,
+    required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
     required TResult Function(String cardId) playCard,
     required TResult Function() endTurn,
@@ -1151,6 +1382,7 @@ class _$ShowTableImpl implements ShowTable {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startGame,
+    TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
     TResult? Function(String cardId)? playCard,
     TResult? Function()? endTurn,
@@ -1168,6 +1400,7 @@ class _$ShowTableImpl implements ShowTable {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startGame,
+    TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
     TResult Function(String cardId)? playCard,
     TResult Function()? endTurn,
@@ -1189,6 +1422,7 @@ class _$ShowTableImpl implements ShowTable {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartGame value) startGame,
+    required TResult Function(SetDealer value) setDealer,
     required TResult Function(DrawCard value) drawCard,
     required TResult Function(PlayCard value) playCard,
     required TResult Function(EndTurn value) endTurn,
@@ -1206,6 +1440,7 @@ class _$ShowTableImpl implements ShowTable {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartGame value)? startGame,
+    TResult? Function(SetDealer value)? setDealer,
     TResult? Function(DrawCard value)? drawCard,
     TResult? Function(PlayCard value)? playCard,
     TResult? Function(EndTurn value)? endTurn,
@@ -1223,6 +1458,7 @@ class _$ShowTableImpl implements ShowTable {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartGame value)? startGame,
+    TResult Function(SetDealer value)? setDealer,
     TResult Function(DrawCard value)? drawCard,
     TResult Function(PlayCard value)? playCard,
     TResult Function(EndTurn value)? endTurn,
@@ -1284,6 +1520,7 @@ class _$ShowScoreboardImpl implements ShowScoreboard {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startGame,
+    required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
     required TResult Function(String cardId) playCard,
     required TResult Function() endTurn,
@@ -1301,6 +1538,7 @@ class _$ShowScoreboardImpl implements ShowScoreboard {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startGame,
+    TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
     TResult? Function(String cardId)? playCard,
     TResult? Function()? endTurn,
@@ -1318,6 +1556,7 @@ class _$ShowScoreboardImpl implements ShowScoreboard {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startGame,
+    TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
     TResult Function(String cardId)? playCard,
     TResult Function()? endTurn,
@@ -1339,6 +1578,7 @@ class _$ShowScoreboardImpl implements ShowScoreboard {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartGame value) startGame,
+    required TResult Function(SetDealer value) setDealer,
     required TResult Function(DrawCard value) drawCard,
     required TResult Function(PlayCard value) playCard,
     required TResult Function(EndTurn value) endTurn,
@@ -1356,6 +1596,7 @@ class _$ShowScoreboardImpl implements ShowScoreboard {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartGame value)? startGame,
+    TResult? Function(SetDealer value)? setDealer,
     TResult? Function(DrawCard value)? drawCard,
     TResult? Function(PlayCard value)? playCard,
     TResult? Function(EndTurn value)? endTurn,
@@ -1373,6 +1614,7 @@ class _$ShowScoreboardImpl implements ShowScoreboard {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartGame value)? startGame,
+    TResult Function(SetDealer value)? setDealer,
     TResult Function(DrawCard value)? drawCard,
     TResult Function(PlayCard value)? playCard,
     TResult Function(EndTurn value)? endTurn,
@@ -1434,6 +1676,7 @@ class _$ShuffleImpl implements Shuffle {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startGame,
+    required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
     required TResult Function(String cardId) playCard,
     required TResult Function() endTurn,
@@ -1451,6 +1694,7 @@ class _$ShuffleImpl implements Shuffle {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startGame,
+    TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
     TResult? Function(String cardId)? playCard,
     TResult? Function()? endTurn,
@@ -1468,6 +1712,7 @@ class _$ShuffleImpl implements Shuffle {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startGame,
+    TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
     TResult Function(String cardId)? playCard,
     TResult Function()? endTurn,
@@ -1489,6 +1734,7 @@ class _$ShuffleImpl implements Shuffle {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartGame value) startGame,
+    required TResult Function(SetDealer value) setDealer,
     required TResult Function(DrawCard value) drawCard,
     required TResult Function(PlayCard value) playCard,
     required TResult Function(EndTurn value) endTurn,
@@ -1506,6 +1752,7 @@ class _$ShuffleImpl implements Shuffle {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartGame value)? startGame,
+    TResult? Function(SetDealer value)? setDealer,
     TResult? Function(DrawCard value)? drawCard,
     TResult? Function(PlayCard value)? playCard,
     TResult? Function(EndTurn value)? endTurn,
@@ -1523,6 +1770,7 @@ class _$ShuffleImpl implements Shuffle {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartGame value)? startGame,
+    TResult Function(SetDealer value)? setDealer,
     TResult Function(DrawCard value)? drawCard,
     TResult Function(PlayCard value)? playCard,
     TResult Function(EndTurn value)? endTurn,
@@ -1638,6 +1886,7 @@ class _$DealImpl implements Deal {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() startGame,
+    required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
     required TResult Function(String cardId) playCard,
     required TResult Function() endTurn,
@@ -1655,6 +1904,7 @@ class _$DealImpl implements Deal {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? startGame,
+    TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
     TResult? Function(String cardId)? playCard,
     TResult? Function()? endTurn,
@@ -1672,6 +1922,7 @@ class _$DealImpl implements Deal {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? startGame,
+    TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
     TResult Function(String cardId)? playCard,
     TResult Function()? endTurn,
@@ -1693,6 +1944,7 @@ class _$DealImpl implements Deal {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(StartGame value) startGame,
+    required TResult Function(SetDealer value) setDealer,
     required TResult Function(DrawCard value) drawCard,
     required TResult Function(PlayCard value) playCard,
     required TResult Function(EndTurn value) endTurn,
@@ -1710,6 +1962,7 @@ class _$DealImpl implements Deal {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(StartGame value)? startGame,
+    TResult? Function(SetDealer value)? setDealer,
     TResult? Function(DrawCard value)? drawCard,
     TResult? Function(PlayCard value)? playCard,
     TResult? Function(EndTurn value)? endTurn,
@@ -1727,6 +1980,7 @@ class _$DealImpl implements Deal {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(StartGame value)? startGame,
+    TResult Function(SetDealer value)? setDealer,
     TResult Function(DrawCard value)? drawCard,
     TResult Function(PlayCard value)? playCard,
     TResult Function(EndTurn value)? endTurn,

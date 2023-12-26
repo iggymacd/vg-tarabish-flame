@@ -6,6 +6,9 @@ part 'card_game_action.freezed.dart';
 @freezed
 sealed class CardGameAction with _$CardGameAction {
   const factory CardGameAction.startGame() = StartGame;
+  const factory CardGameAction.setDealer({
+    required int playerId,
+  }) = SetDealer;
   const factory CardGameAction.drawCard() = DrawCard;
   const factory CardGameAction.playCard(String cardId) = PlayCard;
   const factory CardGameAction.endTurn() = EndTurn;

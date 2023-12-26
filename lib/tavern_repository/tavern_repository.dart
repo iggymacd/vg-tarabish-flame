@@ -159,20 +159,21 @@ class TavernRepository {
       CardGame.tarabish(
         gameId: 'demo',
         actions: <CardGameAction>[
+          SetDealer(playerId: 0),
           Shuffle(),
-          Deal(cardIds: getNext(reversed, 3, 0), playerId: 1),
-          Deal(cardIds: getNext(reversed, 3, 1), playerId: 2),
-          Deal(cardIds: getNext(reversed, 3, 2), playerId: 3),
-          Deal(cardIds: getNext(reversed, 3, 3), playerId: 0, flip: true),
+          Deal(cardIds: getNextSet(reversed, 3, 0), playerId: 1),
+          Deal(cardIds: getNextSet(reversed, 3, 1), playerId: 2),
+          Deal(cardIds: getNextSet(reversed, 3, 2), playerId: 3),
+          Deal(cardIds: getNextSet(reversed, 3, 3), playerId: 0, flip: true),
           BidHand(playerId: 0, bid: Suit.SPADES),
-          Deal(cardIds: getNext(reversed, 3, 4), playerId: 1),
-          Deal(cardIds: getNext(reversed, 3, 5), playerId: 2),
-          Deal(cardIds: getNext(reversed, 3, 6), playerId: 3),
-          Deal(cardIds: getNext(reversed, 3, 7), playerId: 0, flip: true),
-          Deal(cardIds: getNext(reversed, 3, 8), playerId: 1),
-          Deal(cardIds: getNext(reversed, 3, 9), playerId: 2),
-          Deal(cardIds: getNext(reversed, 3, 10), playerId: 3),
-          Deal(cardIds: getNext(reversed, 3, 11), playerId: 0, flip: true),
+          Deal(cardIds: getNextSet(reversed, 3, 4), playerId: 1),
+          Deal(cardIds: getNextSet(reversed, 3, 5), playerId: 2),
+          Deal(cardIds: getNextSet(reversed, 3, 6), playerId: 3),
+          Deal(cardIds: getNextSet(reversed, 3, 7), playerId: 0, flip: true),
+          Deal(cardIds: getNextSet(reversed, 3, 8), playerId: 1),
+          Deal(cardIds: getNextSet(reversed, 3, 9), playerId: 2),
+          Deal(cardIds: getNextSet(reversed, 3, 10), playerId: 3),
+          Deal(cardIds: getNextSet(reversed, 3, 11), playerId: 0, flip: true),
         ],
       ),
     );
@@ -226,7 +227,7 @@ class TavernRepository {
   }
 
   // getNext(Iterable<int> reversed, int i, int j) {
-  List<int> getNext(List<int> inputList, int count, int multiple) {
+  List<int> getNextSet(List<int> inputList, int count, int multiple) {
     if (multiple < 0) {
       throw ArgumentError("Multiple should be a non-negative integer.");
     }
