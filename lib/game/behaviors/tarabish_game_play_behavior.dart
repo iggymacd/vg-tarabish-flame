@@ -4,21 +4,25 @@ import 'package:flame/components.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/text.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
+import 'package:flutter/material.dart' as material;
 import 'package:vg_tarabish_flame/bloc/tavern_bloc.dart';
 import 'package:vg_tarabish_flame/game/components/flat_button.dart';
 import 'package:vg_tarabish_flame/game/components/player_pile.dart';
+import 'package:vg_tarabish_flame/game/components/trick_pile.dart';
+import 'package:vg_tarabish_flame/game/components/winning_trick_pile.dart';
 import 'package:vg_tarabish_flame/game/entity/card/card.dart';
 import 'package:vg_tarabish_flame/game/entity/game/view/card_game_action.dart';
 import 'package:vg_tarabish_flame/game/tavern_game.dart';
 import 'package:vg_tarabish_flame/game/tavern_world.dart';
 import 'package:vg_tarabish_flame/start_game/bloc/start_game_bloc.dart';
-import 'package:flutter/material.dart' as material;
 
 class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
   // final List<PlayerPile> playerPiles = [];
   int counter = 0;
+  StreamSubscription<TavernState>? streamSubscription;
   @override
   Future<void> onLoad() async {
+    print(' onload called for TarabishGamePlayBehavior');
     super.onLoad();
     parent.currentCardGameAction = -1;
     await Flame.images.load('tarabish-sprites.png');
@@ -28,16 +32,7 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
     //     Vector2(parent.cardSpaceWidth + parent.cardGap, parent.topGap);
     parent.tableAreaSize = Vector2(4 * parent.cardSpaceHeight + parent.topGap,
         4 * parent.cardSpaceHeight + parent.topGap);
-    // for (var i = 0; i < 4; i++) {
-    //   parent.foundations.add(
-    //     FoundationPile(
-    //       i,
-    //       checkWin,
-    //       position: Vector2((i + 3) * parent.cardSpaceWidth + parent.cardGap,
-    //           2 * parent.cardSpaceHeight + parent.topGap),
-    //     ),
-    //   );
-    // }
+
     for (var i = 0; i < 4; i++) {
       parent.playerPiles.add(
         PlayerPile(
@@ -57,25 +52,61 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
             )),
       );
     }
+    for (var i = 0; i < 1; i++) {
+      parent.trickPiles.add(TrickPile(
+          position: Vector2(
+              parent.tableAreaSize.x / 2 - parent.cardSpaceWidth / 2,
+              parent.tableAreaSize.y / 2 - parent.cardSpaceHeight / 2),
+          message: TextComponent(
+            text: 'Trick Pile',
+            size: Vector2.all(TavernGames.cardWidth), //.bind(context),
+            textRenderer: TextPaint(
+              style: const TextStyle(
+                color: material.Colors.white,
+                fontSize: 200,
+              ),
+            ),
+            // anchor: Anchor.center,
+            priority: 1,
+            position: getMessagePosition(2),
+          )));
+    }
 
+    for (var i = 0; i < 2; i++) {
+      parent.winningTrickPiles.add(WinningTrickPile(
+          position: i == 0
+              ? Vector2(parent.cardGap,
+                  parent.tableAreaSize.y - parent.cardSpaceHeight)
+              : Vector2(parent.tableAreaSize.x - parent.cardSpaceWidth,
+                  parent.topGap),
+          message: TextComponent(
+            text: i == 0 ? 'N/S Tricks' : 'E/W Tricks',
+            size: Vector2.all(TavernGames.cardWidth), //.bind(context),
+            textRenderer: TextPaint(
+              style: const TextStyle(
+                color: material.Colors.white,
+                fontSize: 200,
+              ),
+            ),
+            // anchor: Anchor.center,
+            priority: 1,
+            position: getMessagePosition(i * 2),
+          )));
+    }
     // for (var rank = 1; rank <= 13; rank++) {
     for (var suit = 0; suit < 4; suit++) {
-      // if (rank > 1 && rank < 6) {
-      //   continue;
-      // }
-      // for (var suit = 0; suit < 4; suit++) {
       for (var rank = 1; rank <= 13; rank++) {
-        if (rank > 1 && rank < 6) {
-          continue;
-        }
         final card = Card(
           rank,
           suit,
         );
-        card.position = parent.stock.position;
-        // parent.stock.add(card);
-        parent.stock.acquireCard(card);
+        card.position = Vector2(0, -TavernGames.cardSpaceHeight);
+
         parent.cards.add(card);
+        if (!(rank > 1 && rank < 6)) {
+          card.position = parent.stock.position;
+          parent.stock.acquireCard(card);
+        }
       }
     }
     // parent.cards.indexed.forEach((element) => print('element is $element'));
@@ -83,17 +114,23 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
     // add(parent.waste);
     // await addAll(parent.foundations);
     await addAll(parent.playerPiles);
+    await addAll(parent.trickPiles);
+    await addAll(parent.winningTrickPiles);
+    print('cards are ${parent.cards}');
     await addAll(parent.cards);
 
     // Vector2(7 * parent.cardSpaceWidth + parent.cardGap,
     //     4 * parent.cardSpaceHeight + parent.topGap);
+    final gameLeftX = TavernGames.cardGap;
     final gameMidX = parent.tableAreaSize.x / 2;
 
-    addButton('New deal', gameMidX, Action.newDeal);
-    addButton('Same deal', gameMidX + parent.cardSpaceWidth, Action.sameDeal);
-    addButton('Demo', gameMidX + 2 * parent.cardSpaceWidth, Action.demo);
-    addButton('Have fun', gameMidX + 3 * parent.cardSpaceWidth, Action.haveFun);
-    addButton('New Game', gameMidX + 4 * parent.cardSpaceWidth, Action.newGame);
+    addButton('New deal', gameLeftX, Action.newDeal);
+    addButton('Same deal', gameLeftX + parent.cardSpaceWidth, Action.sameDeal);
+    addButton('Demo', gameLeftX + 2 * parent.cardSpaceWidth, Action.demo);
+    addButton(
+        'Have fun', gameLeftX + 3 * parent.cardSpaceWidth, Action.haveFun);
+    addButton(
+        'New Game', gameLeftX + 4 * parent.cardSpaceWidth, Action.newGame);
 
     final camera = parent.game.camera;
     camera.viewfinder.visibleGameSize = parent.tableAreaSize;
@@ -133,7 +170,7 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
       case 2:
         return Vector2(0, parent.cardSpaceHeight);
       case 3:
-        return Vector2(0, -(parent.cardGap * 2));
+        return Vector2(0, parent.cardSpaceHeight);
       default:
         return Vector2(0, -(parent.cardGap * 2));
     }
@@ -147,8 +184,14 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
 
   ///
   void play() {
-    parent.tavernBloc.stream.listen((state) async {
-      print('I am listening for TavernStates got $state');
+    print('play is called....................................................');
+    if (streamSubscription != null) {
+      print('cancelling subscription');
+      streamSubscription?.cancel();
+    }
+
+    streamSubscription = parent.tavernBloc.stream.listen((state) async {
+      print('I am listening for TavernStates...');
       switch (state) {
         case TavernState.initial:
           print('Tavern State is initial...');
@@ -158,21 +201,8 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
 
           ///
           print(
-              "CardGame state is updated - handle state change - card game is ${state.cardGame}");
+              "CardGame state is updated - handle state change - card game is ?"); //${state.cardGame}");
           final cardGameState = state.cardGame;
-          // parent.currentCardGameView =
-          //     CardGameView(cardGameState, commands: List.empty());
-          // Compare the currentCardGameView to see what the current command
-          // index is and check if it is 1 less than the last action on the
-          // cardGameState from the repository. If it is then we just have to
-          // create a new CardGameCommand and execute it. Otherwise, find the
-          // appropriate action from cardGame that matches the
-          // currentCommandIndex, and create a new command for each and execute
-          //  until we get to the end. Then we can consider our CardGameView as
-          //  synchronized with the cardGame state.
-          // print('parent is $parent :: cardGameState is $cardGameState');
-          // print(
-          //     'parent.currentCardGameAction is ${parent.currentCardGameAction} :: cardGameState.lastActionIndex is ${cardGameState.lastActionIndex}');
           if (parent.currentCardGameAction ==
               cardGameState.lastActionIndex - 1) {
             print('in if condition');
@@ -182,39 +212,18 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
             // command.execute(parent);
           } else if (parent.currentCardGameAction <
               cardGameState.lastActionIndex - 1) {
-            print('in else if condition');
+            print('replaying all actions...................................');
             await Future.forEach(
                 cardGameState.actions.getRange(
                   parent.currentCardGameAction + 1,
                   cardGameState.actions.length,
                 ),
                 execute);
-            // cardGameState.actions
-            //     .getRange(
-            //       parent.currentCardGameAction + 1,
-            //       cardGameState.actions.length,
-            //     )
-            //     .forEach(execute);
-            // Find the appropriate action from cardGame that matches the currentCommandIndex.
-            // final action = cardGame.actions[cardGameView.currentCommand];
-
-            // // Create a new command for each action and execute until we get to the end.
-            // for (final action in action) {
-            //   final command = CardGameCommand();
-            //   command.execute(cardGameView);
-            // }
           }
 
           // Consider our CardGameView as synchronized with the cardGame state.
           parent.currentCardGameAction = cardGameState.lastActionIndex;
-        // final currentStep = cardGameState.cardGame.currentStep;
-        // final lastStep = parent.currentCardGame.lastStep;
-        // if (currentStep > lastStep) {
-        //   // We need to replay the steps from lastStep to currentStep.
-        //   for (var i = lastStep + 1; i <= currentStep; i++) {
-        //     // TODO: implement UI update for step i.
-        //   }
-        // }
+
         default:
           print('no match');
       }
@@ -234,101 +243,76 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
   Future<void> execute(CardGameAction? lastAction) async {
     switch (lastAction) {
       case Shuffle shuffleAction:
-        _handleShuffle(shuffleAction);
+        return await _handleShuffle(shuffleAction);
       case final Deal dealAction:
-        await _handleDeal(dealAction);
-      // case  Draw drawAction:
-      //   _handleDraw(drawAction);
-      // case Discard discardAction:
-      //   _handleDiscard(discardAction);
-      // case Play playAction:
-      //   _handlePlay(playAction);
+        return await _handleDeal(dealAction);
+      case PlayCard playCardAction:
+        return await _handlePlayCard(playCardAction);
+      case WinTrick winTrickAction:
+        return await _handleWinTrick(winTrickAction);
       default:
-        print("default");
+        print("default for $lastAction");
+        return Future.value();
     }
   }
-
-  // void _handleDeal(Deal dealAction) {
-  //   print('deal');
-  // }
 
   Future<void> _handleDeal(Deal dealAction) async {
     // print('draw for ${}');
     final playerPosition = dealAction.playerId;
     final cardsToDeal = dealAction.cardIds;
     final flipCards = dealAction.flip;
-    // final counter = dealAction.counter;
-    // var targetB = parent.playerPiles[playerPosition!];
-    // var cardToDeal;
-    int counter = 0;
     print('deal for $playerPosition of $cardsToDeal');
 
     for (final cardId in cardsToDeal) {
-      Card cardToDeal = parent.cards[cardId - 1];
+      Card cardToDeal = parent.cards[cardId];
       if (flipCards) {
         cardToDeal.flip();
       }
-      await doMove(cardToDeal, playerPosition, counter);
+      // await doMove(cardToDeal, playerPosition);
+      cardToDeal.doMove(
+        parent.playerPiles[playerPosition].position,
+        speed: 10,
+        start: counter * 0.55, //nMovingCards * 0.15,
+        startPriority: 100 + counter++, // + nMovingCards,
+        onComplete: () {
+          parent.playerPiles[playerPosition].acquireCard(cardToDeal);
+          // completer.complete();
+          // return c.future;
+          // nMovingCards--;
+          // if (nMovingCards == 0)
+        },
+      );
     }
   }
 
-  Future<void> doMove(Card cardToDeal, int playerPosition, int counter) async {
-    // final c = Completer();
-    Completer<void> completer = Completer<void>();
-    cardToDeal.doMove(
-      parent.playerPiles[playerPosition].position,
-      speed: 10,
-      start: counter * 0.55, //nMovingCards * 0.15,
-      startPriority: 100 + counter++, // + nMovingCards,
-      onComplete: () {
-        parent.playerPiles[playerPosition].acquireCard(cardToDeal);
-        completer.complete();
-        // return c.future;
-        // nMovingCards--;
-        // if (nMovingCards == 0)
-      },
-    );
-    await completer.future;
-  }
-
-  // void _handleDiscard(Discard discardAction) {
-  //   print('discardAction');
+  // Future<void> doMove(Card cardToDeal, int playerPosition) async {
+  //   // final c = Completer();
+  //   int counter = 0;
+  //   Completer<void> completer = Completer<void>();
+  // cardToDeal.doMove(
+  //   parent.playerPiles[playerPosition].position,
+  //   speed: 10,
+  //   start: counter * 0.55, //nMovingCards * 0.15,
+  //   startPriority: 100 + counter++, // + nMovingCards,
+  //   onComplete: () {
+  //     // parent.playerPiles[playerPosition].acquireCard(cardToDeal);
+  //     completer.complete();
+  //     // return c.future;
+  //     // nMovingCards--;
+  //     // if (nMovingCards == 0)
+  //   },
+  // );
+  //   await completer.future;
   // }
 
-  // void _handlePlay(Play playAction) {
-  //   print('play');
-  // }
-
-  void _handleShuffle(Shuffle shuffleAction) {
+  Future<void> _handleShuffle(Shuffle shuffleAction) async {
     print('shuffle');
     // TODO: implement shuffle
-    final cards = parent.cards;
+    final cards = await parent.cards;
     // var nMovingCards = 0;
     // var cardToDeal =
   }
 
-  // void dealCard(
-  //     List<Card> cards, int cardToDeal, int nMovingCards, TavernWorld parent) {
-  //   final card = cards[cardToDeal--];
-  //   card.doMove(
-  //     parent.tableauPiles[nMovingCards].position,
-  //     speed: 15.0,
-  //     start: nMovingCards * 0.15,
-  //     startPriority: 100 + nMovingCards,
-  //     onComplete: () {
-  //       parent.tableauPiles[nMovingCards].acquireCard(card);
-  //       nMovingCards--;
-  //       if (nMovingCards == 0) {
-  //         var delayFactor = 0;
-  //         for (final tableauPile in parent.tableauPiles) {
-  //           delayFactor++;
-  //           tableauPile.flipTopCard(start: delayFactor * 0.15);
-  //         }
-  //       }
-  //     },
-  //   );
-  //   nMovingCards++;
-  // }
   void addButton(String label, double buttonX, Action action) {
     final button = FlatButton(
       label,
@@ -364,6 +348,119 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
     if (nComplete == parent.foundations.length) {
       letsCelebrate();
     }
+  }
+
+  Vector2 getPlayerPosition(int i) {
+    switch (i) {
+      case 0:
+        return Vector2(parent.tableAreaSize.x / 2 - parent.cardSpaceWidth / 2,
+            parent.tableAreaSize.y - parent.cardSpaceHeight);
+      case 1:
+        return Vector2(parent.cardGap,
+            parent.tableAreaSize.y / 2 - parent.cardSpaceHeight / 2);
+      case 2:
+        return Vector2(parent.tableAreaSize.x / 2 - parent.cardSpaceWidth / 2,
+            parent.topGap);
+      case 3:
+        return Vector2(parent.tableAreaSize.x - parent.cardSpaceHeight,
+            parent.tableAreaSize.y / 2 - parent.cardSpaceHeight / 2);
+      default:
+        return Vector2(parent.tableAreaSize.x / 2 - parent.cardSpaceWidth / 2,
+            parent.tableAreaSize.y - parent.cardSpaceHeight);
+    }
+  }
+
+  Future<void> _handlePlayCard(PlayCard playCardAction) async {
+    // final card = playCardAction.cardId;
+    int playerPosition = playCardAction.playerId;
+    // final cardToPlay = parent.cards[playCardAction.cardId];
+    // final playerPosition = getPlayerPosition(player);
+    await doPlayCard(playCardAction.cardId, playerPosition);
+    // cardToPlay.doMove(
+    //   playerPosition,
+    //   speed: 15.0,
+    // start: 0.0,
+    // ]
+  }
+
+  Future<void> doPlayCard(int cardId, int playerPosition) async {
+    // final c = Completer();
+    // PlayerPile pp = cardToPlay.pile as PlayerPile;
+    // final cardToPlay = parent.cards[cardId];
+    // final targetPilePosition = parent.trickPiles[0].position;
+    final completer = Completer<void>();
+    // targetPile.acquireCard(cardToPlay);
+    parent.cards[cardId].doMove(
+      parent.trickPiles[0].position,
+      speed: 10,
+      start: 0.55, //counter * 0.55, //nMovingCards * 0.15,
+      startPriority: 100, // + counter++, // + nMovingCards,
+      onComplete: () {
+        // print('runtime type is ${cardToPlay.pile.runtimeType}');
+        // pp.layOutCards();
+        // parent.trickPiles[0].acquireCard(parent.cards[cardId]);
+        // pp.layOutCards();
+        completer.complete();
+
+        // return c.future;
+        // nMovingCards--;
+        // if (nMovingCards == 0)
+      },
+    );
+    // pp.layOutCards();
+    return completer.future;
+  }
+
+  Future<void> _handleWinTrick(WinTrick winTrickAction) async {
+    // final wonCards =
+    //     winTrickAction.cardIds.map<Card>((e) => parent.cards[e]).toList();
+    // final card = winTrickAction.cardId;
+    int playerPosition = winTrickAction.playerId;
+    await Future.forEach(
+        winTrickAction.cardIds,
+        // (cardId) => doWinTrick(parent.cards[cardId], playerPosition));
+        (cardId) => doWinTrick(cardId, playerPosition));
+    // winTrickAction.cardIds.forEach((element) {
+    //   doWinTrick(parent.cards[element], playerPosition);
+    // });
+  }
+
+  // void doWinTrick(int playerPosition) {
+
+  // }
+  Future<void> doWinTrick(int cardId, int playerPosition) async {
+    // final c = Completer();
+    // PlayerPile pp = cardsWon.pile as PlayerPile;
+    // final card = parent.cards[cardId];
+    // final targetPile = parent.trickPiles[0];
+    final winningTeamPosition = playerPosition % 2 == 0 ? 0 : 1;
+    // parent.winningTrickPiles[winningTeamPosition].acquireCard(cardsWon[0]);
+    Completer<void> completer = Completer<void>();
+    // for (final card in cardsWon) {
+    // }
+    parent.cards[cardId].doMove(
+      parent.winningTrickPiles[winningTeamPosition].position,
+      speed: 10,
+      start: 0.0, //0.55, //counter * 0.55, //nMovingCards * 0.15,
+      startPriority: 100, // + counter++, // + nMovingCards,
+      onComplete: () {
+        // print('runtime type is ${cardToPlay.pile.runtimeType}');
+        // pp.layOutCards();
+        // parent.winningTrickPiles[winningTeamPosition]
+        //     .acquireCard(parent.cards[cardId]);
+        completer.complete();
+        // targetPile.acquireCard(cardToPlay);
+        // pp.layOutCards();
+
+        // return c.future;
+        // nMovingCards--;
+        // if (nMovingCards == 0)
+      },
+    );
+    // }
+    // completer.complete();
+    // pp.layOutCards();
+    return completer.future;
   }
 
   void letsCelebrate({int phase = 1}) {
@@ -453,26 +550,6 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
         offScreenPosition = corner[side] + topLeft - direction[side] * space;
         space = length[side] + space;
       }
-    }
-  }
-
-  Vector2 getPlayerPosition(int i) {
-    switch (i) {
-      case 0:
-        return Vector2(parent.tableAreaSize.x / 2 - parent.cardSpaceWidth / 2,
-            parent.tableAreaSize.y - parent.cardSpaceHeight);
-      case 1:
-        return Vector2(parent.cardGap,
-            parent.tableAreaSize.y / 2 - parent.cardSpaceHeight / 2);
-      case 2:
-        return Vector2(parent.tableAreaSize.x / 2 - parent.cardSpaceWidth / 2,
-            parent.topGap);
-      case 3:
-        return Vector2(parent.tableAreaSize.x - parent.cardSpaceWidth,
-            parent.tableAreaSize.y / 2 - parent.cardSpaceHeight / 2);
-      default:
-        return Vector2(parent.tableAreaSize.x / 2 - parent.cardSpaceWidth / 2,
-            parent.tableAreaSize.y - parent.cardSpaceHeight);
     }
   }
 }

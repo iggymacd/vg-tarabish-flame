@@ -10,14 +10,20 @@ sealed class CardGameAction with _$CardGameAction {
     required int playerId,
   }) = SetDealer;
   const factory CardGameAction.drawCard() = DrawCard;
-  const factory CardGameAction.playCard(String cardId) = PlayCard;
+  const factory CardGameAction.playCard({
+    required int cardId,
+    required int playerId,
+  }) = PlayCard;
   const factory CardGameAction.endTurn() = EndTurn;
   const factory CardGameAction.showHand() = ShowHand;
   const factory CardGameAction.bidHand({
     required int bid,
     required int playerId,
   }) = BidHand;
-  const factory CardGameAction.showTable() = ShowTable;
+  const factory CardGameAction.winTrick({
+    required List<int> cardIds,
+    required int playerId,
+  }) = WinTrick;
   const factory CardGameAction.showScoreboard() = ShowScoreboard;
   const factory CardGameAction.shuffle() = Shuffle;
   const factory CardGameAction.deal({

@@ -4,7 +4,7 @@ part of 'tavern_bloc.dart';
 sealed class TavernState with _$TavernState {
   const factory TavernState.initial() = TavernStateInitial;
   const factory TavernState.currentGameStateUpdated({
-    required CardGame cardGame,
+    required CardGameView cardGame,
   }) = CurrentGameStateUpdated;
   const factory TavernState.tavernGamesOrMembersUpdated({
     @Default(<TavernMember>[]) List<TavernMember> tavernMembers,

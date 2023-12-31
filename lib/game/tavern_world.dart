@@ -12,7 +12,9 @@ import 'package:vg_tarabish_flame/game/components/foundation_pile.dart';
 import 'package:vg_tarabish_flame/game/components/player_pile.dart';
 import 'package:vg_tarabish_flame/game/components/stock_pile.dart';
 import 'package:vg_tarabish_flame/game/components/tableau_pile.dart';
+import 'package:vg_tarabish_flame/game/components/trick_pile.dart';
 import 'package:vg_tarabish_flame/game/components/waste_pile.dart';
+import 'package:vg_tarabish_flame/game/components/winning_trick_pile.dart';
 // import 'package:vg_tarabish_flame/game/entity/card/behaviors/behaviors.dart.old';
 // import 'package:vg_tarabish_flame/game/entity/card/behaviors/dragging_behavior.dart.old';
 // import 'package:vg_tarabish_flame/game/entity/card/behaviors/tapping_behavior.dart';
@@ -39,6 +41,10 @@ class TavernWorld extends World
   final List<FoundationPile> foundations = [];
   final List<TableauPile> tableauPiles = [];
   final List<PlayerPile> playerPiles = [];
+  final List<TrickPile> trickPiles = [];
+  final List<WinningTrickPile> winningTrickPiles = [];
+  // final List<TrickPile> trickPiles = [ = TrickPile(position: Vector2(0.0, 0.0),message:);
+  // final List<Card> cards =');
   final List<Card> cards = [];
   late Vector2 tableAreaSize;
 

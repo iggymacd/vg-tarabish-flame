@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$CardGame {
+mixin _$CardGameView {
   String get gameId => throw _privateConstructorUsedError;
   List<CardGameAction> get actions => throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -53,22 +53,23 @@ mixin _$CardGame {
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $CardGameCopyWith<CardGame> get copyWith =>
+  $CardGameViewCopyWith<CardGameView> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $CardGameCopyWith<$Res> {
-  factory $CardGameCopyWith(CardGame value, $Res Function(CardGame) then) =
-      _$CardGameCopyWithImpl<$Res, CardGame>;
+abstract class $CardGameViewCopyWith<$Res> {
+  factory $CardGameViewCopyWith(
+          CardGameView value, $Res Function(CardGameView) then) =
+      _$CardGameViewCopyWithImpl<$Res, CardGameView>;
   @useResult
   $Res call({String gameId, List<CardGameAction> actions});
 }
 
 /// @nodoc
-class _$CardGameCopyWithImpl<$Res, $Val extends CardGame>
-    implements $CardGameCopyWith<$Res> {
-  _$CardGameCopyWithImpl(this._value, this._then);
+class _$CardGameViewCopyWithImpl<$Res, $Val extends CardGameView>
+    implements $CardGameViewCopyWith<$Res> {
+  _$CardGameViewCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -96,7 +97,7 @@ class _$CardGameCopyWithImpl<$Res, $Val extends CardGame>
 
 /// @nodoc
 abstract class _$$TarabishGameImplCopyWith<$Res>
-    implements $CardGameCopyWith<$Res> {
+    implements $CardGameViewCopyWith<$Res> {
   factory _$$TarabishGameImplCopyWith(
           _$TarabishGameImpl value, $Res Function(_$TarabishGameImpl) then) =
       __$$TarabishGameImplCopyWithImpl<$Res>;
@@ -107,7 +108,7 @@ abstract class _$$TarabishGameImplCopyWith<$Res>
 
 /// @nodoc
 class __$$TarabishGameImplCopyWithImpl<$Res>
-    extends _$CardGameCopyWithImpl<$Res, _$TarabishGameImpl>
+    extends _$CardGameViewCopyWithImpl<$Res, _$TarabishGameImpl>
     implements _$$TarabishGameImplCopyWith<$Res> {
   __$$TarabishGameImplCopyWithImpl(
       _$TarabishGameImpl _value, $Res Function(_$TarabishGameImpl) _then)
@@ -152,7 +153,7 @@ class _$TarabishGameImpl extends _TarabishGame {
 
   @override
   String toString() {
-    return 'CardGame.tarabish(gameId: $gameId, actions: $actions)';
+    return 'CardGameView.tarabish(gameId: $gameId, actions: $actions)';
   }
 
   @override
@@ -232,7 +233,7 @@ class _$TarabishGameImpl extends _TarabishGame {
   }
 }
 
-abstract class _TarabishGame extends CardGame {
+abstract class _TarabishGame extends CardGameView {
   const factory _TarabishGame(
       {required final String gameId,
       required final List<CardGameAction> actions}) = _$TarabishGameImpl;

@@ -66,8 +66,8 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
       _tavernMembersStreamSubscription;
 
 // Map to store game streams based on their IDs
-  final Map<String, Stream<CardGame>> _gameStreams =
-      <String, Stream<CardGame>>{};
+  final Map<String, Stream<CardGameView>> _gameStreams =
+      <String, Stream<CardGameView>>{};
 
   // ID of the currently viewed game
   String? _currentGameId;
@@ -132,10 +132,10 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
 
     // Switch to the newly created game
     _currentGameId = gameId;
-    _gameStreams[gameId]!.listen((CardGame game) {
+    _gameStreams[gameId]!.listen((CardGameView game) {
       // Do something with the updated game state
       // You may emit a new state to the UI if needed
-      print('Received updated game state for game $gameId: $game');
+      // print('Received updated game state for game $gameId: $game');
       emit(CurrentGameStateUpdated(cardGame: game));
     });
   }
@@ -148,7 +148,7 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
     if (_gameStreams.containsKey(gameId)) {
       // Switch to the selected game
       _currentGameId = gameId;
-      _gameStreams[gameId]!.listen((CardGame game) {
+      _gameStreams[gameId]!.listen((CardGameView game) {
         // Do something with the updated game state
         // You may emit a new state to the UI if needed
         print('Received updated game state for game $gameId: $game');
@@ -161,7 +161,7 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
 
       // Switch to the selected game (whether it's a new stream or not)
       _currentGameId = gameId;
-      _gameStreams[gameId]!.listen((CardGame game) {
+      _gameStreams[gameId]!.listen((CardGameView game) {
         // Do something with the updated game state
         // You may emit a new state to the UI if needed
         print('Received updated game state for game $gameId: $game');

@@ -18,7 +18,7 @@ class TavernRepository {
     // Initialize the stream controllers in the constructor
     _tavernGamesController = StreamController<List<TavernGame>>.broadcast();
     _tavernMembersController = StreamController<List<TavernMember>>.broadcast();
-    _currentGamesInProgressMap = <String, BehaviorSubject<CardGame>>{};
+    _currentGamesInProgressMap = <String, BehaviorSubject<CardGameView>>{};
 
     // Fetch initial data and add it to the streams
     fetchTavernGames().then((tavernGames) {
@@ -32,7 +32,7 @@ class TavernRepository {
 
   late StreamController<List<TavernGame>> _tavernGamesController;
   late StreamController<List<TavernMember>> _tavernMembersController;
-  late Map<String, BehaviorSubject<CardGame>> _currentGamesInProgressMap;
+  late Map<String, BehaviorSubject<CardGameView>> _currentGamesInProgressMap;
 
   /// Stream of [TavernGame]s.
   Stream<List<TavernGame>> get tavernGamesStream =>
@@ -75,10 +75,10 @@ class TavernRepository {
   }
 
 /**
- * Stream of [CardGame] state changes - if gameId is not found in 
+ * Stream of [CardGameView] state changes - if gameId is not found in 
  * _currentGamesInProgressMap, then throw an error
  */
-  Stream<CardGame> listenCardGame({required String gameId}) {
+  Stream<CardGameView> listenCardGame({required String gameId}) {
     if (_currentGamesInProgressMap.containsKey(gameId)) {
       return _currentGamesInProgressMap[gameId]!.stream;
     } else {
@@ -104,7 +104,7 @@ class TavernRepository {
       //   Deal(cardIds: [1, 2, 3], playerId: 1),
       //   Deal(cardIds: [4, 5, 6], playerId: 2),
       //   Deal(cardIds: [7, 8, 9], playerId: 3),
-      //   Deal(cardIds: [28, 11, 22], playerId: 0, flip: true),
+      //   Deal(cardIds: [28, 11, 22], playerId: 0, flip: defaultFlip),
       // ]))
       //   ..stream;
     }
@@ -117,15 +117,15 @@ class TavernRepository {
     }
     _currentGamesInProgressMap.putIfAbsent(
       uniqueId,
-      () => BehaviorSubject<CardGame>.seeded(
-        CardGame.tarabish(
+      () => BehaviorSubject<CardGameView>.seeded(
+        CardGameView.tarabish(
           gameId: uniqueId,
           actions: <CardGameAction>[
             // Shuffle(),
             // const Deal(cardIds: [1, 2, 3], playerId: 1),
             // const Deal(cardIds: [4, 5, 6], playerId: 2),
             // const Deal(cardIds: [7, 8, 9], playerId: 3),
-            // const Deal(cardIds: [28, 11, 22], playerId: 0, flip: true),
+            // const Deal(cardIds: [28, 11, 22], playerId: 0, flip: defaultFlip),
           ],
         ),
       ),
@@ -133,7 +133,7 @@ class TavernRepository {
     return uniqueId;
   }
 
-  BehaviorSubject<CardGame> generateDemo({String gameType = 'solitaire'}) {
+  BehaviorSubject<CardGameView> generateDemo({String gameType = 'solitaire'}) {
     /// use a switch to determine the type of game
     switch (gameType) {
       case 'solitaire':
@@ -145,7 +145,7 @@ class TavernRepository {
     }
   }
 
-  BehaviorSubject<CardGame> generateDemoTarabish() {
+  BehaviorSubject<CardGameView> generateDemoTarabish() {
     // tarabish game has 36 cards, so 9 cards per player
     // create list of 36 integers and shuffle with a constant seed to ensure
     // the same sequence is generated each time
@@ -154,34 +154,84 @@ class TavernRepository {
     integers.shuffle(Random(1));
     print('    shuffled integers: $integers');
     final reversed = integers.reversed.toList();
-
-    return BehaviorSubject<CardGame>.seeded(
-      CardGame.tarabish(
+    final defaultFlip = true;
+    return BehaviorSubject<CardGameView>.seeded(
+      CardGameView.tarabish(
         gameId: 'demo',
         actions: <CardGameAction>[
           SetDealer(playerId: 0),
           Shuffle(),
-          Deal(cardIds: getNextSet(reversed, 3, 0), playerId: 1),
-          Deal(cardIds: getNextSet(reversed, 3, 1), playerId: 2),
-          Deal(cardIds: getNextSet(reversed, 3, 2), playerId: 3),
+          Deal(
+              cardIds: getNextSet(reversed, 3, 0),
+              playerId: 1,
+              flip: defaultFlip),
+          Deal(
+              cardIds: getNextSet(reversed, 3, 1),
+              playerId: 2,
+              flip: defaultFlip),
+          Deal(
+              cardIds: getNextSet(reversed, 3, 2),
+              playerId: 3,
+              flip: defaultFlip),
           Deal(cardIds: getNextSet(reversed, 3, 3), playerId: 0, flip: true),
-          BidHand(playerId: 0, bid: Suit.SPADES),
-          Deal(cardIds: getNextSet(reversed, 3, 4), playerId: 1),
-          Deal(cardIds: getNextSet(reversed, 3, 5), playerId: 2),
-          Deal(cardIds: getNextSet(reversed, 3, 6), playerId: 3),
+          Deal(
+              cardIds: getNextSet(reversed, 3, 4),
+              playerId: 1,
+              flip: defaultFlip),
+          Deal(
+              cardIds: getNextSet(reversed, 3, 5),
+              playerId: 2,
+              flip: defaultFlip),
+          Deal(
+              cardIds: getNextSet(reversed, 3, 6),
+              playerId: 3,
+              flip: defaultFlip),
           Deal(cardIds: getNextSet(reversed, 3, 7), playerId: 0, flip: true),
-          Deal(cardIds: getNextSet(reversed, 3, 8), playerId: 1),
-          Deal(cardIds: getNextSet(reversed, 3, 9), playerId: 2),
-          Deal(cardIds: getNextSet(reversed, 3, 10), playerId: 3),
+          BidHand(playerId: 1, bid: Suit.DIAMONDS),
+          Deal(
+              cardIds: getNextSet(reversed, 3, 8),
+              playerId: 1,
+              flip: defaultFlip),
+          Deal(
+              cardIds: getNextSet(reversed, 3, 9),
+              playerId: 2,
+              flip: defaultFlip),
+          Deal(
+              cardIds: getNextSet(reversed, 3, 10),
+              playerId: 3,
+              flip: defaultFlip),
           Deal(cardIds: getNextSet(reversed, 3, 11), playerId: 0, flip: true),
+          PlayCard(cardId: Suit.JACK_OF_DIAMONDS, playerId: 1),
+          PlayCard(cardId: Suit.SIX_OF_DIAMONDS, playerId: 2),
+          PlayCard(cardId: Suit.QUEEN_OF_DIAMONDS, playerId: 3),
+          PlayCard(cardId: Suit.EIGHT_OF_DIAMONDS, playerId: 0),
+          WinTrick(cardIds: [
+            Suit.JACK_OF_DIAMONDS,
+            Suit.SIX_OF_DIAMONDS,
+            Suit.QUEEN_OF_DIAMONDS,
+            Suit.EIGHT_OF_DIAMONDS
+          ], playerId: 1),
+          PlayCard(cardId: Suit.KING_OF_DIAMONDS, playerId: 1),
+          PlayCard(cardId: Suit.NINE_OF_DIAMONDS, playerId: 2),
+          PlayCard(cardId: Suit.SEVEN_OF_DIAMONDS, playerId: 3),
+          PlayCard(cardId: Suit.ACE_OF_DIAMONDS, playerId: 0),
+          WinTrick(cardIds: [
+            Suit.KING_OF_DIAMONDS,
+            Suit.NINE_OF_DIAMONDS,
+            Suit.SEVEN_OF_DIAMONDS,
+            Suit.ACE_OF_DIAMONDS
+          ], playerId: 2),
+          PlayCard(cardId: Suit.SEVEN_OF_HEARTS, playerId: 2),
+          // Deal(cardIds: [1, 2, ], playerId: playerId)
         ],
       ),
     );
   }
 
-  BehaviorSubject<CardGame> generateDemoSolitaire() {
-    return BehaviorSubject<CardGame>.seeded(
-      const CardGame.tarabish(
+  BehaviorSubject<CardGameView> generateDemoSolitaire() {
+    final defaultFlip = true;
+    return BehaviorSubject<CardGameView>.seeded(
+      CardGameView.tarabish(
         gameId: 'demo',
         actions: <CardGameAction>[
           Shuffle(),
@@ -190,15 +240,15 @@ class TavernRepository {
           Deal(cardIds: [7, 8, 9], playerId: 3),
           BidHand(playerId: 0, bid: Suit.SPADES),
           // const Discard(playerId: 0, cardIds: [1, 2, 3]),
-          Deal(cardIds: [10, 11, 12], playerId: 0, flip: true),
+          Deal(cardIds: [10, 11, 12], playerId: 0, flip: defaultFlip),
           Deal(cardIds: [13, 14, 15], playerId: 1),
           Deal(cardIds: [16, 17, 18], playerId: 2),
           Deal(cardIds: [19, 20, 21], playerId: 3),
-          Deal(cardIds: [22, 23, 24], playerId: 0, flip: true),
+          Deal(cardIds: [22, 23, 24], playerId: 0, flip: defaultFlip),
           Deal(cardIds: [25, 26, 27], playerId: 1),
           Deal(cardIds: [28, 29, 30], playerId: 2),
           Deal(cardIds: [31, 32, 33], playerId: 3),
-          Deal(cardIds: [34, 35, 36], playerId: 0, flip: true),
+          Deal(cardIds: [34, 35, 36], playerId: 0, flip: defaultFlip),
         ],
       ),
     );
@@ -210,7 +260,11 @@ class TavernRepository {
     bool? shuffle = false,
   }) {
     List<int> integers = [];
-    for (int i = 1; i <= count; i++) {
+    for (int i = 0; i < 52; i++) {
+      if ([1, 2, 3, 4, 14, 15, 16, 17, 27, 28, 29, 30, 40, 41, 42, 43]
+          .contains(i)) {
+        continue;
+      }
       integers.add(i);
     }
     if (shuffle!) {

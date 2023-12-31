@@ -21,11 +21,11 @@ mixin _$CardGameAction {
     required TResult Function() startGame,
     required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
-    required TResult Function(String cardId) playCard,
+    required TResult Function(int cardId, int playerId) playCard,
     required TResult Function() endTurn,
     required TResult Function() showHand,
     required TResult Function(int bid, int playerId) bidHand,
-    required TResult Function() showTable,
+    required TResult Function(List<int> cardIds, int playerId) winTrick,
     required TResult Function() showScoreboard,
     required TResult Function() shuffle,
     required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
@@ -36,11 +36,11 @@ mixin _$CardGameAction {
     TResult? Function()? startGame,
     TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
-    TResult? Function(String cardId)? playCard,
+    TResult? Function(int cardId, int playerId)? playCard,
     TResult? Function()? endTurn,
     TResult? Function()? showHand,
     TResult? Function(int bid, int playerId)? bidHand,
-    TResult? Function()? showTable,
+    TResult? Function(List<int> cardIds, int playerId)? winTrick,
     TResult? Function()? showScoreboard,
     TResult? Function()? shuffle,
     TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
@@ -51,11 +51,11 @@ mixin _$CardGameAction {
     TResult Function()? startGame,
     TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
-    TResult Function(String cardId)? playCard,
+    TResult Function(int cardId, int playerId)? playCard,
     TResult Function()? endTurn,
     TResult Function()? showHand,
     TResult Function(int bid, int playerId)? bidHand,
-    TResult Function()? showTable,
+    TResult Function(List<int> cardIds, int playerId)? winTrick,
     TResult Function()? showScoreboard,
     TResult Function()? shuffle,
     TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
@@ -71,7 +71,7 @@ mixin _$CardGameAction {
     required TResult Function(EndTurn value) endTurn,
     required TResult Function(ShowHand value) showHand,
     required TResult Function(BidHand value) bidHand,
-    required TResult Function(ShowTable value) showTable,
+    required TResult Function(WinTrick value) winTrick,
     required TResult Function(ShowScoreboard value) showScoreboard,
     required TResult Function(Shuffle value) shuffle,
     required TResult Function(Deal value) deal,
@@ -86,7 +86,7 @@ mixin _$CardGameAction {
     TResult? Function(EndTurn value)? endTurn,
     TResult? Function(ShowHand value)? showHand,
     TResult? Function(BidHand value)? bidHand,
-    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(WinTrick value)? winTrick,
     TResult? Function(ShowScoreboard value)? showScoreboard,
     TResult? Function(Shuffle value)? shuffle,
     TResult? Function(Deal value)? deal,
@@ -101,7 +101,7 @@ mixin _$CardGameAction {
     TResult Function(EndTurn value)? endTurn,
     TResult Function(ShowHand value)? showHand,
     TResult Function(BidHand value)? bidHand,
-    TResult Function(ShowTable value)? showTable,
+    TResult Function(WinTrick value)? winTrick,
     TResult Function(ShowScoreboard value)? showScoreboard,
     TResult Function(Shuffle value)? shuffle,
     TResult Function(Deal value)? deal,
@@ -169,11 +169,11 @@ class _$StartGameImpl implements StartGame {
     required TResult Function() startGame,
     required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
-    required TResult Function(String cardId) playCard,
+    required TResult Function(int cardId, int playerId) playCard,
     required TResult Function() endTurn,
     required TResult Function() showHand,
     required TResult Function(int bid, int playerId) bidHand,
-    required TResult Function() showTable,
+    required TResult Function(List<int> cardIds, int playerId) winTrick,
     required TResult Function() showScoreboard,
     required TResult Function() shuffle,
     required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
@@ -187,11 +187,11 @@ class _$StartGameImpl implements StartGame {
     TResult? Function()? startGame,
     TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
-    TResult? Function(String cardId)? playCard,
+    TResult? Function(int cardId, int playerId)? playCard,
     TResult? Function()? endTurn,
     TResult? Function()? showHand,
     TResult? Function(int bid, int playerId)? bidHand,
-    TResult? Function()? showTable,
+    TResult? Function(List<int> cardIds, int playerId)? winTrick,
     TResult? Function()? showScoreboard,
     TResult? Function()? shuffle,
     TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
@@ -205,11 +205,11 @@ class _$StartGameImpl implements StartGame {
     TResult Function()? startGame,
     TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
-    TResult Function(String cardId)? playCard,
+    TResult Function(int cardId, int playerId)? playCard,
     TResult Function()? endTurn,
     TResult Function()? showHand,
     TResult Function(int bid, int playerId)? bidHand,
-    TResult Function()? showTable,
+    TResult Function(List<int> cardIds, int playerId)? winTrick,
     TResult Function()? showScoreboard,
     TResult Function()? shuffle,
     TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
@@ -231,7 +231,7 @@ class _$StartGameImpl implements StartGame {
     required TResult Function(EndTurn value) endTurn,
     required TResult Function(ShowHand value) showHand,
     required TResult Function(BidHand value) bidHand,
-    required TResult Function(ShowTable value) showTable,
+    required TResult Function(WinTrick value) winTrick,
     required TResult Function(ShowScoreboard value) showScoreboard,
     required TResult Function(Shuffle value) shuffle,
     required TResult Function(Deal value) deal,
@@ -249,7 +249,7 @@ class _$StartGameImpl implements StartGame {
     TResult? Function(EndTurn value)? endTurn,
     TResult? Function(ShowHand value)? showHand,
     TResult? Function(BidHand value)? bidHand,
-    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(WinTrick value)? winTrick,
     TResult? Function(ShowScoreboard value)? showScoreboard,
     TResult? Function(Shuffle value)? shuffle,
     TResult? Function(Deal value)? deal,
@@ -267,7 +267,7 @@ class _$StartGameImpl implements StartGame {
     TResult Function(EndTurn value)? endTurn,
     TResult Function(ShowHand value)? showHand,
     TResult Function(BidHand value)? bidHand,
-    TResult Function(ShowTable value)? showTable,
+    TResult Function(WinTrick value)? winTrick,
     TResult Function(ShowScoreboard value)? showScoreboard,
     TResult Function(Shuffle value)? shuffle,
     TResult Function(Deal value)? deal,
@@ -352,11 +352,11 @@ class _$SetDealerImpl implements SetDealer {
     required TResult Function() startGame,
     required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
-    required TResult Function(String cardId) playCard,
+    required TResult Function(int cardId, int playerId) playCard,
     required TResult Function() endTurn,
     required TResult Function() showHand,
     required TResult Function(int bid, int playerId) bidHand,
-    required TResult Function() showTable,
+    required TResult Function(List<int> cardIds, int playerId) winTrick,
     required TResult Function() showScoreboard,
     required TResult Function() shuffle,
     required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
@@ -370,11 +370,11 @@ class _$SetDealerImpl implements SetDealer {
     TResult? Function()? startGame,
     TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
-    TResult? Function(String cardId)? playCard,
+    TResult? Function(int cardId, int playerId)? playCard,
     TResult? Function()? endTurn,
     TResult? Function()? showHand,
     TResult? Function(int bid, int playerId)? bidHand,
-    TResult? Function()? showTable,
+    TResult? Function(List<int> cardIds, int playerId)? winTrick,
     TResult? Function()? showScoreboard,
     TResult? Function()? shuffle,
     TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
@@ -388,11 +388,11 @@ class _$SetDealerImpl implements SetDealer {
     TResult Function()? startGame,
     TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
-    TResult Function(String cardId)? playCard,
+    TResult Function(int cardId, int playerId)? playCard,
     TResult Function()? endTurn,
     TResult Function()? showHand,
     TResult Function(int bid, int playerId)? bidHand,
-    TResult Function()? showTable,
+    TResult Function(List<int> cardIds, int playerId)? winTrick,
     TResult Function()? showScoreboard,
     TResult Function()? shuffle,
     TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
@@ -414,7 +414,7 @@ class _$SetDealerImpl implements SetDealer {
     required TResult Function(EndTurn value) endTurn,
     required TResult Function(ShowHand value) showHand,
     required TResult Function(BidHand value) bidHand,
-    required TResult Function(ShowTable value) showTable,
+    required TResult Function(WinTrick value) winTrick,
     required TResult Function(ShowScoreboard value) showScoreboard,
     required TResult Function(Shuffle value) shuffle,
     required TResult Function(Deal value) deal,
@@ -432,7 +432,7 @@ class _$SetDealerImpl implements SetDealer {
     TResult? Function(EndTurn value)? endTurn,
     TResult? Function(ShowHand value)? showHand,
     TResult? Function(BidHand value)? bidHand,
-    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(WinTrick value)? winTrick,
     TResult? Function(ShowScoreboard value)? showScoreboard,
     TResult? Function(Shuffle value)? shuffle,
     TResult? Function(Deal value)? deal,
@@ -450,7 +450,7 @@ class _$SetDealerImpl implements SetDealer {
     TResult Function(EndTurn value)? endTurn,
     TResult Function(ShowHand value)? showHand,
     TResult Function(BidHand value)? bidHand,
-    TResult Function(ShowTable value)? showTable,
+    TResult Function(WinTrick value)? winTrick,
     TResult Function(ShowScoreboard value)? showScoreboard,
     TResult Function(Shuffle value)? shuffle,
     TResult Function(Deal value)? deal,
@@ -513,11 +513,11 @@ class _$DrawCardImpl implements DrawCard {
     required TResult Function() startGame,
     required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
-    required TResult Function(String cardId) playCard,
+    required TResult Function(int cardId, int playerId) playCard,
     required TResult Function() endTurn,
     required TResult Function() showHand,
     required TResult Function(int bid, int playerId) bidHand,
-    required TResult Function() showTable,
+    required TResult Function(List<int> cardIds, int playerId) winTrick,
     required TResult Function() showScoreboard,
     required TResult Function() shuffle,
     required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
@@ -531,11 +531,11 @@ class _$DrawCardImpl implements DrawCard {
     TResult? Function()? startGame,
     TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
-    TResult? Function(String cardId)? playCard,
+    TResult? Function(int cardId, int playerId)? playCard,
     TResult? Function()? endTurn,
     TResult? Function()? showHand,
     TResult? Function(int bid, int playerId)? bidHand,
-    TResult? Function()? showTable,
+    TResult? Function(List<int> cardIds, int playerId)? winTrick,
     TResult? Function()? showScoreboard,
     TResult? Function()? shuffle,
     TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
@@ -549,11 +549,11 @@ class _$DrawCardImpl implements DrawCard {
     TResult Function()? startGame,
     TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
-    TResult Function(String cardId)? playCard,
+    TResult Function(int cardId, int playerId)? playCard,
     TResult Function()? endTurn,
     TResult Function()? showHand,
     TResult Function(int bid, int playerId)? bidHand,
-    TResult Function()? showTable,
+    TResult Function(List<int> cardIds, int playerId)? winTrick,
     TResult Function()? showScoreboard,
     TResult Function()? shuffle,
     TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
@@ -575,7 +575,7 @@ class _$DrawCardImpl implements DrawCard {
     required TResult Function(EndTurn value) endTurn,
     required TResult Function(ShowHand value) showHand,
     required TResult Function(BidHand value) bidHand,
-    required TResult Function(ShowTable value) showTable,
+    required TResult Function(WinTrick value) winTrick,
     required TResult Function(ShowScoreboard value) showScoreboard,
     required TResult Function(Shuffle value) shuffle,
     required TResult Function(Deal value) deal,
@@ -593,7 +593,7 @@ class _$DrawCardImpl implements DrawCard {
     TResult? Function(EndTurn value)? endTurn,
     TResult? Function(ShowHand value)? showHand,
     TResult? Function(BidHand value)? bidHand,
-    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(WinTrick value)? winTrick,
     TResult? Function(ShowScoreboard value)? showScoreboard,
     TResult? Function(Shuffle value)? shuffle,
     TResult? Function(Deal value)? deal,
@@ -611,7 +611,7 @@ class _$DrawCardImpl implements DrawCard {
     TResult Function(EndTurn value)? endTurn,
     TResult Function(ShowHand value)? showHand,
     TResult Function(BidHand value)? bidHand,
-    TResult Function(ShowTable value)? showTable,
+    TResult Function(WinTrick value)? winTrick,
     TResult Function(ShowScoreboard value)? showScoreboard,
     TResult Function(Shuffle value)? shuffle,
     TResult Function(Deal value)? deal,
@@ -634,7 +634,7 @@ abstract class _$$PlayCardImplCopyWith<$Res> {
           _$PlayCardImpl value, $Res Function(_$PlayCardImpl) then) =
       __$$PlayCardImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String cardId});
+  $Res call({int cardId, int playerId});
 }
 
 /// @nodoc
@@ -649,12 +649,17 @@ class __$$PlayCardImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? cardId = null,
+    Object? playerId = null,
   }) {
     return _then(_$PlayCardImpl(
-      null == cardId
+      cardId: null == cardId
           ? _value.cardId
           : cardId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
+      playerId: null == playerId
+          ? _value.playerId
+          : playerId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -662,14 +667,16 @@ class __$$PlayCardImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PlayCardImpl implements PlayCard {
-  const _$PlayCardImpl(this.cardId);
+  const _$PlayCardImpl({required this.cardId, required this.playerId});
 
   @override
-  final String cardId;
+  final int cardId;
+  @override
+  final int playerId;
 
   @override
   String toString() {
-    return 'CardGameAction.playCard(cardId: $cardId)';
+    return 'CardGameAction.playCard(cardId: $cardId, playerId: $playerId)';
   }
 
   @override
@@ -677,11 +684,13 @@ class _$PlayCardImpl implements PlayCard {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PlayCardImpl &&
-            (identical(other.cardId, cardId) || other.cardId == cardId));
+            (identical(other.cardId, cardId) || other.cardId == cardId) &&
+            (identical(other.playerId, playerId) ||
+                other.playerId == playerId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, cardId);
+  int get hashCode => Object.hash(runtimeType, cardId, playerId);
 
   @JsonKey(ignore: true)
   @override
@@ -695,16 +704,16 @@ class _$PlayCardImpl implements PlayCard {
     required TResult Function() startGame,
     required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
-    required TResult Function(String cardId) playCard,
+    required TResult Function(int cardId, int playerId) playCard,
     required TResult Function() endTurn,
     required TResult Function() showHand,
     required TResult Function(int bid, int playerId) bidHand,
-    required TResult Function() showTable,
+    required TResult Function(List<int> cardIds, int playerId) winTrick,
     required TResult Function() showScoreboard,
     required TResult Function() shuffle,
     required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
   }) {
-    return playCard(cardId);
+    return playCard(cardId, playerId);
   }
 
   @override
@@ -713,16 +722,16 @@ class _$PlayCardImpl implements PlayCard {
     TResult? Function()? startGame,
     TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
-    TResult? Function(String cardId)? playCard,
+    TResult? Function(int cardId, int playerId)? playCard,
     TResult? Function()? endTurn,
     TResult? Function()? showHand,
     TResult? Function(int bid, int playerId)? bidHand,
-    TResult? Function()? showTable,
+    TResult? Function(List<int> cardIds, int playerId)? winTrick,
     TResult? Function()? showScoreboard,
     TResult? Function()? shuffle,
     TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
   }) {
-    return playCard?.call(cardId);
+    return playCard?.call(cardId, playerId);
   }
 
   @override
@@ -731,18 +740,18 @@ class _$PlayCardImpl implements PlayCard {
     TResult Function()? startGame,
     TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
-    TResult Function(String cardId)? playCard,
+    TResult Function(int cardId, int playerId)? playCard,
     TResult Function()? endTurn,
     TResult Function()? showHand,
     TResult Function(int bid, int playerId)? bidHand,
-    TResult Function()? showTable,
+    TResult Function(List<int> cardIds, int playerId)? winTrick,
     TResult Function()? showScoreboard,
     TResult Function()? shuffle,
     TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
     required TResult orElse(),
   }) {
     if (playCard != null) {
-      return playCard(cardId);
+      return playCard(cardId, playerId);
     }
     return orElse();
   }
@@ -757,7 +766,7 @@ class _$PlayCardImpl implements PlayCard {
     required TResult Function(EndTurn value) endTurn,
     required TResult Function(ShowHand value) showHand,
     required TResult Function(BidHand value) bidHand,
-    required TResult Function(ShowTable value) showTable,
+    required TResult Function(WinTrick value) winTrick,
     required TResult Function(ShowScoreboard value) showScoreboard,
     required TResult Function(Shuffle value) shuffle,
     required TResult Function(Deal value) deal,
@@ -775,7 +784,7 @@ class _$PlayCardImpl implements PlayCard {
     TResult? Function(EndTurn value)? endTurn,
     TResult? Function(ShowHand value)? showHand,
     TResult? Function(BidHand value)? bidHand,
-    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(WinTrick value)? winTrick,
     TResult? Function(ShowScoreboard value)? showScoreboard,
     TResult? Function(Shuffle value)? shuffle,
     TResult? Function(Deal value)? deal,
@@ -793,7 +802,7 @@ class _$PlayCardImpl implements PlayCard {
     TResult Function(EndTurn value)? endTurn,
     TResult Function(ShowHand value)? showHand,
     TResult Function(BidHand value)? bidHand,
-    TResult Function(ShowTable value)? showTable,
+    TResult Function(WinTrick value)? winTrick,
     TResult Function(ShowScoreboard value)? showScoreboard,
     TResult Function(Shuffle value)? shuffle,
     TResult Function(Deal value)? deal,
@@ -807,9 +816,12 @@ class _$PlayCardImpl implements PlayCard {
 }
 
 abstract class PlayCard implements CardGameAction {
-  const factory PlayCard(final String cardId) = _$PlayCardImpl;
+  const factory PlayCard(
+      {required final int cardId,
+      required final int playerId}) = _$PlayCardImpl;
 
-  String get cardId;
+  int get cardId;
+  int get playerId;
   @JsonKey(ignore: true)
   _$$PlayCardImplCopyWith<_$PlayCardImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -856,11 +868,11 @@ class _$EndTurnImpl implements EndTurn {
     required TResult Function() startGame,
     required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
-    required TResult Function(String cardId) playCard,
+    required TResult Function(int cardId, int playerId) playCard,
     required TResult Function() endTurn,
     required TResult Function() showHand,
     required TResult Function(int bid, int playerId) bidHand,
-    required TResult Function() showTable,
+    required TResult Function(List<int> cardIds, int playerId) winTrick,
     required TResult Function() showScoreboard,
     required TResult Function() shuffle,
     required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
@@ -874,11 +886,11 @@ class _$EndTurnImpl implements EndTurn {
     TResult? Function()? startGame,
     TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
-    TResult? Function(String cardId)? playCard,
+    TResult? Function(int cardId, int playerId)? playCard,
     TResult? Function()? endTurn,
     TResult? Function()? showHand,
     TResult? Function(int bid, int playerId)? bidHand,
-    TResult? Function()? showTable,
+    TResult? Function(List<int> cardIds, int playerId)? winTrick,
     TResult? Function()? showScoreboard,
     TResult? Function()? shuffle,
     TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
@@ -892,11 +904,11 @@ class _$EndTurnImpl implements EndTurn {
     TResult Function()? startGame,
     TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
-    TResult Function(String cardId)? playCard,
+    TResult Function(int cardId, int playerId)? playCard,
     TResult Function()? endTurn,
     TResult Function()? showHand,
     TResult Function(int bid, int playerId)? bidHand,
-    TResult Function()? showTable,
+    TResult Function(List<int> cardIds, int playerId)? winTrick,
     TResult Function()? showScoreboard,
     TResult Function()? shuffle,
     TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
@@ -918,7 +930,7 @@ class _$EndTurnImpl implements EndTurn {
     required TResult Function(EndTurn value) endTurn,
     required TResult Function(ShowHand value) showHand,
     required TResult Function(BidHand value) bidHand,
-    required TResult Function(ShowTable value) showTable,
+    required TResult Function(WinTrick value) winTrick,
     required TResult Function(ShowScoreboard value) showScoreboard,
     required TResult Function(Shuffle value) shuffle,
     required TResult Function(Deal value) deal,
@@ -936,7 +948,7 @@ class _$EndTurnImpl implements EndTurn {
     TResult? Function(EndTurn value)? endTurn,
     TResult? Function(ShowHand value)? showHand,
     TResult? Function(BidHand value)? bidHand,
-    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(WinTrick value)? winTrick,
     TResult? Function(ShowScoreboard value)? showScoreboard,
     TResult? Function(Shuffle value)? shuffle,
     TResult? Function(Deal value)? deal,
@@ -954,7 +966,7 @@ class _$EndTurnImpl implements EndTurn {
     TResult Function(EndTurn value)? endTurn,
     TResult Function(ShowHand value)? showHand,
     TResult Function(BidHand value)? bidHand,
-    TResult Function(ShowTable value)? showTable,
+    TResult Function(WinTrick value)? winTrick,
     TResult Function(ShowScoreboard value)? showScoreboard,
     TResult Function(Shuffle value)? shuffle,
     TResult Function(Deal value)? deal,
@@ -1012,11 +1024,11 @@ class _$ShowHandImpl implements ShowHand {
     required TResult Function() startGame,
     required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
-    required TResult Function(String cardId) playCard,
+    required TResult Function(int cardId, int playerId) playCard,
     required TResult Function() endTurn,
     required TResult Function() showHand,
     required TResult Function(int bid, int playerId) bidHand,
-    required TResult Function() showTable,
+    required TResult Function(List<int> cardIds, int playerId) winTrick,
     required TResult Function() showScoreboard,
     required TResult Function() shuffle,
     required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
@@ -1030,11 +1042,11 @@ class _$ShowHandImpl implements ShowHand {
     TResult? Function()? startGame,
     TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
-    TResult? Function(String cardId)? playCard,
+    TResult? Function(int cardId, int playerId)? playCard,
     TResult? Function()? endTurn,
     TResult? Function()? showHand,
     TResult? Function(int bid, int playerId)? bidHand,
-    TResult? Function()? showTable,
+    TResult? Function(List<int> cardIds, int playerId)? winTrick,
     TResult? Function()? showScoreboard,
     TResult? Function()? shuffle,
     TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
@@ -1048,11 +1060,11 @@ class _$ShowHandImpl implements ShowHand {
     TResult Function()? startGame,
     TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
-    TResult Function(String cardId)? playCard,
+    TResult Function(int cardId, int playerId)? playCard,
     TResult Function()? endTurn,
     TResult Function()? showHand,
     TResult Function(int bid, int playerId)? bidHand,
-    TResult Function()? showTable,
+    TResult Function(List<int> cardIds, int playerId)? winTrick,
     TResult Function()? showScoreboard,
     TResult Function()? shuffle,
     TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
@@ -1074,7 +1086,7 @@ class _$ShowHandImpl implements ShowHand {
     required TResult Function(EndTurn value) endTurn,
     required TResult Function(ShowHand value) showHand,
     required TResult Function(BidHand value) bidHand,
-    required TResult Function(ShowTable value) showTable,
+    required TResult Function(WinTrick value) winTrick,
     required TResult Function(ShowScoreboard value) showScoreboard,
     required TResult Function(Shuffle value) shuffle,
     required TResult Function(Deal value) deal,
@@ -1092,7 +1104,7 @@ class _$ShowHandImpl implements ShowHand {
     TResult? Function(EndTurn value)? endTurn,
     TResult? Function(ShowHand value)? showHand,
     TResult? Function(BidHand value)? bidHand,
-    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(WinTrick value)? winTrick,
     TResult? Function(ShowScoreboard value)? showScoreboard,
     TResult? Function(Shuffle value)? shuffle,
     TResult? Function(Deal value)? deal,
@@ -1110,7 +1122,7 @@ class _$ShowHandImpl implements ShowHand {
     TResult Function(EndTurn value)? endTurn,
     TResult Function(ShowHand value)? showHand,
     TResult Function(BidHand value)? bidHand,
-    TResult Function(ShowTable value)? showTable,
+    TResult Function(WinTrick value)? winTrick,
     TResult Function(ShowScoreboard value)? showScoreboard,
     TResult Function(Shuffle value)? shuffle,
     TResult Function(Deal value)? deal,
@@ -1203,11 +1215,11 @@ class _$BidHandImpl implements BidHand {
     required TResult Function() startGame,
     required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
-    required TResult Function(String cardId) playCard,
+    required TResult Function(int cardId, int playerId) playCard,
     required TResult Function() endTurn,
     required TResult Function() showHand,
     required TResult Function(int bid, int playerId) bidHand,
-    required TResult Function() showTable,
+    required TResult Function(List<int> cardIds, int playerId) winTrick,
     required TResult Function() showScoreboard,
     required TResult Function() shuffle,
     required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
@@ -1221,11 +1233,11 @@ class _$BidHandImpl implements BidHand {
     TResult? Function()? startGame,
     TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
-    TResult? Function(String cardId)? playCard,
+    TResult? Function(int cardId, int playerId)? playCard,
     TResult? Function()? endTurn,
     TResult? Function()? showHand,
     TResult? Function(int bid, int playerId)? bidHand,
-    TResult? Function()? showTable,
+    TResult? Function(List<int> cardIds, int playerId)? winTrick,
     TResult? Function()? showScoreboard,
     TResult? Function()? shuffle,
     TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
@@ -1239,11 +1251,11 @@ class _$BidHandImpl implements BidHand {
     TResult Function()? startGame,
     TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
-    TResult Function(String cardId)? playCard,
+    TResult Function(int cardId, int playerId)? playCard,
     TResult Function()? endTurn,
     TResult Function()? showHand,
     TResult Function(int bid, int playerId)? bidHand,
-    TResult Function()? showTable,
+    TResult Function(List<int> cardIds, int playerId)? winTrick,
     TResult Function()? showScoreboard,
     TResult Function()? shuffle,
     TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
@@ -1265,7 +1277,7 @@ class _$BidHandImpl implements BidHand {
     required TResult Function(EndTurn value) endTurn,
     required TResult Function(ShowHand value) showHand,
     required TResult Function(BidHand value) bidHand,
-    required TResult Function(ShowTable value) showTable,
+    required TResult Function(WinTrick value) winTrick,
     required TResult Function(ShowScoreboard value) showScoreboard,
     required TResult Function(Shuffle value) shuffle,
     required TResult Function(Deal value) deal,
@@ -1283,7 +1295,7 @@ class _$BidHandImpl implements BidHand {
     TResult? Function(EndTurn value)? endTurn,
     TResult? Function(ShowHand value)? showHand,
     TResult? Function(BidHand value)? bidHand,
-    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(WinTrick value)? winTrick,
     TResult? Function(ShowScoreboard value)? showScoreboard,
     TResult? Function(Shuffle value)? shuffle,
     TResult? Function(Deal value)? deal,
@@ -1301,7 +1313,7 @@ class _$BidHandImpl implements BidHand {
     TResult Function(EndTurn value)? endTurn,
     TResult Function(ShowHand value)? showHand,
     TResult Function(BidHand value)? bidHand,
-    TResult Function(ShowTable value)? showTable,
+    TResult Function(WinTrick value)? winTrick,
     TResult Function(ShowScoreboard value)? showScoreboard,
     TResult Function(Shuffle value)? shuffle,
     TResult Function(Deal value)? deal,
@@ -1326,39 +1338,83 @@ abstract class BidHand implements CardGameAction {
 }
 
 /// @nodoc
-abstract class _$$ShowTableImplCopyWith<$Res> {
-  factory _$$ShowTableImplCopyWith(
-          _$ShowTableImpl value, $Res Function(_$ShowTableImpl) then) =
-      __$$ShowTableImplCopyWithImpl<$Res>;
+abstract class _$$WinTrickImplCopyWith<$Res> {
+  factory _$$WinTrickImplCopyWith(
+          _$WinTrickImpl value, $Res Function(_$WinTrickImpl) then) =
+      __$$WinTrickImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<int> cardIds, int playerId});
 }
 
 /// @nodoc
-class __$$ShowTableImplCopyWithImpl<$Res>
-    extends _$CardGameActionCopyWithImpl<$Res, _$ShowTableImpl>
-    implements _$$ShowTableImplCopyWith<$Res> {
-  __$$ShowTableImplCopyWithImpl(
-      _$ShowTableImpl _value, $Res Function(_$ShowTableImpl) _then)
+class __$$WinTrickImplCopyWithImpl<$Res>
+    extends _$CardGameActionCopyWithImpl<$Res, _$WinTrickImpl>
+    implements _$$WinTrickImplCopyWith<$Res> {
+  __$$WinTrickImplCopyWithImpl(
+      _$WinTrickImpl _value, $Res Function(_$WinTrickImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? cardIds = null,
+    Object? playerId = null,
+  }) {
+    return _then(_$WinTrickImpl(
+      cardIds: null == cardIds
+          ? _value._cardIds
+          : cardIds // ignore: cast_nullable_to_non_nullable
+              as List<int>,
+      playerId: null == playerId
+          ? _value.playerId
+          : playerId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$ShowTableImpl implements ShowTable {
-  const _$ShowTableImpl();
+class _$WinTrickImpl implements WinTrick {
+  const _$WinTrickImpl(
+      {required final List<int> cardIds, required this.playerId})
+      : _cardIds = cardIds;
+
+  final List<int> _cardIds;
+  @override
+  List<int> get cardIds {
+    if (_cardIds is EqualUnmodifiableListView) return _cardIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_cardIds);
+  }
+
+  @override
+  final int playerId;
 
   @override
   String toString() {
-    return 'CardGameAction.showTable()';
+    return 'CardGameAction.winTrick(cardIds: $cardIds, playerId: $playerId)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ShowTableImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$WinTrickImpl &&
+            const DeepCollectionEquality().equals(other._cardIds, _cardIds) &&
+            (identical(other.playerId, playerId) ||
+                other.playerId == playerId));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_cardIds), playerId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$WinTrickImplCopyWith<_$WinTrickImpl> get copyWith =>
+      __$$WinTrickImplCopyWithImpl<_$WinTrickImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1366,16 +1422,16 @@ class _$ShowTableImpl implements ShowTable {
     required TResult Function() startGame,
     required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
-    required TResult Function(String cardId) playCard,
+    required TResult Function(int cardId, int playerId) playCard,
     required TResult Function() endTurn,
     required TResult Function() showHand,
     required TResult Function(int bid, int playerId) bidHand,
-    required TResult Function() showTable,
+    required TResult Function(List<int> cardIds, int playerId) winTrick,
     required TResult Function() showScoreboard,
     required TResult Function() shuffle,
     required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
   }) {
-    return showTable();
+    return winTrick(cardIds, playerId);
   }
 
   @override
@@ -1384,16 +1440,16 @@ class _$ShowTableImpl implements ShowTable {
     TResult? Function()? startGame,
     TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
-    TResult? Function(String cardId)? playCard,
+    TResult? Function(int cardId, int playerId)? playCard,
     TResult? Function()? endTurn,
     TResult? Function()? showHand,
     TResult? Function(int bid, int playerId)? bidHand,
-    TResult? Function()? showTable,
+    TResult? Function(List<int> cardIds, int playerId)? winTrick,
     TResult? Function()? showScoreboard,
     TResult? Function()? shuffle,
     TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
   }) {
-    return showTable?.call();
+    return winTrick?.call(cardIds, playerId);
   }
 
   @override
@@ -1402,18 +1458,18 @@ class _$ShowTableImpl implements ShowTable {
     TResult Function()? startGame,
     TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
-    TResult Function(String cardId)? playCard,
+    TResult Function(int cardId, int playerId)? playCard,
     TResult Function()? endTurn,
     TResult Function()? showHand,
     TResult Function(int bid, int playerId)? bidHand,
-    TResult Function()? showTable,
+    TResult Function(List<int> cardIds, int playerId)? winTrick,
     TResult Function()? showScoreboard,
     TResult Function()? shuffle,
     TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
     required TResult orElse(),
   }) {
-    if (showTable != null) {
-      return showTable();
+    if (winTrick != null) {
+      return winTrick(cardIds, playerId);
     }
     return orElse();
   }
@@ -1428,12 +1484,12 @@ class _$ShowTableImpl implements ShowTable {
     required TResult Function(EndTurn value) endTurn,
     required TResult Function(ShowHand value) showHand,
     required TResult Function(BidHand value) bidHand,
-    required TResult Function(ShowTable value) showTable,
+    required TResult Function(WinTrick value) winTrick,
     required TResult Function(ShowScoreboard value) showScoreboard,
     required TResult Function(Shuffle value) shuffle,
     required TResult Function(Deal value) deal,
   }) {
-    return showTable(this);
+    return winTrick(this);
   }
 
   @override
@@ -1446,12 +1502,12 @@ class _$ShowTableImpl implements ShowTable {
     TResult? Function(EndTurn value)? endTurn,
     TResult? Function(ShowHand value)? showHand,
     TResult? Function(BidHand value)? bidHand,
-    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(WinTrick value)? winTrick,
     TResult? Function(ShowScoreboard value)? showScoreboard,
     TResult? Function(Shuffle value)? shuffle,
     TResult? Function(Deal value)? deal,
   }) {
-    return showTable?.call(this);
+    return winTrick?.call(this);
   }
 
   @override
@@ -1464,21 +1520,29 @@ class _$ShowTableImpl implements ShowTable {
     TResult Function(EndTurn value)? endTurn,
     TResult Function(ShowHand value)? showHand,
     TResult Function(BidHand value)? bidHand,
-    TResult Function(ShowTable value)? showTable,
+    TResult Function(WinTrick value)? winTrick,
     TResult Function(ShowScoreboard value)? showScoreboard,
     TResult Function(Shuffle value)? shuffle,
     TResult Function(Deal value)? deal,
     required TResult orElse(),
   }) {
-    if (showTable != null) {
-      return showTable(this);
+    if (winTrick != null) {
+      return winTrick(this);
     }
     return orElse();
   }
 }
 
-abstract class ShowTable implements CardGameAction {
-  const factory ShowTable() = _$ShowTableImpl;
+abstract class WinTrick implements CardGameAction {
+  const factory WinTrick(
+      {required final List<int> cardIds,
+      required final int playerId}) = _$WinTrickImpl;
+
+  List<int> get cardIds;
+  int get playerId;
+  @JsonKey(ignore: true)
+  _$$WinTrickImplCopyWith<_$WinTrickImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1522,11 +1586,11 @@ class _$ShowScoreboardImpl implements ShowScoreboard {
     required TResult Function() startGame,
     required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
-    required TResult Function(String cardId) playCard,
+    required TResult Function(int cardId, int playerId) playCard,
     required TResult Function() endTurn,
     required TResult Function() showHand,
     required TResult Function(int bid, int playerId) bidHand,
-    required TResult Function() showTable,
+    required TResult Function(List<int> cardIds, int playerId) winTrick,
     required TResult Function() showScoreboard,
     required TResult Function() shuffle,
     required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
@@ -1540,11 +1604,11 @@ class _$ShowScoreboardImpl implements ShowScoreboard {
     TResult? Function()? startGame,
     TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
-    TResult? Function(String cardId)? playCard,
+    TResult? Function(int cardId, int playerId)? playCard,
     TResult? Function()? endTurn,
     TResult? Function()? showHand,
     TResult? Function(int bid, int playerId)? bidHand,
-    TResult? Function()? showTable,
+    TResult? Function(List<int> cardIds, int playerId)? winTrick,
     TResult? Function()? showScoreboard,
     TResult? Function()? shuffle,
     TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
@@ -1558,11 +1622,11 @@ class _$ShowScoreboardImpl implements ShowScoreboard {
     TResult Function()? startGame,
     TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
-    TResult Function(String cardId)? playCard,
+    TResult Function(int cardId, int playerId)? playCard,
     TResult Function()? endTurn,
     TResult Function()? showHand,
     TResult Function(int bid, int playerId)? bidHand,
-    TResult Function()? showTable,
+    TResult Function(List<int> cardIds, int playerId)? winTrick,
     TResult Function()? showScoreboard,
     TResult Function()? shuffle,
     TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
@@ -1584,7 +1648,7 @@ class _$ShowScoreboardImpl implements ShowScoreboard {
     required TResult Function(EndTurn value) endTurn,
     required TResult Function(ShowHand value) showHand,
     required TResult Function(BidHand value) bidHand,
-    required TResult Function(ShowTable value) showTable,
+    required TResult Function(WinTrick value) winTrick,
     required TResult Function(ShowScoreboard value) showScoreboard,
     required TResult Function(Shuffle value) shuffle,
     required TResult Function(Deal value) deal,
@@ -1602,7 +1666,7 @@ class _$ShowScoreboardImpl implements ShowScoreboard {
     TResult? Function(EndTurn value)? endTurn,
     TResult? Function(ShowHand value)? showHand,
     TResult? Function(BidHand value)? bidHand,
-    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(WinTrick value)? winTrick,
     TResult? Function(ShowScoreboard value)? showScoreboard,
     TResult? Function(Shuffle value)? shuffle,
     TResult? Function(Deal value)? deal,
@@ -1620,7 +1684,7 @@ class _$ShowScoreboardImpl implements ShowScoreboard {
     TResult Function(EndTurn value)? endTurn,
     TResult Function(ShowHand value)? showHand,
     TResult Function(BidHand value)? bidHand,
-    TResult Function(ShowTable value)? showTable,
+    TResult Function(WinTrick value)? winTrick,
     TResult Function(ShowScoreboard value)? showScoreboard,
     TResult Function(Shuffle value)? shuffle,
     TResult Function(Deal value)? deal,
@@ -1678,11 +1742,11 @@ class _$ShuffleImpl implements Shuffle {
     required TResult Function() startGame,
     required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
-    required TResult Function(String cardId) playCard,
+    required TResult Function(int cardId, int playerId) playCard,
     required TResult Function() endTurn,
     required TResult Function() showHand,
     required TResult Function(int bid, int playerId) bidHand,
-    required TResult Function() showTable,
+    required TResult Function(List<int> cardIds, int playerId) winTrick,
     required TResult Function() showScoreboard,
     required TResult Function() shuffle,
     required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
@@ -1696,11 +1760,11 @@ class _$ShuffleImpl implements Shuffle {
     TResult? Function()? startGame,
     TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
-    TResult? Function(String cardId)? playCard,
+    TResult? Function(int cardId, int playerId)? playCard,
     TResult? Function()? endTurn,
     TResult? Function()? showHand,
     TResult? Function(int bid, int playerId)? bidHand,
-    TResult? Function()? showTable,
+    TResult? Function(List<int> cardIds, int playerId)? winTrick,
     TResult? Function()? showScoreboard,
     TResult? Function()? shuffle,
     TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
@@ -1714,11 +1778,11 @@ class _$ShuffleImpl implements Shuffle {
     TResult Function()? startGame,
     TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
-    TResult Function(String cardId)? playCard,
+    TResult Function(int cardId, int playerId)? playCard,
     TResult Function()? endTurn,
     TResult Function()? showHand,
     TResult Function(int bid, int playerId)? bidHand,
-    TResult Function()? showTable,
+    TResult Function(List<int> cardIds, int playerId)? winTrick,
     TResult Function()? showScoreboard,
     TResult Function()? shuffle,
     TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
@@ -1740,7 +1804,7 @@ class _$ShuffleImpl implements Shuffle {
     required TResult Function(EndTurn value) endTurn,
     required TResult Function(ShowHand value) showHand,
     required TResult Function(BidHand value) bidHand,
-    required TResult Function(ShowTable value) showTable,
+    required TResult Function(WinTrick value) winTrick,
     required TResult Function(ShowScoreboard value) showScoreboard,
     required TResult Function(Shuffle value) shuffle,
     required TResult Function(Deal value) deal,
@@ -1758,7 +1822,7 @@ class _$ShuffleImpl implements Shuffle {
     TResult? Function(EndTurn value)? endTurn,
     TResult? Function(ShowHand value)? showHand,
     TResult? Function(BidHand value)? bidHand,
-    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(WinTrick value)? winTrick,
     TResult? Function(ShowScoreboard value)? showScoreboard,
     TResult? Function(Shuffle value)? shuffle,
     TResult? Function(Deal value)? deal,
@@ -1776,7 +1840,7 @@ class _$ShuffleImpl implements Shuffle {
     TResult Function(EndTurn value)? endTurn,
     TResult Function(ShowHand value)? showHand,
     TResult Function(BidHand value)? bidHand,
-    TResult Function(ShowTable value)? showTable,
+    TResult Function(WinTrick value)? winTrick,
     TResult Function(ShowScoreboard value)? showScoreboard,
     TResult Function(Shuffle value)? shuffle,
     TResult Function(Deal value)? deal,
@@ -1888,11 +1952,11 @@ class _$DealImpl implements Deal {
     required TResult Function() startGame,
     required TResult Function(int playerId) setDealer,
     required TResult Function() drawCard,
-    required TResult Function(String cardId) playCard,
+    required TResult Function(int cardId, int playerId) playCard,
     required TResult Function() endTurn,
     required TResult Function() showHand,
     required TResult Function(int bid, int playerId) bidHand,
-    required TResult Function() showTable,
+    required TResult Function(List<int> cardIds, int playerId) winTrick,
     required TResult Function() showScoreboard,
     required TResult Function() shuffle,
     required TResult Function(List<int> cardIds, int playerId, bool flip) deal,
@@ -1906,11 +1970,11 @@ class _$DealImpl implements Deal {
     TResult? Function()? startGame,
     TResult? Function(int playerId)? setDealer,
     TResult? Function()? drawCard,
-    TResult? Function(String cardId)? playCard,
+    TResult? Function(int cardId, int playerId)? playCard,
     TResult? Function()? endTurn,
     TResult? Function()? showHand,
     TResult? Function(int bid, int playerId)? bidHand,
-    TResult? Function()? showTable,
+    TResult? Function(List<int> cardIds, int playerId)? winTrick,
     TResult? Function()? showScoreboard,
     TResult? Function()? shuffle,
     TResult? Function(List<int> cardIds, int playerId, bool flip)? deal,
@@ -1924,11 +1988,11 @@ class _$DealImpl implements Deal {
     TResult Function()? startGame,
     TResult Function(int playerId)? setDealer,
     TResult Function()? drawCard,
-    TResult Function(String cardId)? playCard,
+    TResult Function(int cardId, int playerId)? playCard,
     TResult Function()? endTurn,
     TResult Function()? showHand,
     TResult Function(int bid, int playerId)? bidHand,
-    TResult Function()? showTable,
+    TResult Function(List<int> cardIds, int playerId)? winTrick,
     TResult Function()? showScoreboard,
     TResult Function()? shuffle,
     TResult Function(List<int> cardIds, int playerId, bool flip)? deal,
@@ -1950,7 +2014,7 @@ class _$DealImpl implements Deal {
     required TResult Function(EndTurn value) endTurn,
     required TResult Function(ShowHand value) showHand,
     required TResult Function(BidHand value) bidHand,
-    required TResult Function(ShowTable value) showTable,
+    required TResult Function(WinTrick value) winTrick,
     required TResult Function(ShowScoreboard value) showScoreboard,
     required TResult Function(Shuffle value) shuffle,
     required TResult Function(Deal value) deal,
@@ -1968,7 +2032,7 @@ class _$DealImpl implements Deal {
     TResult? Function(EndTurn value)? endTurn,
     TResult? Function(ShowHand value)? showHand,
     TResult? Function(BidHand value)? bidHand,
-    TResult? Function(ShowTable value)? showTable,
+    TResult? Function(WinTrick value)? winTrick,
     TResult? Function(ShowScoreboard value)? showScoreboard,
     TResult? Function(Shuffle value)? shuffle,
     TResult? Function(Deal value)? deal,
@@ -1986,7 +2050,7 @@ class _$DealImpl implements Deal {
     TResult Function(EndTurn value)? endTurn,
     TResult Function(ShowHand value)? showHand,
     TResult Function(BidHand value)? bidHand,
-    TResult Function(ShowTable value)? showTable,
+    TResult Function(WinTrick value)? winTrick,
     TResult Function(ShowScoreboard value)? showScoreboard,
     TResult Function(Shuffle value)? shuffle,
     TResult Function(Deal value)? deal,

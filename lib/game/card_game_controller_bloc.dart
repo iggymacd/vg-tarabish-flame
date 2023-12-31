@@ -16,7 +16,7 @@ class CardGameControllerBloc extends Bloc<CardGameAction, CardGameState> {
     on<EndTurn>(_endTurn);
     on<StartGame>(_startGame);
     on<ShowHand>(_showHand);
-    on<ShowTable>(_showTable);
+    on<WinTrick>(_winTrick);
     on<ShowScoreboard>(_showScoreboard);
     on<Shuffle>(_shuffle);
     on<Deal>(_deal);
@@ -97,8 +97,8 @@ class CardGameControllerBloc extends Bloc<CardGameAction, CardGameState> {
     }
   }
 
-  Stream<CardGameState> _showTable(
-    ShowTable event,
+  Stream<CardGameState> _winTrick(
+    WinTrick event,
     Emitter<CardGameState> emit,
   ) async* {
     try {

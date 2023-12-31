@@ -143,7 +143,7 @@ class Card extends PositionComponent
     final rankSprite = suit.isBlack ? rank.blackSprite : rank.redSprite;
     final suitSprite = suit.sprite;
     _drawSprite(canvas, rankSprite, 0.1, 0.08);
-    _drawSprite(canvas, suitSprite, 0.1, 0.18, scale: 0.5);
+    _drawSprite(canvas, suitSprite, 0.1, 0.18, scale: 0.8);
     _drawSprite(canvas, rankSprite, 0.1, 0.08, rotate: true);
     _drawSprite(canvas, suitSprite, 0.1, 0.18, scale: 0.5, rotate: true);
     switch (rank.value) {

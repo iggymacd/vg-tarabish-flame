@@ -8,10 +8,10 @@ import 'package:vg_tarabish_flame/game/entity/game/view/card_game_action.dart';
 part 'card_game.freezed.dart';
 
 @freezed
-class CardGame with _$CardGame {
+class CardGameView with _$CardGameView {
   // var currentStep;
-  const CardGame._();
-  const factory CardGame.tarabish({
+  const CardGameView._();
+  const factory CardGameView.tarabish({
     required String gameId,
     required List<CardGameAction> actions,
     // @Default(false) bool isDemo,

@@ -6,8 +6,8 @@ import '../pile.dart';
 import '../tavern_game.dart';
 import '../entity/card/card.dart';
 
-class PlayerPile extends PositionComponent implements Pile {
-  PlayerPile({required this.message, super.position})
+class WinningTrickPile extends PositionComponent implements Pile {
+  WinningTrickPile({required this.message, super.position})
       : super(size: TavernGames.cardSize) {
     // message.position.setFrom(Vector2(position.x + 10, position.y + 10));
     add(message);
@@ -32,13 +32,14 @@ class PlayerPile extends PositionComponent implements Pile {
 
   @override
   bool canAcceptCard(Card card) {
-    if (_cards.isEmpty) {
-      return card.rank.value == 13;
-    } else {
-      final topCard = _cards.last;
-      return card.suit.isRed == !topCard.suit.isRed &&
-          card.rank.value == topCard.rank.value - 1;
-    }
+    // if (_cards.isEmpty) {
+    //   return card.rank.value == 13;
+    // } else {
+    //   final topCard = _cards.last;
+    //   return card.suit.isRed == !topCard.suit.isRed &&
+    //       card.rank.value == topCard.rank.value - 1;
+    // }
+    return true;
   }
 
   @override
@@ -104,7 +105,7 @@ class PlayerPile extends PositionComponent implements Pile {
   }
 
   void layOutCards() {
-    sortCards();
+    // sortCards();
     final cardSpacingAdjustment =
         (TavernGames.cardSpacingFaceUp - TavernGames.cardSpacingFaceDown) /
             2 *
