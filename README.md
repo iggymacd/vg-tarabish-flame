@@ -184,3 +184,5 @@ bloc concurrency
 
 https://verygood.ventures/blog/how-to-use-bloc-with-streams-and-concurrency
 
+ run --flavor development --target lib/main_development.dart -d chrome --web-renderer canvaskit
+dart run build_runner watch
