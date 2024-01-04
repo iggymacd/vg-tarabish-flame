@@ -20,7 +20,7 @@ mixin _$TavernEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(String gameId, String gameType, bool demo)
         newGame,
-    required TResult Function(String gameId) switchGame,
+    required TResult Function() goToLobby,
     required TResult Function() showGameTypes,
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
@@ -30,7 +30,7 @@ mixin _$TavernEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String gameId, String gameType, bool demo)? newGame,
-    TResult? Function(String gameId)? switchGame,
+    TResult? Function()? goToLobby,
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
@@ -39,7 +39,7 @@ mixin _$TavernEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String gameId, String gameType, bool demo)? newGame,
-    TResult Function(String gameId)? switchGame,
+    TResult Function()? goToLobby,
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
@@ -49,7 +49,7 @@ mixin _$TavernEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_NewGame value) newGame,
-    required TResult Function(_SwitchGame value) switchGame,
+    required TResult Function(GoToLobby value) goToLobby,
     required TResult Function(_ShowGameTypes value) showGameTypes,
     required TResult Function(_TavernGamesUpdated value) tavernGamesUpdated,
     required TResult Function(_TavernMembersUpdated value) tavernMembersUpdated,
@@ -58,7 +58,7 @@ mixin _$TavernEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_NewGame value)? newGame,
-    TResult? Function(_SwitchGame value)? switchGame,
+    TResult? Function(GoToLobby value)? goToLobby,
     TResult? Function(_ShowGameTypes value)? showGameTypes,
     TResult? Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult? Function(_TavernMembersUpdated value)? tavernMembersUpdated,
@@ -67,7 +67,7 @@ mixin _$TavernEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NewGame value)? newGame,
-    TResult Function(_SwitchGame value)? switchGame,
+    TResult Function(GoToLobby value)? goToLobby,
     TResult Function(_ShowGameTypes value)? showGameTypes,
     TResult Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult Function(_TavernMembersUpdated value)? tavernMembersUpdated,
@@ -181,7 +181,7 @@ class _$NewGameImpl implements _NewGame {
   TResult when<TResult extends Object?>({
     required TResult Function(String gameId, String gameType, bool demo)
         newGame,
-    required TResult Function(String gameId) switchGame,
+    required TResult Function() goToLobby,
     required TResult Function() showGameTypes,
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
@@ -194,7 +194,7 @@ class _$NewGameImpl implements _NewGame {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String gameId, String gameType, bool demo)? newGame,
-    TResult? Function(String gameId)? switchGame,
+    TResult? Function()? goToLobby,
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
@@ -206,7 +206,7 @@ class _$NewGameImpl implements _NewGame {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String gameId, String gameType, bool demo)? newGame,
-    TResult Function(String gameId)? switchGame,
+    TResult Function()? goToLobby,
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
@@ -222,7 +222,7 @@ class _$NewGameImpl implements _NewGame {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_NewGame value) newGame,
-    required TResult Function(_SwitchGame value) switchGame,
+    required TResult Function(GoToLobby value) goToLobby,
     required TResult Function(_ShowGameTypes value) showGameTypes,
     required TResult Function(_TavernGamesUpdated value) tavernGamesUpdated,
     required TResult Function(_TavernMembersUpdated value) tavernMembersUpdated,
@@ -234,7 +234,7 @@ class _$NewGameImpl implements _NewGame {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_NewGame value)? newGame,
-    TResult? Function(_SwitchGame value)? switchGame,
+    TResult? Function(GoToLobby value)? goToLobby,
     TResult? Function(_ShowGameTypes value)? showGameTypes,
     TResult? Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult? Function(_TavernMembersUpdated value)? tavernMembersUpdated,
@@ -246,7 +246,7 @@ class _$NewGameImpl implements _NewGame {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NewGame value)? newGame,
-    TResult Function(_SwitchGame value)? switchGame,
+    TResult Function(GoToLobby value)? goToLobby,
     TResult Function(_ShowGameTypes value)? showGameTypes,
     TResult Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult Function(_TavernMembersUpdated value)? tavernMembersUpdated,
@@ -274,104 +274,78 @@ abstract class _NewGame implements TavernEvent {
 }
 
 /// @nodoc
-abstract class _$$SwitchGameImplCopyWith<$Res> {
-  factory _$$SwitchGameImplCopyWith(
-          _$SwitchGameImpl value, $Res Function(_$SwitchGameImpl) then) =
-      __$$SwitchGameImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String gameId});
+abstract class _$$GoToLobbyImplCopyWith<$Res> {
+  factory _$$GoToLobbyImplCopyWith(
+          _$GoToLobbyImpl value, $Res Function(_$GoToLobbyImpl) then) =
+      __$$GoToLobbyImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SwitchGameImplCopyWithImpl<$Res>
-    extends _$TavernEventCopyWithImpl<$Res, _$SwitchGameImpl>
-    implements _$$SwitchGameImplCopyWith<$Res> {
-  __$$SwitchGameImplCopyWithImpl(
-      _$SwitchGameImpl _value, $Res Function(_$SwitchGameImpl) _then)
+class __$$GoToLobbyImplCopyWithImpl<$Res>
+    extends _$TavernEventCopyWithImpl<$Res, _$GoToLobbyImpl>
+    implements _$$GoToLobbyImplCopyWith<$Res> {
+  __$$GoToLobbyImplCopyWithImpl(
+      _$GoToLobbyImpl _value, $Res Function(_$GoToLobbyImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? gameId = null,
-  }) {
-    return _then(_$SwitchGameImpl(
-      gameId: null == gameId
-          ? _value.gameId
-          : gameId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$SwitchGameImpl implements _SwitchGame {
-  const _$SwitchGameImpl({required this.gameId});
-
-  @override
-  final String gameId;
+class _$GoToLobbyImpl implements GoToLobby {
+  const _$GoToLobbyImpl();
 
   @override
   String toString() {
-    return 'TavernEvent.switchGame(gameId: $gameId)';
+    return 'TavernEvent.goToLobby()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SwitchGameImpl &&
-            (identical(other.gameId, gameId) || other.gameId == gameId));
+        (other.runtimeType == runtimeType && other is _$GoToLobbyImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, gameId);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SwitchGameImplCopyWith<_$SwitchGameImpl> get copyWith =>
-      __$$SwitchGameImplCopyWithImpl<_$SwitchGameImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String gameId, String gameType, bool demo)
         newGame,
-    required TResult Function(String gameId) switchGame,
+    required TResult Function() goToLobby,
     required TResult Function() showGameTypes,
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
         tavernMembersUpdated,
   }) {
-    return switchGame(gameId);
+    return goToLobby();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String gameId, String gameType, bool demo)? newGame,
-    TResult? Function(String gameId)? switchGame,
+    TResult? Function()? goToLobby,
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
   }) {
-    return switchGame?.call(gameId);
+    return goToLobby?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String gameId, String gameType, bool demo)? newGame,
-    TResult Function(String gameId)? switchGame,
+    TResult Function()? goToLobby,
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
     required TResult orElse(),
   }) {
-    if (switchGame != null) {
-      return switchGame(gameId);
+    if (goToLobby != null) {
+      return goToLobby();
     }
     return orElse();
   }
@@ -380,50 +354,45 @@ class _$SwitchGameImpl implements _SwitchGame {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_NewGame value) newGame,
-    required TResult Function(_SwitchGame value) switchGame,
+    required TResult Function(GoToLobby value) goToLobby,
     required TResult Function(_ShowGameTypes value) showGameTypes,
     required TResult Function(_TavernGamesUpdated value) tavernGamesUpdated,
     required TResult Function(_TavernMembersUpdated value) tavernMembersUpdated,
   }) {
-    return switchGame(this);
+    return goToLobby(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_NewGame value)? newGame,
-    TResult? Function(_SwitchGame value)? switchGame,
+    TResult? Function(GoToLobby value)? goToLobby,
     TResult? Function(_ShowGameTypes value)? showGameTypes,
     TResult? Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult? Function(_TavernMembersUpdated value)? tavernMembersUpdated,
   }) {
-    return switchGame?.call(this);
+    return goToLobby?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NewGame value)? newGame,
-    TResult Function(_SwitchGame value)? switchGame,
+    TResult Function(GoToLobby value)? goToLobby,
     TResult Function(_ShowGameTypes value)? showGameTypes,
     TResult Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult Function(_TavernMembersUpdated value)? tavernMembersUpdated,
     required TResult orElse(),
   }) {
-    if (switchGame != null) {
-      return switchGame(this);
+    if (goToLobby != null) {
+      return goToLobby(this);
     }
     return orElse();
   }
 }
 
-abstract class _SwitchGame implements TavernEvent {
-  const factory _SwitchGame({required final String gameId}) = _$SwitchGameImpl;
-
-  String get gameId;
-  @JsonKey(ignore: true)
-  _$$SwitchGameImplCopyWith<_$SwitchGameImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+abstract class GoToLobby implements TavernEvent {
+  const factory GoToLobby() = _$GoToLobbyImpl;
 }
 
 /// @nodoc
@@ -466,7 +435,7 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
   TResult when<TResult extends Object?>({
     required TResult Function(String gameId, String gameType, bool demo)
         newGame,
-    required TResult Function(String gameId) switchGame,
+    required TResult Function() goToLobby,
     required TResult Function() showGameTypes,
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
@@ -479,7 +448,7 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String gameId, String gameType, bool demo)? newGame,
-    TResult? Function(String gameId)? switchGame,
+    TResult? Function()? goToLobby,
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
@@ -491,7 +460,7 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String gameId, String gameType, bool demo)? newGame,
-    TResult Function(String gameId)? switchGame,
+    TResult Function()? goToLobby,
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
@@ -507,7 +476,7 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_NewGame value) newGame,
-    required TResult Function(_SwitchGame value) switchGame,
+    required TResult Function(GoToLobby value) goToLobby,
     required TResult Function(_ShowGameTypes value) showGameTypes,
     required TResult Function(_TavernGamesUpdated value) tavernGamesUpdated,
     required TResult Function(_TavernMembersUpdated value) tavernMembersUpdated,
@@ -519,7 +488,7 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_NewGame value)? newGame,
-    TResult? Function(_SwitchGame value)? switchGame,
+    TResult? Function(GoToLobby value)? goToLobby,
     TResult? Function(_ShowGameTypes value)? showGameTypes,
     TResult? Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult? Function(_TavernMembersUpdated value)? tavernMembersUpdated,
@@ -531,7 +500,7 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NewGame value)? newGame,
-    TResult Function(_SwitchGame value)? switchGame,
+    TResult Function(GoToLobby value)? goToLobby,
     TResult Function(_ShowGameTypes value)? showGameTypes,
     TResult Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult Function(_TavernMembersUpdated value)? tavernMembersUpdated,
@@ -623,7 +592,7 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
   TResult when<TResult extends Object?>({
     required TResult Function(String gameId, String gameType, bool demo)
         newGame,
-    required TResult Function(String gameId) switchGame,
+    required TResult Function() goToLobby,
     required TResult Function() showGameTypes,
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
@@ -636,7 +605,7 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String gameId, String gameType, bool demo)? newGame,
-    TResult? Function(String gameId)? switchGame,
+    TResult? Function()? goToLobby,
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
@@ -648,7 +617,7 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String gameId, String gameType, bool demo)? newGame,
-    TResult Function(String gameId)? switchGame,
+    TResult Function()? goToLobby,
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
@@ -664,7 +633,7 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_NewGame value) newGame,
-    required TResult Function(_SwitchGame value) switchGame,
+    required TResult Function(GoToLobby value) goToLobby,
     required TResult Function(_ShowGameTypes value) showGameTypes,
     required TResult Function(_TavernGamesUpdated value) tavernGamesUpdated,
     required TResult Function(_TavernMembersUpdated value) tavernMembersUpdated,
@@ -676,7 +645,7 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_NewGame value)? newGame,
-    TResult? Function(_SwitchGame value)? switchGame,
+    TResult? Function(GoToLobby value)? goToLobby,
     TResult? Function(_ShowGameTypes value)? showGameTypes,
     TResult? Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult? Function(_TavernMembersUpdated value)? tavernMembersUpdated,
@@ -688,7 +657,7 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NewGame value)? newGame,
-    TResult Function(_SwitchGame value)? switchGame,
+    TResult Function(GoToLobby value)? goToLobby,
     TResult Function(_ShowGameTypes value)? showGameTypes,
     TResult Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult Function(_TavernMembersUpdated value)? tavernMembersUpdated,
@@ -788,7 +757,7 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
   TResult when<TResult extends Object?>({
     required TResult Function(String gameId, String gameType, bool demo)
         newGame,
-    required TResult Function(String gameId) switchGame,
+    required TResult Function() goToLobby,
     required TResult Function() showGameTypes,
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
@@ -801,7 +770,7 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String gameId, String gameType, bool demo)? newGame,
-    TResult? Function(String gameId)? switchGame,
+    TResult? Function()? goToLobby,
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
@@ -813,7 +782,7 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String gameId, String gameType, bool demo)? newGame,
-    TResult Function(String gameId)? switchGame,
+    TResult Function()? goToLobby,
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
@@ -829,7 +798,7 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_NewGame value) newGame,
-    required TResult Function(_SwitchGame value) switchGame,
+    required TResult Function(GoToLobby value) goToLobby,
     required TResult Function(_ShowGameTypes value) showGameTypes,
     required TResult Function(_TavernGamesUpdated value) tavernGamesUpdated,
     required TResult Function(_TavernMembersUpdated value) tavernMembersUpdated,
@@ -841,7 +810,7 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_NewGame value)? newGame,
-    TResult? Function(_SwitchGame value)? switchGame,
+    TResult? Function(GoToLobby value)? goToLobby,
     TResult? Function(_ShowGameTypes value)? showGameTypes,
     TResult? Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult? Function(_TavernMembersUpdated value)? tavernMembersUpdated,
@@ -853,7 +822,7 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_NewGame value)? newGame,
-    TResult Function(_SwitchGame value)? switchGame,
+    TResult Function(GoToLobby value)? goToLobby,
     TResult Function(_ShowGameTypes value)? showGameTypes,
     TResult Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult Function(_TavernMembersUpdated value)? tavernMembersUpdated,
@@ -881,8 +850,9 @@ abstract class _TavernMembersUpdated implements TavernEvent {
 mixin _$TavernState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(CardGameView cardGame) currentGameStateUpdated,
+    required TResult Function() lobby,
+    required TResult Function(GameInProgressBloc gameInProgressBloc)
+        currentGameInProgressUpdated,
     required TResult Function(
             List<TavernMember> tavernMembers, List<TavernGame> tavernGames)
         tavernGamesOrMembersUpdated,
@@ -890,8 +860,9 @@ mixin _$TavernState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(CardGameView cardGame)? currentGameStateUpdated,
+    TResult? Function()? lobby,
+    TResult? Function(GameInProgressBloc gameInProgressBloc)?
+        currentGameInProgressUpdated,
     TResult? Function(
             List<TavernMember> tavernMembers, List<TavernGame> tavernGames)?
         tavernGamesOrMembersUpdated,
@@ -899,8 +870,9 @@ mixin _$TavernState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(CardGameView cardGame)? currentGameStateUpdated,
+    TResult Function()? lobby,
+    TResult Function(GameInProgressBloc gameInProgressBloc)?
+        currentGameInProgressUpdated,
     TResult Function(
             List<TavernMember> tavernMembers, List<TavernGame> tavernGames)?
         tavernGamesOrMembersUpdated,
@@ -909,25 +881,27 @@ mixin _$TavernState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TavernStateInitial value) initial,
-    required TResult Function(CurrentGameStateUpdated value)
-        currentGameStateUpdated,
+    required TResult Function(TavernStateLobby value) lobby,
+    required TResult Function(CurrentGameInProgressUpdated value)
+        currentGameInProgressUpdated,
     required TResult Function(TavernGamesOrMembersUpdated value)
         tavernGamesOrMembersUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TavernStateInitial value)? initial,
-    TResult? Function(CurrentGameStateUpdated value)? currentGameStateUpdated,
+    TResult? Function(TavernStateLobby value)? lobby,
+    TResult? Function(CurrentGameInProgressUpdated value)?
+        currentGameInProgressUpdated,
     TResult? Function(TavernGamesOrMembersUpdated value)?
         tavernGamesOrMembersUpdated,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TavernStateInitial value)? initial,
-    TResult Function(CurrentGameStateUpdated value)? currentGameStateUpdated,
+    TResult Function(TavernStateLobby value)? lobby,
+    TResult Function(CurrentGameInProgressUpdated value)?
+        currentGameInProgressUpdated,
     TResult Function(TavernGamesOrMembersUpdated value)?
         tavernGamesOrMembersUpdated,
     required TResult orElse(),
@@ -954,35 +928,35 @@ class _$TavernStateCopyWithImpl<$Res, $Val extends TavernState>
 }
 
 /// @nodoc
-abstract class _$$TavernStateInitialImplCopyWith<$Res> {
-  factory _$$TavernStateInitialImplCopyWith(_$TavernStateInitialImpl value,
-          $Res Function(_$TavernStateInitialImpl) then) =
-      __$$TavernStateInitialImplCopyWithImpl<$Res>;
+abstract class _$$TavernStateLobbyImplCopyWith<$Res> {
+  factory _$$TavernStateLobbyImplCopyWith(_$TavernStateLobbyImpl value,
+          $Res Function(_$TavernStateLobbyImpl) then) =
+      __$$TavernStateLobbyImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$TavernStateInitialImplCopyWithImpl<$Res>
-    extends _$TavernStateCopyWithImpl<$Res, _$TavernStateInitialImpl>
-    implements _$$TavernStateInitialImplCopyWith<$Res> {
-  __$$TavernStateInitialImplCopyWithImpl(_$TavernStateInitialImpl _value,
-      $Res Function(_$TavernStateInitialImpl) _then)
+class __$$TavernStateLobbyImplCopyWithImpl<$Res>
+    extends _$TavernStateCopyWithImpl<$Res, _$TavernStateLobbyImpl>
+    implements _$$TavernStateLobbyImplCopyWith<$Res> {
+  __$$TavernStateLobbyImplCopyWithImpl(_$TavernStateLobbyImpl _value,
+      $Res Function(_$TavernStateLobbyImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$TavernStateInitialImpl implements TavernStateInitial {
-  const _$TavernStateInitialImpl();
+class _$TavernStateLobbyImpl implements TavernStateLobby {
+  const _$TavernStateLobbyImpl();
 
   @override
   String toString() {
-    return 'TavernState.initial()';
+    return 'TavernState.lobby()';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TavernStateInitialImpl);
+        (other.runtimeType == runtimeType && other is _$TavernStateLobbyImpl);
   }
 
   @override
@@ -991,39 +965,42 @@ class _$TavernStateInitialImpl implements TavernStateInitial {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(CardGameView cardGame) currentGameStateUpdated,
+    required TResult Function() lobby,
+    required TResult Function(GameInProgressBloc gameInProgressBloc)
+        currentGameInProgressUpdated,
     required TResult Function(
             List<TavernMember> tavernMembers, List<TavernGame> tavernGames)
         tavernGamesOrMembersUpdated,
   }) {
-    return initial();
+    return lobby();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(CardGameView cardGame)? currentGameStateUpdated,
+    TResult? Function()? lobby,
+    TResult? Function(GameInProgressBloc gameInProgressBloc)?
+        currentGameInProgressUpdated,
     TResult? Function(
             List<TavernMember> tavernMembers, List<TavernGame> tavernGames)?
         tavernGamesOrMembersUpdated,
   }) {
-    return initial?.call();
+    return lobby?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(CardGameView cardGame)? currentGameStateUpdated,
+    TResult Function()? lobby,
+    TResult Function(GameInProgressBloc gameInProgressBloc)?
+        currentGameInProgressUpdated,
     TResult Function(
             List<TavernMember> tavernMembers, List<TavernGame> tavernGames)?
         tavernGamesOrMembersUpdated,
     required TResult orElse(),
   }) {
-    if (initial != null) {
-      return initial();
+    if (lobby != null) {
+      return lobby();
     }
     return orElse();
   }
@@ -1031,157 +1008,155 @@ class _$TavernStateInitialImpl implements TavernStateInitial {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TavernStateInitial value) initial,
-    required TResult Function(CurrentGameStateUpdated value)
-        currentGameStateUpdated,
+    required TResult Function(TavernStateLobby value) lobby,
+    required TResult Function(CurrentGameInProgressUpdated value)
+        currentGameInProgressUpdated,
     required TResult Function(TavernGamesOrMembersUpdated value)
         tavernGamesOrMembersUpdated,
   }) {
-    return initial(this);
+    return lobby(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TavernStateInitial value)? initial,
-    TResult? Function(CurrentGameStateUpdated value)? currentGameStateUpdated,
+    TResult? Function(TavernStateLobby value)? lobby,
+    TResult? Function(CurrentGameInProgressUpdated value)?
+        currentGameInProgressUpdated,
     TResult? Function(TavernGamesOrMembersUpdated value)?
         tavernGamesOrMembersUpdated,
   }) {
-    return initial?.call(this);
+    return lobby?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TavernStateInitial value)? initial,
-    TResult Function(CurrentGameStateUpdated value)? currentGameStateUpdated,
+    TResult Function(TavernStateLobby value)? lobby,
+    TResult Function(CurrentGameInProgressUpdated value)?
+        currentGameInProgressUpdated,
     TResult Function(TavernGamesOrMembersUpdated value)?
         tavernGamesOrMembersUpdated,
     required TResult orElse(),
   }) {
-    if (initial != null) {
-      return initial(this);
+    if (lobby != null) {
+      return lobby(this);
     }
     return orElse();
   }
 }
 
-abstract class TavernStateInitial implements TavernState {
-  const factory TavernStateInitial() = _$TavernStateInitialImpl;
+abstract class TavernStateLobby implements TavernState {
+  const factory TavernStateLobby() = _$TavernStateLobbyImpl;
 }
 
 /// @nodoc
-abstract class _$$CurrentGameStateUpdatedImplCopyWith<$Res> {
-  factory _$$CurrentGameStateUpdatedImplCopyWith(
-          _$CurrentGameStateUpdatedImpl value,
-          $Res Function(_$CurrentGameStateUpdatedImpl) then) =
-      __$$CurrentGameStateUpdatedImplCopyWithImpl<$Res>;
+abstract class _$$CurrentGameInProgressUpdatedImplCopyWith<$Res> {
+  factory _$$CurrentGameInProgressUpdatedImplCopyWith(
+          _$CurrentGameInProgressUpdatedImpl value,
+          $Res Function(_$CurrentGameInProgressUpdatedImpl) then) =
+      __$$CurrentGameInProgressUpdatedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({CardGameView cardGame});
-
-  $CardGameViewCopyWith<$Res> get cardGame;
+  $Res call({GameInProgressBloc gameInProgressBloc});
 }
 
 /// @nodoc
-class __$$CurrentGameStateUpdatedImplCopyWithImpl<$Res>
-    extends _$TavernStateCopyWithImpl<$Res, _$CurrentGameStateUpdatedImpl>
-    implements _$$CurrentGameStateUpdatedImplCopyWith<$Res> {
-  __$$CurrentGameStateUpdatedImplCopyWithImpl(
-      _$CurrentGameStateUpdatedImpl _value,
-      $Res Function(_$CurrentGameStateUpdatedImpl) _then)
+class __$$CurrentGameInProgressUpdatedImplCopyWithImpl<$Res>
+    extends _$TavernStateCopyWithImpl<$Res, _$CurrentGameInProgressUpdatedImpl>
+    implements _$$CurrentGameInProgressUpdatedImplCopyWith<$Res> {
+  __$$CurrentGameInProgressUpdatedImplCopyWithImpl(
+      _$CurrentGameInProgressUpdatedImpl _value,
+      $Res Function(_$CurrentGameInProgressUpdatedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? cardGame = null,
+    Object? gameInProgressBloc = null,
   }) {
-    return _then(_$CurrentGameStateUpdatedImpl(
-      cardGame: null == cardGame
-          ? _value.cardGame
-          : cardGame // ignore: cast_nullable_to_non_nullable
-              as CardGameView,
+    return _then(_$CurrentGameInProgressUpdatedImpl(
+      gameInProgressBloc: null == gameInProgressBloc
+          ? _value.gameInProgressBloc
+          : gameInProgressBloc // ignore: cast_nullable_to_non_nullable
+              as GameInProgressBloc,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CardGameViewCopyWith<$Res> get cardGame {
-    return $CardGameViewCopyWith<$Res>(_value.cardGame, (value) {
-      return _then(_value.copyWith(cardGame: value));
-    });
   }
 }
 
 /// @nodoc
 
-class _$CurrentGameStateUpdatedImpl implements CurrentGameStateUpdated {
-  const _$CurrentGameStateUpdatedImpl({required this.cardGame});
+class _$CurrentGameInProgressUpdatedImpl
+    implements CurrentGameInProgressUpdated {
+  const _$CurrentGameInProgressUpdatedImpl({required this.gameInProgressBloc});
 
+// required CardGameView cardGame,
   @override
-  final CardGameView cardGame;
+  final GameInProgressBloc gameInProgressBloc;
 
   @override
   String toString() {
-    return 'TavernState.currentGameStateUpdated(cardGame: $cardGame)';
+    return 'TavernState.currentGameInProgressUpdated(gameInProgressBloc: $gameInProgressBloc)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CurrentGameStateUpdatedImpl &&
-            (identical(other.cardGame, cardGame) ||
-                other.cardGame == cardGame));
+            other is _$CurrentGameInProgressUpdatedImpl &&
+            (identical(other.gameInProgressBloc, gameInProgressBloc) ||
+                other.gameInProgressBloc == gameInProgressBloc));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, cardGame);
+  int get hashCode => Object.hash(runtimeType, gameInProgressBloc);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$CurrentGameStateUpdatedImplCopyWith<_$CurrentGameStateUpdatedImpl>
-      get copyWith => __$$CurrentGameStateUpdatedImplCopyWithImpl<
-          _$CurrentGameStateUpdatedImpl>(this, _$identity);
+  _$$CurrentGameInProgressUpdatedImplCopyWith<
+          _$CurrentGameInProgressUpdatedImpl>
+      get copyWith => __$$CurrentGameInProgressUpdatedImplCopyWithImpl<
+          _$CurrentGameInProgressUpdatedImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(CardGameView cardGame) currentGameStateUpdated,
+    required TResult Function() lobby,
+    required TResult Function(GameInProgressBloc gameInProgressBloc)
+        currentGameInProgressUpdated,
     required TResult Function(
             List<TavernMember> tavernMembers, List<TavernGame> tavernGames)
         tavernGamesOrMembersUpdated,
   }) {
-    return currentGameStateUpdated(cardGame);
+    return currentGameInProgressUpdated(gameInProgressBloc);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(CardGameView cardGame)? currentGameStateUpdated,
+    TResult? Function()? lobby,
+    TResult? Function(GameInProgressBloc gameInProgressBloc)?
+        currentGameInProgressUpdated,
     TResult? Function(
             List<TavernMember> tavernMembers, List<TavernGame> tavernGames)?
         tavernGamesOrMembersUpdated,
   }) {
-    return currentGameStateUpdated?.call(cardGame);
+    return currentGameInProgressUpdated?.call(gameInProgressBloc);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(CardGameView cardGame)? currentGameStateUpdated,
+    TResult Function()? lobby,
+    TResult Function(GameInProgressBloc gameInProgressBloc)?
+        currentGameInProgressUpdated,
     TResult Function(
             List<TavernMember> tavernMembers, List<TavernGame> tavernGames)?
         tavernGamesOrMembersUpdated,
     required TResult orElse(),
   }) {
-    if (currentGameStateUpdated != null) {
-      return currentGameStateUpdated(cardGame);
+    if (currentGameInProgressUpdated != null) {
+      return currentGameInProgressUpdated(gameInProgressBloc);
     }
     return orElse();
   }
@@ -1189,49 +1164,54 @@ class _$CurrentGameStateUpdatedImpl implements CurrentGameStateUpdated {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TavernStateInitial value) initial,
-    required TResult Function(CurrentGameStateUpdated value)
-        currentGameStateUpdated,
+    required TResult Function(TavernStateLobby value) lobby,
+    required TResult Function(CurrentGameInProgressUpdated value)
+        currentGameInProgressUpdated,
     required TResult Function(TavernGamesOrMembersUpdated value)
         tavernGamesOrMembersUpdated,
   }) {
-    return currentGameStateUpdated(this);
+    return currentGameInProgressUpdated(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TavernStateInitial value)? initial,
-    TResult? Function(CurrentGameStateUpdated value)? currentGameStateUpdated,
+    TResult? Function(TavernStateLobby value)? lobby,
+    TResult? Function(CurrentGameInProgressUpdated value)?
+        currentGameInProgressUpdated,
     TResult? Function(TavernGamesOrMembersUpdated value)?
         tavernGamesOrMembersUpdated,
   }) {
-    return currentGameStateUpdated?.call(this);
+    return currentGameInProgressUpdated?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TavernStateInitial value)? initial,
-    TResult Function(CurrentGameStateUpdated value)? currentGameStateUpdated,
+    TResult Function(TavernStateLobby value)? lobby,
+    TResult Function(CurrentGameInProgressUpdated value)?
+        currentGameInProgressUpdated,
     TResult Function(TavernGamesOrMembersUpdated value)?
         tavernGamesOrMembersUpdated,
     required TResult orElse(),
   }) {
-    if (currentGameStateUpdated != null) {
-      return currentGameStateUpdated(this);
+    if (currentGameInProgressUpdated != null) {
+      return currentGameInProgressUpdated(this);
     }
     return orElse();
   }
 }
 
-abstract class CurrentGameStateUpdated implements TavernState {
-  const factory CurrentGameStateUpdated(
-      {required final CardGameView cardGame}) = _$CurrentGameStateUpdatedImpl;
+abstract class CurrentGameInProgressUpdated implements TavernState {
+  const factory CurrentGameInProgressUpdated(
+          {required final GameInProgressBloc gameInProgressBloc}) =
+      _$CurrentGameInProgressUpdatedImpl;
 
-  CardGameView get cardGame;
+// required CardGameView cardGame,
+  GameInProgressBloc get gameInProgressBloc;
   @JsonKey(ignore: true)
-  _$$CurrentGameStateUpdatedImplCopyWith<_$CurrentGameStateUpdatedImpl>
+  _$$CurrentGameInProgressUpdatedImplCopyWith<
+          _$CurrentGameInProgressUpdatedImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -1332,8 +1312,9 @@ class _$TavernGamesOrMembersUpdatedImpl implements TavernGamesOrMembersUpdated {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(CardGameView cardGame) currentGameStateUpdated,
+    required TResult Function() lobby,
+    required TResult Function(GameInProgressBloc gameInProgressBloc)
+        currentGameInProgressUpdated,
     required TResult Function(
             List<TavernMember> tavernMembers, List<TavernGame> tavernGames)
         tavernGamesOrMembersUpdated,
@@ -1344,8 +1325,9 @@ class _$TavernGamesOrMembersUpdatedImpl implements TavernGamesOrMembersUpdated {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(CardGameView cardGame)? currentGameStateUpdated,
+    TResult? Function()? lobby,
+    TResult? Function(GameInProgressBloc gameInProgressBloc)?
+        currentGameInProgressUpdated,
     TResult? Function(
             List<TavernMember> tavernMembers, List<TavernGame> tavernGames)?
         tavernGamesOrMembersUpdated,
@@ -1356,8 +1338,9 @@ class _$TavernGamesOrMembersUpdatedImpl implements TavernGamesOrMembersUpdated {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(CardGameView cardGame)? currentGameStateUpdated,
+    TResult Function()? lobby,
+    TResult Function(GameInProgressBloc gameInProgressBloc)?
+        currentGameInProgressUpdated,
     TResult Function(
             List<TavernMember> tavernMembers, List<TavernGame> tavernGames)?
         tavernGamesOrMembersUpdated,
@@ -1372,9 +1355,9 @@ class _$TavernGamesOrMembersUpdatedImpl implements TavernGamesOrMembersUpdated {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TavernStateInitial value) initial,
-    required TResult Function(CurrentGameStateUpdated value)
-        currentGameStateUpdated,
+    required TResult Function(TavernStateLobby value) lobby,
+    required TResult Function(CurrentGameInProgressUpdated value)
+        currentGameInProgressUpdated,
     required TResult Function(TavernGamesOrMembersUpdated value)
         tavernGamesOrMembersUpdated,
   }) {
@@ -1384,8 +1367,9 @@ class _$TavernGamesOrMembersUpdatedImpl implements TavernGamesOrMembersUpdated {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TavernStateInitial value)? initial,
-    TResult? Function(CurrentGameStateUpdated value)? currentGameStateUpdated,
+    TResult? Function(TavernStateLobby value)? lobby,
+    TResult? Function(CurrentGameInProgressUpdated value)?
+        currentGameInProgressUpdated,
     TResult? Function(TavernGamesOrMembersUpdated value)?
         tavernGamesOrMembersUpdated,
   }) {
@@ -1395,8 +1379,9 @@ class _$TavernGamesOrMembersUpdatedImpl implements TavernGamesOrMembersUpdated {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(TavernStateInitial value)? initial,
-    TResult Function(CurrentGameStateUpdated value)? currentGameStateUpdated,
+    TResult Function(TavernStateLobby value)? lobby,
+    TResult Function(CurrentGameInProgressUpdated value)?
+        currentGameInProgressUpdated,
     TResult Function(TavernGamesOrMembersUpdated value)?
         tavernGamesOrMembersUpdated,
     required TResult orElse(),

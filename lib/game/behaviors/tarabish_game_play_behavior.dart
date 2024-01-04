@@ -5,6 +5,7 @@ import 'package:flame/flame.dart';
 import 'package:flame/text.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flutter/material.dart' as material;
+import 'package:vg_tarabish_flame/bloc/game_in_progress_bloc.dart';
 import 'package:vg_tarabish_flame/bloc/tavern_bloc.dart';
 import 'package:vg_tarabish_flame/game/components/flat_button.dart';
 import 'package:vg_tarabish_flame/game/components/player_pile.dart';
@@ -125,12 +126,12 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
     final gameMidX = parent.tableAreaSize.x / 2;
 
     addButton('New deal', gameLeftX, Action.newDeal);
-    addButton('Same deal', gameLeftX + parent.cardSpaceWidth, Action.sameDeal);
-    addButton('Demo', gameLeftX + 2 * parent.cardSpaceWidth, Action.demo);
+    addButton('Demo', gameLeftX + 1 * parent.cardSpaceWidth, Action.demo);
     addButton(
-        'Have fun', gameLeftX + 3 * parent.cardSpaceWidth, Action.haveFun);
+        'Have fun', gameLeftX + 2 * parent.cardSpaceWidth, Action.haveFun);
     addButton(
-        'New Game', gameLeftX + 4 * parent.cardSpaceWidth, Action.newGame);
+        'New Game', gameLeftX + 3 * parent.cardSpaceWidth, Action.newGame);
+    addButton('Lobby', gameLeftX + 4 * parent.cardSpaceWidth, Action.lobby);
 
     final camera = parent.game.camera;
     camera.viewfinder.visibleGameSize = parent.tableAreaSize;
@@ -142,7 +143,16 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
         parent.game.action == Action.newGame)) {
       // deal();
     }
-    play();
+    parent.gameInProgressBloc.stream.listen((state) {
+      switch (state) {
+        case Playing():
+          print('game is playing');
+        case Paused:
+          print('game is paused');
+        default:
+      }
+    });
+    // play();
   }
 
   String getMessage(int i) {
@@ -185,53 +195,53 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
   ///
   void play() {
     print('play is called....................................................');
-    if (streamSubscription != null) {
-      print('cancelling subscription');
-      streamSubscription?.cancel();
-    }
+    // if (streamSubscription != null) {
+    //   print('cancelling subscription');
+    //   streamSubscription?.cancel();
+    // }
 
-    streamSubscription = parent.tavernBloc.stream.listen((state) async {
-      print('I am listening for TavernStates...');
-      switch (state) {
-        case TavernState.initial:
-          print('Tavern State is initial...');
-        case TavernState.tavernGamesOrMembersUpdated:
-          print('Tavern State is tavernGamesOrMembersUpdated');
-        case CurrentGameStateUpdated():
+    // streamSubscription = parent.tavernBloc.stream.listen((state) async {
+    //   print('I am listening for TavernStates...');
+    //   switch (state) {
+    //     case TavernState.lobby:
+    //       print('Tavern State is initial...');
+    //     case TavernState.tavernGamesOrMembersUpdated:
+    //       print('Tavern State is tavernGamesOrMembersUpdated');
+    //     case CurrentGameStateUpdated():
 
-          ///
-          print(
-              "CardGame state is updated - handle state change - card game is ?"); //${state.cardGame}");
-          final cardGameState = state.cardGame;
-          if (parent.currentCardGameAction ==
-              cardGameState.lastActionIndex - 1) {
-            print('in if condition');
-            execute(cardGameState.lastAction);
-            // Create a new command and execute it.
-            // final command = CardGameCommand();
-            // command.execute(parent);
-          } else if (parent.currentCardGameAction <
-              cardGameState.lastActionIndex - 1) {
-            print('replaying all actions...................................');
-            await Future.forEach(
-                cardGameState.actions.getRange(
-                  parent.currentCardGameAction + 1,
-                  cardGameState.actions.length,
-                ),
-                execute);
-          }
+    //       ///
+    //       print(
+    //           "CardGame state is updated - handle state change - card game is ?"); //${state.cardGame}");
+    //       final cardGameState = state.cardGame;
+    //       if (parent.currentCardGameAction ==
+    //           cardGameState.lastActionIndex - 1) {
+    //         print('in if condition');
+    //         execute(cardGameState.lastAction);
+    //         // Create a new command and execute it.
+    //         // final command = CardGameCommand();
+    //         // command.execute(parent);
+    //       } else if (parent.currentCardGameAction <
+    //           cardGameState.lastActionIndex - 1) {
+    //         print('replaying all actions...................................');
+    //         await Future.forEach(
+    //             cardGameState.actions.getRange(
+    //               parent.currentCardGameAction + 1,
+    //               cardGameState.actions.length,
+    //             ),
+    //             execute);
+    //       }
 
-          // Consider our CardGameView as synchronized with the cardGame state.
-          parent.currentCardGameAction = cardGameState.lastActionIndex;
+    //       // Consider our CardGameView as synchronized with the cardGame state.
+    //       parent.currentCardGameAction = cardGameState.lastActionIndex;
 
-        default:
-          print('no match');
-      }
-    });
-    final isDemo = parent.game.action == Action.demo;
+    //     default:
+    //       print('no match');
+    //   }
+    // });
+    // final isDemo = parent.game.action == Action.demo;
 
-    parent.tavernBloc
-        .add(TavernEvent.newGame(gameType: 'Tarabish', demo: isDemo));
+    // parent.tavernBloc
+    //     .add(TavernEvent.newGame(gameType: 'Tarabish', demo: isDemo));
   }
 
   @override
@@ -322,15 +332,22 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
         if (action == Action.haveFun) {
           // Shortcut to the "win" sequence, for Tutorial purposes only.
           letsCelebrate();
-        } else {
-          if (action == Action.newGame) {
-            print('starting new game');
-            parent.startGameBloc
-                .add(const GameDialogEvent.displayGameTypeDialog());
-          }
+        } else if (action == Action.lobby) {
+          // parent.removeFromParent();
+          removeFromParent();
+          parent.game.world = TavernWorld();
+          // parent.tavernBloc.add(const GoToLobby());
+        }
+        // parent.game.
+        else {
+          // if (action == Action.newGame) {
+          //   print('starting new game');
+          //   parent.startGameBloc
+          //       .add(const GameDialogEvent.displayGameTypeDialog());
+          // }
           // Restart with a new deal or the same deal as before.
           parent.game.action = action;
-          parent.game.world = TavernWorld()..gameType = parent.gameType;
+          // parent.game.world = TavernWorld()..gameType = parent.gameType;
         }
       },
     );

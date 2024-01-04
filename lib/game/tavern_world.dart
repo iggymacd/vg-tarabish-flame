@@ -1,10 +1,14 @@
 // import 'dart:ui';
 
+import 'dart:async';
+
 import 'package:flame/components.dart';
 import 'package:flame/text.dart';
 import 'package:flame_behaviors/flame_behaviors.dart';
 import 'package:flutter/material.dart' as material;
+import 'package:vg_tarabish_flame/bloc/game_in_progress_bloc.dart';
 import 'package:vg_tarabish_flame/bloc/tavern_bloc.dart';
+import 'package:vg_tarabish_flame/game/behaviors/main_menu_behavior.dart';
 import 'package:vg_tarabish_flame/game/behaviors/solitaire_setup_behavior.dart';
 import 'package:vg_tarabish_flame/game/behaviors/tarabish_game_play_behavior.dart';
 import 'package:vg_tarabish_flame/game/behaviors/tarabish_setup_behavior.dart';
@@ -26,7 +30,9 @@ import 'package:vg_tarabish_flame/start_game/start_game.dart';
 class TavernWorld extends World
     with HasGameReference<TavernGames>, EntityMixin {
   late final TavernBloc tavernBloc; // = game.tavernBloc;
+  late StreamSubscription<TavernState> tavernBlocSubscription;
   late final GameDialogBloc startGameBloc;
+  late GameInProgressBloc gameInProgressBloc;
   late final String gameType;
   late int currentCardGameAction;
   final cardGap = TavernGames.cardGap;
@@ -43,100 +49,67 @@ class TavernWorld extends World
   final List<PlayerPile> playerPiles = [];
   final List<TrickPile> trickPiles = [];
   final List<WinningTrickPile> winningTrickPiles = [];
+  final tarabishGamePlayBehavior = TarabishGamePlayBehavior();
   // final List<TrickPile> trickPiles = [ = TrickPile(position: Vector2(0.0, 0.0),message:);
   // final List<Card> cards =');
-  final List<Card> cards = [];
+  late List<Card> cards;
   late Vector2 tableAreaSize;
 
   @override
   Future<void> onLoad() async {
+    print('calling tavern world onLoad...');
     tavernBloc = game.tavernBloc;
-    startGameBloc = game.gameDialogBloc;
-    // game.overlays.add(pauseOverlayIdentifier);
-    // game.overlays.add(chooseGameTypeOverlayIdentifier);
-    // if ((game.action == Action.none || game.action == Action.newGame)) {
-    ///  send an event to show dialog for user to choose game
-    /// wait for a state indicating that the game type was chosen
-    // add(TextComponent(
-    //   text: 'Hello, Flame',
-    //   size: Vector2.all(TavernGames.cardWidth), //.bind(context),
-    //   textRenderer: TextPaint(
-    //     style: TextStyle(
-    //       color: material.Colors.white,
-    //       fontSize: 200,
-    //     ),
-    //   ),
-    //   // anchor: Anchor.center,
-    //   priority: 1,
-    //   position: Vector2.all(16),
-    // ));
-    if (game.action == Action.none || game.action == Action.newGame) {
-      startGameBloc.add(const GameDialogEvent.displayGameTypeDialog());
-      final chosenState = await startGameBloc.stream.firstWhere((state) {
-        // print('runtime type is ${state.runtimeType}');
-        return switch (state) {
-          GameTypeChosen() => true,
-          GameTypeDialogDisplayed() => false,
-          Initial() => false,
-          GameTypeDialogCancelled() => false,
-        };
-      }).timeout(
-        const Duration(seconds: 10), // Set a reasonable timeout duration
-        onTimeout: () {
-          // Handle the case where the user cancels or times out
-          // You can throw an exception or return a default value
-          startGameBloc
-              .add(const GameDialogEvent.cancelDisplayGameTypeDialog());
-          return Future.value(const GameTypeChosen(gameType: 'Solitaire'));
-        },
-      );
+    // startGameBloc = game.gameDialogBloc;
+    cards = [];
+    tableAreaSize =
+        Vector2(4 * cardSpaceHeight + topGap, 4 * cardSpaceHeight + topGap);
+    final camera = game.camera;
+    final gameMidX = tableAreaSize.x / 2;
+    camera.viewfinder.visibleGameSize = tableAreaSize;
+    camera.viewfinder.position = Vector2(gameMidX, 0);
+    camera.viewfinder.anchor = Anchor.topCenter;
+    await add(MainMenuBehavior());
+    tavernBlocSubscription = tavernBloc.stream.listen((state) async {
+      // print('listening for events...');
+      switch (state) {
+        case TavernStateLobby():
+          await add(MainMenuBehavior());
+        case final CurrentGameInProgressUpdated state:
+          print('TavernWorld - CurrentGameStateUpdated event received');
+          gameInProgressBloc = state.gameInProgressBloc;
+          await add(tarabishGamePlayBehavior);
+        case TavernGamesOrMembersUpdated():
+          print('TavernWorld - TavernGamesOrMembersUpdated event received');
+        // TODONE: Handle this case.
+      }
+    });
 
-      gameType = switch (chosenState) {
-        final GameTypeChosen currentState => currentState.gameType,
-        GameTypeDialogDisplayed() ||
-        Initial() ||
-        GameTypeDialogCancelled() =>
-          'Solitaire',
-        // Initial() => 'Solitaire',
-        // TODO: Handle this case.
-        // GameTypeDialogCancelled() => null,
-      };
-      // }
-      // } else {
-      //   gameType = 'Solitaire';
-      //   cardGame = CardGame(dealingBehavior: DealingBehavior());
-      // }
-      print('playing game of $gameType');
-      // StartGameState.gameTypeChosen(gameType: gameType) =>
-      switch (gameType) {
-        case 'Solitaire':
-          // await setupSolitaireGame();
-          add(SolitaireSetupBehavior());
-        case 'Tarabish':
-          // await setupTarabishGame();
-          // await add(TarabishSetupBehavior());
-          add(TarabishGamePlayBehavior());
-        default:
-          // await setupSolitaireGame();
-          add(SolitaireSetupBehavior());
-      }
-    } else {
-      print('playing game of $gameType');
-      // StartGameState.gameTypeChosen(gameType: gameType) =>
-      switch (gameType) {
-        case 'Solitaire':
-          // await setupSolitaireGame();
-          add(SolitaireSetupBehavior());
-        case 'Tarabish':
-          // await setupTarabishGame();
-          // await add(TarabishSetupBehavior());
-          add(TarabishGamePlayBehavior());
-        default:
-          // await setupSolitaireGame();
-          add(SolitaireSetupBehavior());
-      }
-    }
     super.onLoad();
     // await setupSolitaireGame();
+  }
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+  }
+
+  // @override
+  // void render(Canvas canvas) {
+  //   super.render(canvas);
+  // }
+  @override
+  void onRemove() {
+    print('onRemove called...');
+    cards = [];
+    foundations.clear();
+    tableauPiles.clear();
+    playerPiles.clear();
+    trickPiles.clear();
+    winningTrickPiles.clear();
+    gameInProgressBloc.close();
+    tavernBlocSubscription.cancel();
+    // startGameBloc.close();
+    // tavernBloc.close();
+    super.onRemove();
   }
 }

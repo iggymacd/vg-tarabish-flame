@@ -14,13 +14,14 @@ class GameInProgressBloc
     extends Bloc<GameInProgressEvent, GameInProgressState> {
   GameInProgressBloc({
     required this.tavernRepository,
+    required this.currentGameId,
     // required VideoData frame,
   }) : super(const GameInProgressState.initial()) {
     on<PauseStartGame>(
       (event, emit) async {
         if (event.play) {
           await emit.forEach(
-            tavernRepository.listenCardGame(gameId: 'gameId'),
+            tavernRepository.listenCardGame(gameId: 'gameId'), // <--
             onData: (CardGameView cardGameView) => GameInProgressState.playing(
               // cardGame: CardGameView.tarabish(gameId: 'gameId', actions: []),
               cardGameView: cardGameView,
@@ -50,4 +51,5 @@ class GameInProgressBloc
 
   // final VideoStreamingRepo videoStreamingRepo;
   final TavernRepository tavernRepository;
+  final String currentGameId;
 }
