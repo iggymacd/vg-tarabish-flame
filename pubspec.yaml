@@ -23,6 +23,7 @@ dependencies:
   google_fonts: ^6.1.0
   intl: ^0.18.0
   json_annotation: ^4.8.1
+  random_name_generator: ^1.2.0
   rxdart: ^0.27.7
   uuid: ^4.2.2
 

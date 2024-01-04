@@ -56,6 +56,9 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
         case GoToLobby():
           _handleGoToLobby(event, emit);
         // TODO: Handle this case.
+        case InviteBot():
+          // TODONE: Handle this case.
+          _handleInviteBot(event, emit);
       }
     });
   }
@@ -71,7 +74,7 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
       <String, Stream<CardGameView>>{};
 
   // ID of the currently viewed game
-  String? _currentGameId;
+  String? currentGameId;
 
   @override
   Future<void> close() {
@@ -124,7 +127,7 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
     // The gameinprogress bloc will listen for changes to the state and respond
     // to those changes
     // var gameType = event.gameType;
-    _currentGameId = tavernRepository.newOrExistingGameInProgress(
+    currentGameId = tavernRepository.newOrExistingGameInProgress(
         gameType: event.gameType, demo: event.demo);
     // print('game gameId is $_currentGameId');
     // _currentGameId = _currentGameId;
@@ -135,8 +138,8 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
     emit(TavernState.currentGameInProgressUpdated(
         gameInProgressBloc: GameInProgressBloc(
       tavernRepository: tavernRepository,
-      currentGameId: _currentGameId!,
-    )));
+      currentGameId: currentGameId!,
+    )..add(const GameInProgressEvent.pauseStartGame(play: true))));
     // gameInProgressBloc.
     //')
     // final String gameId = event.gameId; // Extract gameId from the event
@@ -189,6 +192,14 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
     //     print('Received updated game state for game $gameId: $game');
     //   });
     // }
+  }
+
+  void _handleInviteBot(InviteBot event, Emitter<TavernState> emit) {
+    print('TavenEvent _handleInviteBot called');
+    tavernRepository.inviteBot(
+      playerPosition: event.playerPosition,
+      gameId: event.gameId,
+    );
   }
   // void _handleChooseGameType(_ChooseGameType event, Emitter<TavernState> emit) {
   //   // ignore: lines_longer_than_80_chars

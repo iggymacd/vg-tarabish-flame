@@ -20,8 +20,9 @@ class GameInProgressBloc
     on<PauseStartGame>(
       (event, emit) async {
         if (event.play) {
+          print('starting game with id $currentGameId');
           await emit.forEach(
-            tavernRepository.listenCardGame(gameId: 'gameId'), // <--
+            tavernRepository.listenCardGame(gameId: currentGameId), // <--
             onData: (CardGameView cardGameView) => GameInProgressState.playing(
               // cardGame: CardGameView.tarabish(gameId: 'gameId', actions: []),
               cardGameView: cardGameView,
@@ -34,6 +35,7 @@ class GameInProgressBloc
                 stackTrace: stackTrace),
           );
         } else {
+          print('pausing game with id $currentGameId');
           emit(
             const GameInProgressState.paused(
               cardGameView:
@@ -47,6 +49,10 @@ class GameInProgressBloc
       // any active `emit.forEach` above.
       transformer: restartable(),
     );
+    // on<InviteBot>((event, emit) => tavernRepository.inviteBot(
+    //       playerPosition: event.playerPosition,
+    //       gameId: currentGameId,
+    //     ));
   }
 
   // final VideoStreamingRepo videoStreamingRepo;

@@ -18,20 +18,26 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$CardGameView {
   String get gameId => throw _privateConstructorUsedError;
   List<CardGameAction> get actions => throw _privateConstructorUsedError;
+  int? get playerPosition => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String gameId, List<CardGameAction> actions)
+    required TResult Function(
+            String gameId, List<CardGameAction> actions, int? playerPosition)
         tarabish,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String gameId, List<CardGameAction> actions)? tarabish,
+    TResult? Function(
+            String gameId, List<CardGameAction> actions, int? playerPosition)?
+        tarabish,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String gameId, List<CardGameAction> actions)? tarabish,
+    TResult Function(
+            String gameId, List<CardGameAction> actions, int? playerPosition)?
+        tarabish,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -63,7 +69,7 @@ abstract class $CardGameViewCopyWith<$Res> {
           CardGameView value, $Res Function(CardGameView) then) =
       _$CardGameViewCopyWithImpl<$Res, CardGameView>;
   @useResult
-  $Res call({String gameId, List<CardGameAction> actions});
+  $Res call({String gameId, List<CardGameAction> actions, int? playerPosition});
 }
 
 /// @nodoc
@@ -81,6 +87,7 @@ class _$CardGameViewCopyWithImpl<$Res, $Val extends CardGameView>
   $Res call({
     Object? gameId = null,
     Object? actions = null,
+    Object? playerPosition = freezed,
   }) {
     return _then(_value.copyWith(
       gameId: null == gameId
@@ -91,6 +98,10 @@ class _$CardGameViewCopyWithImpl<$Res, $Val extends CardGameView>
           ? _value.actions
           : actions // ignore: cast_nullable_to_non_nullable
               as List<CardGameAction>,
+      playerPosition: freezed == playerPosition
+          ? _value.playerPosition
+          : playerPosition // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -103,7 +114,7 @@ abstract class _$$TarabishGameImplCopyWith<$Res>
       __$$TarabishGameImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String gameId, List<CardGameAction> actions});
+  $Res call({String gameId, List<CardGameAction> actions, int? playerPosition});
 }
 
 /// @nodoc
@@ -119,6 +130,7 @@ class __$$TarabishGameImplCopyWithImpl<$Res>
   $Res call({
     Object? gameId = null,
     Object? actions = null,
+    Object? playerPosition = freezed,
   }) {
     return _then(_$TarabishGameImpl(
       gameId: null == gameId
@@ -129,6 +141,10 @@ class __$$TarabishGameImplCopyWithImpl<$Res>
           ? _value._actions
           : actions // ignore: cast_nullable_to_non_nullable
               as List<CardGameAction>,
+      playerPosition: freezed == playerPosition
+          ? _value.playerPosition
+          : playerPosition // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -137,7 +153,9 @@ class __$$TarabishGameImplCopyWithImpl<$Res>
 
 class _$TarabishGameImpl extends _TarabishGame {
   const _$TarabishGameImpl(
-      {required this.gameId, required final List<CardGameAction> actions})
+      {required this.gameId,
+      required final List<CardGameAction> actions,
+      this.playerPosition})
       : _actions = actions,
         super._();
 
@@ -152,8 +170,11 @@ class _$TarabishGameImpl extends _TarabishGame {
   }
 
   @override
+  final int? playerPosition;
+
+  @override
   String toString() {
-    return 'CardGameView.tarabish(gameId: $gameId, actions: $actions)';
+    return 'CardGameView.tarabish(gameId: $gameId, actions: $actions, playerPosition: $playerPosition)';
   }
 
   @override
@@ -162,12 +183,14 @@ class _$TarabishGameImpl extends _TarabishGame {
         (other.runtimeType == runtimeType &&
             other is _$TarabishGameImpl &&
             (identical(other.gameId, gameId) || other.gameId == gameId) &&
-            const DeepCollectionEquality().equals(other._actions, _actions));
+            const DeepCollectionEquality().equals(other._actions, _actions) &&
+            (identical(other.playerPosition, playerPosition) ||
+                other.playerPosition == playerPosition));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, gameId, const DeepCollectionEquality().hash(_actions));
+  int get hashCode => Object.hash(runtimeType, gameId,
+      const DeepCollectionEquality().hash(_actions), playerPosition);
 
   @JsonKey(ignore: true)
   @override
@@ -178,28 +201,33 @@ class _$TarabishGameImpl extends _TarabishGame {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String gameId, List<CardGameAction> actions)
+    required TResult Function(
+            String gameId, List<CardGameAction> actions, int? playerPosition)
         tarabish,
   }) {
-    return tarabish(gameId, actions);
+    return tarabish(gameId, actions, playerPosition);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String gameId, List<CardGameAction> actions)? tarabish,
+    TResult? Function(
+            String gameId, List<CardGameAction> actions, int? playerPosition)?
+        tarabish,
   }) {
-    return tarabish?.call(gameId, actions);
+    return tarabish?.call(gameId, actions, playerPosition);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String gameId, List<CardGameAction> actions)? tarabish,
+    TResult Function(
+            String gameId, List<CardGameAction> actions, int? playerPosition)?
+        tarabish,
     required TResult orElse(),
   }) {
     if (tarabish != null) {
-      return tarabish(gameId, actions);
+      return tarabish(gameId, actions, playerPosition);
     }
     return orElse();
   }
@@ -236,13 +264,16 @@ class _$TarabishGameImpl extends _TarabishGame {
 abstract class _TarabishGame extends CardGameView {
   const factory _TarabishGame(
       {required final String gameId,
-      required final List<CardGameAction> actions}) = _$TarabishGameImpl;
+      required final List<CardGameAction> actions,
+      final int? playerPosition}) = _$TarabishGameImpl;
   const _TarabishGame._() : super._();
 
   @override
   String get gameId;
   @override
   List<CardGameAction> get actions;
+  @override
+  int? get playerPosition;
   @override
   @JsonKey(ignore: true)
   _$$TarabishGameImplCopyWith<_$TarabishGameImpl> get copyWith =>

@@ -14,6 +14,7 @@ class CardGameView with _$CardGameView {
   const factory CardGameView.tarabish({
     required String gameId,
     required List<CardGameAction> actions,
+    int? playerPosition,
     // @Default(false) bool isDemo,
 
     // required List<CardGamemand> actions,

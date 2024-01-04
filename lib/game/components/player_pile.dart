@@ -1,17 +1,47 @@
 import 'dart:ui';
 
 import 'package:flame/components.dart';
+import 'package:flame/events.dart';
+import 'package:flame/text.dart';
+import 'package:flutter/material.dart' as material;
+import 'package:vg_tarabish_flame/bloc/game_in_progress_bloc.dart';
+import 'package:vg_tarabish_flame/bloc/tavern_bloc.dart';
+import 'package:vg_tarabish_flame/game/tavern_world.dart';
+// import 'package:flutter/material.dart';
 
 import '../pile.dart';
 import '../tavern_game.dart';
 import '../entity/card/card.dart';
 
-class PlayerPile extends PositionComponent implements Pile {
-  PlayerPile({required this.message, super.position})
-      : super(size: TavernGames.cardSize) {
+class PlayerPile extends PositionComponent
+    with TapCallbacks, HasWorldReference<TavernWorld>
+    implements Pile {
+  PlayerPile({
+    required this.message,
+    required this.playerPosition,
+    this.player,
+    this.textComponent,
+    super.position,
+  }) : super(size: TavernGames.cardSize) {
     // message.position.setFrom(Vector2(position.x + 10, position.y + 10));
-    add(message);
+    textComponent = TextComponent(
+      text: getMessage(playerPosition),
+      size: Vector2.all(TavernGames.cardWidth), //.bind(context),
+      textRenderer: TextPaint(
+        style: const TextStyle(
+          color: material.Colors.white,
+          fontSize: 200,
+        ),
+      ),
+      // anchor: Anchor.center,
+      priority: 1,
+      position: getMessagePosition(playerPosition), //(i),
+    );
+    add(textComponent!);
   }
+  String? player;
+  TextComponent<TextRenderer>? textComponent;
+  late int playerPosition;
 
   /// Which cards are currently placed onto this pile.
   final List<Card> _cards = [];
@@ -21,7 +51,7 @@ class PlayerPile extends PositionComponent implements Pile {
       Vector2(TavernGames.cardWidth * TavernGames.cardSpacingFaceDown, 0);
   final Vector2 _fanOffset2h =
       Vector2(TavernGames.cardWidth * TavernGames.cardSpacingFaceUp, 0);
-  final TextComponent message;
+  final String message;
 
   //#region Pile API
 
@@ -159,4 +189,60 @@ class PlayerPile extends PositionComponent implements Pile {
   }
 
   //#endregion
+  @override
+  void onTapUp(TapUpEvent event) {
+    if (player == null) {
+      print("invite bot to $message");
+      world.tavernBloc.add(TavernEvent.inviteBot(
+          playerPosition: playerPosition,
+          gameId: world.tavernBloc.currentGameId!));
+    }
+  }
+
+  String getMessage(int i) {
+    switch (i) {
+      case 0:
+        return 'South';
+      case 1:
+        return 'West';
+      case 2:
+        return 'North';
+      case 3:
+        return 'East';
+      default:
+        return 'Unknown';
+    }
+  }
+
+  // Vector2 getMessagePosition(int i) {
+  //   // return Vector2.all(-16);
+  //   switch (i) {
+  //     case 0:
+  //       return Vector2(0, -(parent.cardGap * 2));
+  //     case 1:
+  //       return Vector2(0, -(parent.cardGap * 2));
+  //     case 2:
+  //       return Vector2(0, parent.cardSpaceHeight);
+  //     case 3:
+  //       return Vector2(0, parent.cardSpaceHeight);
+  //     default:
+  //       return Vector2(0, -(parent.cardGap * 2));
+  //   }
+  // }
+
+  Vector2 getMessagePosition(int i) {
+    // return Vector2.all(-16);
+    switch (i) {
+      case 0:
+        return Vector2(0, -(TavernGames.cardGap * 2));
+      case 1:
+        return Vector2(0, -(TavernGames.cardGap * 2));
+      case 2:
+        return Vector2(0, TavernGames.cardSpaceHeight);
+      case 3:
+        return Vector2(0, TavernGames.cardSpaceHeight);
+      default:
+        return Vector2(0, -(TavernGames.cardGap * 2));
+    }
+  }
 }

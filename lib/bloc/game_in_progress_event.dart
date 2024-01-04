@@ -8,9 +8,12 @@ sealed class GameInProgressEvent with _$GameInProgressEvent {
     // @Default(false) bool demo,
   }) = _Initial;
   const factory GameInProgressEvent.pauseStartGame({
-    required String gameId,
+    // required String gameId,
     @Default(false) bool play,
   }) = PauseStartGame;
+  const factory GameInProgressEvent.inviteBot({
+    required int playerPosition,
+  }) = InviteBot;
   // const factory GameInProgressEvent.showGameTypes() = _ShowGameTypes;
   // // const factory TavernEvent.chooseGameType({
   // //   required String gameType,

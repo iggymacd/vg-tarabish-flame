@@ -37,20 +37,9 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
     for (var i = 0; i < 4; i++) {
       parent.playerPiles.add(
         PlayerPile(
+            playerPosition: i,
             position: getPlayerPosition(i),
-            message: TextComponent(
-              text: getMessage(i),
-              size: Vector2.all(TavernGames.cardWidth), //.bind(context),
-              textRenderer: TextPaint(
-                style: TextStyle(
-                  color: material.Colors.white,
-                  fontSize: 200,
-                ),
-              ),
-              // anchor: Anchor.center,
-              priority: 1,
-              position: getMessagePosition(i),
-            )),
+            message: 'Position $i'),
       );
     }
     for (var i = 0; i < 1; i++) {
@@ -117,7 +106,7 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
     await addAll(parent.playerPiles);
     await addAll(parent.trickPiles);
     await addAll(parent.winningTrickPiles);
-    print('cards are ${parent.cards}');
+    // print('cards are ${parent.cards}');
     await addAll(parent.cards);
 
     // Vector2(7 * parent.cardSpaceWidth + parent.cardGap,
@@ -174,15 +163,15 @@ class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
     // return Vector2.all(-16);
     switch (i) {
       case 0:
-        return Vector2(0, -(parent.cardGap * 2));
+        return Vector2(0, -(TavernGames.cardGap * 2));
       case 1:
-        return Vector2(0, -(parent.cardGap * 2));
+        return Vector2(0, -(TavernGames.cardGap * 2));
       case 2:
-        return Vector2(0, parent.cardSpaceHeight);
+        return Vector2(0, TavernGames.cardSpaceHeight);
       case 3:
-        return Vector2(0, parent.cardSpaceHeight);
+        return Vector2(0, TavernGames.cardSpaceHeight);
       default:
-        return Vector2(0, -(parent.cardGap * 2));
+        return Vector2(0, -(TavernGames.cardGap * 2));
     }
   }
 

@@ -2,12 +2,15 @@ import 'dart:async';
 import 'dart:math';
 // import 'dart:math';
 
+import 'package:random_name_generator/random_name_generator.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:uuid/uuid.dart';
+import 'package:vg_tarabish_flame/bloc/game_in_progress_bloc.dart';
+import 'package:vg_tarabish_flame/game/card_game_controller_bloc.dart';
 import 'package:vg_tarabish_flame/game/entity/game/card_game.dart';
 import 'package:vg_tarabish_flame/game/entity/game/view/card_game_action.dart';
 import 'package:vg_tarabish_flame/game/suit.dart';
-import 'package:vg_tarabish_flame/game/tavern_game.dart';
+// import 'package:vg_tarabish_flame/game/tavern_game.dart';
 
 /// {@template tavern_repository}
 /// Repository to manage tavern.
@@ -18,7 +21,7 @@ class TavernRepository {
     // Initialize the stream controllers in the constructor
     _tavernGamesController = StreamController<List<TavernGame>>.broadcast();
     _tavernMembersController = StreamController<List<TavernMember>>.broadcast();
-    _currentGamesInProgressMap = <String, BehaviorSubject<CardGameView>>{};
+    _cardGameControllerBlocMap = <String, CardGameControllerBloc>{};
 
     // Fetch initial data and add it to the streams
     fetchTavernGames().then((tavernGames) {
@@ -32,7 +35,7 @@ class TavernRepository {
 
   late StreamController<List<TavernGame>> _tavernGamesController;
   late StreamController<List<TavernMember>> _tavernMembersController;
-  late Map<String, Subject<CardGameView>> _currentGamesInProgressMap;
+  late Map<String, CardGameControllerBloc> _cardGameControllerBlocMap;
 
   /// Stream of [TavernGame]s.
   Stream<List<TavernGame>> get tavernGamesStream =>
@@ -77,8 +80,9 @@ class TavernRepository {
   /// Stream of [CardGameView] state changes - if gameId is not found in
   /// _currentGamesInProgressMap, then throw an error
   Stream<CardGameView> listenCardGame({required String gameId}) {
-    if (_currentGamesInProgressMap.containsKey(gameId)) {
-      return _currentGamesInProgressMap[gameId]!.stream;
+    if (_cardGameControllerBlocMap.containsKey(gameId)) {
+      return _cardGameControllerBlocMap[gameId]!
+          .map((event) => event.state.toView());
     } else {
       throw Exception('Game not found');
     }
@@ -92,9 +96,9 @@ class TavernRepository {
   }) {
     // print("demo mode is $demo and game type is $gameType");
     if (demo) {
-      _currentGamesInProgressMap.putIfAbsent(
+      _cardGameControllerBlocMap.putIfAbsent(
         'demo',
-        () => generateDemo(gameType: gameType),
+        () => CardGameControllerBloc(),
       );
       return 'demo';
       // return BehaviorSubject<CardGame>.seeded(
@@ -114,20 +118,21 @@ class TavernRepository {
     } else {
       uniqueId = id;
     }
-    _currentGamesInProgressMap.putIfAbsent(
+    _cardGameControllerBlocMap.putIfAbsent(
       uniqueId,
-      () => BehaviorSubject<CardGameView>.seeded(
-        CardGameView.tarabish(
-          gameId: uniqueId,
-          actions: <CardGameAction>[
-            // Shuffle(),
-            // const Deal(cardIds: [1, 2, 3], playerId: 1),
-            // const Deal(cardIds: [4, 5, 6], playerId: 2),
-            // const Deal(cardIds: [7, 8, 9], playerId: 3),
-            // const Deal(cardIds: [28, 11, 22], playerId: 0, flip: defaultFlip),
-          ],
-        ),
-      ),
+      () => BehaviorSubject<CardGameControllerBloc>.seeded(
+          CardGameControllerBloc(this)
+          // CardGameView.tarabish(
+          //   gameId: uniqueId,
+          //   actions: <CardGameAction>[
+          //     // Shuffle(),
+          //     // const Deal(cardIds: [1, 2, 3], playerId: 1),
+          //     // const Deal(cardIds: [4, 5, 6], playerId: 2),
+          //     // const Deal(cardIds: [7, 8, 9], playerId: 3),
+          //     // const Deal(cardIds: [28, 11, 22], playerId: 0, flip: defaultFlip),
+          //   ],
+          // ),
+          ),
     );
     return uniqueId;
   }
@@ -297,6 +302,33 @@ class TavernRepository {
 
     return inputList.sublist(startIndex, endIndex);
 // }
+  }
+
+  FutureOr<void> inviteBot({
+    required String gameId,
+    required int playerPosition,
+  }) async {
+    // TODO: implement inviteBot
+    print(
+        'inviting bot to play game for game id $gameId at position $playerPosition');
+    if (_cardGameControllerBlocMap.containsKey(gameId)) {
+      // return
+      var currentGameView = _cardGameControllerBlocMap[gameId]!.value;
+      _cardGameControllerBlocMap[gameId]!.sink.add(currentGameView.copyWith(
+            // gameId: gameId,
+            playerPosition: playerPosition,
+            // actions: currentGameView.actions,
+          ));
+    } else {
+      throw Exception('Game not found');
+    }
+    // throw UnimplementedError();
+  }
+
+  String generateAiBotName() {
+    final randomNames = RandomNames(Zone.us);
+    return randomNames.fullName();
+    // throw UnimplementedError();
   }
 }
 

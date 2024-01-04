@@ -25,6 +25,7 @@ mixin _$TavernEvent {
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
         tavernMembersUpdated,
+    required TResult Function(String gameId, int playerPosition) inviteBot,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -34,6 +35,7 @@ mixin _$TavernEvent {
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
+    TResult? Function(String gameId, int playerPosition)? inviteBot,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -43,6 +45,7 @@ mixin _$TavernEvent {
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
+    TResult Function(String gameId, int playerPosition)? inviteBot,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -53,6 +56,7 @@ mixin _$TavernEvent {
     required TResult Function(_ShowGameTypes value) showGameTypes,
     required TResult Function(_TavernGamesUpdated value) tavernGamesUpdated,
     required TResult Function(_TavernMembersUpdated value) tavernMembersUpdated,
+    required TResult Function(InviteBot value) inviteBot,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -62,6 +66,7 @@ mixin _$TavernEvent {
     TResult? Function(_ShowGameTypes value)? showGameTypes,
     TResult? Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult? Function(_TavernMembersUpdated value)? tavernMembersUpdated,
+    TResult? Function(InviteBot value)? inviteBot,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,6 +76,7 @@ mixin _$TavernEvent {
     TResult Function(_ShowGameTypes value)? showGameTypes,
     TResult Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult Function(_TavernMembersUpdated value)? tavernMembersUpdated,
+    TResult Function(InviteBot value)? inviteBot,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -186,6 +192,7 @@ class _$NewGameImpl implements _NewGame {
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
         tavernMembersUpdated,
+    required TResult Function(String gameId, int playerPosition) inviteBot,
   }) {
     return newGame(gameId, gameType, demo);
   }
@@ -198,6 +205,7 @@ class _$NewGameImpl implements _NewGame {
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
+    TResult? Function(String gameId, int playerPosition)? inviteBot,
   }) {
     return newGame?.call(gameId, gameType, demo);
   }
@@ -210,6 +218,7 @@ class _$NewGameImpl implements _NewGame {
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
+    TResult Function(String gameId, int playerPosition)? inviteBot,
     required TResult orElse(),
   }) {
     if (newGame != null) {
@@ -226,6 +235,7 @@ class _$NewGameImpl implements _NewGame {
     required TResult Function(_ShowGameTypes value) showGameTypes,
     required TResult Function(_TavernGamesUpdated value) tavernGamesUpdated,
     required TResult Function(_TavernMembersUpdated value) tavernMembersUpdated,
+    required TResult Function(InviteBot value) inviteBot,
   }) {
     return newGame(this);
   }
@@ -238,6 +248,7 @@ class _$NewGameImpl implements _NewGame {
     TResult? Function(_ShowGameTypes value)? showGameTypes,
     TResult? Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult? Function(_TavernMembersUpdated value)? tavernMembersUpdated,
+    TResult? Function(InviteBot value)? inviteBot,
   }) {
     return newGame?.call(this);
   }
@@ -250,6 +261,7 @@ class _$NewGameImpl implements _NewGame {
     TResult Function(_ShowGameTypes value)? showGameTypes,
     TResult Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult Function(_TavernMembersUpdated value)? tavernMembersUpdated,
+    TResult Function(InviteBot value)? inviteBot,
     required TResult orElse(),
   }) {
     if (newGame != null) {
@@ -318,6 +330,7 @@ class _$GoToLobbyImpl implements GoToLobby {
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
         tavernMembersUpdated,
+    required TResult Function(String gameId, int playerPosition) inviteBot,
   }) {
     return goToLobby();
   }
@@ -330,6 +343,7 @@ class _$GoToLobbyImpl implements GoToLobby {
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
+    TResult? Function(String gameId, int playerPosition)? inviteBot,
   }) {
     return goToLobby?.call();
   }
@@ -342,6 +356,7 @@ class _$GoToLobbyImpl implements GoToLobby {
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
+    TResult Function(String gameId, int playerPosition)? inviteBot,
     required TResult orElse(),
   }) {
     if (goToLobby != null) {
@@ -358,6 +373,7 @@ class _$GoToLobbyImpl implements GoToLobby {
     required TResult Function(_ShowGameTypes value) showGameTypes,
     required TResult Function(_TavernGamesUpdated value) tavernGamesUpdated,
     required TResult Function(_TavernMembersUpdated value) tavernMembersUpdated,
+    required TResult Function(InviteBot value) inviteBot,
   }) {
     return goToLobby(this);
   }
@@ -370,6 +386,7 @@ class _$GoToLobbyImpl implements GoToLobby {
     TResult? Function(_ShowGameTypes value)? showGameTypes,
     TResult? Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult? Function(_TavernMembersUpdated value)? tavernMembersUpdated,
+    TResult? Function(InviteBot value)? inviteBot,
   }) {
     return goToLobby?.call(this);
   }
@@ -382,6 +399,7 @@ class _$GoToLobbyImpl implements GoToLobby {
     TResult Function(_ShowGameTypes value)? showGameTypes,
     TResult Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult Function(_TavernMembersUpdated value)? tavernMembersUpdated,
+    TResult Function(InviteBot value)? inviteBot,
     required TResult orElse(),
   }) {
     if (goToLobby != null) {
@@ -440,6 +458,7 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
         tavernMembersUpdated,
+    required TResult Function(String gameId, int playerPosition) inviteBot,
   }) {
     return showGameTypes();
   }
@@ -452,6 +471,7 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
+    TResult? Function(String gameId, int playerPosition)? inviteBot,
   }) {
     return showGameTypes?.call();
   }
@@ -464,6 +484,7 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
+    TResult Function(String gameId, int playerPosition)? inviteBot,
     required TResult orElse(),
   }) {
     if (showGameTypes != null) {
@@ -480,6 +501,7 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
     required TResult Function(_ShowGameTypes value) showGameTypes,
     required TResult Function(_TavernGamesUpdated value) tavernGamesUpdated,
     required TResult Function(_TavernMembersUpdated value) tavernMembersUpdated,
+    required TResult Function(InviteBot value) inviteBot,
   }) {
     return showGameTypes(this);
   }
@@ -492,6 +514,7 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
     TResult? Function(_ShowGameTypes value)? showGameTypes,
     TResult? Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult? Function(_TavernMembersUpdated value)? tavernMembersUpdated,
+    TResult? Function(InviteBot value)? inviteBot,
   }) {
     return showGameTypes?.call(this);
   }
@@ -504,6 +527,7 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
     TResult Function(_ShowGameTypes value)? showGameTypes,
     TResult Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult Function(_TavernMembersUpdated value)? tavernMembersUpdated,
+    TResult Function(InviteBot value)? inviteBot,
     required TResult orElse(),
   }) {
     if (showGameTypes != null) {
@@ -597,6 +621,7 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
         tavernMembersUpdated,
+    required TResult Function(String gameId, int playerPosition) inviteBot,
   }) {
     return tavernGamesUpdated(tavernGames);
   }
@@ -609,6 +634,7 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
+    TResult? Function(String gameId, int playerPosition)? inviteBot,
   }) {
     return tavernGamesUpdated?.call(tavernGames);
   }
@@ -621,6 +647,7 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
+    TResult Function(String gameId, int playerPosition)? inviteBot,
     required TResult orElse(),
   }) {
     if (tavernGamesUpdated != null) {
@@ -637,6 +664,7 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
     required TResult Function(_ShowGameTypes value) showGameTypes,
     required TResult Function(_TavernGamesUpdated value) tavernGamesUpdated,
     required TResult Function(_TavernMembersUpdated value) tavernMembersUpdated,
+    required TResult Function(InviteBot value) inviteBot,
   }) {
     return tavernGamesUpdated(this);
   }
@@ -649,6 +677,7 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
     TResult? Function(_ShowGameTypes value)? showGameTypes,
     TResult? Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult? Function(_TavernMembersUpdated value)? tavernMembersUpdated,
+    TResult? Function(InviteBot value)? inviteBot,
   }) {
     return tavernGamesUpdated?.call(this);
   }
@@ -661,6 +690,7 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
     TResult Function(_ShowGameTypes value)? showGameTypes,
     TResult Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult Function(_TavernMembersUpdated value)? tavernMembersUpdated,
+    TResult Function(InviteBot value)? inviteBot,
     required TResult orElse(),
   }) {
     if (tavernGamesUpdated != null) {
@@ -762,6 +792,7 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
         tavernMembersUpdated,
+    required TResult Function(String gameId, int playerPosition) inviteBot,
   }) {
     return tavernMembersUpdated(tavernMembers);
   }
@@ -774,6 +805,7 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
+    TResult? Function(String gameId, int playerPosition)? inviteBot,
   }) {
     return tavernMembersUpdated?.call(tavernMembers);
   }
@@ -786,6 +818,7 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
+    TResult Function(String gameId, int playerPosition)? inviteBot,
     required TResult orElse(),
   }) {
     if (tavernMembersUpdated != null) {
@@ -802,6 +835,7 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
     required TResult Function(_ShowGameTypes value) showGameTypes,
     required TResult Function(_TavernGamesUpdated value) tavernGamesUpdated,
     required TResult Function(_TavernMembersUpdated value) tavernMembersUpdated,
+    required TResult Function(InviteBot value) inviteBot,
   }) {
     return tavernMembersUpdated(this);
   }
@@ -814,6 +848,7 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
     TResult? Function(_ShowGameTypes value)? showGameTypes,
     TResult? Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult? Function(_TavernMembersUpdated value)? tavernMembersUpdated,
+    TResult? Function(InviteBot value)? inviteBot,
   }) {
     return tavernMembersUpdated?.call(this);
   }
@@ -826,6 +861,7 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
     TResult Function(_ShowGameTypes value)? showGameTypes,
     TResult Function(_TavernGamesUpdated value)? tavernGamesUpdated,
     TResult Function(_TavernMembersUpdated value)? tavernMembersUpdated,
+    TResult Function(InviteBot value)? inviteBot,
     required TResult orElse(),
   }) {
     if (tavernMembersUpdated != null) {
@@ -844,6 +880,177 @@ abstract class _TavernMembersUpdated implements TavernEvent {
   @JsonKey(ignore: true)
   _$$TavernMembersUpdatedImplCopyWith<_$TavernMembersUpdatedImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$InviteBotImplCopyWith<$Res> {
+  factory _$$InviteBotImplCopyWith(
+          _$InviteBotImpl value, $Res Function(_$InviteBotImpl) then) =
+      __$$InviteBotImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String gameId, int playerPosition});
+}
+
+/// @nodoc
+class __$$InviteBotImplCopyWithImpl<$Res>
+    extends _$TavernEventCopyWithImpl<$Res, _$InviteBotImpl>
+    implements _$$InviteBotImplCopyWith<$Res> {
+  __$$InviteBotImplCopyWithImpl(
+      _$InviteBotImpl _value, $Res Function(_$InviteBotImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? gameId = null,
+    Object? playerPosition = null,
+  }) {
+    return _then(_$InviteBotImpl(
+      gameId: null == gameId
+          ? _value.gameId
+          : gameId // ignore: cast_nullable_to_non_nullable
+              as String,
+      playerPosition: null == playerPosition
+          ? _value.playerPosition
+          : playerPosition // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$InviteBotImpl implements InviteBot {
+  const _$InviteBotImpl({required this.gameId, required this.playerPosition});
+
+  @override
+  final String gameId;
+  @override
+  final int playerPosition;
+
+  @override
+  String toString() {
+    return 'TavernEvent.inviteBot(gameId: $gameId, playerPosition: $playerPosition)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$InviteBotImpl &&
+            (identical(other.gameId, gameId) || other.gameId == gameId) &&
+            (identical(other.playerPosition, playerPosition) ||
+                other.playerPosition == playerPosition));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, gameId, playerPosition);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InviteBotImplCopyWith<_$InviteBotImpl> get copyWith =>
+      __$$InviteBotImplCopyWithImpl<_$InviteBotImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String gameId, String gameType, bool demo)
+        newGame,
+    required TResult Function() goToLobby,
+    required TResult Function() showGameTypes,
+    required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
+    required TResult Function(List<TavernMember> tavernMembers)
+        tavernMembersUpdated,
+    required TResult Function(String gameId, int playerPosition) inviteBot,
+  }) {
+    return inviteBot(gameId, playerPosition);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String gameId, String gameType, bool demo)? newGame,
+    TResult? Function()? goToLobby,
+    TResult? Function()? showGameTypes,
+    TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
+    TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
+    TResult? Function(String gameId, int playerPosition)? inviteBot,
+  }) {
+    return inviteBot?.call(gameId, playerPosition);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String gameId, String gameType, bool demo)? newGame,
+    TResult Function()? goToLobby,
+    TResult Function()? showGameTypes,
+    TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
+    TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
+    TResult Function(String gameId, int playerPosition)? inviteBot,
+    required TResult orElse(),
+  }) {
+    if (inviteBot != null) {
+      return inviteBot(gameId, playerPosition);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_NewGame value) newGame,
+    required TResult Function(GoToLobby value) goToLobby,
+    required TResult Function(_ShowGameTypes value) showGameTypes,
+    required TResult Function(_TavernGamesUpdated value) tavernGamesUpdated,
+    required TResult Function(_TavernMembersUpdated value) tavernMembersUpdated,
+    required TResult Function(InviteBot value) inviteBot,
+  }) {
+    return inviteBot(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_NewGame value)? newGame,
+    TResult? Function(GoToLobby value)? goToLobby,
+    TResult? Function(_ShowGameTypes value)? showGameTypes,
+    TResult? Function(_TavernGamesUpdated value)? tavernGamesUpdated,
+    TResult? Function(_TavernMembersUpdated value)? tavernMembersUpdated,
+    TResult? Function(InviteBot value)? inviteBot,
+  }) {
+    return inviteBot?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_NewGame value)? newGame,
+    TResult Function(GoToLobby value)? goToLobby,
+    TResult Function(_ShowGameTypes value)? showGameTypes,
+    TResult Function(_TavernGamesUpdated value)? tavernGamesUpdated,
+    TResult Function(_TavernMembersUpdated value)? tavernMembersUpdated,
+    TResult Function(InviteBot value)? inviteBot,
+    required TResult orElse(),
+  }) {
+    if (inviteBot != null) {
+      return inviteBot(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InviteBot implements TavernEvent {
+  const factory InviteBot(
+      {required final String gameId,
+      required final int playerPosition}) = _$InviteBotImpl;
+
+  String get gameId;
+  int get playerPosition;
+  @JsonKey(ignore: true)
+  _$$InviteBotImplCopyWith<_$InviteBotImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc

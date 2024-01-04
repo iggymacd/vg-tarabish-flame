@@ -16,23 +16,25 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$GameInProgressEvent {
-  String get gameId => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String gameId) initial,
-    required TResult Function(String gameId, bool play) pauseStartGame,
+    required TResult Function(bool play) pauseStartGame,
+    required TResult Function(int playerPosition) inviteBot,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String gameId)? initial,
-    TResult? Function(String gameId, bool play)? pauseStartGame,
+    TResult? Function(bool play)? pauseStartGame,
+    TResult? Function(int playerPosition)? inviteBot,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String gameId)? initial,
-    TResult Function(String gameId, bool play)? pauseStartGame,
+    TResult Function(bool play)? pauseStartGame,
+    TResult Function(int playerPosition)? inviteBot,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,24 +42,23 @@ mixin _$GameInProgressEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(PauseStartGame value) pauseStartGame,
+    required TResult Function(InviteBot value) inviteBot,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(PauseStartGame value)? pauseStartGame,
+    TResult? Function(InviteBot value)? inviteBot,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(PauseStartGame value)? pauseStartGame,
+    TResult Function(InviteBot value)? inviteBot,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $GameInProgressEventCopyWith<GameInProgressEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -66,8 +67,6 @@ abstract class $GameInProgressEventCopyWith<$Res> {
   factory $GameInProgressEventCopyWith(
           GameInProgressEvent value, $Res Function(GameInProgressEvent) then) =
       _$GameInProgressEventCopyWithImpl<$Res, GameInProgressEvent>;
-  @useResult
-  $Res call({String gameId});
 }
 
 /// @nodoc
@@ -79,28 +78,13 @@ class _$GameInProgressEventCopyWithImpl<$Res, $Val extends GameInProgressEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? gameId = null,
-  }) {
-    return _then(_value.copyWith(
-      gameId: null == gameId
-          ? _value.gameId
-          : gameId // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$InitialImplCopyWith<$Res>
-    implements $GameInProgressEventCopyWith<$Res> {
+abstract class _$$InitialImplCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
           _$InitialImpl value, $Res Function(_$InitialImpl) then) =
       __$$InitialImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({String gameId});
 }
@@ -162,7 +146,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String gameId) initial,
-    required TResult Function(String gameId, bool play) pauseStartGame,
+    required TResult Function(bool play) pauseStartGame,
+    required TResult Function(int playerPosition) inviteBot,
   }) {
     return initial(gameId);
   }
@@ -171,7 +156,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String gameId)? initial,
-    TResult? Function(String gameId, bool play)? pauseStartGame,
+    TResult? Function(bool play)? pauseStartGame,
+    TResult? Function(int playerPosition)? inviteBot,
   }) {
     return initial?.call(gameId);
   }
@@ -180,7 +166,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String gameId)? initial,
-    TResult Function(String gameId, bool play)? pauseStartGame,
+    TResult Function(bool play)? pauseStartGame,
+    TResult Function(int playerPosition)? inviteBot,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -194,6 +181,7 @@ class _$InitialImpl implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(PauseStartGame value) pauseStartGame,
+    required TResult Function(InviteBot value) inviteBot,
   }) {
     return initial(this);
   }
@@ -203,6 +191,7 @@ class _$InitialImpl implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(PauseStartGame value)? pauseStartGame,
+    TResult? Function(InviteBot value)? inviteBot,
   }) {
     return initial?.call(this);
   }
@@ -212,6 +201,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(PauseStartGame value)? pauseStartGame,
+    TResult Function(InviteBot value)? inviteBot,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -224,23 +214,19 @@ class _$InitialImpl implements _Initial {
 abstract class _Initial implements GameInProgressEvent {
   const factory _Initial({final String gameId}) = _$InitialImpl;
 
-  @override
   String get gameId;
-  @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$PauseStartGameImplCopyWith<$Res>
-    implements $GameInProgressEventCopyWith<$Res> {
+abstract class _$$PauseStartGameImplCopyWith<$Res> {
   factory _$$PauseStartGameImplCopyWith(_$PauseStartGameImpl value,
           $Res Function(_$PauseStartGameImpl) then) =
       __$$PauseStartGameImplCopyWithImpl<$Res>;
-  @override
   @useResult
-  $Res call({String gameId, bool play});
+  $Res call({bool play});
 }
 
 /// @nodoc
@@ -254,14 +240,9 @@ class __$$PauseStartGameImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? gameId = null,
     Object? play = null,
   }) {
     return _then(_$PauseStartGameImpl(
-      gameId: null == gameId
-          ? _value.gameId
-          : gameId // ignore: cast_nullable_to_non_nullable
-              as String,
       play: null == play
           ? _value.play
           : play // ignore: cast_nullable_to_non_nullable
@@ -273,17 +254,16 @@ class __$$PauseStartGameImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PauseStartGameImpl implements PauseStartGame {
-  const _$PauseStartGameImpl({required this.gameId, this.play = false});
+  const _$PauseStartGameImpl({this.play = false});
 
-  @override
-  final String gameId;
+// required String gameId,
   @override
   @JsonKey()
   final bool play;
 
   @override
   String toString() {
-    return 'GameInProgressEvent.pauseStartGame(gameId: $gameId, play: $play)';
+    return 'GameInProgressEvent.pauseStartGame(play: $play)';
   }
 
   @override
@@ -291,12 +271,11 @@ class _$PauseStartGameImpl implements PauseStartGame {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PauseStartGameImpl &&
-            (identical(other.gameId, gameId) || other.gameId == gameId) &&
             (identical(other.play, play) || other.play == play));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, gameId, play);
+  int get hashCode => Object.hash(runtimeType, play);
 
   @JsonKey(ignore: true)
   @override
@@ -309,29 +288,32 @@ class _$PauseStartGameImpl implements PauseStartGame {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String gameId) initial,
-    required TResult Function(String gameId, bool play) pauseStartGame,
+    required TResult Function(bool play) pauseStartGame,
+    required TResult Function(int playerPosition) inviteBot,
   }) {
-    return pauseStartGame(gameId, play);
+    return pauseStartGame(play);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String gameId)? initial,
-    TResult? Function(String gameId, bool play)? pauseStartGame,
+    TResult? Function(bool play)? pauseStartGame,
+    TResult? Function(int playerPosition)? inviteBot,
   }) {
-    return pauseStartGame?.call(gameId, play);
+    return pauseStartGame?.call(play);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String gameId)? initial,
-    TResult Function(String gameId, bool play)? pauseStartGame,
+    TResult Function(bool play)? pauseStartGame,
+    TResult Function(int playerPosition)? inviteBot,
     required TResult orElse(),
   }) {
     if (pauseStartGame != null) {
-      return pauseStartGame(gameId, play);
+      return pauseStartGame(play);
     }
     return orElse();
   }
@@ -341,6 +323,7 @@ class _$PauseStartGameImpl implements PauseStartGame {
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
     required TResult Function(PauseStartGame value) pauseStartGame,
+    required TResult Function(InviteBot value) inviteBot,
   }) {
     return pauseStartGame(this);
   }
@@ -350,6 +333,7 @@ class _$PauseStartGameImpl implements PauseStartGame {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
     TResult? Function(PauseStartGame value)? pauseStartGame,
+    TResult? Function(InviteBot value)? inviteBot,
   }) {
     return pauseStartGame?.call(this);
   }
@@ -359,6 +343,7 @@ class _$PauseStartGameImpl implements PauseStartGame {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
     TResult Function(PauseStartGame value)? pauseStartGame,
+    TResult Function(InviteBot value)? inviteBot,
     required TResult orElse(),
   }) {
     if (pauseStartGame != null) {
@@ -369,15 +354,153 @@ class _$PauseStartGameImpl implements PauseStartGame {
 }
 
 abstract class PauseStartGame implements GameInProgressEvent {
-  const factory PauseStartGame(
-      {required final String gameId, final bool play}) = _$PauseStartGameImpl;
+  const factory PauseStartGame({final bool play}) = _$PauseStartGameImpl;
 
-  @override
-  String get gameId;
+// required String gameId,
   bool get play;
-  @override
   @JsonKey(ignore: true)
   _$$PauseStartGameImplCopyWith<_$PauseStartGameImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$InviteBotImplCopyWith<$Res> {
+  factory _$$InviteBotImplCopyWith(
+          _$InviteBotImpl value, $Res Function(_$InviteBotImpl) then) =
+      __$$InviteBotImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int playerPosition});
+}
+
+/// @nodoc
+class __$$InviteBotImplCopyWithImpl<$Res>
+    extends _$GameInProgressEventCopyWithImpl<$Res, _$InviteBotImpl>
+    implements _$$InviteBotImplCopyWith<$Res> {
+  __$$InviteBotImplCopyWithImpl(
+      _$InviteBotImpl _value, $Res Function(_$InviteBotImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? playerPosition = null,
+  }) {
+    return _then(_$InviteBotImpl(
+      playerPosition: null == playerPosition
+          ? _value.playerPosition
+          : playerPosition // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$InviteBotImpl implements InviteBot {
+  const _$InviteBotImpl({required this.playerPosition});
+
+  @override
+  final int playerPosition;
+
+  @override
+  String toString() {
+    return 'GameInProgressEvent.inviteBot(playerPosition: $playerPosition)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$InviteBotImpl &&
+            (identical(other.playerPosition, playerPosition) ||
+                other.playerPosition == playerPosition));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, playerPosition);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InviteBotImplCopyWith<_$InviteBotImpl> get copyWith =>
+      __$$InviteBotImplCopyWithImpl<_$InviteBotImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String gameId) initial,
+    required TResult Function(bool play) pauseStartGame,
+    required TResult Function(int playerPosition) inviteBot,
+  }) {
+    return inviteBot(playerPosition);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String gameId)? initial,
+    TResult? Function(bool play)? pauseStartGame,
+    TResult? Function(int playerPosition)? inviteBot,
+  }) {
+    return inviteBot?.call(playerPosition);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String gameId)? initial,
+    TResult Function(bool play)? pauseStartGame,
+    TResult Function(int playerPosition)? inviteBot,
+    required TResult orElse(),
+  }) {
+    if (inviteBot != null) {
+      return inviteBot(playerPosition);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(PauseStartGame value) pauseStartGame,
+    required TResult Function(InviteBot value) inviteBot,
+  }) {
+    return inviteBot(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(PauseStartGame value)? pauseStartGame,
+    TResult? Function(InviteBot value)? inviteBot,
+  }) {
+    return inviteBot?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(PauseStartGame value)? pauseStartGame,
+    TResult Function(InviteBot value)? inviteBot,
+    required TResult orElse(),
+  }) {
+    if (inviteBot != null) {
+      return inviteBot(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InviteBot implements GameInProgressEvent {
+  const factory InviteBot({required final int playerPosition}) =
+      _$InviteBotImpl;
+
+  int get playerPosition;
+  @JsonKey(ignore: true)
+  _$$InviteBotImplCopyWith<_$InviteBotImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

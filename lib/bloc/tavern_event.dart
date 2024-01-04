@@ -18,6 +18,10 @@ sealed class TavernEvent with _$TavernEvent {
   const factory TavernEvent.tavernMembersUpdated({
     required List<TavernMember> tavernMembers,
   }) = _TavernMembersUpdated;
+  const factory TavernEvent.inviteBot({
+    required String gameId,
+    required int playerPosition,
+  }) = InviteBot;
   // static TavernEvent tavernGamesUpdated(List<TavernGame> tavernGames) {}
 
   // static TavernEvent tavernMembersUpdated(List<TavernMember> tavernMembers) {}
