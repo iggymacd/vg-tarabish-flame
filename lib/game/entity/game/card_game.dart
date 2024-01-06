@@ -8,7 +8,7 @@ import 'package:vg_tarabish_flame/game/entity/game/view/card_game_action.dart';
 part 'card_game.freezed.dart';
 
 @freezed
-class CardGameView with _$CardGameView {
+sealed class CardGameView with _$CardGameView {
   // var currentStep;
   const CardGameView._();
   const factory CardGameView.tarabish({
@@ -24,11 +24,63 @@ class CardGameView with _$CardGameView {
     // required int tarabishDraw,
     // required int action,
   }) = _TarabishGame;
+  const factory CardGameView.initial() = _Initial;
+  const factory CardGameView.loading() = _Loading;
+  const factory CardGameView.error(String error) = _Error;
+  const factory CardGameView.readyToStart() = _ReadyToStart;
+  const factory CardGameView.inProgress() = _InProgress;
+  const factory CardGameView.gameOver() = _GameOver;
 
-  int get lastActionIndex => actions.length - 1;
+  int get lastActionIndex {
+    switch (this) {
+      // case CardGameView.initial:
+      //   return -1;
+      // case CardGameView.loading:
+      //   return -1;
+      // case CardGameView.error:
+      //   return -1;
+      // case CardGameView.readyToStart:
+      //   return -1;
+      // case CardGameView.inProgress:
+      //   return -1;
+      // case CardGameView.gameOver:
+      //   return -1;
+      // break;
+      // default:
+      case final _TarabishGame t:
+        return t.actions.length - 1;
+      default:
+        return -1;
+      // return actions.length - 1;
+      // TODO: Handle this case.
+    }
+    // return actions.length - 1;
+  }
 
-  CardGameAction? get lastAction => actions.lastOrNull;
-
+  CardGameAction? get lastAction {
+    switch (this) {
+      // case CardGameView.initial:
+      //   return null;
+      // case CardGameView.loading:
+      //   return null;
+      // case CardGameView.error:
+      //   return null;
+      // case CardGameView.readyToStart:
+      //   return null;
+      // case CardGameView.inProgress:
+      //   return null;
+      // case CardGameView.gameOver:
+      //   return null;
+      // break;
+      // default:
+      case final _TarabishGame t:
+        return t.actions.lastOrNull;
+      default:
+        return null;
+      // return actions.lastOrNull;}
+    }
+  }
+}
   // CardGameAction? get currentAction => actions.elementAtOrNull(currentAction);
 
   // CardGame()
@@ -85,4 +137,4 @@ class CardGameView with _$CardGameView {
   //     stock.acquireCard(cards[n]);
   //   }
   // }
-}
+// }

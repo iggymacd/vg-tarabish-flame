@@ -6,7 +6,8 @@ import 'package:vg_tarabish_flame/game/entity/game/card_game.dart';
 part 'card_game_state.freezed.dart';
 
 @freezed
-class CardGameState with _$CardGameState {
+sealed class CardGameState with _$CardGameState {
+  const CardGameState._();
   const factory CardGameState.initial() = _Initial;
   const factory CardGameState.loading() = _Loading;
   const factory CardGameState.error(String error) = _Error;
@@ -15,6 +16,23 @@ class CardGameState with _$CardGameState {
   const factory CardGameState.gameOver() = _GameOver;
 
   CardGameView toView() {
-    return CardGameView.tarabish(gameId: 'gameId', actions: []);
+    switch (this) {
+      // default:
+      case _Initial():
+      // TODO: Handle this case.
+      case _Loading():
+      // TODO: Handle this case.
+      case _Error():
+      // TODO: Handle this case.
+      case _ReadyToStart():
+      // TODO: Handle this case.
+      case _InProgress():
+      // TODO: Handle this case.
+      case _GameOver():
+      // TODO: Handle this case.
+      default:
+        return CardGameView.tarabish(gameId: 'gameId', actions: []);
+    }
+    // return CardGameView.tarabish(gameId: 'gameId', actions: []);
   }
 }

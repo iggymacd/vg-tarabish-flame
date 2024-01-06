@@ -136,10 +136,12 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
     //   currentGameId: _currentGameId!,
     // );
     emit(TavernState.currentGameInProgressUpdated(
-        gameInProgressBloc: GameInProgressBloc(
-      tavernRepository: tavernRepository,
-      currentGameId: currentGameId!,
-    )..add(const GameInProgressEvent.pauseStartGame(play: true))));
+      gameInProgressBloc: GameInProgressBloc(
+        tavernRepository: tavernRepository,
+        currentGameId: currentGameId!,
+      ),
+    ));
+    // ..add(const GameInProgressEvent.pauseStartGame(play: true))));
     // gameInProgressBloc.
     //')
     // final String gameId = event.gameId; // Extract gameId from the event

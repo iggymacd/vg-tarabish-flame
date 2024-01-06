@@ -81,60 +81,68 @@ class TavernRepository {
   /// _currentGamesInProgressMap, then throw an error
   Stream<CardGameView> listenCardGame({required String gameId}) {
     if (_cardGameControllerBlocMap.containsKey(gameId)) {
-      return _cardGameControllerBlocMap[gameId]!
-          .map((event) => event.state.toView());
+      final gameController = _cardGameControllerBlocMap[gameId]!;
+      return gameController.stream.map((event) => event.toView());
     } else {
       throw Exception('Game not found');
     }
   }
 
-  // Stream<CardGame> newOrExistingGameInProgress({
+  /// Stream of [CardGameView])
+  //   return _cardGameControllerBlocMap[gameId]!
+  //       .map((event) => event.state.toView());
+  // } else {
+  //   throw Exception('Game not found');
+  // }
+// }
+
+// Stream<CardGame> newOrExistingGameInProgress({
   String newOrExistingGameInProgress({
     String id = '',
     bool demo = false,
     String gameType = 'solitaire',
   }) {
     // print("demo mode is $demo and game type is $gameType");
-    if (demo) {
-      _cardGameControllerBlocMap.putIfAbsent(
-        'demo',
-        () => CardGameControllerBloc(),
-      );
-      return 'demo';
-      // return BehaviorSubject<CardGame>.seeded(
-      //     const CardGame.tarabish(gameId: 'demo', actions: <CardGameAction>[
-      //   Shuffle(),
-      //   Deal(cardIds: [1, 2, 3], playerId: 1),
-      //   Deal(cardIds: [4, 5, 6], playerId: 2),
-      //   Deal(cardIds: [7, 8, 9], playerId: 3),
-      //   Deal(cardIds: [28, 11, 22], playerId: 0, flip: defaultFlip),
-      // ]))
-      //   ..stream;
-    }
-    late String uniqueId;
-    if (id == '') {
-      uniqueId = const Uuid().v4();
-      // print('new game id is $uniqueId');
-    } else {
-      uniqueId = id;
-    }
-    _cardGameControllerBlocMap.putIfAbsent(
-      uniqueId,
-      () => BehaviorSubject<CardGameControllerBloc>.seeded(
-          CardGameControllerBloc(this)
-          // CardGameView.tarabish(
-          //   gameId: uniqueId,
-          //   actions: <CardGameAction>[
-          //     // Shuffle(),
-          //     // const Deal(cardIds: [1, 2, 3], playerId: 1),
-          //     // const Deal(cardIds: [4, 5, 6], playerId: 2),
-          //     // const Deal(cardIds: [7, 8, 9], playerId: 3),
-          //     // const Deal(cardIds: [28, 11, 22], playerId: 0, flip: defaultFlip),
-          //   ],
-          // ),
-          ),
-    );
-    return uniqueId;
+    // if (demo) {
+    //   _cardGameControllerBlocMap.putIfAbsent(
+    //     'demo',
+    //     () => CardGameControllerBloc(this),
+    //   );
+    //   return 'demo';
+    //   // return BehaviorSubject<CardGame>.seeded(
+    //   //     const CardGame.tarabish(gameId: 'demo', actions: <CardGameAction>[
+    //   //   Shuffle(),
+    //   //   Deal(cardIds: [1, 2, 3], playerId: 1),
+    //   //   Deal(cardIds: [4, 5, 6], playerId: 2),
+    //   //   Deal(cardIds: [7, 8, 9], playerId: 3),
+    //   //   Deal(cardIds: [28, 11, 22], playerId: 0, flip: defaultFlip),
+    //   // ]))
+    //   //   ..stream;
+    // }
+    // late String uniqueId;
+    // if (id == '') {
+    //   uniqueId = const Uuid().v4();
+    //   // print('new game id is $uniqueId');
+    // } else {
+    //   uniqueId = id;
+    // }
+    // _cardGameControllerBlocMap.putIfAbsent(
+    //   uniqueId,
+    //   () => CardGameControllerBloc(this)
+    //       // CardGameView.tarabish(
+    //       //   gameId: uniqueId,
+    //       //   actions: <CardGameAction>[
+    //       //     // Shuffle(),
+    //       //     // const Deal(cardIds: [1, 2, 3], playerId: 1),
+    //       //     // const Deal(cardIds: [4, 5, 6], playerId: 2),
+    //       //     // const Deal(cardIds: [7, 8, 9], playerId: 3),
+    //       //     // const Deal(cardIds: [28, 11, 22], playerId: 0, flip: defaultFlip),
+    //       //   ],
+    //       // ),
+    //       ,
+    // );
+    // return uniqueId;
+    return const Uuid().v4();
   }
 
   BehaviorSubject<CardGameView> generateDemo({String gameType = 'solitaire'}) {
@@ -284,7 +292,7 @@ class TavernRepository {
     return integers;
   }
 
-  // getNext(Iterable<int> reversed, int i, int j) {
+// getNext(Iterable<int> reversed, int i, int j) {
   List<int> getNextSet(List<int> inputList, int count, int multiple) {
     if (multiple < 0) {
       throw ArgumentError("Multiple should be a non-negative integer.");
@@ -311,17 +319,17 @@ class TavernRepository {
     // TODO: implement inviteBot
     print(
         'inviting bot to play game for game id $gameId at position $playerPosition');
-    if (_cardGameControllerBlocMap.containsKey(gameId)) {
-      // return
-      var currentGameView = _cardGameControllerBlocMap[gameId]!.value;
-      _cardGameControllerBlocMap[gameId]!.sink.add(currentGameView.copyWith(
-            // gameId: gameId,
-            playerPosition: playerPosition,
-            // actions: currentGameView.actions,
-          ));
-    } else {
-      throw Exception('Game not found');
-    }
+    // if (_cardGameControllerBlocMap.containsKey(gameId)) {
+    //   // return
+    //   var currentGameView = _cardGameControllerBlocMap[gameId]!.value;
+    //   _cardGameControllerBlocMap[gameId]!.sink.add(currentGameView.copyWith(
+    //         // gameId: gameId,
+    //         playerPosition: playerPosition,
+    //         // actions: currentGameView.actions,
+    //       ));
+    // } else {
+    //   throw Exception('Game not found');
+    // }
     // throw UnimplementedError();
   }
 
@@ -329,6 +337,40 @@ class TavernRepository {
     final randomNames = RandomNames(Zone.us);
     return randomNames.fullName();
     // throw UnimplementedError();
+  }
+
+  /// method to create an ai bot and have it participate in card game
+  /// generate the playerName using generateAiBotName()
+  /// playerPosition should be 1 or 2 or 3
+  /// gameId should be the game id to join
+  /// return the playerId of the ai bot created
+  /// throw an exception if the gameId is not found
+  /// throw an exception if the playerPosition is invalid.
+  /// throw an exception if the playerName is invalid.
+  ///
+  void createAiBot(
+      {required String gameId,
+      required int playerPosition,
+      required String playerName}) {
+    if (!(_cardGameControllerBlocMap.containsKey(gameId))) {
+      throw Exception('Game not found');
+    }
+    if (playerPosition < 1 || playerPosition > 4) {
+      throw Exception('Invalid player position');
+    }
+    if (playerName.isEmpty) {
+      throw Exception('Invalid player name');
+    }
+    // var currentGameView = _currentGameView;
+    // _currentGameView = currentGameView.copyWith(
+    //     playerPosition: playerPosition);
+    // _cardGameControllerBlocMap[gameId]!.sink.add(currentGameView);
+
+    // _cardGameControllerBlocMap[gameId]!.sink.add(currentGameView.copyWith(
+    //       // gameId: gameId,
+    //       playerPosition: playerPosition,
+    //       // actions: currentGameView.actions,
+    //     ));
   }
 }
 

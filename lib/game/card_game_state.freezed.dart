@@ -116,8 +116,8 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
+class _$InitialImpl extends _Initial {
+  const _$InitialImpl() : super._();
 
   @override
   String toString() {
@@ -220,8 +220,9 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements CardGameState {
+abstract class _Initial extends CardGameState {
   const factory _Initial() = _$InitialImpl;
+  const _Initial._() : super._();
 }
 
 /// @nodoc
@@ -242,8 +243,8 @@ class __$$LoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl();
+class _$LoadingImpl extends _Loading {
+  const _$LoadingImpl() : super._();
 
   @override
   String toString() {
@@ -346,8 +347,9 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements CardGameState {
+abstract class _Loading extends CardGameState {
   const factory _Loading() = _$LoadingImpl;
+  const _Loading._() : super._();
 }
 
 /// @nodoc
@@ -383,8 +385,8 @@ class __$$ErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ErrorImpl implements _Error {
-  const _$ErrorImpl(this.error);
+class _$ErrorImpl extends _Error {
+  const _$ErrorImpl(this.error) : super._();
 
   @override
   final String error;
@@ -498,8 +500,9 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements CardGameState {
+abstract class _Error extends CardGameState {
   const factory _Error(final String error) = _$ErrorImpl;
+  const _Error._() : super._();
 
   String get error;
   @JsonKey(ignore: true)
@@ -525,8 +528,8 @@ class __$$ReadyToStartImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ReadyToStartImpl implements _ReadyToStart {
-  const _$ReadyToStartImpl();
+class _$ReadyToStartImpl extends _ReadyToStart {
+  const _$ReadyToStartImpl() : super._();
 
   @override
   String toString() {
@@ -629,8 +632,9 @@ class _$ReadyToStartImpl implements _ReadyToStart {
   }
 }
 
-abstract class _ReadyToStart implements CardGameState {
+abstract class _ReadyToStart extends CardGameState {
   const factory _ReadyToStart() = _$ReadyToStartImpl;
+  const _ReadyToStart._() : super._();
 }
 
 /// @nodoc
@@ -651,8 +655,8 @@ class __$$InProgressImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InProgressImpl implements _InProgress {
-  const _$InProgressImpl();
+class _$InProgressImpl extends _InProgress {
+  const _$InProgressImpl() : super._();
 
   @override
   String toString() {
@@ -755,8 +759,9 @@ class _$InProgressImpl implements _InProgress {
   }
 }
 
-abstract class _InProgress implements CardGameState {
+abstract class _InProgress extends CardGameState {
   const factory _InProgress() = _$InProgressImpl;
+  const _InProgress._() : super._();
 }
 
 /// @nodoc
@@ -777,8 +782,8 @@ class __$$GameOverImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GameOverImpl implements _GameOver {
-  const _$GameOverImpl();
+class _$GameOverImpl extends _GameOver {
+  const _$GameOverImpl() : super._();
 
   @override
   String toString() {
@@ -881,6 +886,7 @@ class _$GameOverImpl implements _GameOver {
   }
 }
 
-abstract class _GameOver implements CardGameState {
+abstract class _GameOver extends CardGameState {
   const factory _GameOver() = _$GameOverImpl;
+  const _GameOver._() : super._();
 }
