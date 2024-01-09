@@ -8,14 +8,20 @@ import 'package:vg_tarabish_flame/game/model/person_proxy.dart';
 ///
 class RemotePersonProxyDataSource implements PersonProxyDataSource {
   @override
-  Future<List<PersonProxy>> getAllPersonProxies() {
+  Future<List<PersonProxyBloc>> getAllPersonProxies() {
     // TODO: implement getAllPersonProxies
     throw UnimplementedError();
   }
 
   @override
-  Future<void> createOrUpdatePersonProxy(PersonProxy personProxy) {
+  Future<void> createOrUpdatePersonProxy(PersonProxyBloc personProxy) {
     // TODO: implement createOrUpdatePersonProxy
+    throw UnimplementedError();
+  }
+
+  @override
+  PersonProxyBloc getPersonProxy(String gameId, int playerPosition) {
+    // TODO: implement getPersonProxy
     throw UnimplementedError();
   }
 }
