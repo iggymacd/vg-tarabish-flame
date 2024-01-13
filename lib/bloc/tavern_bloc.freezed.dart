@@ -163,7 +163,7 @@ class _$NewGameImpl implements _NewGame {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NewGameImpl &&
@@ -312,7 +312,7 @@ class _$GoToLobbyImpl implements GoToLobby {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$GoToLobbyImpl);
   }
@@ -440,7 +440,7 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$ShowGameTypesImpl);
   }
@@ -592,7 +592,7 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TavernGamesUpdatedImpl &&
@@ -762,7 +762,7 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TavernMembersUpdatedImpl &&
@@ -934,7 +934,7 @@ class _$InviteBotImpl implements InviteBot {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InviteBotImpl &&
@@ -1161,7 +1161,7 @@ class _$TavernStateLobbyImpl implements TavernStateLobby {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$TavernStateLobbyImpl);
   }
@@ -1306,7 +1306,7 @@ class _$CurrentGameInProgressUpdatedImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CurrentGameInProgressUpdatedImpl &&
@@ -1493,7 +1493,7 @@ class _$TavernGamesOrMembersUpdatedImpl implements TavernGamesOrMembersUpdated {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TavernGamesOrMembersUpdatedImpl &&

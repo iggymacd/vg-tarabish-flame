@@ -49,7 +49,8 @@ class TavernWorld extends World
   final List<PlayerPile> playerPiles = [];
   final List<TrickPile> trickPiles = [];
   final List<WinningTrickPile> winningTrickPiles = [];
-  final tarabishGamePlayBehavior = TarabishGamePlayBehavior();
+  late TarabishGamePlayBehavior tarabishGamePlayBehavior =
+      TarabishGamePlayBehavior();
   // final List<TrickPile> trickPiles = [ = TrickPile(position: Vector2(0.0, 0.0),message:);
   // final List<Card> cards =');
   late List<Card> cards;
@@ -77,6 +78,13 @@ class TavernWorld extends World
         case final CurrentGameInProgressUpdated state:
           print('TavernWorld - CurrentGameStateUpdated event received');
           gameInProgressBloc = state.gameInProgressBloc;
+          if (tarabishGamePlayBehavior.isMounted) {
+            tarabishGamePlayBehavior.removeFromParent();
+          }
+          // remove(tarabishGamePlayBehavior); // remove existing behavior
+          // add new behavior
+          tarabishGamePlayBehavior = TarabishGamePlayBehavior(); // start clean
+          // add(tarabishGamePlayBehavior);
           await add(tarabishGamePlayBehavior);
         case TavernGamesOrMembersUpdated():
           print('TavernWorld - TavernGamesOrMembersUpdated event received');

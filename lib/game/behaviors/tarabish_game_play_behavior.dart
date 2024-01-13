@@ -20,7 +20,7 @@ import 'package:vg_tarabish_flame/start_game/bloc/start_game_bloc.dart';
 class TarabishGamePlayBehavior extends Behavior<TavernWorld> {
   // final List<PlayerPile> playerPiles = [];
   int counter = 0;
-  StreamSubscription<TavernState>? streamSubscription;
+  // StreamSubscription<TavernState>? streamSubscription;
   @override
   Future<void> onLoad() async {
     print(' onload called for TarabishGamePlayBehavior');

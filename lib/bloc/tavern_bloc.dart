@@ -92,13 +92,6 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
     print('tavern games are ${event.tavernGames}');
     emit(TavernState.tavernGamesOrMembersUpdated(
         tavernGames: event.tavernGames));
-    // switch (state) {
-    //   case _Initial():
-    //     emit(TavernState.tavernGamesOrMembersUpdated(
-    //         tavernGames: event.tavernGames));
-    //   case final _TavernGamesOrMembersUpdated currentState:
-    //     emit(currentState.copyWith(tavernGames: event.tavernGames));
-    // }
   }
 
   void _handleTavernMembersUpdated(

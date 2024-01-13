@@ -112,7 +112,7 @@ class _$DisplayGameTypeDialogImpl implements _DisplayGameTypeDialog {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DisplayGameTypeDialogImpl);
@@ -229,7 +229,7 @@ class _$CancelDisplayGameTypeDialogImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CancelDisplayGameTypeDialogImpl);
@@ -361,7 +361,7 @@ class _$ChooseGameTypeImpl implements _ChooseGameType {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChooseGameTypeImpl &&
@@ -565,7 +565,7 @@ class _$GameTypeDialogDisplayedImpl implements GameTypeDialogDisplayed {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GameTypeDialogDisplayedImpl);
@@ -684,7 +684,7 @@ class _$GameTypeDialogCancelledImpl implements GameTypeDialogCancelled {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GameTypeDialogCancelledImpl);
@@ -819,7 +819,7 @@ class _$GameTypeChosenImpl implements GameTypeChosen {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GameTypeChosenImpl &&
@@ -951,7 +951,7 @@ class _$InitialImpl implements Initial {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
