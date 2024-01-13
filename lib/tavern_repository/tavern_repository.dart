@@ -149,7 +149,12 @@ class TavernRepository {
     //       ,
     // );
     // return uniqueId;
-    return const Uuid().v4();
+    final uniqueId = const Uuid().v4();
+    // final gameInProgressBloc =
+    //     GameInProgressBloc(tavernRepository: this, currentGameId: uniqueId);
+    _gameInProgressBlocMap[uniqueId] =
+        GameInProgressBloc(tavernRepository: this, currentGameId: uniqueId);
+    return uniqueId;
   }
 
   BehaviorSubject<CardGameView> generateDemo({String gameType = 'solitaire'}) {
