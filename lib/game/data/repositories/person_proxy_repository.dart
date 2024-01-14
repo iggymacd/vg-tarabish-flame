@@ -1,4 +1,5 @@
-import 'package:vg_tarabish_flame/game/data/proxy_person_datasource.dart';
+// import 'package:vg_tarabish_flame/game/data/proxy_person_datasource.dart';
+import 'package:vg_tarabish_flame/game/data/person_proxy_datasource.dart';
 import 'package:vg_tarabish_flame/game/model/person_proxy.dart';
 
 class PersonProxyRepository {

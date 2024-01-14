@@ -20,7 +20,10 @@ sealed class TavernEvent with _$TavernEvent {
   }) = _TavernMembersUpdated;
   const factory TavernEvent.inviteBot({
     required String gameId,
-    required int playerPosition,
+
+    /// player position is relative to current player
+    /// this may need to be translated when it arrives in the game in progress
+    required int targetPosition,
   }) = InviteBot;
   // static TavernEvent tavernGamesUpdated(List<TavernGame> tavernGames) {}
 

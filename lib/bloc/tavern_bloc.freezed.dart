@@ -25,7 +25,7 @@ mixin _$TavernEvent {
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
         tavernMembersUpdated,
-    required TResult Function(String gameId, int playerPosition) inviteBot,
+    required TResult Function(String gameId, int targetPosition) inviteBot,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,7 +35,7 @@ mixin _$TavernEvent {
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
-    TResult? Function(String gameId, int playerPosition)? inviteBot,
+    TResult? Function(String gameId, int targetPosition)? inviteBot,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -45,7 +45,7 @@ mixin _$TavernEvent {
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
-    TResult Function(String gameId, int playerPosition)? inviteBot,
+    TResult Function(String gameId, int targetPosition)? inviteBot,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -163,7 +163,7 @@ class _$NewGameImpl implements _NewGame {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NewGameImpl &&
@@ -192,7 +192,7 @@ class _$NewGameImpl implements _NewGame {
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
         tavernMembersUpdated,
-    required TResult Function(String gameId, int playerPosition) inviteBot,
+    required TResult Function(String gameId, int targetPosition) inviteBot,
   }) {
     return newGame(gameId, gameType, demo);
   }
@@ -205,7 +205,7 @@ class _$NewGameImpl implements _NewGame {
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
-    TResult? Function(String gameId, int playerPosition)? inviteBot,
+    TResult? Function(String gameId, int targetPosition)? inviteBot,
   }) {
     return newGame?.call(gameId, gameType, demo);
   }
@@ -218,7 +218,7 @@ class _$NewGameImpl implements _NewGame {
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
-    TResult Function(String gameId, int playerPosition)? inviteBot,
+    TResult Function(String gameId, int targetPosition)? inviteBot,
     required TResult orElse(),
   }) {
     if (newGame != null) {
@@ -312,7 +312,7 @@ class _$GoToLobbyImpl implements GoToLobby {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$GoToLobbyImpl);
   }
@@ -330,7 +330,7 @@ class _$GoToLobbyImpl implements GoToLobby {
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
         tavernMembersUpdated,
-    required TResult Function(String gameId, int playerPosition) inviteBot,
+    required TResult Function(String gameId, int targetPosition) inviteBot,
   }) {
     return goToLobby();
   }
@@ -343,7 +343,7 @@ class _$GoToLobbyImpl implements GoToLobby {
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
-    TResult? Function(String gameId, int playerPosition)? inviteBot,
+    TResult? Function(String gameId, int targetPosition)? inviteBot,
   }) {
     return goToLobby?.call();
   }
@@ -356,7 +356,7 @@ class _$GoToLobbyImpl implements GoToLobby {
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
-    TResult Function(String gameId, int playerPosition)? inviteBot,
+    TResult Function(String gameId, int targetPosition)? inviteBot,
     required TResult orElse(),
   }) {
     if (goToLobby != null) {
@@ -440,7 +440,7 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$ShowGameTypesImpl);
   }
@@ -458,7 +458,7 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
         tavernMembersUpdated,
-    required TResult Function(String gameId, int playerPosition) inviteBot,
+    required TResult Function(String gameId, int targetPosition) inviteBot,
   }) {
     return showGameTypes();
   }
@@ -471,7 +471,7 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
-    TResult? Function(String gameId, int playerPosition)? inviteBot,
+    TResult? Function(String gameId, int targetPosition)? inviteBot,
   }) {
     return showGameTypes?.call();
   }
@@ -484,7 +484,7 @@ class _$ShowGameTypesImpl implements _ShowGameTypes {
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
-    TResult Function(String gameId, int playerPosition)? inviteBot,
+    TResult Function(String gameId, int targetPosition)? inviteBot,
     required TResult orElse(),
   }) {
     if (showGameTypes != null) {
@@ -592,7 +592,7 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TavernGamesUpdatedImpl &&
@@ -621,7 +621,7 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
         tavernMembersUpdated,
-    required TResult Function(String gameId, int playerPosition) inviteBot,
+    required TResult Function(String gameId, int targetPosition) inviteBot,
   }) {
     return tavernGamesUpdated(tavernGames);
   }
@@ -634,7 +634,7 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
-    TResult? Function(String gameId, int playerPosition)? inviteBot,
+    TResult? Function(String gameId, int targetPosition)? inviteBot,
   }) {
     return tavernGamesUpdated?.call(tavernGames);
   }
@@ -647,7 +647,7 @@ class _$TavernGamesUpdatedImpl implements _TavernGamesUpdated {
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
-    TResult Function(String gameId, int playerPosition)? inviteBot,
+    TResult Function(String gameId, int targetPosition)? inviteBot,
     required TResult orElse(),
   }) {
     if (tavernGamesUpdated != null) {
@@ -762,7 +762,7 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TavernMembersUpdatedImpl &&
@@ -792,7 +792,7 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
         tavernMembersUpdated,
-    required TResult Function(String gameId, int playerPosition) inviteBot,
+    required TResult Function(String gameId, int targetPosition) inviteBot,
   }) {
     return tavernMembersUpdated(tavernMembers);
   }
@@ -805,7 +805,7 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
-    TResult? Function(String gameId, int playerPosition)? inviteBot,
+    TResult? Function(String gameId, int targetPosition)? inviteBot,
   }) {
     return tavernMembersUpdated?.call(tavernMembers);
   }
@@ -818,7 +818,7 @@ class _$TavernMembersUpdatedImpl implements _TavernMembersUpdated {
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
-    TResult Function(String gameId, int playerPosition)? inviteBot,
+    TResult Function(String gameId, int targetPosition)? inviteBot,
     required TResult orElse(),
   }) {
     if (tavernMembersUpdated != null) {
@@ -888,7 +888,7 @@ abstract class _$$InviteBotImplCopyWith<$Res> {
           _$InviteBotImpl value, $Res Function(_$InviteBotImpl) then) =
       __$$InviteBotImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String gameId, int playerPosition});
+  $Res call({String gameId, int targetPosition});
 }
 
 /// @nodoc
@@ -903,16 +903,16 @@ class __$$InviteBotImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? gameId = null,
-    Object? playerPosition = null,
+    Object? targetPosition = null,
   }) {
     return _then(_$InviteBotImpl(
       gameId: null == gameId
           ? _value.gameId
           : gameId // ignore: cast_nullable_to_non_nullable
               as String,
-      playerPosition: null == playerPosition
-          ? _value.playerPosition
-          : playerPosition // ignore: cast_nullable_to_non_nullable
+      targetPosition: null == targetPosition
+          ? _value.targetPosition
+          : targetPosition // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -921,30 +921,33 @@ class __$$InviteBotImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$InviteBotImpl implements InviteBot {
-  const _$InviteBotImpl({required this.gameId, required this.playerPosition});
+  const _$InviteBotImpl({required this.gameId, required this.targetPosition});
 
   @override
   final String gameId;
+
+  /// player position is relative to current player
+  /// this may need to be translated when it arrives in the game in progress
   @override
-  final int playerPosition;
+  final int targetPosition;
 
   @override
   String toString() {
-    return 'TavernEvent.inviteBot(gameId: $gameId, playerPosition: $playerPosition)';
+    return 'TavernEvent.inviteBot(gameId: $gameId, targetPosition: $targetPosition)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InviteBotImpl &&
             (identical(other.gameId, gameId) || other.gameId == gameId) &&
-            (identical(other.playerPosition, playerPosition) ||
-                other.playerPosition == playerPosition));
+            (identical(other.targetPosition, targetPosition) ||
+                other.targetPosition == targetPosition));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, gameId, playerPosition);
+  int get hashCode => Object.hash(runtimeType, gameId, targetPosition);
 
   @JsonKey(ignore: true)
   @override
@@ -962,9 +965,9 @@ class _$InviteBotImpl implements InviteBot {
     required TResult Function(List<TavernGame> tavernGames) tavernGamesUpdated,
     required TResult Function(List<TavernMember> tavernMembers)
         tavernMembersUpdated,
-    required TResult Function(String gameId, int playerPosition) inviteBot,
+    required TResult Function(String gameId, int targetPosition) inviteBot,
   }) {
-    return inviteBot(gameId, playerPosition);
+    return inviteBot(gameId, targetPosition);
   }
 
   @override
@@ -975,9 +978,9 @@ class _$InviteBotImpl implements InviteBot {
     TResult? Function()? showGameTypes,
     TResult? Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult? Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
-    TResult? Function(String gameId, int playerPosition)? inviteBot,
+    TResult? Function(String gameId, int targetPosition)? inviteBot,
   }) {
-    return inviteBot?.call(gameId, playerPosition);
+    return inviteBot?.call(gameId, targetPosition);
   }
 
   @override
@@ -988,11 +991,11 @@ class _$InviteBotImpl implements InviteBot {
     TResult Function()? showGameTypes,
     TResult Function(List<TavernGame> tavernGames)? tavernGamesUpdated,
     TResult Function(List<TavernMember> tavernMembers)? tavernMembersUpdated,
-    TResult Function(String gameId, int playerPosition)? inviteBot,
+    TResult Function(String gameId, int targetPosition)? inviteBot,
     required TResult orElse(),
   }) {
     if (inviteBot != null) {
-      return inviteBot(gameId, playerPosition);
+      return inviteBot(gameId, targetPosition);
     }
     return orElse();
   }
@@ -1044,10 +1047,13 @@ class _$InviteBotImpl implements InviteBot {
 abstract class InviteBot implements TavernEvent {
   const factory InviteBot(
       {required final String gameId,
-      required final int playerPosition}) = _$InviteBotImpl;
+      required final int targetPosition}) = _$InviteBotImpl;
 
   String get gameId;
-  int get playerPosition;
+
+  /// player position is relative to current player
+  /// this may need to be translated when it arrives in the game in progress
+  int get targetPosition;
   @JsonKey(ignore: true)
   _$$InviteBotImplCopyWith<_$InviteBotImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1161,7 +1167,7 @@ class _$TavernStateLobbyImpl implements TavernStateLobby {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$TavernStateLobbyImpl);
   }
@@ -1306,7 +1312,7 @@ class _$CurrentGameInProgressUpdatedImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CurrentGameInProgressUpdatedImpl &&
@@ -1493,7 +1499,7 @@ class _$TavernGamesOrMembersUpdatedImpl implements TavernGamesOrMembersUpdated {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TavernGamesOrMembersUpdatedImpl &&

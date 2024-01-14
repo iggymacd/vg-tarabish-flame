@@ -194,7 +194,7 @@ class PlayerPile extends PositionComponent
     if (player == null) {
       print("invite bot to $message");
       world.tavernBloc.add(TavernEvent.inviteBot(
-          playerPosition: playerPosition,
+          targetPosition: playerPosition,
           gameId: world.tavernBloc.currentGameId!));
     }
   }

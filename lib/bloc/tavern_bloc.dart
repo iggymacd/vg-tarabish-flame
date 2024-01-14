@@ -199,7 +199,7 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
   void _handleInviteBot(InviteBot event, Emitter<TavernState> emit) {
     print('TavenEvent _handleInviteBot called');
     tavernRepository.inviteBot(
-      playerPosition: event.playerPosition,
+      playerPosition: event.targetPosition,
       gameId: event.gameId,
     );
   }

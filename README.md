@@ -186,3 +186,36 @@ https://verygood.ventures/blog/how-to-use-bloc-with-streams-and-concurrency
 
  run --flavor development --target lib/main_development.dart -d chrome --web-renderer canvaskit
 dart run build_runner watch
+
+
+Architecture will be based on data, domain and presentation
+
+Loosely based on info at https://verygood.ventures/blog/very-good-flutter-architecture
+
+![Alt text](image.png)
+
+Example structure
+
+├── lib
+|   ├── games
+│   │   ├── bloc
+│   │   │   └── game_bloc.dart
+|   |   |   └── game_event.dart
+|   |   |   └── game_state.dart
+|   |   └── models
+|   |   |   └── models.dart
+|   |   |   └── game.dart
+│   │   └── view
+│   │   |   ├── games_page.dart
+│   │   |   └── games_list.dart
+|   |   |   └── view.dart
+|   |   └── widgets
+|   |   |   └── bottom_loader.dart
+|   |   |   └── game_list_item.dart
+|   |   |   └── widgets.dart
+│   │   ├── games.dart
+│   ├── app.dart
+│   ├── simple_bloc_observer.dart
+│   └── main.dart
+├── pubspec.lock
+├── pubspec.yaml
