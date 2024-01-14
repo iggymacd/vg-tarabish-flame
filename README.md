@@ -184,7 +184,13 @@ bloc concurrency
 
 https://verygood.ventures/blog/how-to-use-bloc-with-streams-and-concurrency
 
- run --flavor development --target lib/main_development.dart -d chrome --web-renderer canvaskit
+flutter run --flavor development --target lib/main_development.dart -d chrome --web-renderer canvaskit
+
+on cloud shell
+git clone https://github.com/iggymacd/vg-tarabish-flame.git
+cd vg-tarabish-flame/
+git config --global --add safe.directory /google/flutter
+flutter run --flavor development --target lib/main_development.dart -d web-server --web-port=5555 --web-renderer canvaskit
 dart run build_runner watch
 
 

@@ -7,10 +7,14 @@ sealed class GameInProgressEvent with _$GameInProgressEvent {
     // @Default('Solitaire') String gameType,
     // @Default(false) bool demo,
   }) = _Initial;
-  const factory GameInProgressEvent.pauseStartGame({
-    // required String gameId,
+  const factory GameInProgressEvent.startGame({
+    required String gameId,
     @Default(false) bool play,
-  }) = PauseStartGame;
+  }) = StartGame;
+  const factory GameInProgressEvent.pauseGame({
+    required String gameId,
+    @Default(false) bool play,
+  }) = PauseGame;
   const factory GameInProgressEvent.inviteBot({
     required int playerPosition,
   }) = InviteBot;

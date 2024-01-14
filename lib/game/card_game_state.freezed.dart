@@ -14,11 +14,35 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+CardGameState _$CardGameStateFromJson(Map<String, dynamic> json) {
+  switch (json['runtimeType']) {
+    case 'initial':
+      return _Initial.fromJson(json);
+    case 'bidding':
+      return _Bidding.fromJson(json);
+    case 'loading':
+      return _Loading.fromJson(json);
+    case 'error':
+      return _Error.fromJson(json);
+    case 'readyToStart':
+      return _ReadyToStart.fromJson(json);
+    case 'inProgress':
+      return _InProgress.fromJson(json);
+    case 'gameOver':
+      return _GameOver.fromJson(json);
+
+    default:
+      throw CheckedFromJsonException(json, 'runtimeType', 'CardGameState',
+          'Invalid union type "${json['runtimeType']}"!');
+  }
+}
+
 /// @nodoc
 mixin _$CardGameState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() bidding,
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() readyToStart,
@@ -29,6 +53,7 @@ mixin _$CardGameState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? bidding,
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? readyToStart,
@@ -39,6 +64,7 @@ mixin _$CardGameState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? bidding,
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? readyToStart,
@@ -50,6 +76,7 @@ mixin _$CardGameState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Bidding value) bidding,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_ReadyToStart value) readyToStart,
@@ -60,6 +87,7 @@ mixin _$CardGameState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Bidding value)? bidding,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_ReadyToStart value)? readyToStart,
@@ -70,6 +98,7 @@ mixin _$CardGameState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Bidding value)? bidding,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_ReadyToStart value)? readyToStart,
@@ -78,6 +107,7 @@ mixin _$CardGameState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -115,9 +145,17 @@ class __$$InitialImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$InitialImpl extends _Initial {
-  const _$InitialImpl() : super._();
+  const _$InitialImpl({final String? $type})
+      : $type = $type ?? 'initial',
+        super._();
+
+  factory _$InitialImpl.fromJson(Map<String, dynamic> json) =>
+      _$$InitialImplFromJson(json);
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
 
   @override
   String toString() {
@@ -130,6 +168,7 @@ class _$InitialImpl extends _Initial {
         (other.runtimeType == runtimeType && other is _$InitialImpl);
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => runtimeType.hashCode;
 
@@ -137,6 +176,7 @@ class _$InitialImpl extends _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() bidding,
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() readyToStart,
@@ -150,6 +190,7 @@ class _$InitialImpl extends _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? bidding,
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? readyToStart,
@@ -163,6 +204,7 @@ class _$InitialImpl extends _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? bidding,
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? readyToStart,
@@ -180,6 +222,7 @@ class _$InitialImpl extends _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Bidding value) bidding,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_ReadyToStart value) readyToStart,
@@ -193,6 +236,7 @@ class _$InitialImpl extends _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Bidding value)? bidding,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_ReadyToStart value)? readyToStart,
@@ -206,6 +250,7 @@ class _$InitialImpl extends _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Bidding value)? bidding,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_ReadyToStart value)? readyToStart,
@@ -218,11 +263,171 @@ class _$InitialImpl extends _Initial {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$InitialImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Initial extends CardGameState {
   const factory _Initial() = _$InitialImpl;
   const _Initial._() : super._();
+
+  factory _Initial.fromJson(Map<String, dynamic> json) = _$InitialImpl.fromJson;
+}
+
+/// @nodoc
+abstract class _$$BiddingImplCopyWith<$Res> {
+  factory _$$BiddingImplCopyWith(
+          _$BiddingImpl value, $Res Function(_$BiddingImpl) then) =
+      __$$BiddingImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$BiddingImplCopyWithImpl<$Res>
+    extends _$CardGameStateCopyWithImpl<$Res, _$BiddingImpl>
+    implements _$$BiddingImplCopyWith<$Res> {
+  __$$BiddingImplCopyWithImpl(
+      _$BiddingImpl _value, $Res Function(_$BiddingImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$BiddingImpl extends _Bidding {
+  const _$BiddingImpl({final String? $type})
+      : $type = $type ?? 'bidding',
+        super._();
+
+  factory _$BiddingImpl.fromJson(Map<String, dynamic> json) =>
+      _$$BiddingImplFromJson(json);
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'CardGameState.bidding()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$BiddingImpl);
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() bidding,
+    required TResult Function() loading,
+    required TResult Function(String error) error,
+    required TResult Function() readyToStart,
+    required TResult Function() inProgress,
+    required TResult Function() gameOver,
+  }) {
+    return bidding();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? bidding,
+    TResult? Function()? loading,
+    TResult? Function(String error)? error,
+    TResult? Function()? readyToStart,
+    TResult? Function()? inProgress,
+    TResult? Function()? gameOver,
+  }) {
+    return bidding?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? bidding,
+    TResult Function()? loading,
+    TResult Function(String error)? error,
+    TResult Function()? readyToStart,
+    TResult Function()? inProgress,
+    TResult Function()? gameOver,
+    required TResult orElse(),
+  }) {
+    if (bidding != null) {
+      return bidding();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Bidding value) bidding,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Error value) error,
+    required TResult Function(_ReadyToStart value) readyToStart,
+    required TResult Function(_InProgress value) inProgress,
+    required TResult Function(_GameOver value) gameOver,
+  }) {
+    return bidding(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Bidding value)? bidding,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_ReadyToStart value)? readyToStart,
+    TResult? Function(_InProgress value)? inProgress,
+    TResult? Function(_GameOver value)? gameOver,
+  }) {
+    return bidding?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Bidding value)? bidding,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Error value)? error,
+    TResult Function(_ReadyToStart value)? readyToStart,
+    TResult Function(_InProgress value)? inProgress,
+    TResult Function(_GameOver value)? gameOver,
+    required TResult orElse(),
+  }) {
+    if (bidding != null) {
+      return bidding(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$BiddingImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _Bidding extends CardGameState {
+  const factory _Bidding() = _$BiddingImpl;
+  const _Bidding._() : super._();
+
+  factory _Bidding.fromJson(Map<String, dynamic> json) = _$BiddingImpl.fromJson;
 }
 
 /// @nodoc
@@ -242,9 +447,17 @@ class __$$LoadingImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$LoadingImpl extends _Loading {
-  const _$LoadingImpl() : super._();
+  const _$LoadingImpl({final String? $type})
+      : $type = $type ?? 'loading',
+        super._();
+
+  factory _$LoadingImpl.fromJson(Map<String, dynamic> json) =>
+      _$$LoadingImplFromJson(json);
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
 
   @override
   String toString() {
@@ -257,6 +470,7 @@ class _$LoadingImpl extends _Loading {
         (other.runtimeType == runtimeType && other is _$LoadingImpl);
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => runtimeType.hashCode;
 
@@ -264,6 +478,7 @@ class _$LoadingImpl extends _Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() bidding,
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() readyToStart,
@@ -277,6 +492,7 @@ class _$LoadingImpl extends _Loading {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? bidding,
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? readyToStart,
@@ -290,6 +506,7 @@ class _$LoadingImpl extends _Loading {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? bidding,
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? readyToStart,
@@ -307,6 +524,7 @@ class _$LoadingImpl extends _Loading {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Bidding value) bidding,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_ReadyToStart value) readyToStart,
@@ -320,6 +538,7 @@ class _$LoadingImpl extends _Loading {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Bidding value)? bidding,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_ReadyToStart value)? readyToStart,
@@ -333,6 +552,7 @@ class _$LoadingImpl extends _Loading {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Bidding value)? bidding,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_ReadyToStart value)? readyToStart,
@@ -345,11 +565,20 @@ class _$LoadingImpl extends _Loading {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$LoadingImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Loading extends CardGameState {
   const factory _Loading() = _$LoadingImpl;
   const _Loading._() : super._();
+
+  factory _Loading.fromJson(Map<String, dynamic> json) = _$LoadingImpl.fromJson;
 }
 
 /// @nodoc
@@ -384,12 +613,20 @@ class __$$ErrorImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$ErrorImpl extends _Error {
-  const _$ErrorImpl(this.error) : super._();
+  const _$ErrorImpl(this.error, {final String? $type})
+      : $type = $type ?? 'error',
+        super._();
+
+  factory _$ErrorImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ErrorImplFromJson(json);
 
   @override
   final String error;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
 
   @override
   String toString() {
@@ -404,6 +641,7 @@ class _$ErrorImpl extends _Error {
             (identical(other.error, error) || other.error == error));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, error);
 
@@ -417,6 +655,7 @@ class _$ErrorImpl extends _Error {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() bidding,
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() readyToStart,
@@ -430,6 +669,7 @@ class _$ErrorImpl extends _Error {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? bidding,
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? readyToStart,
@@ -443,6 +683,7 @@ class _$ErrorImpl extends _Error {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? bidding,
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? readyToStart,
@@ -460,6 +701,7 @@ class _$ErrorImpl extends _Error {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Bidding value) bidding,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_ReadyToStart value) readyToStart,
@@ -473,6 +715,7 @@ class _$ErrorImpl extends _Error {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Bidding value)? bidding,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_ReadyToStart value)? readyToStart,
@@ -486,6 +729,7 @@ class _$ErrorImpl extends _Error {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Bidding value)? bidding,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_ReadyToStart value)? readyToStart,
@@ -498,11 +742,20 @@ class _$ErrorImpl extends _Error {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ErrorImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Error extends CardGameState {
   const factory _Error(final String error) = _$ErrorImpl;
   const _Error._() : super._();
+
+  factory _Error.fromJson(Map<String, dynamic> json) = _$ErrorImpl.fromJson;
 
   String get error;
   @JsonKey(ignore: true)
@@ -527,9 +780,17 @@ class __$$ReadyToStartImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$ReadyToStartImpl extends _ReadyToStart {
-  const _$ReadyToStartImpl() : super._();
+  const _$ReadyToStartImpl({final String? $type})
+      : $type = $type ?? 'readyToStart',
+        super._();
+
+  factory _$ReadyToStartImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReadyToStartImplFromJson(json);
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
 
   @override
   String toString() {
@@ -542,6 +803,7 @@ class _$ReadyToStartImpl extends _ReadyToStart {
         (other.runtimeType == runtimeType && other is _$ReadyToStartImpl);
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => runtimeType.hashCode;
 
@@ -549,6 +811,7 @@ class _$ReadyToStartImpl extends _ReadyToStart {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() bidding,
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() readyToStart,
@@ -562,6 +825,7 @@ class _$ReadyToStartImpl extends _ReadyToStart {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? bidding,
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? readyToStart,
@@ -575,6 +839,7 @@ class _$ReadyToStartImpl extends _ReadyToStart {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? bidding,
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? readyToStart,
@@ -592,6 +857,7 @@ class _$ReadyToStartImpl extends _ReadyToStart {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Bidding value) bidding,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_ReadyToStart value) readyToStart,
@@ -605,6 +871,7 @@ class _$ReadyToStartImpl extends _ReadyToStart {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Bidding value)? bidding,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_ReadyToStart value)? readyToStart,
@@ -618,6 +885,7 @@ class _$ReadyToStartImpl extends _ReadyToStart {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Bidding value)? bidding,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_ReadyToStart value)? readyToStart,
@@ -630,11 +898,21 @@ class _$ReadyToStartImpl extends _ReadyToStart {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ReadyToStartImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _ReadyToStart extends CardGameState {
   const factory _ReadyToStart() = _$ReadyToStartImpl;
   const _ReadyToStart._() : super._();
+
+  factory _ReadyToStart.fromJson(Map<String, dynamic> json) =
+      _$ReadyToStartImpl.fromJson;
 }
 
 /// @nodoc
@@ -654,9 +932,17 @@ class __$$InProgressImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$InProgressImpl extends _InProgress {
-  const _$InProgressImpl() : super._();
+  const _$InProgressImpl({final String? $type})
+      : $type = $type ?? 'inProgress',
+        super._();
+
+  factory _$InProgressImpl.fromJson(Map<String, dynamic> json) =>
+      _$$InProgressImplFromJson(json);
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
 
   @override
   String toString() {
@@ -669,6 +955,7 @@ class _$InProgressImpl extends _InProgress {
         (other.runtimeType == runtimeType && other is _$InProgressImpl);
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => runtimeType.hashCode;
 
@@ -676,6 +963,7 @@ class _$InProgressImpl extends _InProgress {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() bidding,
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() readyToStart,
@@ -689,6 +977,7 @@ class _$InProgressImpl extends _InProgress {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? bidding,
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? readyToStart,
@@ -702,6 +991,7 @@ class _$InProgressImpl extends _InProgress {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? bidding,
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? readyToStart,
@@ -719,6 +1009,7 @@ class _$InProgressImpl extends _InProgress {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Bidding value) bidding,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_ReadyToStart value) readyToStart,
@@ -732,6 +1023,7 @@ class _$InProgressImpl extends _InProgress {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Bidding value)? bidding,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_ReadyToStart value)? readyToStart,
@@ -745,6 +1037,7 @@ class _$InProgressImpl extends _InProgress {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Bidding value)? bidding,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_ReadyToStart value)? readyToStart,
@@ -757,11 +1050,21 @@ class _$InProgressImpl extends _InProgress {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$InProgressImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _InProgress extends CardGameState {
   const factory _InProgress() = _$InProgressImpl;
   const _InProgress._() : super._();
+
+  factory _InProgress.fromJson(Map<String, dynamic> json) =
+      _$InProgressImpl.fromJson;
 }
 
 /// @nodoc
@@ -781,9 +1084,17 @@ class __$$GameOverImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$GameOverImpl extends _GameOver {
-  const _$GameOverImpl() : super._();
+  const _$GameOverImpl({final String? $type})
+      : $type = $type ?? 'gameOver',
+        super._();
+
+  factory _$GameOverImpl.fromJson(Map<String, dynamic> json) =>
+      _$$GameOverImplFromJson(json);
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
 
   @override
   String toString() {
@@ -796,6 +1107,7 @@ class _$GameOverImpl extends _GameOver {
         (other.runtimeType == runtimeType && other is _$GameOverImpl);
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => runtimeType.hashCode;
 
@@ -803,6 +1115,7 @@ class _$GameOverImpl extends _GameOver {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() bidding,
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function() readyToStart,
@@ -816,6 +1129,7 @@ class _$GameOverImpl extends _GameOver {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? bidding,
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function()? readyToStart,
@@ -829,6 +1143,7 @@ class _$GameOverImpl extends _GameOver {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? bidding,
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function()? readyToStart,
@@ -846,6 +1161,7 @@ class _$GameOverImpl extends _GameOver {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Bidding value) bidding,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_ReadyToStart value) readyToStart,
@@ -859,6 +1175,7 @@ class _$GameOverImpl extends _GameOver {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Bidding value)? bidding,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_ReadyToStart value)? readyToStart,
@@ -872,6 +1189,7 @@ class _$GameOverImpl extends _GameOver {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Bidding value)? bidding,
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_ReadyToStart value)? readyToStart,
@@ -884,9 +1202,19 @@ class _$GameOverImpl extends _GameOver {
     }
     return orElse();
   }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$GameOverImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _GameOver extends CardGameState {
   const factory _GameOver() = _$GameOverImpl;
   const _GameOver._() : super._();
+
+  factory _GameOver.fromJson(Map<String, dynamic> json) =
+      _$GameOverImpl.fromJson;
 }

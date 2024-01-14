@@ -72,6 +72,8 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
 // Map to store game streams based on their IDs
   final Map<String, Stream<CardGameView>> _gameStreams =
       <String, Stream<CardGameView>>{};
+  final Map<String, GameInProgressBloc> _gameInProgressBlocs =
+      <String, GameInProgressBloc>{};
 
   // ID of the currently viewed game
   String? currentGameId;
@@ -90,13 +92,6 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
     print('tavern games are ${event.tavernGames}');
     emit(TavernState.tavernGamesOrMembersUpdated(
         tavernGames: event.tavernGames));
-    // switch (state) {
-    //   case _Initial():
-    //     emit(TavernState.tavernGamesOrMembersUpdated(
-    //         tavernGames: event.tavernGames));
-    //   case final _TavernGamesOrMembersUpdated currentState:
-    //     emit(currentState.copyWith(tavernGames: event.tavernGames));
-    // }
   }
 
   void _handleTavernMembersUpdated(
@@ -129,6 +124,12 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
     // var gameType = event.gameType;
     currentGameId = tavernRepository.newOrExistingGameInProgress(
         gameType: event.gameType, demo: event.demo);
+
+    ///create a new GameInProgressBloc, and add to map
+    this._gameInProgressBlocs[currentGameId!] = GameInProgressBloc(
+      tavernRepository: tavernRepository,
+      currentGameId: currentGameId!,
+    );
     // print('game gameId is $_currentGameId');
     // _currentGameId = _currentGameId;
     // final gameInProgressBloc = GameInProgressBloc(
@@ -197,7 +198,14 @@ class TavernBloc extends Bloc<TavernEvent, TavernState> {
   }
 
   void _handleInviteBot(InviteBot event, Emitter<TavernState> emit) {
-    print('TavenEvent _handleInviteBot called');
+    print('TavernEvent _handleInviteBot called');
+    // gamein
+    var gameInProgress = this._gameInProgressBlocs[event.gameId];
+    if (gameInProgress != null) {
+      gameInProgress.add(
+          GameInProgressEvent.inviteBot(playerPosition: event.playerPosition));
+    }
+
     tavernRepository.inviteBot(
       playerPosition: event.targetPosition,
       gameId: event.gameId,

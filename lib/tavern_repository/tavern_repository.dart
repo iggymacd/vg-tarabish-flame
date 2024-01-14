@@ -7,6 +7,9 @@ import 'package:rxdart/subjects.dart';
 import 'package:uuid/uuid.dart';
 import 'package:vg_tarabish_flame/bloc/game_in_progress_bloc.dart';
 import 'package:vg_tarabish_flame/game/card_game_controller_bloc.dart';
+import 'package:vg_tarabish_flame/game/data/person_proxy_datasource.dart';
+import 'package:vg_tarabish_flame/game/data/remote_person_proxy_datasource.dart';
+import 'package:vg_tarabish_flame/game/data/repositories/person_proxy_repository.dart';
 import 'package:vg_tarabish_flame/game/entity/game/card_game.dart';
 import 'package:vg_tarabish_flame/game/entity/game/view/card_game_action.dart';
 import 'package:vg_tarabish_flame/game/suit.dart';
@@ -21,7 +24,7 @@ class TavernRepository {
     // Initialize the stream controllers in the constructor
     _tavernGamesController = StreamController<List<TavernGame>>.broadcast();
     _tavernMembersController = StreamController<List<TavernMember>>.broadcast();
-    _cardGameControllerBlocMap = <String, CardGameControllerBloc>{};
+    _gameInProgressBlocMap = <String, GameInProgressBloc>{};
 
     // Fetch initial data and add it to the streams
     fetchTavernGames().then((tavernGames) {
@@ -32,10 +35,14 @@ class TavernRepository {
       _tavernMembersController.add(tavernMembers);
     });
   }
+  PersonProxyRepository personProxyRepository =
+      PersonProxyRepository(RemotePersonProxyDataSource());
 
+  /// {@macro tavern_repository}
+  // TavernRepository());
   late StreamController<List<TavernGame>> _tavernGamesController;
   late StreamController<List<TavernMember>> _tavernMembersController;
-  late Map<String, CardGameControllerBloc> _cardGameControllerBlocMap;
+  late Map<String, GameInProgressBloc> _gameInProgressBlocMap;
 
   /// Stream of [TavernGame]s.
   Stream<List<TavernGame>> get tavernGamesStream =>
@@ -79,10 +86,10 @@ class TavernRepository {
 
   /// Stream of [CardGameView] state changes - if gameId is not found in
   /// _currentGamesInProgressMap, then throw an error
-  Stream<CardGameView> listenCardGame({required String gameId}) {
-    if (_cardGameControllerBlocMap.containsKey(gameId)) {
-      final gameController = _cardGameControllerBlocMap[gameId]!;
-      return gameController.stream.map((event) => event.toView());
+  Stream<GameInProgressState> listenCardGame({required String gameId}) {
+    if (_gameInProgressBlocMap.containsKey(gameId)) {
+      final gameController = _gameInProgressBlocMap[gameId]!;
+      return gameController.stream;
     } else {
       throw Exception('Game not found');
     }
@@ -142,7 +149,12 @@ class TavernRepository {
     //       ,
     // );
     // return uniqueId;
-    return const Uuid().v4();
+    final uniqueId = const Uuid().v4();
+    // final gameInProgressBloc =
+    //     GameInProgressBloc(tavernRepository: this, currentGameId: uniqueId);
+    _gameInProgressBlocMap[uniqueId] =
+        GameInProgressBloc(tavernRepository: this, currentGameId: uniqueId);
+    return uniqueId;
   }
 
   BehaviorSubject<CardGameView> generateDemo({String gameType = 'solitaire'}) {
@@ -312,13 +324,33 @@ class TavernRepository {
 // }
   }
 
+  /// Bot could be running locally or remotely
+  /// Using PersonProxyRepository to manage the bot
   FutureOr<void> inviteBot({
     required String gameId,
     required int playerPosition,
   }) async {
-    // TODO: implement inviteBot
+    // TODONE : implement inviteBot
     print(
         'inviting bot to play game for game id $gameId at position $playerPosition');
+    final personProxy =
+        personProxyRepository.getPersonProxy(gameId, playerPosition);
+    // wire up outbound game states and inbound player action events
+    final gameInProgressBloc = _gameInProgressBlocMap.containsKey(gameId)
+        ? _gameInProgressBlocMap[gameId]
+        : null;
+    if (gameInProgressBloc != null) {
+      // personProxy.wireUp(gameInProgressBloc);
+      // personProxy.wireUp(gameInProgressBloc.value);
+      final currentGameView = gameInProgressBloc.state;
+      // gameInProgressBloc.add(currentGameView.copyWith(
+      //   playerPosition: playerPosition,
+      // ));
+    } else {
+      throw Exception('Game not found. ');
+    }
+    // personProxy.inviteBot(playerPosition: playerPosition);
+
     // if (_cardGameControllerBlocMap.containsKey(gameId)) {
     //   // return
     //   var currentGameView = _cardGameControllerBlocMap[gameId]!.value;
@@ -352,7 +384,7 @@ class TavernRepository {
       {required String gameId,
       required int playerPosition,
       required String playerName}) {
-    if (!(_cardGameControllerBlocMap.containsKey(gameId))) {
+    if (!(_gameInProgressBlocMap.containsKey(gameId))) {
       throw Exception('Game not found');
     }
     if (playerPosition < 1 || playerPosition > 4) {
